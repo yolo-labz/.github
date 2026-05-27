@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>yolo-labz OG card</title>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1200px;
+    height: 630px;
+    background: #1e1e2e;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #cdd6f4;
+    position: relative;
+    overflow: hidden;
+  }
+  .accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: #cba6f7;
+  }
+  .frame {
+    position: absolute;
+    top: 64px;
+    left: 64px;
+    right: 64px;
+    bottom: 64px;
+    background: #181825;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .top-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #a6adc8;
+    font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .top-row::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: #cba6f7;
+    display: inline-block;
+  }
+  h1 {
+    font-family: "Source Serif Pro", "Spectral", "Newsreader", Charter, Georgia, serif;
+    font-weight: 600;
+    font-size: 72px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #cdd6f4;
+    margin: 0;
+    max-width: 18ch;
+  }
+  .subhead {
+    color: #a6adc8;
+    font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    margin-top: 24px;
+    max-width: 60ch;
+    line-height: 1.5;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #6c7086;
+    font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+  }
+  .footer .wordmark {
+    color: #cdd6f4;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .footer .url::before {
+    content: "↳ ";
+    color: #cba6f7;
+  }
+</style>
+</head>
+<body>
+  <div class="accent"></div>
+  <div class="frame">
+    <div class="top-row">spec / 024</div>
+    <div>
+      <h1>Plugin family for Claude Code. Signed releases.</h1>
+      <p class="subhead">SLSA L2 build provenance · Sigstore keyless signatures · dual SBOM (CycloneDX 1.7 + SPDX 2.3) · reproducible builds · one-command verification.</p>
+    </div>
+    <div class="footer">
+      <span class="wordmark">yolo-labz</span>
+      <span class="url">github.com/yolo-labz</span>
+    </div>
+  </div>
+</body>
+</html>

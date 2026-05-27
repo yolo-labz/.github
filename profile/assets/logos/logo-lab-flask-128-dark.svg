@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="title desc">
+  <title id="title">yolo-labz · lab-flask logo</title>
+  <desc id="desc">Geometric Erlenmeyer flask outline with a circuit-trace lattice inside, ctp-mauve on ctp-base. Conveys experimentation + supply-chain provenance.</desc>
+  <rect width="128" height="128" fill="#1e1e2e"/>
+  <g fill="none" stroke="#cba6f7" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M50 24 H78 M50 24 V46 L34 96 a8 8 0 0 0 7.5 11 H86.5 a8 8 0 0 0 7.5 -11 L78 46 V24"/>
+    <line x1="48" y1="58" x2="80" y2="58"/>
+  </g>
+  <g fill="#cba6f7" opacity="0.85">
+    <circle cx="56" cy="74" r="2"/>
+    <circle cx="72" cy="78" r="2"/>
+    <circle cx="64" cy="92" r="2"/>
+    <circle cx="50" cy="86" r="2"/>
+    <circle cx="78" cy="92" r="2"/>
+  </g>
+  <g fill="none" stroke="#cba6f7" stroke-width="1" opacity="0.6">
+    <path d="M56 74 L64 92 L78 92 M64 92 L50 86 L72 78"/>
+  </g>
+</svg>

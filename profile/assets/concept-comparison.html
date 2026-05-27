@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>yolo-labz logo concepts — Pedro pick</title>
+<meta name="viewport" content="width=1200">
+<style>
+  :root {
+    --ctp-base: #1e1e2e;
+    --ctp-mantle: #181825;
+    --ctp-crust: #11111b;
+    --ctp-surface0: #313244;
+    --ctp-text: #cdd6f4;
+    --ctp-subtext0: #a6adc8;
+    --ctp-overlay0: #6c7086;
+    --ctp-mauve: #cba6f7;
+    --ctp-blue: #89b4fa;
+    --ctp-peach: #fab387;
+  }
+  html, body { background: var(--ctp-base); color: var(--ctp-text); margin: 0; }
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    padding: 56px 64px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: "Source Serif Pro", "Spectral", "Newsreader", Charter, Georgia, serif;
+    font-weight: 600;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    color: var(--ctp-text);
+  }
+  .lede {
+    color: var(--ctp-subtext0);
+    font-size: 15px;
+    max-width: 64ch;
+    margin: 0 0 12px;
+  }
+  .meta {
+    color: var(--ctp-overlay0);
+    font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-size: 12px;
+    margin: 0 0 48px;
+    letter-spacing: 0.04em;
+  }
+  .meta::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--ctp-mauve);
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+  .card {
+    background: var(--ctp-mantle);
+    padding: 32px 28px 28px;
+    border: 1px solid color-mix(in oklch, var(--ctp-overlay0), transparent 70%);
+  }
+  .card.recommended {
+    border-color: var(--ctp-mauve);
+  }
+  .card .badge {
+    font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ctp-mauve);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .card h2 {
+    font-family: "Source Serif Pro", "Spectral", Charter, Georgia, serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0 0 16px;
+    color: var(--ctp-text);
+  }
+  .card .preview {
+    background: var(--ctp-crust);
+    padding: 16px;
+    margin: 0 -28px 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .card .preview img {
+    width: 128px;
+    height: 128px;
+    display: block;
+  }
+  .card .desc {
+    color: var(--ctp-subtext0);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .card .desc strong {
+    color: var(--ctp-text);
+    font-weight: 500;
+  }
+  .pick-form {
+    background: var(--ctp-mantle);
+    padding: 24px 28px;
+    border-left: 2px solid var(--ctp-mauve);
+    margin-bottom: 32px;
+  }
+  .pick-form h3 {
+    font-family: "Source Serif Pro", "Spectral", Charter, serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 8px;
+  }
+  .pick-form p {
+    color: var(--ctp-subtext0);
+    font-size: 13px;
+    margin: 0 0 12px;
+  }
+  .pick-form code {
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    background: var(--ctp-crust);
+    padding: 2px 6px;
+    color: var(--ctp-peach);
+    font-size: 12px;
+  }
+  footer {
+    color: var(--ctp-overlay0);
+    font-size: 11px;
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    letter-spacing: 0.06em;
+    padding-top: 24px;
+    border-top: 1px solid color-mix(in oklch, var(--ctp-overlay0), transparent 80%);
+  }
+</style>
+</head>
+<body>
+  <h1>yolo-labz logo concepts</h1>
+  <p class="lede">Five concept directions for Pedro pick. All Catppuccin Mocha tokens, anti-slop discipline (no gradient hero, no glassmorphism, no sparkle). Editorial typographic restraint anchored on Linear / claude.com 2025 / GitHub Primer.</p>
+  <p class="meta">spec 024-yolo-labz-portfolio-consolidation-2026Q2 · brand-kit PR yolo-labz/.github#001 · review window 48h SLA</p>
+
+  <section class="grid">
+    <article class="card">
+      <div class="badge">Concept #1</div>
+      <h2>lab-flask</h2>
+      <div class="preview"><img src="logos/logo-lab-flask-128-dark.svg" alt="Lab flask logo concept"></div>
+      <p class="desc"><strong>Geometric Erlenmeyer + circuit-trace lattice.</strong> Reads as experimentation + signed releases. Mauve outline on base. Strong at 64-256 px, may need stroke-weight bump at 16-32 favicon.</p>
+    </article>
+
+    <article class="card">
+      <div class="badge">Concept #2</div>
+      <h2>monogram</h2>
+      <div class="preview"><img src="logos/logo-monogram-128-dark.svg" alt="YL monogram logo concept"></div>
+      <p class="desc"><strong>Custom Y-L ligature, single-stroke.</strong> Editorial identity. Reads cleanly at all sizes. Lowest-overhead visual identity; relies on wordmark to convey "labz" semantics.</p>
+    </article>
+
+    <article class="card recommended">
+      <div class="badge">Concept #3 · pre-ranked fallback</div>
+      <h2>stamp-seal</h2>
+      <div class="preview"><img src="logos/logo-stamp-seal-128-dark.svg" alt="Stamp seal logo concept"></div>
+      <p class="desc"><strong>Notched hexagonal seal + YL/LABZ stack.</strong> Strongest narrative tie-in to SLSA/Sigstore supply-chain story. Ships as v0.1 [provisional] if Pedro misses 48h SLA per spec plan §4 pre-rank.</p>
+    </article>
+
+    <article class="card">
+      <div class="badge">Concept #4</div>
+      <h2>glyph-stack</h2>
+      <div class="preview"><img src="logos/logo-glyph-stack-128-dark.svg" alt="Glyph stack logo concept"></div>
+      <p class="desc"><strong>Vertical Y-O-L-A-B-Z stack, text+subtext0 alternation.</strong> Editorial typographic system. Strong wordmark presence; weak as favicon (needs single-glyph variant).</p>
+    </article>
+
+    <article class="card">
+      <div class="badge">Concept #5</div>
+      <h2>schematic-node</h2>
+      <div class="preview"><img src="logos/logo-schematic-node-128-dark.svg" alt="Schematic node logo concept"></div>
+      <p class="desc"><strong>Fan-out graph node, mauve nodes + blue edges.</strong> Visualizes portfolio composition. Reads as "system of repos". May feel generic at small sizes; works best paired with wordmark.</p>
+    </article>
+  </section>
+
+  <section class="pick-form">
+    <h3>Pedro pick instructions</h3>
+    <p>Reply <code>OK #N</code> with concept number (1-5) for finals. Reply <code>mix</code> + concept numbers for hybrid exploration. No reply within 48h → ship <code>stamp-seal #3</code> as v0.1 <code>[provisional]</code> per spec plan §4 fallback rank.</p>
+    <p>Finals render at 4 sizes (64/128/256/512) × 2 modes (dark/light) per pick. Favicon grid + wordmark lockup + monochrome variant follow same pick.</p>
+  </section>
+
+  <footer>
+    Generated by yolo-labz consolidation sprint 024 · WORKTREE-FIRST · ANTI-SLOP · CATPPUCCIN MOCHA ONLY
+  </footer>
+</body>
+</html>
