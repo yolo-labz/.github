@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64" role="img" aria-labelledby="title desc">
+  <title id="title">yolo-labz wordmark (light)</title>
+  <desc id="desc">Wordmark "yolo-labz" Catppuccin Latte variant, ctp-text #4c4f69 on ctp-base #eff1f5, mauve accent #8839ef.</desc>
+  <rect width="320" height="64" fill="#eff1f5"/>
+  <text x="20" y="42" font-family="ui-monospace, 'JetBrains Mono', 'IBM Plex Mono', monospace" font-size="28" font-weight="600" letter-spacing="0.08em" fill="#4c4f69">yolo-labz</text>
+  <rect x="20" y="50" width="38" height="2" fill="#8839ef"/>
+</svg>

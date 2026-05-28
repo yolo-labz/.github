@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="title desc">
+  <title id="title">yolo-labz · glyph-stack logo</title>
+  <desc id="desc">Vertically stacked Y-O-L-A-B-Z glyphs in monospace, ctp-text + ctp-subtext0 alternation. Editorial typographic system.</desc>
+  <rect width="128" height="128" fill="#1e1e2e"/>
+  <g font-family="ui-monospace, 'JetBrains Mono', 'IBM Plex Mono', monospace" font-size="16" font-weight="600" text-anchor="middle" letter-spacing="0.12em">
+    <text x="64" y="32" fill="#cdd6f4">Y</text>
+    <text x="64" y="48" fill="#a6adc8">O</text>
+    <text x="64" y="64" fill="#cdd6f4">L</text>
+    <text x="64" y="80" fill="#a6adc8">A</text>
+    <text x="64" y="96" fill="#cdd6f4">B</text>
+    <text x="64" y="112" fill="#a6adc8">Z</text>
+  </g>
+  <line x1="48" y1="24" x2="48" y2="116" stroke="#cba6f7" stroke-width="1" opacity="0.6"/>
+  <line x1="80" y1="24" x2="80" y2="116" stroke="#cba6f7" stroke-width="1" opacity="0.6"/>
+</svg>
