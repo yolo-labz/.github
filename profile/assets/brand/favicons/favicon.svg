@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t">
+  <title id="t">yolo-labz</title>
+  <style>
+    .bg { fill: #1e1e2e; }
+    .ink { stroke: #cdd6f4; }
+    .dot { fill: #cba6f7; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #eff1f5; }
+      .ink { stroke: #4c4f69; }
+      .dot { fill: #8839ef; }
+    }
+  </style>
+  <rect class="bg" width="128" height="128" rx="26"/>
+  <g class="ink" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 28 L52 60 L52 100"/>
+    <path d="M72 28 L52 60"/>
+    <path d="M52 100 L96 100"/>
+    <path d="M88 28 L88 80"/>
+  </g>
+  <circle class="dot" cx="52" cy="60" r="4" />
+</svg>

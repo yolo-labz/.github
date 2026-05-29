@@ -38,7 +38,7 @@
     align-items: center;
     gap: 16px;
     color: #a6adc8;
-    font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", "FiraCode Nerd Font", ui-monospace, monospace;
     font-size: 14px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -51,7 +51,7 @@
     display: inline-block;
   }
   h1 {
-    font-family: "Source Serif Pro", "Spectral", "Newsreader", Charter, Georgia, serif;
+    font-family: "Noto Serif Display", "Noto Serif", "Source Serif Pro", "Spectral", Charter, Georgia, serif;
     font-weight: 600;
     font-size: 72px;
     line-height: 1.05;
@@ -62,7 +62,7 @@
   }
   .subhead {
     color: #a6adc8;
-    font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", "FiraCode Nerd Font", ui-monospace, monospace;
     font-size: 18px;
     letter-spacing: 0.02em;
     margin-top: 24px;
@@ -74,10 +74,16 @@
     justify-content: space-between;
     align-items: flex-end;
     color: #6c7086;
-    font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono", monospace;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", "FiraCode Nerd Font", ui-monospace, monospace;
     font-size: 14px;
     letter-spacing: 0.08em;
   }
+  .footer .lockup {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .footer .mark { width: 40px; height: 40px; display: block; }
   .footer .wordmark {
     color: #cdd6f4;
     font-size: 20px;
@@ -93,13 +99,24 @@
 <body>
   <div class="accent"></div>
   <div class="frame">
-    <div class="top-row">spec / 024</div>
+    <div class="top-row">open source · claude code · macos</div>
     <div>
       <h1>Plugin family for Claude Code. Signed releases.</h1>
-      <p class="subhead">SLSA L2 build provenance · Sigstore keyless signatures · dual SBOM (CycloneDX 1.7 + SPDX 2.3) · reproducible builds · one-command verification.</p>
+      <p class="subhead">SLSA L2 build provenance · Sigstore keyless signatures · dual SBOM (CycloneDX 1.6 + SPDX 2.3) · reproducible builds · one-command verification.</p>
     </div>
     <div class="footer">
-      <span class="wordmark">yolo-labz</span>
+      <span class="lockup">
+        <svg class="mark" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g stroke="#cdd6f4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M32 28 L52 60 L52 100"/>
+            <path d="M72 28 L52 60"/>
+            <path d="M52 100 L96 100"/>
+            <path d="M88 28 L88 80"/>
+          </g>
+          <circle cx="52" cy="60" r="4" fill="#cba6f7"/>
+        </svg>
+        <span class="wordmark">yolo-labz</span>
+      </span>
       <span class="url">github.com/yolo-labz</span>
     </div>
   </div>
