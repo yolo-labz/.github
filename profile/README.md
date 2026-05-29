@@ -23,15 +23,15 @@ The agent loop becomes a graph of specialized capabilities, not a monolithic cha
 
 ## Distribution + supply chain
 
-Every release ships with:
+`gh attestation verify <artifact> --owner yolo-labz` — one command, no cosign install, confirms a release artifact was built by this org's CI from the tagged source. Every plugin's release pipeline produces:
 
-- SLSA L2 build provenance via `actions/attest-build-provenance@v2` (GitHub native attestations)
-- Cosign keyless signature via Sigstore + GitHub OIDC (no PEM management)
-- Dual SBOM — CycloneDX 1.6 + SPDX 2.3 (`syft`)
-- Reproducible builds — `SOURCE_DATE_EPOCH`, `-trimpath`, `-buildvcs=true`
-- Verification one-liner: `gh attestation verify <artifact> --owner yolo-labz`
+- SLSA L2 build provenance via `actions/attest-build-provenance` (GitHub-native attestations; `claude-mac-chrome` adds SLSA L3 via `slsa-github-generator`)
+- Dual SBOM — CycloneDX 1.6 + SPDX 2.3 (`syft` / `anchore/sbom-action`)
+- Reproducible builds — `SOURCE_DATE_EPOCH`, `-trimpath`, `-buildvcs=true` where the toolchain supports it
 
-CI hardened: every action SHA-pinned (40-char) with version comment, `permissions: {}` deny-all + per-job re-grant, `step-security/harden-runner` egress audit, `zizmor` + `actionlint` pre-commit.
+Python plugins (`kokoro-speakd`, `claude-classroom-submit`) publish to PyPI via Trusted Publishing with PEP 740 attestations.
+
+CI is hardened across every repo: SHA-pinned actions (40-char) with version comments, `permissions: {}` deny-all + per-job re-grant, and `step-security/harden-runner` egress auditing.
 
 ## Tap
 
