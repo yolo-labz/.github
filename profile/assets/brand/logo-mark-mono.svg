@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t d" color="#cdd6f4">
+  <title id="t">yolo-labz</title>
+  <desc id="d">YL monogram, monochrome single-ink (currentColor) on transparent. Node merges into the ink. Set CSS color to recolor; defaults to ctp-text for dark surfaces.</desc>
+  <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 28 L52 60 L52 100"/>
+    <path d="M72 28 L52 60"/>
+    <path d="M52 100 L96 100"/>
+    <path d="M88 28 L88 80"/>
+  </g>
+  <circle cx="52" cy="60" r="3.4" fill="currentColor"/>
+</svg>

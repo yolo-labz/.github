@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>yolo-labz · org deck</title>
+<style>
+  :root {
+    --base:#1e1e2e; --mantle:#181825; --crust:#11111b;
+    --text:#cdd6f4; --subtext:#a6adc8; --overlay:#6c7086;
+    --mauve:#cba6f7; --blue:#89b4fa; --green:#a6e3a1; --peach:#fab387;
+    --serif:"Noto Serif Display","Noto Serif","Source Serif Pro",Charter,Georgia,serif;
+    --mono:"JetBrainsMono Nerd Font","JetBrains Mono","FiraCode Nerd Font",ui-monospace,monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 1280px; height: 720px; overflow: hidden;
+    background: var(--base); color: var(--text);
+    font-family: var(--serif);
+  }
+  .slide { position: fixed; inset: 0; display: none; flex-direction: column;
+           padding: 88px 100px; }
+  .slide:target { display: flex; }
+  body:not(:has(.slide:target)) #s1 { display: flex; }
+  .accent { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--mauve); }
+  .kicker { font-family: var(--mono); font-size: 15px; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--subtext);
+            display: flex; align-items: center; gap: 14px; }
+  .kicker::before { content: ""; width: 34px; height: 1px; background: var(--mauve); display: inline-block; }
+  h2 { font-size: 58px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.04;
+       margin: 26px 0 0; color: var(--text); max-width: 22ch; }
+  .lede { font-family: var(--mono); font-size: 21px; line-height: 1.55; color: var(--subtext);
+          margin-top: 26px; max-width: 64ch; }
+  .mark-tr { position: absolute; right: 96px; top: 80px; width: 46px; height: 46px; }
+  .pagenum { position: absolute; right: 100px; bottom: 60px; font-family: var(--mono);
+             font-size: 14px; letter-spacing: 0.1em; color: var(--overlay); }
+  .pagenum b { color: var(--mauve); font-weight: 500; }
+
+  /* slide 1 + 6 — centered brand */
+  .center { align-items: flex-start; justify-content: center; }
+  .bigmark { width: 116px; height: 116px; }
+  .wordmark { font-family: var(--mono); font-size: 76px; font-weight: 500;
+              letter-spacing: 0.01em; margin: 30px 0 0; color: var(--text); }
+  .wordmark .dash { color: var(--mauve); }
+  .tagline { font-family: var(--serif); font-size: 38px; font-weight: 500; color: var(--text);
+             margin: 30px 0 0; max-width: 24ch; line-height: 1.12; }
+  .url { font-family: var(--mono); font-size: 19px; color: var(--subtext); margin-top: 34px; }
+  .url::before { content: "↳ "; color: var(--mauve); }
+
+  /* repo family list */
+  .family { font-family: var(--mono); font-size: 24px; line-height: 1.92; margin-top: 38px; }
+  .family .row { display: flex; gap: 18px; }
+  .family .name { color: var(--mauve); min-width: 320px; }
+  .family .desc { color: var(--subtext); }
+
+  /* feature bullets */
+  .bullets { font-family: var(--mono); font-size: 25px; line-height: 1.95; margin-top: 38px;
+             color: var(--text); list-style: none; padding: 0; }
+  .bullets li { display: flex; gap: 16px; align-items: baseline; }
+  .bullets li::before { content: ""; width: 9px; height: 9px; border-radius: 2px;
+                        background: var(--mauve); flex: none; transform: translateY(-2px); }
+  .bullets .q { color: var(--subtext); }
+
+  /* code block */
+  .code { margin-top: 40px; background: var(--crust); border: 1px solid #313244;
+          border-radius: 10px; padding: 30px 34px; font-family: var(--mono);
+          font-size: 26px; color: var(--text); line-height: 1.5; }
+  .code .p { color: var(--green); }
+  .code .arg { color: var(--peach); }
+  .code .flag { color: var(--blue); }
+  .proof { font-family: var(--mono); font-size: 20px; color: var(--subtext);
+           margin-top: 30px; line-height: 1.55; max-width: 62ch; }
+  .proof .ok { color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- inline mark, reused -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="ylmark">
+      <g fill="none" stroke="#cdd6f4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 28 L52 60 L52 100"/>
+        <path d="M72 28 L52 60"/>
+        <path d="M52 100 L96 100"/>
+        <path d="M88 28 L88 80"/>
+      </g>
+      <circle cx="52" cy="60" r="4" fill="#cba6f7"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- 1 — title -->
+<section class="slide center" id="s1">
+  <div class="accent"></div>
+  <svg class="bigmark" viewBox="0 0 128 128"><use href="#ylmark"/></svg>
+  <div class="wordmark">yolo<span class="dash">-</span>labz</div>
+  <div class="tagline">Plugin family for Claude Code. Signed releases.</div>
+  <div class="url">github.com/yolo-labz · open source · macOS</div>
+</section>
+
+<!-- 2 — the family -->
+<section class="slide" id="s2">
+  <div class="accent"></div>
+  <svg class="mark-tr" viewBox="0 0 128 128"><use href="#ylmark"/></svg>
+  <div class="kicker">the family</div>
+  <h2>Eight focused tools, one supply chain.</h2>
+  <div class="family">
+    <div class="row"><span class="name">wa</span><span class="desc">WhatsApp daemon · Go</span></div>
+    <div class="row"><span class="name">claude-mac-chrome</span><span class="desc">Chrome automation · macOS</span></div>
+    <div class="row"><span class="name">linkedin-chrome-copilot</span><span class="desc">LinkedIn workflows · plugin</span></div>
+    <div class="row"><span class="name">kokoro-speakd</span><span class="desc">local text-to-speech daemon · Python</span></div>
+    <div class="row"><span class="name">claude-classroom-submit</span><span class="desc">Classroom auto-submit · Python</span></div>
+    <div class="row"><span class="name">fand</span><span class="desc">Apple Silicon thermal control · Rust</span></div>
+    <div class="row"><span class="name">chrome-bridge · homebrew-tap</span><span class="desc">automation bridge · install formulae</span></div>
+  </div>
+  <div class="pagenum"><b>02</b> / 06</div>
+</section>
+
+<!-- 3 — supply chain -->
+<section class="slide" id="s3">
+  <div class="accent"></div>
+  <svg class="mark-tr" viewBox="0 0 128 128"><use href="#ylmark"/></svg>
+  <div class="kicker">supply chain</div>
+  <h2>Every release, provable.</h2>
+  <ul class="bullets">
+    <li>SLSA L2 build provenance <span class="q">— who built it, from which commit</span></li>
+    <li>Sigstore keyless signing <span class="q">— OIDC, no long-lived keys</span></li>
+    <li>Dual SBOM <span class="q">— CycloneDX 1.6 + SPDX 2.3</span></li>
+    <li>Reproducible builds <span class="q">— pinned SOURCE_DATE_EPOCH</span></li>
+    <li>SHA-pinned actions <span class="q">— every workflow step, by digest</span></li>
+  </ul>
+  <div class="pagenum"><b>03</b> / 06</div>
+</section>
+
+<!-- 4 — verify -->
+<section class="slide" id="s4">
+  <div class="accent"></div>
+  <svg class="mark-tr" viewBox="0 0 128 128"><use href="#ylmark"/></svg>
+  <div class="kicker">verify it yourself</div>
+  <h2>One command. No cosign install.</h2>
+  <div class="code"><span class="p">gh</span> attestation verify <span class="arg">&lt;asset&gt;</span> <span class="flag">--repo</span> yolo-labz/&lt;plugin&gt;</div>
+  <p class="proof"><span class="ok">✓</span> Confirms the artifact was built by our CI, from this source, and has not been tampered with since signing. The provenance travels with every published release asset.</p>
+  <div class="pagenum"><b>04</b> / 06</div>
+</section>
+
+<!-- 5 — how we ship -->
+<section class="slide" id="s5">
+  <div class="accent"></div>
+  <svg class="mark-tr" viewBox="0 0 128 128"><use href="#ylmark"/></svg>
+  <div class="kicker">how we ship</div>
+  <h2>Hardened by default.</h2>
+  <ul class="bullets">
+    <li>Workflow permissions deny-all <span class="q">— re-granted per job</span></li>
+    <li>harden-runner egress policy <span class="q">— monitored network</span></li>
+    <li>Tag-gated on green main <span class="q">— no release on red CI</span></li>
+    <li>Never re-tag <span class="q">— botched publish ships vX.Y.Z+1</span></li>
+    <li>Conventional commits <span class="q">— auto-generated changelog</span></li>
+  </ul>
+  <div class="pagenum"><b>05</b> / 06</div>
+</section>
+
+<!-- 6 — get started -->
+<section class="slide center" id="s6">
+  <div class="accent"></div>
+  <svg class="bigmark" viewBox="0 0 128 128"><use href="#ylmark"/></svg>
+  <div class="tagline" style="margin-top:34px">Build with tools you can verify.</div>
+  <div class="code" style="font-size:23px"><span class="p">brew</span> install yolo-labz/tap/<span class="arg">&lt;tool&gt;</span></div>
+  <div class="url">github.com/yolo-labz</div>
+</section>
+
+</body>
+</html>

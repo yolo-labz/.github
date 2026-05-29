@@ -27,7 +27,7 @@ Every release ships with:
 
 - SLSA L2 build provenance via `actions/attest-build-provenance@v2` (GitHub native attestations)
 - Cosign keyless signature via Sigstore + GitHub OIDC (no PEM management)
-- Dual SBOM — CycloneDX 1.7 + SPDX 2.3 (`syft`)
+- Dual SBOM — CycloneDX 1.6 + SPDX 2.3 (`syft`)
 - Reproducible builds — `SOURCE_DATE_EPOCH`, `-trimpath`, `-buildvcs=true`
 - Verification one-liner: `gh attestation verify <artifact> --owner yolo-labz`
 

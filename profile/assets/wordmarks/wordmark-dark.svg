@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64" role="img" aria-labelledby="title desc">
-  <title id="title">yolo-labz wordmark</title>
-  <desc id="desc">Wordmark "yolo-labz" set in monospace weight 600, letter-spacing 0.08em, ctp-text on ctp-base. With ctp-mauve underline accent.</desc>
-  <rect width="320" height="64" fill="#1e1e2e"/>
-  <text x="20" y="42" font-family="ui-monospace, 'JetBrains Mono', 'IBM Plex Mono', monospace" font-size="28" font-weight="600" letter-spacing="0.08em" fill="#cdd6f4">yolo-labz</text>
-  <rect x="20" y="50" width="38" height="2" fill="#cba6f7"/>
-</svg>
