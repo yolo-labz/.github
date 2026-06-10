@@ -1,6 +1,6 @@
 # yolo-labz
 
-AI-native automation tooling for high-leverage operators.
+AI-native automation tooling for high-leverage operators — built compliance-grade: build provenance, signed attestations, and hard rate/cost ceilings are first-class citizens, not bolted on after the demo.
 
 Plugin family for Claude Code, system daemons for macOS / Linux, and infra recipes that compose. Apache-2.0 + MIT throughout. SLSA L2 + Sigstore + reproducible builds.
 
@@ -14,6 +14,7 @@ Plugin family for Claude Code, system daemons for macOS / Linux, and infra recip
 | [kokoro-speakd](https://github.com/yolo-labz/kokoro-speakd) | Python · ONNX | Persistent Kokoro TTS daemon. Loads model once, serves over unix socket. Sub-200ms warm-call latency. PyPI-published with PEP 740 attestations. |
 | [claude-classroom-submit](https://github.com/yolo-labz/claude-classroom-submit) | Python · Google Classroom API | Bypasses Drive Picker iframe via REST API + OAuth 2.0. End-to-end submission < 5s. |
 | [fand](https://github.com/yolo-labz/fand) | Rust · launchd | Apple Silicon thermal daemon. Temperature-driven curves, SIGHUP reload, exact-pin reproducible builds. |
+| [anthropic-throttle-proxy](https://github.com/yolo-labz/anthropic-throttle-proxy) | Python · HTMX | Self-hosted throttle proxy for the Anthropic API: AIMD rate ceiling for an agent fleet, live saturation dashboard, advisor loop. The spend/429 guardrail everything else runs behind. |
 
 ## Composition
 
