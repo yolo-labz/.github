@@ -11,6 +11,7 @@ Plugin family for Claude Code, system daemons for macOS / Linux, and infra recip
 | [wa](https://github.com/yolo-labz/wa) | Go · whatsmeow · SQLite · JSON-RPC | WhatsApp daemon with append-only safety, allowlist + rate limiter + warmup ramp. Built so an LLM can use it without becoming a vector for spam or impersonation. |
 | [claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome) | Bash · AppleScript · TypeScript | Multi-profile Chrome control on macOS. Reads Chrome's Local State catalog + drives React/Ember SPAs via cliclick at computed screen coords. Zero user configuration. |
 | [linkedin-chrome-copilot](https://github.com/yolo-labz/linkedin-chrome-copilot) | TypeScript · Anthropic SDK | LinkedIn copilot: five user-stories (resume, draft-reply, book-slot, CV tailor, guardrails). Per-channel tone + transport + validation. PII-scanner CI gate. |
+| [chrome-bridge](https://github.com/yolo-labz/chrome-bridge) | TypeScript · Chrome MV3 | Trusted-event Chrome automation bridge: MV3 extension plus a localhost relay on `127.0.0.1:9224` that injects first-party events instead of synthetic ones. |
 | [kokoro-speakd](https://github.com/yolo-labz/kokoro-speakd) | Python · ONNX | Persistent Kokoro TTS daemon. Loads model once, serves over unix socket. Sub-200ms warm-call latency. PyPI-published with PEP 740 attestations. |
 | [claude-classroom-submit](https://github.com/yolo-labz/claude-classroom-submit) | Python · Google Classroom API | Bypasses Drive Picker iframe via REST API + OAuth 2.0. End-to-end submission < 5s. |
 | [fand](https://github.com/yolo-labz/fand) | Rust · launchd | Apple Silicon thermal daemon. Temperature-driven curves, SIGHUP reload, exact-pin reproducible builds. |
@@ -21,6 +22,16 @@ Plugin family for Claude Code, system daemons for macOS / Linux, and infra recip
 Plugins compose. `linkedin-chrome-copilot` uses `claude-mac-chrome` for browser routing. Both sit alongside `wa` for cross-channel pipelines. `kokoro-speakd` narrates agent status without per-call model-load latency. `fand` keeps the laptop cool while all of the above run in parallel.
 
 The agent loop becomes a graph of specialized capabilities, not a monolithic chat assistant.
+
+## Tools
+
+Not plugins, but the same discipline:
+
+| Tool | Stack | Purpose |
+|------|-------|---------|
+| [aferidor](https://github.com/yolo-labz/aferidor) | Python stdlib · MCP | Grocery price checking from your own data — spreadsheet method, a stdlib CLI and an MCP server. Nothing auto-pays. |
+| [noctalia-appmenu](https://github.com/yolo-labz/noctalia-appmenu) | Rust · Quickshell QML | macOS-style global menu for noctalia-shell on niri: a Rust sidecar bridge plus a QML widget. |
+| [quality-gates](https://github.com/yolo-labz/quality-gates) | TypeScript · composite Action | The org's own PR gates published as a reusable action — the gate that runs in this org's repos is public. |
 
 ## Distribution + supply chain
 
@@ -45,7 +56,7 @@ brew install yolo-labz/tap/wa
 
 ## Constitution
 
-Each repo carries a `constitution.md` (under `.specify/memory/`) with binding rules: hexagonal core, daemon owns state, no `--force` ever, CGO_ENABLED=0 where applicable, conventional commits, signed tags. Spec-driven development with citations: every "best practice" claim links to a primary source.
+Repos built from a spec carry a `constitution.md` (under `.specify/memory/`) with binding rules: hexagonal core, daemon owns state, no `--force` ever, CGO_ENABLED=0 where applicable, conventional commits, signed tags. Spec-driven development with citations: every "best practice" claim links to a primary source.
 
 ## Author
 
