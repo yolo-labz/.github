@@ -1,63 +1,69 @@
-# yolo-labz
+# Yolo Labz
 
-AI-native automation tooling for high-leverage operators — built compliance-grade: build provenance, signed attestations, and hard rate/cost ceilings are first-class citizens, not bolted on after the demo.
+**Tools for reading, listening, and making your desktop work for you.**
 
-Plugin family for Claude Code, system daemons for macOS / Linux, and infra recipes that compose. Apache-2.0 + MIT throughout. SLSA L2 + Sigstore + reproducible builds.
+Start with the task you want to do. Each project has its own installation path,
+platform support, and limitations.
 
-## Plugins (Claude Code)
+## Read with your ears
 
-| Plugin | Stack | Purpose |
-|--------|-------|---------|
-| [wa](https://github.com/yolo-labz/wa) | Go · whatsmeow · SQLite · JSON-RPC | WhatsApp daemon with append-only safety, allowlist + rate limiter + warmup ramp. Built so an LLM can use it without becoming a vector for spam or impersonation. |
-| [claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome) | Bash · AppleScript · TypeScript | Multi-profile Chrome control on macOS. Reads Chrome's Local State catalog + drives React/Ember SPAs via cliclick at computed screen coords. Zero user configuration. |
-| [linkedin-chrome-copilot](https://github.com/yolo-labz/linkedin-chrome-copilot) | TypeScript · Anthropic SDK | LinkedIn copilot: five user-stories (resume, draft-reply, book-slot, CV tailor, guardrails). Per-channel tone + transport + validation. PII-scanner CI gate. |
-| [chrome-bridge](https://github.com/yolo-labz/chrome-bridge) | TypeScript · Chrome MV3 | Trusted-event Chrome automation bridge: MV3 extension plus a localhost relay on `127.0.0.1:9224` that injects first-party events instead of synthetic ones. |
-| [kokoro-speakd](https://github.com/yolo-labz/kokoro-speakd) | Python · ONNX | Persistent Kokoro TTS daemon. Loads model once, serves over unix socket. Sub-200ms warm-call latency. PyPI-published with PEP 740 attestations. |
-| [claude-classroom-submit](https://github.com/yolo-labz/claude-classroom-submit) | Python · Google Classroom API | Bypasses Drive Picker iframe via REST API + OAuth 2.0. End-to-end submission < 5s. |
-| [fand](https://github.com/yolo-labz/fand) | Rust · launchd | Apple Silicon thermal daemon. Temperature-driven curves, SIGHUP reload, exact-pin reproducible builds. |
-| [anthropic-throttle-proxy](https://github.com/yolo-labz/anthropic-throttle-proxy) | Python · HTMX | Self-hosted throttle proxy for the Anthropic API: AIMD rate ceiling for an agent fleet, live saturation dashboard, advisor loop. The spend/429 guardrail everything else runs behind. |
+### [Proso — listen to web pages in Firefox](https://github.com/phsb5321/Proso)
 
-## Composition
+Read articles or selected text aloud, follow word highlighting, and control
+playback without leaving the page.
 
-Plugins compose. `linkedin-chrome-copilot` uses `claude-mac-chrome` for browser routing. Both sit alongside `wa` for cross-channel pipelines. `kokoro-speakd` narrates agent status without per-call model-load latency. `fand` keeps the laptop cool while all of the above run in parallel.
+[**Install from Mozilla Add-ons**](https://addons.mozilla.org/en-US/firefox/addon/proso/)
+· [Setup and privacy](https://github.com/phsb5321/Proso#installation)
 
-The agent loop becomes a graph of specialized capabilities, not a monolithic chat assistant.
+Free to install, not automatically free to synthesize: audio needs your own
+provider key, a synthesis host you operate, or an eligible managed plan. There
+is no built-in browser TTS fallback. Provider charges may apply.
 
-## Tools
+### [Lectrice — read and annotate local PDFs](https://github.com/phsb5321/Tauri-PDF-Reader)
 
-Not plugins, but the same discipline:
+Keep your place, highlight passages, and optionally listen to them. PDF viewing
+works offline; the published v0.2.0 narration path uses ElevenLabs with your own
+API key and sends the requested text to that provider.
 
-| Tool | Stack | Purpose |
-|------|-------|---------|
-| [aferidor](https://github.com/yolo-labz/aferidor) | Python stdlib · MCP | Grocery price checking from your own data — spreadsheet method, a stdlib CLI and an MCP server. Nothing auto-pays. |
-| [noctalia-appmenu](https://github.com/yolo-labz/noctalia-appmenu) | Rust · Quickshell QML | macOS-style global menu for noctalia-shell on niri: a Rust sidecar bridge plus a QML widget. |
-| [quality-gates](https://github.com/yolo-labz/quality-gates) | TypeScript · composite Action | The org's own PR gates published as a reusable action — the gate that runs in this org's repos is public. |
+[**Linux downloads**](https://github.com/phsb5321/Tauri-PDF-Reader/releases)
+· [Start here](https://github.com/phsb5321/Tauri-PDF-Reader#lectrice)
 
-## Distribution + supply chain
+Apple-silicon macOS has a separate personal Nix channel, not a notarized public
+installer. Windows packages are not published. Current source and tagged
+releases can differ; check the project's platform and release notes.
 
-`gh attestation verify <artifact> --owner yolo-labz`: one command, no cosign install, confirms a release artifact was built by this org's CI from the tagged source. Every plugin's release pipeline produces:
+Proso and Lectrice are maintained under [phsb5321](https://github.com/phsb5321).
+They are linked here alongside the Yolo Labz repositories; their existing URLs
+and ownership have not changed.
 
-- SLSA L2 build provenance via `actions/attest-build-provenance` (GitHub-native attestations; `claude-mac-chrome` adds SLSA L3 via `slsa-github-generator`)
-- Dual SBOM: CycloneDX 1.7 + SPDX 2.3 (`syft` / `anchore/sbom-action`)
-- Reproducible builds: `SOURCE_DATE_EPOCH`, `-trimpath`, `-buildvcs=true` where the toolchain supports it
+## Shape your workspace
 
-Python plugins (`kokoro-speakd`, `claude-classroom-submit`) publish to PyPI via Trusted Publishing with PEP 740 attestations.
+| If you want to… | Start with | Before you install |
+|---|---|---|
+| Hear locally synthesized speech from scripts | [kokoro-speakd](https://github.com/yolo-labz/kokoro-speakd) | A persistent Kokoro daemon; check model, audio and platform setup. |
+| Navigate Zellij tabs in a sidebar | [zellij-vertical-tabs](https://github.com/yolo-labz/zellij-vertical-tabs) | A Zellij plugin; the README includes an isolated-session recording. |
+| Put application menus in a desktop panel | [noctalia-appmenu](https://github.com/yolo-labz/noctalia-appmenu) | Check the supported shell/toolkit versions; compatibility is not universal. |
 
-CI is hardened across every repo: SHA-pinned actions (40-char) with version comments, `permissions: {}` deny-all + per-job re-grant, and `step-security/harden-runner` egress auditing.
+## Automate deliberately
 
-## Tap
+| Project | What it does | Boundary |
+|---|---|---|
+| [wa](https://github.com/yolo-labz/wa) | A WhatsApp CLI and daemon for explicit messaging workflows. | Pairing grants account access. The README demo is unpaired, not a send demonstration. |
+| [claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome) | Control Chrome profiles on macOS with AppleScript and shell helpers. | macOS-only; review permissions and profile selection first. |
+| [chrome-bridge](https://github.com/yolo-labz/chrome-bridge) | Connect a Chrome extension to a local automation relay. | Review its security model; it is not an invisibility or trusted-event guarantee. |
 
-`brew install yolo-labz/tap/<plugin>` for CLI tools. Pre-notarized macOS binaries built from a Linux runner via `rcodesign`.
+[Browse all Yolo Labz repositories →](https://github.com/orgs/yolo-labz/repositories)
 
-```bash
-brew tap yolo-labz/tap
-brew install yolo-labz/tap/wa
-```
+## Try one, tell us where it breaks
 
-## Constitution
+Use the chosen project's README for installation and its issue tracker for
+problems. Include the version, operating system, expected result, and a minimal
+reproduction. Do not attach API keys, private documents, message histories, or
+browser profiles.
 
-Repos built from a spec carry a `constitution.md` (under `.specify/memory/`) with binding rules: hexagonal core, daemon owns state, no `--force` ever, CGO_ENABLED=0 where applicable, conventional commits, signed tags. Spec-driven development with citations: every "best practice" claim links to a primary source.
+Licenses, release provenance, and support guarantees are **per project**. Check
+the repository and the specific release rather than assuming one policy covers
+everything here.
 
-## Author
-
-[Pedro Balbino](https://github.com/phsb5321) · Senior SWE specializing in AI-native automation. Engineering writeups + plugin demos at [blog.home301server.com.br](https://blog.home301server.com.br) · portfolio at [portfolio.home301server.com.br](https://portfolio.home301server.com.br) · LinkedIn [balbinopedro](https://linkedin.com/in/balbinopedro).
+[Engineering notes](https://blog.home301server.com.br)
+· [Portfolio](https://portfolio.home301server.com.br)
