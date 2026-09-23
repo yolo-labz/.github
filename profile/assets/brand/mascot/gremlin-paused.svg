@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t d">
+  <title id="t">yolo-labz mascot — gremlin paused</title>
+  <desc id="d">The programming gremlin with its head turned over the shoulder toward two faint incoming arcs, one claw raised. Paused state: holding for input, nothing produced.</desc>
+  <!--
+    state: paused / waiting for input · head mirrored (scale(-0.55,0.55)) to
+    face the incoming signal. No mauve: nothing is produced while holding.
+  -->
+  <style>
+    .skin { fill: #a6e3a1; stroke: #a6e3a1; stroke-linejoin: round; stroke-linecap: round; }
+    .pale { fill: #cdd6f4; stroke: #cdd6f4; stroke-linejoin: round; stroke-linecap: round; }
+    .dark { fill: #181825; }
+    .node { fill: #cba6f7; }
+    .limb { fill: none; stroke: #a6e3a1; stroke-width: 12; stroke-linecap: round; }
+    .sub  { fill: none; stroke: #a6adc8; stroke-width: 4; stroke-linecap: round; }
+    @media (prefers-color-scheme: light) {
+      .skin { fill: #40a02b; stroke: #40a02b; }
+      .pale { fill: #eff1f5; stroke: #eff1f5; }
+      .dark { fill: #dce0e8; }
+      .node { fill: #8839ef; }
+      .limb { stroke: #40a02b; }
+      .sub  { stroke: #7c7f93; }
+    }
+  </style>
+  <path class="sub" d="M 14 112 H 114" opacity="0.55"/>
+  <path class="skin" stroke-width="4" d="M 84 94 C 102 98 108 90 106 82 L 114 76 L 115 86 L 122 90 L 108 93 C 108 103 96 106 84 102 Z"/>
+  <ellipse class="skin" cx="64" cy="88" rx="25" ry="16" stroke-width="4"/>
+  <path class="limb" stroke-width="6" d="M 46 86 Q 34 80 30 70 M 82 88 Q 88 98 84 102"/>
+  <path class="pale" stroke-width="3" style="fill:none" d="M 26 66 l -4 -5 M 32 63 l -1 -6 M 37 65 l 3 -5"/>
+  <path class="limb" stroke-width="5" d="M 56 102 L 55 110 M 72 102 L 73 110"/>
+  <g transform="translate(60 48) scale(-0.55 0.55)">
+    <path class="skin" stroke-width="6" d="M -28 -16 C -42 -38 -62 -60 -98 -68 C -98 -34 -76 -2 -44 12 Z"/>
+    <path class="skin" stroke-width="6" d="M 28 -16 C 42 -38 62 -60 98 -68 C 98 -34 76 -2 44 12 Z"/>
+    <ellipse class="skin" rx="48" ry="40" stroke-width="6"/>
+    <circle class="pale" cx="-21" cy="-8" r="11"/>
+    <circle class="pale" cx="21" cy="-8" r="11"/>
+    <circle class="node" cx="-19" cy="-7" r="4.5"/>
+    <circle class="node" cx="23" cy="-7" r="4.5"/>
+    <path class="skin" stroke-width="5" style="fill:none" d="M -36 -25 L -8 -19 M 36 -25 L 8 -19"/>
+    <path class="dark" d="M -40 12 Q 0 54 40 12 Q 0 32 -40 12 Z"/>
+    <path class="pale" d="M -28 16 L -17 15 L -23 30 Z"/>
+    <path class="pale" d="M 17 15 L 28 16 L 23 29 Z"/>
+    <path class="pale" d="M -6 35 L 6 35 L 0 25 Z"/>
+  </g>
+  <path class="sub" d="M 22 46 Q 16 58 22 70"/>
+  <path class="sub" d="M 12 38 Q 2 58 12 78" opacity="0.6"/>
+</svg>

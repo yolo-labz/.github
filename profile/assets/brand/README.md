@@ -58,10 +58,13 @@ brand/
 │   ├── favicon-{16,32,64,128,512}.png
 │   ├── favicon.ico                   multi-res 16+32+64
 │   └── apple-touch-icon.png          180px, dark mark on base
-├── mascot/                           the bird on the line — 5-state character system
+├── mascot/                           the programming gremlin — 5-state character system
 │   ├── README.md                     grammar + states + binding usage rules
-│   └── mascot-{idle,working,paused,  state masters (.svg) + 320px rasters (.png)
-│       loading,asleep}.{svg,png}
+│   ├── gremlin-model-sheet.svg       construction spec (head geometry, palette, rules)
+│   ├── gremlin-hero.svg              signature piece — the gremlin programming (240×160)
+│   ├── gremlin-avatar.svg            head cut for social avatar / app icon
+│   └── gremlin-{idle,working,        state masters (.svg) + 320px rasters (.png)
+│       paused,loading,asleep}.{svg,png}
 ├── og-card.png                       1200×630 social card
 ├── twitter-card.png                  1200×630 (same copy)
 └── slides/
@@ -79,8 +82,9 @@ The two source templates live one level up at `../og-card-template.html`
 # raster a mark/wordmark SVG
 rsvg-convert -w 256 logo-mark-dark.svg -o logo-mark-dark.png
 
-# mascot states (see mascot/README.md for the state machine + usage rules)
-cd mascot && for f in mascot-*.svg; do rsvg-convert -w 320 "$f" -o "${f%.svg}.png"; done
+# mascot states (see mascot/README.md for the gremlin state machine + usage rules)
+cd mascot && for f in gremlin-idle gremlin-working gremlin-paused gremlin-loading gremlin-asleep gremlin-avatar; do
+  rsvg-convert -w 320 "$f.svg" -o "$f.png"; done
 
 # outline wordmark text to paths (font-independent)
 inkscape in.svg --export-text-to-path --export-plain-svg --export-filename=out.svg
