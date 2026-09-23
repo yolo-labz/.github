@@ -10,15 +10,17 @@
     .form { fill: #cdd6f4; stroke: #cdd6f4; stroke-width: 6; stroke-linejoin: round; }
     .ink  { fill: none; stroke: #cdd6f4; stroke-width: 5; stroke-linecap: round; }
     .sub  { fill: none; stroke: #a6adc8; stroke-width: 4; stroke-linecap: round; }
+    .moon { fill: #a6adc8; stroke: none; }
     @media (prefers-color-scheme: light) {
       .form { fill: #4c4f69; stroke: #4c4f69; }
       .ink  { stroke: #4c4f69; }
       .sub  { stroke: #7c7f93; }
+      .moon { fill: #7c7f93; }
     }
   </style>
   <path class="sub" d="M18 104 H110" opacity="0.55"/>
-  <!-- moon: thin crescent, sub colour -->
-  <path class="sub" d="M34 20 a 11 11 0 1 0 12 17 a 13 13 0 0 1 -12 -17 z" stroke-width="3"/>
+  <!-- moon: filled crescent (sub colour) — filled like every other form, rule 3 -->
+  <path class="moon" d="M34 20 a 11 11 0 1 0 12 17 a 13 13 0 0 1 -12 -17 z"/>
   <!-- hunched body: wider, lower, head merged into the mass -->
   <path class="form" d="M30 84 C 24 62 40 48 62 48 C 84 48 100 62 98 82 C 84 92 44 92 30 84 Z"/>
   <!-- tail, flat along the line -->

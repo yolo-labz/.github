@@ -30,7 +30,7 @@
   <path class="form" d="M99 48 L 116 54 L 97 56 Z"/>
   <circle class="node" cx="90" cy="40" r="3.6"/>
   <!-- the output line: leaves the open beak and thins out (family motif) -->
-  <path class="voice" d="M120 44 c 4 -4 6 2 8 -2"/>
-  <path class="voice" d="M121 52 c 4 -3 6 1 7 -1" opacity="0.6"/>
+  <path class="voice" d="M117 44 c 4 -4 6 2 8 -2"/>
+  <path class="voice" d="M118 52 c 4 -3 6 1 7 -1" opacity="0.6"/>
   <path class="ink" d="M52 85 L 50 102 M64 86 L 66 102"/>
 </svg>

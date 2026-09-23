@@ -37,7 +37,7 @@
   <path class="form" d="M100 42 L 118 49 L 100 56 Z"/>
   <circle class="node" cx="92" cy="45" r="3.6"/>
   <!-- motion ticks (flow, not delight) -->
-  <path class="sub" d="M2 34 H18 M0 48 H12 M2 62 H14" opacity="0.6"/>
+  <path class="sub" d="M2 34 H18 M2 48 H12 M2 62 H14" opacity="0.6"/>
   <!-- tucked legs -->
   <path class="ink" d="M56 82 L 62 90 M68 78 L 74 85" stroke-width="4"/>
 </svg>
