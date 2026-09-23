@@ -58,6 +58,10 @@ brand/
 │   ├── favicon-{16,32,64,128,512}.png
 │   ├── favicon.ico                   multi-res 16+32+64
 │   └── apple-touch-icon.png          180px, dark mark on base
+├── mascot/                           the bird on the line — 5-state character system
+│   ├── README.md                     grammar + states + binding usage rules
+│   └── mascot-{idle,working,paused,  state masters (.svg) + 320px rasters (.png)
+│       loading,asleep}.{svg,png}
 ├── og-card.png                       1200×630 social card
 ├── twitter-card.png                  1200×630 (same copy)
 └── slides/
@@ -74,6 +78,9 @@ The two source templates live one level up at `../og-card-template.html`
 ```bash
 # raster a mark/wordmark SVG
 rsvg-convert -w 256 logo-mark-dark.svg -o logo-mark-dark.png
+
+# mascot states (see mascot/README.md for the state machine + usage rules)
+cd mascot && for f in mascot-*.svg; do rsvg-convert -w 320 "$f" -o "${f%.svg}.png"; done
 
 # outline wordmark text to paths (font-independent)
 inkscape in.svg --export-text-to-path --export-plain-svg --export-filename=out.svg

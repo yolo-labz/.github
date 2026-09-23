@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t d">
+  <title id="t">yolo-labz mascot — paused</title>
+  <desc id="d">Songbird with its head turned over the shoulder to face two faint incoming arcs. The paused state: holding for input, nothing is being produced.</desc>
+  <!--
+    yolo-labz mascot · state: paused / waiting for input
+    Head turned over the shoulder (the bird-note's paused pose) — the beak rides
+    ABOVE the body's back line so the silhouette can't merge into a fish.
+    Arcs face the turned beak: input arriving, not output. Nothing is produced,
+    so mauve is absent by rule (the node only lights when the bird works).
+  -->
+  <style>
+    .form { fill: #cdd6f4; stroke: #cdd6f4; stroke-width: 6; stroke-linejoin: round; }
+    .ink  { fill: none; stroke: #cdd6f4; stroke-width: 5; stroke-linecap: round; }
+    .sub  { fill: none; stroke: #a6adc8; stroke-width: 4; stroke-linecap: round; }
+    .node { fill: #cba6f7; }
+    @media (prefers-color-scheme: light) {
+      .form { fill: #4c4f69; stroke: #4c4f69; }
+      .ink  { stroke: #4c4f69; }
+      .sub  { stroke: #7c7f93; }
+      .node { fill: #8839ef; }
+    }
+  </style>
+  <path class="sub" d="M18 104 H110" opacity="0.55"/>
+  <!-- tail -->
+  <path class="form" d="M38 56 L 6 46 L 12 72 Z"/>
+  <!-- body -->
+  <ellipse class="form" cx="58" cy="66" rx="25" ry="20" transform="rotate(-16 58 66)"/>
+  <!-- head, turned back-left and lifted clear of the back line -->
+  <circle class="form" cx="74" cy="38" r="14.5"/>
+  <!-- beak, pointing back over the shoulder -->
+  <path class="form" d="M61 30 L 37 35 L 60 41 Z"/>
+  <!-- eye = the node -->
+  <circle class="node" cx="67" cy="35" r="3.6"/>
+  <!-- input arriving at the turned face -->
+  <path class="sub" d="M33 22 Q 25 35 33 48"/>
+  <path class="sub" d="M25 13 Q 12 35 25 57" opacity="0.6"/>
+  <!-- legs to the line -->
+  <path class="ink" d="M52 85 L 50 102 M64 86 L 66 102"/>
+</svg>
