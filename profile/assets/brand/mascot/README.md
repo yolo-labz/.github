@@ -46,9 +46,11 @@ Mocha dark default, Latte light) with the same class contract as
    file dialogs, disk-space errors.
 2. **Mauve = produced.** Node pupils always; code brackets/sparks only in
    `working`/`hero`; zero mauve in `asleep`.
-3. **One silhouette weight.** Filled forms with round joins; never
-   outlines-plus-fill mixing (a shape is filled or stroked with an inline
-   `style="fill:none"`, never both), no gradients, glow, or 3D.
+3. **One silhouette weight.** Filled forms with round joins — a filled form may
+   carry a same-colour stroke to weld overlaps (never a contrasting outline).
+   Stroke-only details (brows, claws, lids, guides) use inline `style="fill:none"`
+   or a dedicated class with an explicit stroke. Never outline-render a shape
+   among fills. No gradients, glow, or 3D.
 4. **Props are load-bearing only.** The keyboard (the interface) and the moon
    (night) are the only props. No hats, scarves, laptops, speech bubbles.
 5. **Small-size honesty.** Silhouette survives 32px. At favicon size use

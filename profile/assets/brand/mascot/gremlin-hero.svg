@@ -13,9 +13,10 @@
     .pale  { fill: #cdd6f4; stroke: #cdd6f4; stroke-linejoin: round; stroke-linecap: round; }
     .dark  { fill: #181825; }
     .node  { fill: #cba6f7; }
-    .code  { fill: none; stroke: #cba6f7; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .code  { fill: none; stroke: #cba6f7; stroke-linecap: round; stroke-linejoin: round; }
     .limb  { fill: none; stroke: #a6e3a1; stroke-width: 12; stroke-linecap: round; }
     .key   { fill: #45475a; }
+    .kbd   { fill: none; stroke: #6c7086; stroke-linejoin: round; }
     @media (prefers-color-scheme: light) {
       .skin { fill: #40a02b; stroke: #40a02b; }
       .pale { fill: #eff1f5; stroke: #eff1f5; }
@@ -24,15 +25,16 @@
       .code { stroke: #8839ef; }
       .limb { stroke: #40a02b; }
       .key  { fill: #9ca0b0; }
+      .kbd  { stroke: #9ca0b0; }
     }
   </style>
   <path class="skin" stroke-width="5" d="M 158 128 C 196 134 204 118 200 104 L 214 94 L 217 112 L 230 118 L 205 123 C 207 141 184 147 156 140 Z"/>
-  <path class="skin" stroke-width="6" d="M 92 52 C 78 30 58 8 22 0 C 22 34 44 66 76 80 Z"/>
-  <path class="skin" stroke-width="6" d="M 148 52 C 162 30 182 8 218 0 C 218 34 196 66 164 80 Z"/>
+  <path class="skin" stroke-width="6" d="M 92 52 C 78 30 58 10 24 5 C 23 36 44 66 76 80 Z"/>
+  <path class="skin" stroke-width="6" d="M 148 52 C 162 30 182 10 216 5 C 217 36 196 66 164 80 Z"/>
   <ellipse class="skin" cx="120" cy="126" rx="44" ry="26" stroke-width="6"/>
   <ellipse class="skin" cx="120" cy="68" rx="48" ry="40" stroke-width="6"/>
-  <path class="limb" d="M 88 116 Q 78 132 98 137"/>
-  <path class="limb" d="M 152 116 Q 162 132 142 137"/>
+  <path class="limb" stroke-width="12" d="M 88 116 Q 78 132 98 137"/>
+  <path class="limb" stroke-width="12" d="M 152 116 Q 162 132 142 137"/>
   <path class="pale" stroke-width="3.5" style="fill:none" d="M 92 133 l -2 7 M 99 135 l 0 8 M 106 133 l 2 7 M 148 133 l 2 7 M 141 135 l 0 8 M 134 133 l -2 7"/>
   <circle class="pale" cx="99" cy="60" r="11"/>
   <circle class="pale" cx="141" cy="60" r="11"/>
@@ -44,10 +46,10 @@
   <path class="pale" d="M 137 83 L 148 84 L 143 97 Z"/>
   <path class="pale" d="M 114 103 L 126 103 L 120 93 Z"/>
   <path class="dark" d="M 42 132 L 198 132 L 210 154 L 30 154 Z"/>
-  <path style="fill:none" stroke="#6c7086" stroke-width="2.5" stroke-linejoin="round" d="M 42 132 L 198 132 L 210 154 L 30 154 Z"/>
+  <path class="kbd" stroke-width="2.5" d="M 42 132 L 198 132 L 210 154 L 30 154 Z"/>
   <path class="key" d="M 52 138 h 14 v 6 h -14 Z M 72 138 h 14 v 6 h -14 Z M 92 138 h 14 v 6 h -14 Z M 112 138 h 14 v 6 h -14 Z M 132 138 h 14 v 6 h -14 Z M 152 138 h 14 v 6 h -14 Z M 172 138 h 14 v 6 h -14 Z"/>
   <path class="key" d="M 46 147 h 136 v 5 h -136 Z" opacity="0.7"/>
-  <path class="code" d="M 216 34 L 202 46 L 216 58"/>
-  <path class="code" d="M 226 34 L 240 46 L 226 58"/>
-  <path class="code" d="M 58 106 l -7 -7 M 50 117 l -9 -3 M 184 106 l 7 -7 M 192 117 l 9 -3" stroke-width="3.5"/>
+  <path class="code" stroke-width="4" d="M 214 34 L 201 46 L 214 58"/>
+  <path class="code" stroke-width="4" d="M 223 34 L 236 46 L 223 58"/>
+  <path class="code" stroke-width="3.5" d="M 58 106 l -7 -7 M 50 117 l -9 -3 M 184 106 l 7 -7 M 192 117 l 9 -3"/>
 </svg>

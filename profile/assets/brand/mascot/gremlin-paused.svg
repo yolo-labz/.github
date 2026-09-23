@@ -10,7 +10,7 @@
     .pale { fill: #cdd6f4; stroke: #cdd6f4; stroke-linejoin: round; stroke-linecap: round; }
     .dark { fill: #181825; }
     .node { fill: #cba6f7; }
-    .limb { fill: none; stroke: #a6e3a1; stroke-width: 12; stroke-linecap: round; }
+    .limb { fill: none; stroke: #a6e3a1; stroke-linecap: round; }
     .sub  { fill: none; stroke: #a6adc8; stroke-width: 4; stroke-linecap: round; }
     @media (prefers-color-scheme: light) {
       .skin { fill: #40a02b; stroke: #40a02b; }

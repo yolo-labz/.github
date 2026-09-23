@@ -11,12 +11,14 @@
     .pale { fill: #cdd6f4; stroke: #cdd6f4; stroke-linejoin: round; stroke-linecap: round; }
     .dark { fill: #181825; }
     .moon { fill: #a6adc8; stroke: none; }
+    .lid  { fill: none; stroke: #181825; stroke-width: 3.5; stroke-linecap: round; }
     .sub  { fill: none; stroke: #a6adc8; stroke-width: 4; stroke-linecap: round; }
     @media (prefers-color-scheme: light) {
       .skin { fill: #40a02b; stroke: #40a02b; }
       .pale { fill: #eff1f5; stroke: #eff1f5; }
       .dark { fill: #dce0e8; }
       .moon { fill: #7c7f93; }
+      .lid  { stroke: #dce0e8; }
       .sub  { stroke: #7c7f93; }
     }
   </style>
@@ -28,9 +30,10 @@
     <path class="skin" stroke-width="6" d="M -28 -16 C -40 -30 -66 -40 -92 -34 C -88 -10 -68 2 -44 12 Z"/>
     <path class="skin" stroke-width="6" d="M 28 -16 C 40 -30 66 -40 92 -34 C 88 -10 68 2 44 12 Z"/>
     <ellipse class="skin" rx="48" ry="40" stroke-width="6"/>
-    <path class="dark" d="M -40 12 Q 0 44 40 12 Q 0 28 -40 12 Z"/>
-    <path class="pale" d="M -28 15 L -18 14 L -23 26 Z"/>
-    <path class="pale" d="M 18 14 L 28 15 L 23 25 Z"/>
+    <path class="dark" d="M -40 12 Q 0 54 40 12 Q 0 32 -40 12 Z"/>
+    <path class="pale" d="M -28 16 L -17 15 L -23 30 Z"/>
+    <path class="pale" d="M 17 15 L 28 16 L 23 29 Z"/>
+    <path class="pale" d="M -6 35 L 6 35 L 0 25 Z"/>
   </g>
-  <path class="dark" stroke-width="3.5" style="fill:none" d="M 42 58 Q 48 64 54 58 M 64 58 Q 70 64 76 58"/>
+  <path class="lid" d="M 42 58 Q 48 64 54 58 M 64 58 Q 70 64 76 58"/>
 </svg>

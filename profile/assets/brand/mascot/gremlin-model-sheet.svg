@@ -19,10 +19,18 @@
     .node { fill: #cba6f7; }
     .guide{ fill: none; stroke: #6c7086; stroke-width: 1; stroke-dasharray: 3 4; }
     .lbl  { fill: #a6adc8; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9px; }
+    .lblh { fill: #cdd6f4; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; }
     .chipd{ fill: #181825; }
+    @media (prefers-color-scheme: light) {
+      .plate{ fill: #eff1f5; }
+      .guide{ stroke: #9ca0b0; }
+      .lbl  { fill: #6c6f85; }
+      .lblh { fill: #4c4f69; }
+      .chipd{ fill: #dce0e8; }
+    }
   </style>
-  <rect width="360" height="200" fill="#1e1e2e"/>
-  <text class="lbl" x="14" y="20" fill="#cdd6f4" font-size="11">gremlin · model sheet · yolo-labz</text>
+  <rect class="plate" width="360" height="200" fill="#1e1e2e"/>
+  <text class="lblh" x="14" y="20">gremlin · model sheet · yolo-labz</text>
   <!-- construction grid + head -->
   <g transform="translate(96 112)">
     <ellipse class="guide" rx="48" ry="40"/>
@@ -53,7 +61,7 @@
     <text class="lbl" x="22" y="59">dark · mouth / keyboard</text>
     <rect class="node" x="0" y="72" width="14" height="14" rx="3"/>
     <text class="lbl" x="22" y="83">node · pupils + PRODUCED output only</text>
-    <text class="lbl" x="0" y="112" fill="#cdd6f4">rules:</text>
+    <text class="lblh" x="0" y="112">rules:</text>
     <text class="lbl" x="0" y="126">- mauve appears only when the gremlin</text>
     <text class="lbl" x="0" y="138">  produces (working / hero)</text>
     <text class="lbl" x="0" y="150">- filled forms, round joins, no glow</text>
