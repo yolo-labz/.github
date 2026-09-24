@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t d">
+  <title id="t">yolo-labz avatar — gremlin head</title>
+  <desc id="d">The programming gremlin's head on a rounded tile: pointed ears, node pupils, fang grin. The org social avatar and app icon.</desc>
+  <!--
+    avatar cut: head + ears only, scaled to survive 32px (the aferidor rule).
+    Same theme contract as ../favicons/favicon.svg (bg rect + media query).
+  -->
+  <style>
+    .bg   { fill: #1e1e2e; }
+    .skin { fill: #a6e3a1; stroke: #a6e3a1; stroke-linejoin: round; stroke-linecap: round; }
+    .pale { fill: #cdd6f4; stroke: #cdd6f4; stroke-linejoin: round; stroke-linecap: round; }
+    .dark { fill: #181825; }
+    .node { fill: #cba6f7; }
+    @media (prefers-color-scheme: light) {
+      .bg   { fill: #eff1f5; }
+      .skin { fill: #40a02b; stroke: #40a02b; }
+      .pale { fill: #dce0e8; stroke: #dce0e8; }
+      .dark { fill: #bcc0cc; }
+      .node { fill: #8839ef; }
+    }
+  </style>
+  <rect class="bg" width="128" height="128" rx="26"/>
+  <g transform="translate(64 68) scale(0.58)">
+    <path class="skin" stroke-width="6" d="M -28 -16 C -42 -38 -62 -60 -98 -68 C -98 -34 -76 -2 -44 12 Z"/>
+    <path class="skin" stroke-width="6" d="M 28 -16 C 42 -38 62 -60 98 -68 C 98 -34 76 -2 44 12 Z"/>
+    <ellipse class="skin" rx="48" ry="40" stroke-width="6"/>
+    <circle class="pale" cx="-21" cy="-8" r="11"/>
+    <circle class="pale" cx="21" cy="-8" r="11"/>
+    <circle class="node" cx="-19" cy="-7" r="4.5"/>
+    <circle class="node" cx="23" cy="-7" r="4.5"/>
+    <path class="skin" stroke-width="5" style="fill:none" d="M -36 -25 L -8 -19 M 36 -25 L 8 -19"/>
+    <path class="dark" d="M -40 12 Q 0 54 40 12 Q 0 32 -40 12 Z"/>
+    <path class="pale" d="M -28 16 L -17 15 L -23 30 Z"/>
+    <path class="pale" d="M 17 15 L 28 16 L 23 29 Z"/>
+    <path class="pale" d="M -6 35 L 6 35 L 0 25 Z"/>
+  </g>
+</svg>

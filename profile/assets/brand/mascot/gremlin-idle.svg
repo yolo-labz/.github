@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t d">
+  <title id="t">yolo-labz mascot — gremlin idle</title>
+  <desc id="d">The programming gremlin sitting on the line, arms on its knees, wide fang grin, node pupils lit. Ready state: service up, listening.</desc>
+  <!--
+    state: idle / ready · head construction per gremlin-model-sheet.svg
+    head group: translate(64,48) scale(0.55) of the hero-local geometry.
+    Accent rule: node pupils always; nothing produced → no code accents.
+  -->
+  <style>
+    .skin { fill: #a6e3a1; stroke: #a6e3a1; stroke-linejoin: round; stroke-linecap: round; }
+    .pale { fill: #cdd6f4; stroke: #cdd6f4; stroke-linejoin: round; stroke-linecap: round; }
+    .dark { fill: #181825; }
+    .node { fill: #cba6f7; }
+    .limb { fill: none; stroke: #a6e3a1; stroke-linecap: round; }
+    .sub  { fill: none; stroke: #a6adc8; stroke-width: 4; stroke-linecap: round; }
+    @media (prefers-color-scheme: light) {
+      .skin { fill: #40a02b; stroke: #40a02b; }
+      .pale { fill: #eff1f5; stroke: #eff1f5; }
+      .dark { fill: #dce0e8; }
+      .node { fill: #8839ef; }
+      .limb { stroke: #40a02b; }
+      .sub  { stroke: #7c7f93; }
+    }
+  </style>
+  <path class="sub" d="M 14 112 H 114" opacity="0.55"/>
+  <path class="skin" stroke-width="4" d="M 84 94 C 102 98 108 90 106 82 L 114 76 L 115 86 L 122 90 L 108 93 C 108 103 96 106 84 102 Z"/>
+  <ellipse class="skin" cx="64" cy="88" rx="25" ry="16" stroke-width="4"/>
+  <path class="limb" stroke-width="6" d="M 48 84 Q 41 94 45 102 M 80 84 Q 87 94 83 102"/>
+  <path class="limb" stroke-width="5" d="M 56 102 L 55 110 M 72 102 L 73 110"/>
+  <g transform="translate(64 48) scale(0.55)">
+    <path class="skin" stroke-width="6" d="M -28 -16 C -42 -38 -62 -60 -98 -68 C -98 -34 -76 -2 -44 12 Z"/>
+    <path class="skin" stroke-width="6" d="M 28 -16 C 42 -38 62 -60 98 -68 C 98 -34 76 -2 44 12 Z"/>
+    <ellipse class="skin" rx="48" ry="40" stroke-width="6"/>
+    <circle class="pale" cx="-21" cy="-8" r="11"/>
+    <circle class="pale" cx="21" cy="-8" r="11"/>
+    <circle class="node" cx="-19" cy="-7" r="4.5"/>
+    <circle class="node" cx="23" cy="-7" r="4.5"/>
+    <path class="skin" stroke-width="5" style="fill:none" d="M -36 -25 L -8 -19 M 36 -25 L 8 -19"/>
+    <path class="dark" d="M -40 12 Q 0 54 40 12 Q 0 32 -40 12 Z"/>
+    <path class="pale" d="M -28 16 L -17 15 L -23 30 Z"/>
+    <path class="pale" d="M 17 15 L 28 16 L 23 29 Z"/>
+    <path class="pale" d="M -6 35 L 6 35 L 0 25 Z"/>
+  </g>
+</svg>

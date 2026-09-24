@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" role="img" aria-labelledby="t d">
+  <title id="t">yolo-labz mascot — gremlin model sheet</title>
+  <desc id="d">Construction spec for the programming gremlin: head geometry on guide grid, palette chips, and the accent rule. The reference every new state or pose must follow.</desc>
+  <!--
+    MODEL SHEET — the construction spec (engineering-reference aesthetic).
+    Every new gremlin asset reuses these numbers; nothing is freehand.
+    head-local geometry (hero units), head group transform = translate + scale:
+      ears   leaf sweeps · tips at x ±98, y −68 · bases x ±28..±44
+      head   ellipse rx 48 ry 40 at (0,0)
+      eyes   pale r11 at (∓21,−8) · node pupils r4.5 at (∓19,−7)
+      brows  slanted 5px skin strokes: (±36,−25)→(±8,−19)
+      grin   M −40 12 Q 0 54 40 12 Q 0 32 −40 12 Z (dark crescent)
+      fangs  2 down (±17..±28, 14..30) + 1 up (−6..6, 25..35)
+  -->
+  <style>
+    .skin { fill: #a6e3a1; stroke: #a6e3a1; stroke-linejoin: round; stroke-linecap: round; }
+    .pale { fill: #cdd6f4; stroke: #cdd6f4; stroke-linejoin: round; stroke-linecap: round; }
+    .dark { fill: #181825; }
+    .node { fill: #cba6f7; }
+    .guide{ fill: none; stroke: #6c7086; stroke-width: 1; stroke-dasharray: 3 4; }
+    .lbl  { fill: #a6adc8; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 9px; }
+    .lblh { fill: #cdd6f4; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; }
+    .chipd{ fill: #181825; }
+    @media (prefers-color-scheme: light) {
+      .plate{ fill: #eff1f5; }
+      .guide{ stroke: #9ca0b0; }
+      .lbl  { fill: #6c6f85; }
+      .lblh { fill: #4c4f69; }
+      .chipd{ fill: #dce0e8; }
+    }
+  </style>
+  <rect class="plate" width="360" height="200" fill="#1e1e2e"/>
+  <text class="lblh" x="14" y="20">gremlin · model sheet · yolo-labz</text>
+  <!-- construction grid + head -->
+  <g transform="translate(96 112)">
+    <ellipse class="guide" rx="48" ry="40"/>
+    <ellipse class="guide" rx="72" ry="60"/>
+    <path class="guide" d="M -100 0 H 100 M 0 -70 V 70"/>
+    <g transform="scale(0.9)">
+      <path class="skin" stroke-width="6" d="M -28 -16 C -42 -38 -62 -60 -98 -68 C -98 -34 -76 -2 -44 12 Z"/>
+      <path class="skin" stroke-width="6" d="M 28 -16 C 42 -38 62 -60 98 -68 C 98 -34 76 -2 44 12 Z"/>
+      <ellipse class="skin" rx="48" ry="40" stroke-width="6"/>
+      <circle class="pale" cx="-21" cy="-8" r="11"/>
+      <circle class="pale" cx="21" cy="-8" r="11"/>
+      <circle class="node" cx="-19" cy="-7" r="4.5"/>
+      <circle class="node" cx="23" cy="-7" r="4.5"/>
+      <path class="skin" stroke-width="5" style="fill:none" d="M -36 -25 L -8 -19 M 36 -25 L 8 -19"/>
+      <path class="dark" d="M -40 12 Q 0 54 40 12 Q 0 32 -40 12 Z"/>
+      <path class="pale" d="M -28 16 L -17 15 L -23 30 Z"/>
+      <path class="pale" d="M 17 15 L 28 16 L 23 29 Z"/>
+      <path class="pale" d="M -6 35 L 6 35 L 0 25 Z"/>
+    </g>
+  </g>
+  <!-- palette chips + rules -->
+  <g transform="translate(212 44)">
+    <rect class="skin" x="0" y="0" width="14" height="14" rx="3"/>
+    <text class="lbl" x="22" y="11">skin · the character — never recolour</text>
+    <rect class="pale" x="0" y="24" width="14" height="14" rx="3"/>
+    <text class="lbl" x="22" y="35">pale · teeth / eyes / claws</text>
+    <rect class="chipd" x="0" y="48" width="14" height="14" rx="3"/>
+    <text class="lbl" x="22" y="59">dark · mouth / keyboard</text>
+    <rect class="node" x="0" y="72" width="14" height="14" rx="3"/>
+    <text class="lbl" x="22" y="83">node · pupils + PRODUCED output only</text>
+    <text class="lblh" x="0" y="112">rules:</text>
+    <text class="lbl" x="0" y="126">- mauve appears only when the gremlin</text>
+    <text class="lbl" x="0" y="138">  produces (working / hero)</text>
+    <text class="lbl" x="0" y="150">- filled forms, round joins, no glow</text>
+    <text class="lbl" x="0" y="162">- silhouette honest at 32px</text>
+    <text class="lbl" x="0" y="174">- keyboard = the interface (the prompt)</text>
+  </g>
+</svg>

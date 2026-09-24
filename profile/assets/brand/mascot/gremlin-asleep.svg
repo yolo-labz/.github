@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t d">
+  <title id="t">yolo-labz mascot — gremlin asleep</title>
+  <desc id="d">The programming gremlin hunched on the line, eyes closed, ears drooping, a filled crescent moon overhead. Asleep state: timed out, night mode, nothing running.</desc>
+  <!--
+    state: asleep / night · eyes become lid arcs (no pupils), node dark, and
+    the moon is a FILLED crescent (review rule: never outline among fills).
+    The one state with zero mauve: nothing is running.
+  -->
+  <style>
+    .skin { fill: #a6e3a1; stroke: #a6e3a1; stroke-linejoin: round; stroke-linecap: round; }
+    .pale { fill: #cdd6f4; stroke: #cdd6f4; stroke-linejoin: round; stroke-linecap: round; }
+    .dark { fill: #181825; }
+    .moon { fill: #a6adc8; stroke: none; }
+    .lid  { fill: none; stroke: #181825; stroke-width: 3.5; stroke-linecap: round; }
+    .sub  { fill: none; stroke: #a6adc8; stroke-width: 4; stroke-linecap: round; }
+    @media (prefers-color-scheme: light) {
+      .skin { fill: #40a02b; stroke: #40a02b; }
+      .pale { fill: #eff1f5; stroke: #eff1f5; }
+      .dark { fill: #dce0e8; }
+      .moon { fill: #7c7f93; }
+      .lid  { stroke: #dce0e8; }
+      .sub  { stroke: #7c7f93; }
+    }
+  </style>
+  <path class="sub" d="M 14 112 H 114" opacity="0.55"/>
+  <path class="moon" d="M 36 14 a 11 11 0 1 0 12 17 a 13 13 0 0 1 -12 -17 z"/>
+  <path class="skin" stroke-width="4" d="M 84 94 C 102 98 108 90 106 82 L 114 76 L 115 86 L 122 90 L 108 93 C 108 103 96 106 84 102 Z"/>
+  <ellipse class="skin" cx="64" cy="94" rx="34" ry="18" stroke-width="4"/>
+  <g transform="translate(58 62) scale(0.5)">
+    <path class="skin" stroke-width="6" d="M -28 -16 C -40 -30 -66 -40 -92 -34 C -88 -10 -68 2 -44 12 Z"/>
+    <path class="skin" stroke-width="6" d="M 28 -16 C 40 -30 66 -40 92 -34 C 88 -10 68 2 44 12 Z"/>
+    <ellipse class="skin" rx="48" ry="40" stroke-width="6"/>
+    <path class="dark" d="M -40 12 Q 0 54 40 12 Q 0 32 -40 12 Z"/>
+    <path class="pale" d="M -28 16 L -17 15 L -23 30 Z"/>
+    <path class="pale" d="M 17 15 L 28 16 L 23 29 Z"/>
+    <path class="pale" d="M -6 35 L 6 35 L 0 25 Z"/>
+  </g>
+  <path class="lid" d="M 42 58 Q 48 64 54 58 M 64 58 Q 70 64 76 58"/>
+</svg>
