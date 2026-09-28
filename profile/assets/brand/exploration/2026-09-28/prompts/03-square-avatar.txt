@@ -1,0 +1,7 @@
+EDIT the attached programming-gremlin anchor into ONE square avatar direction. Preserve this exact character identity, not a new creature.
+
+PRESERVE EXACTLY: green skin #a6e3a1, large pointed ears and their recognizable shape, knowing mischievous eyelids, pale eye details #cdd6f4, small mauve pupil nodes #cba6f7, angular triangular fangs and asymmetrical grin; crisp flat filled shapes on #1e1e2e Mocha. Keep the original ear asymmetry and character rather than making a generic symmetrical emoji.
+
+CHANGE ONLY: a square 1:1 bust portrait, larger face, calmer pose, reduced small detail for legibility at 64px. Center the face and keep BOTH complete ears within the central circular safe area with breathing room. A short dark blank-key keyboard edge and the two three-clawed hands can remain across the bottom as a compact programming cue, but the face must dominate. Remove output sparks for this resting portrait: mauve stays only in the pupil nodes. No drawn circular frame; the canvas itself is square and unframed.
+
+CONSTRAINTS: no bird, clothes, headset, extra limbs, extra props, gradients, glow, 3D, glossy highlights, logo, border or film/game imitation. Absolutely WORDLESS: no letters, words, numbers, code, key legends, labels, watermark or explanatory copy. Preserve flat professional editorial craft and convincing simple anatomy. Produce only the edited image.
