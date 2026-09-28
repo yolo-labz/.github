@@ -125,4 +125,3 @@ No new workers or advisory model reviewer were launched. No canonical vault note
 was edited. Reversal before merge: close this proposal, leaving main unchanged;
 after a later authorized squash merge, use a normal `git revert <merge-sha>` PR.
 All durable artifacts are in this feature worktree and pushed branch, not scratch.
-
