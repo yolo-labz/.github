@@ -1,0 +1,52 @@
+{
+  "mode": "draft",
+  "assets": 2,
+  "flagships": 6,
+  "links": [
+    "https://github.com/orgs/yolo-labz/repositories",
+    "https://github.com/yolo-labz/anthropic-throttle-proxy",
+    "https://github.com/yolo-labz/chrome-bridge",
+    "https://github.com/yolo-labz/claude-mac-chrome",
+    "https://github.com/yolo-labz/fand",
+    "https://github.com/yolo-labz/kokoro-speakd",
+    "https://github.com/yolo-labz/wa"
+  ],
+  "profile_sha256": "f49025481bd4860f07e7c70d8d4dc053873d1b92722e38bf7e786f5627bd84a7",
+  "remote_links": [
+    {
+      "url": "https://github.com/orgs/yolo-labz/repositories",
+      "status": 200,
+      "final_url": "https://github.com/orgs/yolo-labz/repositories"
+    },
+    {
+      "url": "https://github.com/yolo-labz/anthropic-throttle-proxy",
+      "status": 200,
+      "final_url": "https://github.com/yolo-labz/anthropic-throttle-proxy"
+    },
+    {
+      "url": "https://github.com/yolo-labz/chrome-bridge",
+      "status": 200,
+      "final_url": "https://github.com/yolo-labz/chrome-bridge"
+    },
+    {
+      "url": "https://github.com/yolo-labz/claude-mac-chrome",
+      "status": 200,
+      "final_url": "https://github.com/yolo-labz/claude-mac-chrome"
+    },
+    {
+      "url": "https://github.com/yolo-labz/fand",
+      "status": 200,
+      "final_url": "https://github.com/yolo-labz/fand"
+    },
+    {
+      "url": "https://github.com/yolo-labz/kokoro-speakd",
+      "status": 200,
+      "final_url": "https://github.com/yolo-labz/kokoro-speakd"
+    },
+    {
+      "url": "https://github.com/yolo-labz/wa",
+      "status": 200,
+      "final_url": "https://github.com/yolo-labz/wa"
+    }
+  ]
+}

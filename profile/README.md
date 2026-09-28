@@ -1,63 +1,39 @@
-# yolo-labz
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/yolo-labz/.github/main/profile/assets/brand/logo-wordmark-dark.svg">
+  <img src="https://raw.githubusercontent.com/yolo-labz/.github/main/profile/assets/brand/logo-wordmark-light.svg" alt="yolo-labz" width="300">
+</picture>
 
-AI-native automation tooling for high-leverage operators — built compliance-grade: build provenance, signed attestations, and hard rate/cost ceilings are first-class citizens, not bolted on after the demo.
+# Small tools. Deliberate automation.
 
-Plugin family for Claude Code, system daemons for macOS / Linux, and infra recipes that compose. Apache-2.0 + MIT throughout. SLSA L2 + Sigstore + reproducible builds.
+Tools for scripting messaging, browser workflows and local services.
 
-## Plugins (Claude Code)
+> **Integration draft — temporary art placeholder.** GPT gremlin artwork from
+> producer p9 is pending. No final GPT artwork is present in this profile yet.
 
-| Plugin | Stack | Purpose |
-|--------|-------|---------|
-| [wa](https://github.com/yolo-labz/wa) | Go · whatsmeow · SQLite · JSON-RPC | WhatsApp daemon with append-only safety, allowlist + rate limiter + warmup ramp. Built so an LLM can use it without becoming a vector for spam or impersonation. |
-| [claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome) | Bash · AppleScript · TypeScript | Multi-profile Chrome control on macOS. Reads Chrome's Local State catalog + drives React/Ember SPAs via cliclick at computed screen coords. Zero user configuration. |
-| [linkedin-chrome-copilot](https://github.com/yolo-labz/linkedin-chrome-copilot) | TypeScript · Anthropic SDK | LinkedIn copilot: five user-stories (resume, draft-reply, book-slot, CV tailor, guardrails). Per-channel tone + transport + validation. PII-scanner CI gate. |
-| [chrome-bridge](https://github.com/yolo-labz/chrome-bridge) | TypeScript · Chrome MV3 | Trusted-event Chrome automation bridge: MV3 extension plus a localhost relay on `127.0.0.1:9224` that injects first-party events instead of synthetic ones. |
-| [kokoro-speakd](https://github.com/yolo-labz/kokoro-speakd) | Python · ONNX | Persistent Kokoro TTS daemon. Loads model once, serves over unix socket. Sub-200ms warm-call latency. PyPI-published with PEP 740 attestations. |
-| [claude-classroom-submit](https://github.com/yolo-labz/claude-classroom-submit) | Python · Google Classroom API | Bypasses Drive Picker iframe via REST API + OAuth 2.0. End-to-end submission < 5s. |
-| [fand](https://github.com/yolo-labz/fand) | Rust · launchd | Apple Silicon thermal daemon. Temperature-driven curves, SIGHUP reload, exact-pin reproducible builds. |
-| [anthropic-throttle-proxy](https://github.com/yolo-labz/anthropic-throttle-proxy) | Python · HTMX | Self-hosted throttle proxy for the Anthropic API: AIMD rate ceiling for an agent fleet, live saturation dashboard, advisor loop. The spend/429 guardrail everything else runs behind. |
+## Start with a task
 
-## Composition
+### Connect your workflows
 
-Plugins compose. `linkedin-chrome-copilot` uses `claude-mac-chrome` for browser routing. Both sit alongside `wa` for cross-channel pipelines. `kokoro-speakd` narrates agent status without per-call model-load latency. `fand` keeps the laptop cool while all of the above run in parallel.
+- **[wa](https://github.com/yolo-labz/wa)** — personal WhatsApp workflows with allowlist and rate controls.
+  Single-user, QR-paired, unofficial Multi-Device; not the Cloud API or a bulk-messaging service.
+- **[chrome-bridge](https://github.com/yolo-labz/chrome-bridge)** — drive a dedicated Chromium profile from a local CLI.
+  Requires a compatible unpacked-extension-capable browser, extension and localhost relay.
 
-The agent loop becomes a graph of specialized capabilities, not a monolithic chat assistant.
+### Work on your Mac
 
-## Tools
+- **[claude-mac-chrome](https://github.com/yolo-labz/claude-mac-chrome)** — address Chrome profiles and tabs from scripts without relying on window order.
+  macOS only; visible Chrome, Bash 4+, jq, Python 3 and automation permissions required. IDs last for the tab/window lifetime.
+- **[fand](https://github.com/yolo-labz/fand)** — configure temperature-driven fan modes on supported Apple Silicon Macs.
+  macOS and suitable SMC sensors required; forced-minimum or automatic modes, not arbitrary RPM.
 
-Not plugins, but the same discipline:
+### Keep services ready
 
-| Tool | Stack | Purpose |
-|------|-------|---------|
-| [aferidor](https://github.com/yolo-labz/aferidor) | Python stdlib · MCP | Grocery price checking from your own data — spreadsheet method, a stdlib CLI and an MCP server. Nothing auto-pays. |
-| [noctalia-appmenu](https://github.com/yolo-labz/noctalia-appmenu) | Rust · Quickshell QML | macOS-style global menu for noctalia-shell on niri: a Rust sidecar bridge plus a QML widget. |
-| [quality-gates](https://github.com/yolo-labz/quality-gates) | TypeScript · composite Action | The org's own PR gates published as a reusable action — the gate that runs in this org's repos is public. |
+- **[kokoro-speakd](https://github.com/yolo-labz/kokoro-speakd)** — keep Kokoro ready between speech requests, with interruptible local playback.
+  Single-user Unix-socket daemon; model assets and an audio player required. Queued does not mean audible.
+- **[anthropic-throttle-proxy](https://github.com/yolo-labz/anthropic-throttle-proxy)** — pace Anthropic API traffic across clients with per-bearer queues and a live dashboard.
+  Enable fair/reactive queue mode; the default is off. Pacing does not create provider quota.
 
-## Distribution + supply chain
+Each project's README has its installation path, operating limits and license.
+Choose one tool, check its requirements, then build from there.
 
-`gh attestation verify <artifact> --owner yolo-labz`: one command, no cosign install, confirms a release artifact was built by this org's CI from the tagged source. Every plugin's release pipeline produces:
-
-- SLSA L2 build provenance via `actions/attest-build-provenance` (GitHub-native attestations; `claude-mac-chrome` adds SLSA L3 via `slsa-github-generator`)
-- Dual SBOM: CycloneDX 1.7 + SPDX 2.3 (`syft` / `anchore/sbom-action`)
-- Reproducible builds: `SOURCE_DATE_EPOCH`, `-trimpath`, `-buildvcs=true` where the toolchain supports it
-
-Python plugins (`kokoro-speakd`, `claude-classroom-submit`) publish to PyPI via Trusted Publishing with PEP 740 attestations.
-
-CI is hardened across every repo: SHA-pinned actions (40-char) with version comments, `permissions: {}` deny-all + per-job re-grant, and `step-security/harden-runner` egress auditing.
-
-## Tap
-
-`brew install yolo-labz/tap/<plugin>` for CLI tools. Pre-notarized macOS binaries built from a Linux runner via `rcodesign`.
-
-```bash
-brew tap yolo-labz/tap
-brew install yolo-labz/tap/wa
-```
-
-## Constitution
-
-Repos built from a spec carry a `constitution.md` (under `.specify/memory/`) with binding rules: hexagonal core, daemon owns state, no `--force` ever, CGO_ENABLED=0 where applicable, conventional commits, signed tags. Spec-driven development with citations: every "best practice" claim links to a primary source.
-
-## Author
-
-[Pedro Balbino](https://github.com/phsb5321) · Senior SWE specializing in AI-native automation. Engineering writeups + plugin demos at [blog.home301server.com.br](https://blog.home301server.com.br) · portfolio at [portfolio.home301server.com.br](https://portfolio.home301server.com.br) · LinkedIn [balbinopedro](https://linkedin.com/in/balbinopedro).
+[Browse all Yolo Labz repositories →](https://github.com/orgs/yolo-labz/repositories)
