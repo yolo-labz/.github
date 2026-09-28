@@ -34,8 +34,8 @@ documentation slice; no dependency, test framework or extra owned file is needed
 - [x] Inspect Lectrice/Proso's actual GPT path and published brand contracts; keep private source/receipts out of this public packet.
 - [x] Draft positioning, six qualified propositions, 15 claim rows and a three-class asset contract.
 - [x] Run offline/online acceptance and negative controls; check Markdown and diff scope.
-- [ ] Commit, open a PR assigned to the verified personal account, and record exact delivery state.
-- [ ] Merge only after a fresh protection check and real repository gates allow it; otherwise preserve the held proposal.
+- [x] Commit, open a PR assigned to the verified personal account, and record exact delivery state.
+- [ ] Merge: **held**, main remains unprotected. Recheck protection and real repository gates before any later delivery.
 
 ## Evidence and decisions
 
@@ -215,7 +215,19 @@ text-only slice; no render inspection or image-quality pass is claimed.
 
 ## Delivery receipt and pending gates
 
-- Content commit / PR: pending creation after acceptance.
+- Content commit: `74f6cd01a4ce9a121f1fa15d7b0c270ab1caa9b3`
+  (`docs: ground flagship brand claims`). A subsequent report-only commit records
+  this delivery receipt; resolve the exact current tip with
+  `git rev-parse 012-brand-copy` or the PR's `headRefOid`.
+- PR: [yolo-labz/.github#10](https://github.com/yolo-labz/.github/pull/10),
+  **OPEN / DRAFT**, assigned to **phsb5321**, verified by PR readback.
+  Worktree: `../github-profile-012-brand-copy`; branch: `012-brand-copy`.
+- At **19:58 BRT**, content-head check-runs returned zero checks and commit status
+  returned `pending` with zero statuses. **No CI pass is claimed.** Main still
+  reported `protected=false`, protection disabled, empty required-check lists
+  and effective rules `[]`. PR creation did not change those permissions.
+  Inspect the latest head with `gh pr checks 10 --repo yolo-labz/.github` before
+  any later gate decision.
 - Acceptance passed: 6 propositions, 15 claim rows, 31 references, all three
   negative controls rejected, and exactly the two owned files changed.
 - Online acceptance passed: all 31 public file/release URLs resolve; pinned
