@@ -25,7 +25,8 @@ this seat. No edits outside the assigned ownership surface.
   Current hero is an explicit text placeholder, not old SVG artwork.
 - p8: claim matrix from
   `../github-profile-012-brand-copy/docs/visual-rollout-2026-09-28-copy.md`.
-  Read p8's `docs/brand-positioning.md` at 19:55 BRT; the six flagships are
+  Read p8's `docs/brand-positioning.md` and rollout claim-matrix handoff at
+  19:55 BRT; the six flagships are
   **wa, chrome-bridge, claude-mac-chrome, fand, kokoro-speakd,
   anthropic-throttle-proxy**. The provisional reader-tool links were replaced,
   not copied from held PR #7. Platform/protocol/runtime qualifiers remain visible.
@@ -52,5 +53,15 @@ this seat. No edits outside the assigned ownership surface.
   selection and overflow at 1280/360px, then tests image-failure navigation.
 - First four **draft-only** renders passed; final-art acceptance correctly
   refused the placeholder. These are not final-art or live GitHub screenshots.
-- Final copy/link receipts and final-art renders remain pending. PR receipt will
-  be added after commit; producer generation has not yet yielded public proof.
+- After adopting all six p8 flagship choices: seven public Markdown destinations
+  returned HTTP 200; four fresh draft previews passed 1280/360px light/dark.
+  `checks.json` and `renders.json` bind these receipts to the exact profile SHA-256.
+- Layout/checks commit: `f95ccbfc90e8435f5a73c68e54d1fb786c19ba72`.
+- PR: [yolo-labz/.github#9](https://github.com/yolo-labz/.github/pull/9), OPEN,
+  **DRAFT**, assignee `phsb5321` (read back through REST).
+- CI observation at 19:57 BRT for that head: `check_runs.total_count=0`,
+  combined status `pending` with `statuses=[]`. **No CI check has run/passed**;
+  do not mistake the absent checks for green CI.
+- Final-art integration remains pending producer p9. No raw GPT output/proof
+  is yet available on its public file handoff. This PR is intentionally draft
+  while that postcondition is unfinished; no fallback art generation is allowed.

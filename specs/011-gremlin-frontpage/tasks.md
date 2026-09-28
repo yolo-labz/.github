@@ -7,6 +7,6 @@
 - [ ] T05 Import exact usable p9 GPT image and proof into `profile/assets/brand/rollout/`.
 - [ ] T06 Run executable asset/link checks and final-image light/dark desktop/mobile renders.
 - [ ] T07 Inspect actual renders; preserve logo geometry and image-failure navigation.
-- [ ] T08 Commit, push and create PR assigned to verified personal account `phsb5321`.
+- [x] T08 Commit, push and create PR assigned to verified personal account `phsb5321` (#9, draft).
 - [ ] T09 Verify current checks/protection; merge only if genuinely eligible.
 - [ ] T10 Finalize `docs/visual-rollout-2026-09-28-frontpage.md` with paths, receipts and gates.
