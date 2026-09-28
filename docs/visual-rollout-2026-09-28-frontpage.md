@@ -4,9 +4,12 @@
 
 ## Live file handoff
 
-**IN PROGRESS / PLACEHOLDER ONLY.** This is not final GPT artwork or an approved
-brand master. Producer p9 and copy seat p8 can read this file without interrupting
-this seat. No edits outside the assigned ownership surface.
+**BLOCKED INTEGRATION DRAFT / PLACEHOLDER ONLY — 20:09 BRT.** Layout and
+executable draft checks are delivered; final-art acceptance is **not complete**.
+No final GPT artwork or approved brand master is claimed. Producer p9 still
+reports its anchor in flight/queue, not a delivered image; this is a dependency
+blocker, **not a claim that generation definitively failed**. No sibling was
+interrupted and no edits left this seat's ownership surface.
 
 - Worktree: `../github-profile-011-gremlin-frontpage`
 - Branch: `011-gremlin-frontpage`, based on `6488088` (`origin/main`, PR #8).
@@ -30,7 +33,9 @@ this seat. No edits outside the assigned ownership surface.
   **wa, chrome-bridge, claude-mac-chrome, fand, kokoro-speakd,
   anthropic-throttle-proxy**. The provisional reader-tool links were replaced,
   not copied from held PR #7. Platform/protocol/runtime qualifiers remain visible.
-  No licensing/compliance or supply-chain blanket claims remain.
+  No licensing/compliance or supply-chain blanket claims remain. Immutable copy
+  source: `74f6cd01a4ce9a121f1fa15d7b0c270ab1caa9b3`,
+  [copy PR #10](https://github.com/yolo-labz/.github/pull/10).
 
 ## Gates observed
 
@@ -59,9 +64,65 @@ this seat. No edits outside the assigned ownership surface.
 - Layout/checks commit: `f95ccbfc90e8435f5a73c68e54d1fb786c19ba72`.
 - PR: [yolo-labz/.github#9](https://github.com/yolo-labz/.github/pull/9), OPEN,
   **DRAFT**, assignee `phsb5321` (read back through REST).
-- CI observation at 19:57 BRT for that head: `check_runs.total_count=0`,
+- Evidence/report follow-up commit: `9344184554a27a7e5f6efc229812426698fedfcc`.
+- Fresh CI observation at 20:09 BRT for that head: `check_runs.total_count=0`,
   combined status `pending` with `statuses=[]`. **No CI check has run/passed**;
-  do not mistake the absent checks for green CI.
-- Final-art integration remains pending producer p9. No raw GPT output/proof
-  is yet available on its public file handoff. This PR is intentionally draft
-  while that postcondition is unfinished; no fallback art generation is allowed.
+  do not mistake the absent checks for green CI. The repo has no checked-in CI
+  workflow; this slice does not add one or replace branch authorization.
+- Fresh protection readback at 20:09 BRT: main still `6488088`,
+  `protected=false`, rules `[]`. PR #7 is OPEN/unmerged at unchanged `9bfcb26`.
+- Sole producer's public handoff inspected through 20:09 BRT, including a bounded
+  six-minute file-only wait: reference board, prompts and integrity check exist;
+  **no generated anchor/hero/provenance sidecar** exists. Its report remains
+  `in progress`, with the anchor invocation in flight/queue and an earlier CDP
+  attach failure. No browser attachment, retry or service change was made here.
+- Therefore only **draft** render evidence is supplied. Actual final-image
+  desktop/mobile acceptance cannot be truthfully marked passed.
+
+## Render receipts and rerun
+
+All paths below are relative to the repo. Screenshots were opened and inspected,
+not inferred from tool exit status. Readable vector type, six links and three
+sections remain visible without cropping or horizontal scrolling.
+
+- `profile/assets/brand/rollout/draft-1280-light.png`
+- `profile/assets/brand/rollout/draft-1280-dark.png`
+- `profile/assets/brand/rollout/draft-360-light.png`
+- `profile/assets/brand/rollout/draft-360-dark.png`
+- `profile/assets/brand/rollout/checks.json`: seven HTTP 200 destinations,
+  six exact flagship links, local SVGs and qualifiers checked.
+- `profile/assets/brand/rollout/renders.json`: decoded theme-correct wordmarks,
+  content widths 1280/360 equal to viewports; image-failure text navigation passes.
+
+```sh
+python3 profile/assets/brand/rollout/check.py --draft --online --preview
+NODE_PATH=/home/notroot/Documents/Code/personal/proso/node_modules \
+  node profile/assets/brand/rollout/render.cjs
+git diff --check
+# Expected to FAIL while art is absent; never describe --draft as this pass:
+python3 profile/assets/brand/rollout/check.py
+```
+
+## First unfinished postcondition / coordinator handoff
+
+1. **T05, producer dependency:** consume p9's actual usable GPT output only after
+   inspecting its image and sanitized prompt/reference/generation proof. Copy
+   exact bytes into owned `rollout/`; do not copy the existing reference board.
+   Write `art-provenance.json` with `file`, `sha256`, `producer: p9`,
+   `status: gpt-generated-exploration`, full `source_commit`, and
+   `generation_evidence` pointing to immutable public proof. No signed URLs,
+   account secrets, conversation URLs or private vault excerpts.
+2. Replace the explicit placeholder with that illustration (not a logo), useful
+   alt text and a visible GPT-generated exploration label. Keep unchanged vector
+   wordmarks. Rerun **without `--draft`**, then render and inspect all four final
+   previews. Only then can T05–T07 be completed and the PR leave draft status.
+3. **Repository authorization blocker:** self-merge remains ineligible while main
+   is unprotected. Coordinator/repository owner must handle any protection change
+   through a separately authorized process. No settings mutation or bypass here.
+   Preserve any checks/reviews subsequently configured; absent CI is not success.
+
+No new workers or advisory model reviewer were launched. No canonical vault note
+was edited. Reversal before merge: close this proposal, leaving main unchanged;
+after a later authorized squash merge, use a normal `git revert <merge-sha>` PR.
+All durable artifacts are in this feature worktree and pushed branch, not scratch.
+
