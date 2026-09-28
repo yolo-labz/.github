@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="profile-sha256" content="f49025481bd4860f07e7c70d8d4dc053873d1b92722e38bf7e786f5627bd84a7">
+<base href="../../../../">
+<title>Yolo Labz — local README integration preview</title>
+<style>
+  :root { color-scheme: light dark; --bg: #fff; --ink: #1f2328; --muted: #59636e; --line: #d1d9e0; --link: #0969da; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d1117; --ink: #f0f6fc; --muted: #9198a1; --line: #3d444d; --link: #4493f8; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  header { border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; padding: 12px 20px; }
+  main { max-width: 896px; margin: 24px auto; padding: 24px 32px; border: 1px solid var(--line); border-radius: 6px; overflow-wrap: break-word; }
+  h1, h2 { border-bottom: 1px solid var(--line); padding-bottom: .3em; }
+  h1 { font-size: 2em; line-height: 1.25; margin: 24px 0 16px; }
+  h2 { font-size: 1.5em; margin: 24px 0 16px; }
+  h3 { font-size: 1.25em; margin: 24px 0 16px; }
+  p, ul { margin: 0 0 16px; }
+  ul { padding-left: 2em; }
+  li + li { margin-top: .5em; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  img { max-width: 100%; height: auto; vertical-align: middle; }
+  blockquote { margin: 0 0 16px; border-left: 4px solid var(--line); padding: 0 1em; color: var(--muted); }
+  .anchor { display: none; }
+  @media (max-width: 600px) { main { margin: 0; padding: 20px 16px; border: 0; } }
+</style>
+<header>Local integration preview · GitHub-rendered Markdown · not the live org page</header>
+<main aria-label="Organization profile">
+<themed-picture data-catalyst-inline="true"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="profile/assets/brand/logo-wordmark-dark.svg">
+  <img src="profile/assets/brand/logo-wordmark-light.svg" alt="yolo-labz" width="300">
+</picture></themed-picture>
+<h1 dir="auto">Small tools. Deliberate automation.</h1>
+<p dir="auto">Tools for scripting messaging, browser workflows and local services.</p>
+<blockquote>
+<p dir="auto"><strong>Integration draft — temporary art placeholder.</strong> GPT gremlin artwork from<br>
+producer p9 is pending. No final GPT artwork is present in this profile yet.</p>
+</blockquote>
+<h2 dir="auto">Start with a task</h2>
+<h3 dir="auto">Connect your workflows</h3>
+<ul dir="auto">
+<li><strong><a href="https://github.com/yolo-labz/wa">wa</a></strong> — personal WhatsApp workflows with allowlist and rate controls.<br>
+Single-user, QR-paired, unofficial Multi-Device; not the Cloud API or a bulk-messaging service.</li>
+<li><strong><a href="https://github.com/yolo-labz/chrome-bridge">chrome-bridge</a></strong> — drive a dedicated Chromium profile from a local CLI.<br>
+Requires a compatible unpacked-extension-capable browser, extension and localhost relay.</li>
+</ul>
+<h3 dir="auto">Work on your Mac</h3>
+<ul dir="auto">
+<li><strong><a href="https://github.com/yolo-labz/claude-mac-chrome">claude-mac-chrome</a></strong> — address Chrome profiles and tabs from scripts without relying on window order.<br>
+macOS only; visible Chrome, Bash 4+, jq, Python 3 and automation permissions required. IDs last for the tab/window lifetime.</li>
+<li><strong><a href="https://github.com/yolo-labz/fand">fand</a></strong> — configure temperature-driven fan modes on supported Apple Silicon Macs.<br>
+macOS and suitable SMC sensors required; forced-minimum or automatic modes, not arbitrary RPM.</li>
+</ul>
+<h3 dir="auto">Keep services ready</h3>
+<ul dir="auto">
+<li><strong><a href="https://github.com/yolo-labz/kokoro-speakd">kokoro-speakd</a></strong> — keep Kokoro ready between speech requests, with interruptible local playback.<br>
+Single-user Unix-socket daemon; model assets and an audio player required. Queued does not mean audible.</li>
+<li><strong><a href="https://github.com/yolo-labz/anthropic-throttle-proxy">anthropic-throttle-proxy</a></strong> — pace Anthropic API traffic across clients with per-bearer queues and a live dashboard.<br>
+Enable fair/reactive queue mode; the default is off. Pacing does not create provider quota.</li>
+</ul>
+<p dir="auto">Each project's README has its installation path, operating limits and license.<br>
+Choose one tool, check its requirements, then build from there.</p>
+<p dir="auto"><a href="https://github.com/orgs/yolo-labz/repositories">Browse all Yolo Labz repositories →</a></p>
+</main>
+</html>
