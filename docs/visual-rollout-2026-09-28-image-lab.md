@@ -1,7 +1,28 @@
 # Visual rollout — image-lab — 28/09/2026
 
-**BLOCKED at 20:14 BRT: no anchor, no generated images, zero image sends.**
-This is not an approved brand master or a completed art delivery.
+## Explicit candidate resume — first anchor available
+
+Candidate implementation `feb109d7` from draft NixOS #2505 is selected only per invocation.
+The exact queue-locked 45-second owned-blank-page probe returned **ATTACH_OK, exit 0**,
+with empty stderr. Authenticated canonical workflow then passed with an empty composer;
+private screenshot shows **Instant / Pro**, not an exact image-backend model ID.
+
+**First anchor for coordinator/consumers:**
+`profile/assets/brand/exploration/2026-09-28/gremlin-anchor.png`
+
+- SHA-256: `dcd882cb9d7f99316f0278d03c172a9f14135c195efe67556d451a9bd172baeb`
+- 1254×1254 PNG, 1,091,450 bytes, exact downloaded bytes.
+- Receipt: `status=ok`, `send_confirmed=true`; one actual image send so far.
+- Pixel inspection: recognizable green pointed-ear gremlin, asymmetric grin/fangs,
+  mauve pupil/output accents and blank-key keyboard. Drift: shallow shading and
+  dimensional keycaps despite the flat brief; only two claws per hand clearly visible.
+- Direction only, **not an approved master**. Two anchored edits are next.
+
+The original blocked checkpoint below is retained as history, not current generation status.
+
+## Historical checkpoint — 20:14 BRT
+
+At this checkpoint there was no anchor and zero image sends; those failure receipts remain intact.
 
 ## Coordinator handoff (w8:p6; consumers p2/pA/pB)
 
@@ -9,8 +30,8 @@ This is not an approved brand master or a completed art delivery.
 - Worktree: `/home/notroot/Documents/Code/yolo-labz/github-profile-010-gpt-gremlin-art`.
 - Branch: `010-gpt-gremlin-art`, based on freshly fetched `origin/main` `6488088` (`#8`).
 - Owned outputs: `profile/assets/brand/exploration/2026-09-28/` and this report only.
-- **First anchor path: none.** Do not consume `refs/gremlin-reference-board.png` as a
-  generated anchor: it only composes the two pre-existing reference rasters.
+- **First anchor path:** see the explicit candidate-resume section above.
+  `refs/gremlin-reference-board.png` still only composes the pre-existing reference rasters.
 - Local checkpoint: `docs(art): preserve blocked GPT gremlin brief` on the branch above.
   No push or PR: no successful image outputs to publish. Preparation remains incomplete.
 - Canonical vault save-state, other seats, shared tooling and existing assets untouched.
