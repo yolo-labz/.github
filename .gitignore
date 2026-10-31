@@ -1,1 +1,4 @@
 .DS_Store
+build/
+model/.determinism/
+__pycache__/
