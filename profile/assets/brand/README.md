@@ -65,16 +65,20 @@ brand/
 │   ├── gremlin-avatar.svg            head cut for social avatar / app icon
 │   └── gremlin-{idle,working,        state masters (.svg) + 320px rasters (.png)
 │       paused,loading,asleep}.{svg,png}
-├── og-card.png                       1200×630 social card
-├── twitter-card.png                  1200×630 (same copy)
+├── og-card.png                       1200×630 Open Graph card        (generated)
+├── twitter-card.png                  1200×600 summary_large_image    (generated)
+├── social-preview-1280x640.png       1280×640 repo social preview    (generated)
+├── cards.json                        sha256 + size contract for the three cards
 └── slides/
     ├── deck.html                     6-slide org deck (fragment-navigated)
     └── slide-{1..6}.png              2560×1440 (2× of 1280×720)
 ```
 
-The two source templates live one level up at `../og-card-template.html`
-(renders `og-card.png` + `twitter-card.png`) and `slides/deck.html`
-(each `#sN` fragment renders one slide).
+The cards are **not** hand-made and have no HTML template: `model/cards.py`
+renders the gremlin once from `model/params.json` through Blender and typesets
+the title in Inter over an SVG that `rsvg-convert` rasterises. Running it twice
+must reproduce the committed bytes; `cards.json` is the contract it checks.
+`slides/deck.html` is separate (each `#sN` fragment renders one slide).
 
 ## Regenerate
 
@@ -89,13 +93,14 @@ cd mascot && for f in gremlin-idle gremlin-working gremlin-paused gremlin-loadin
 # outline wordmark text to paths (font-independent)
 inkscape in.svg --export-text-to-path --export-plain-svg --export-filename=out.svg
 
-# OG / Twitter card + slides (Chrome headless, works on NixOS)
-google-chrome-stable --headless=new --no-sandbox --disable-gpu \
-  --hide-scrollbars --force-device-scale-factor=2 \
-  --window-size=1200,630 --screenshot=og-card.png \
-  "file://$PWD/../og-card-template.html"
+# OG / Twitter / social-preview cards — from the gremlin model, no hand art
+# (from the repo root; needs blender + rsvg-convert, ~45 s, deterministic)
+make cards
 
-google-chrome-stable --headless=new --no-sandbox --disable-gpu \
+# slides: the deck is rendered by a headless browser from deck.html
+# (see docs/brand-positioning.md for the approved copy)
+CHROME="google-chrome-stable"   # any Chromium build works
+"$CHROME" --headless=new --no-sandbox --disable-gpu \
   --hide-scrollbars --force-device-scale-factor=2 \
   --window-size=1280,720 --screenshot=slides/slide-1.png \
   "file://$PWD/slides/deck.html#s1"   # repeat #s1..#s6
