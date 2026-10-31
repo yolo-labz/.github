@@ -66,6 +66,8 @@ drops those metadata chunks, so identical pixels mean identical bytes.
 
 | Check | Contract |
 |---|---|
+| geometry | the 3D case reaches the 2D hero outline exactly: `deck + rim == hero2d` per edge (2.25H front, 1.95H back), the outline stroke equals the 2D `.kbd` stroke, and `hero2d` is re-read from `gremlin-hero.svg` rather than trusted |
+| case width | the rendered front view's dark case measures the hero width in pixels (±2 units, anti-aliasing), so a mesh that hangs outside the case cannot hide behind correct arithmetic |
 | palette | every `check: true` palette entry appears in the renders at ≥200 px and within `ΔE00 ≤ 3` of its `params.json` hex |
 | determinism | this run's five PNG sha256 values equal the previous run's |
 | silhouette | generated avatar vs kit master IoU `≥ 0.85` |
