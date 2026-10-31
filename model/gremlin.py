@@ -22,7 +22,6 @@ for a volume reference; that pass is *not* part of the acceptance contract.
 import json
 import math
 import os
-import struct
 import sys
 
 import bmesh
@@ -30,6 +29,12 @@ import bpy
 from mathutils import Matrix, Vector
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+
+# PNG normalisation is shared with model/cards.py: one implementation, because a
+# second copy is how the two outputs would drift apart.
+from pngmeta import normalise_png
+
 PARAMS = os.path.join(HERE, "params.json")
 
 
@@ -53,31 +58,6 @@ def parse_args(argv):
         else:
             raise SystemExit("gremlin.py: unknown argument %r" % arg)
     return opts
-
-
-# PNG chunks Blender writes that are pure metadata.  ``tEXt Date`` and
-# ``tEXt RenderTime`` change on every run even when the pixels are identical,
-# which would make the determinism contract unverifiable for no benefit.
-VOLATILE_PNG_CHUNKS = {b"tEXt", b"zTXt", b"iTXt", b"tIME", b"eXIf", b"oFFs"}
-
-
-def normalise_png(path):
-    """Drop volatile metadata chunks so identical pixels == identical bytes."""
-    with open(path, "rb") as handle:
-        blob = handle.read()
-    kept = []
-    offset = 8
-    while offset < len(blob):
-        length = struct.unpack(">I", blob[offset:offset + 4])[0]
-        kind = blob[offset + 4:offset + 8]
-        end = offset + 12 + length
-        if kind not in VOLATILE_PNG_CHUNKS:
-            kept.append(blob[offset:end])
-        offset = end
-        if kind == b"IEND":
-            break
-    with open(path, "wb") as handle:
-        handle.write(blob[:8] + b"".join(kept))
 
 
 # --------------------------------------------------------------------------- #
