@@ -1,0 +1,42 @@
+{
+  "image": "colour-material.png",
+  "sha256": "81eb24688708cf7bb0a7344a176f90ca731c92362644a6b3d90d84a52668ca85",
+  "width": 1536,
+  "height": 1024,
+  "kind": "model-sheet",
+  "classification": "exploration-not-approved-master",
+  "classification_note": "Generated art for construction review only. Not an approved brand master, avatar, logo or publication asset.",
+  "identity": "chatgpt-c",
+  "identity_host": "Nix.Server browser fleet",
+  "timestamp": "2026-10-31T16:26:28-03:00",
+  "prompt": "prompts/05-colour-material.txt",
+  "prompt_sha256": "a464900fe1594b44ae5bd4a10939cd231c34560dc4901f33bcca8c4938df44ed",
+  "references": [
+    {
+      "image": "refs/canonical-reference-board.png",
+      "sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+    }
+  ],
+  "model": {
+    "ui": "chatgpt.com composer, reference-upload image mode",
+    "picker_label_observed": null,
+    "evidence": "chatgpt-c server identity; the built-in ChatGPT image tool is the backend. The model picker label was not read back and is deliberately not guessed."
+  },
+  "receipt": {
+    "status": "ok",
+    "send_confirmed": true,
+    "bytes": 1310676,
+    "candidates": 1,
+    "anchor_turn": 1,
+    "stamp": "20261031T162628751",
+    "image_mode": "reference-upload"
+  },
+  "receipt_sha256": "f4ba1d1347e827e1ae5e7f795ac252cb388431408c2af314fba33fe64597a57b",
+  "drift": [
+    "two figures (a neutral full-body front and a larger keyboard close-up), not the single neutral character the prompt asked for",
+    "six flat swatch chips with no lettering, as required; their role order must be typeset outside the artwork \u2014 the chip order carries no label",
+    "claw counts drift to four or five per hand in both figures, so the three-claw rule is not held",
+    "keyboard deck reads as a plain grey slab with flat keys: usable as material reference only",
+    "pupils render large (~0.09H) against the specified 0.05625H"
+  ]
+}

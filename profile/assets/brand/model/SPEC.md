@@ -169,10 +169,10 @@ Five separate reference-anchored GPT images; planned sends **5**, absolute
 request ceiling **8**. All use the same role-labelled canonical reference board.
 No generation is authorized when the server/session route is unavailable.
 
-Status after the 31/10/2026 run: **4 of 5 delivered** (`turnaround`,
-`expressions`, `poses`, `hands-keyboard`); `colour-material` blocked by the
-account's image-generation quota at send 5 of 8. The default `check.py` therefore
-still exits non-zero, by design.
+Status after the 31/10/2026 run: **all five delivered** (`turnaround`,
+`expressions`, `poses`, `hands-keyboard`, `colour-material`) in 6 sends of the
+8-send ceiling; the fifth needed a second attempt after the account's free-plan
+image quota reset. The default `check.py` exits 0 on that set.
 
 1. `turnaround.png`: front, 3/4, side, back, left-to-right; same scale,
    aligned ground, complete ears/tail/feet. Orthographic, no camera perspective.
@@ -202,7 +202,7 @@ and the sanitized provenance live beside each PNG in
 | `expressions.png` | Six panels, asleep keeps closed lids and zero mauve, mauve sparks are produced-output marks. Drift: pupils oversized; fang order is not consistently two-down/one-up across panels. |
 | `poses.png` | Typing, thinking, celebrating and asleep all read, keyboard present, asleep has no mauve. Drift: celebrating shows four to five claw marks per hand; the thinking hand merges its claws; keycaps carry a lighter top face (dimensional keys are forbidden). |
 | `hands-keyboard.png` | Both hand close-ups show exactly three separated claws. Drift: the "back" full-body panel is a three-quarter back; two mauve strokes float without a produced-output role; keys are dimensional; body-view claws are outlined instead of solid pale. |
-| `colour-material.png` | NOT GENERATED — the account hit its image-generation quota after send 5. Palette/material matching therefore remains unverified. |
+| `colour-material.png` | Two figures (a neutral full body and a keyboard close-up) plus six flat swatch chips. No lettering, as required — the chip roles must be typeset outside the art. Drift: claw counts reach four or five per hand; the keyboard reads as a plain slab; pupils are again ~0.09H. |
 
 Carry-forward for S2: none of these drifts is construction authority. The SVG kit
 plus the parity table above remain authoritative; the rasters are attitude and

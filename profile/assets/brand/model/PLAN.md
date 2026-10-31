@@ -18,8 +18,7 @@
 7. Re-derive the 2D spec from the merged 3D single source (`model/params.json`,
    PR #14) so the two cannot drift apart silently; machine-check the parity.
 
-Current checkpoint (31/10/2026): steps 1-3, 5 (for the four delivered sheets),
-6 and 7 are complete. Step 4 stopped at the account image quota after five sends:
-sheets 1-4 exist with provenance, `colour-material.png` does not. Default gate
-exits 1 on the missing fifth sheet by design. Resume is one send after the quota
-reset (~16:25 BRT) — see `reproduce.md`.
+Current checkpoint (31/10/2026 16:30 BRT): every step is complete. Five sheets
+exist with sanitized provenance, six sends of the eight-send ceiling, and the
+default gate exits 0. The fifth sheet was generated on the second attempt, after
+the account's free-plan image quota reset — see `reproduce.md`.

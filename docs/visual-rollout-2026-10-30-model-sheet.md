@@ -144,3 +144,25 @@ that mutates the 3D eye radius to prove the gate bites):
 
 No merge, deploy, publication, account/billing change, foreign Project edit or
 new brand master. PR stayed draft and assigned to `phsb5321`.
+
+---
+
+# Update — 31/10/2026 16:30 BRT: fifth sheet delivered, gate green
+
+The quota reset at ~16:26 as the account predicted. One send finished the set.
+
+- `colour-material.png` 1536×1024, SHA-256
+  `81eb24688708cf7bb0a7344a176f90ca731c92362644a6b3d90d84a52668ca85`,
+  send 6 of the 8-send ceiling, `send_confirmed: true`, receipt
+  `05-colour-material.attempt3.json`.
+- **`check.py` (default) → exit 0**: `PASS: five reference-anchored GPT model
+  sheets and reproducible provenance.`
+- `check.py --spec-only` → exit 0; bad-palette fixture → exit 1; 4 offline
+  tests → OK.
+- Drift for this sheet, from inspection rather than from the prompt's intent: two
+  figures instead of one neutral character, six unlabelled swatch chips (correct:
+  roles are typeset outside the art), claw counts reaching four or five per hand,
+  a plain slab keyboard, and pupils again ~0.09H.
+
+Sends used: **6/8**. No further image work is planned; the remaining two are
+reserve for a concrete defect, not for a nicer sheet.
