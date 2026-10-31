@@ -1,0 +1,13 @@
+{
+  "name": "portfolio",
+  "archived": false,
+  "private": false,
+  "description": "Portfolio monorepo",
+  "homepage": "https://github.com/yolo-labz/portfolio",
+  "topics": [
+    "nextjs",
+    "portfolio",
+    "typescript"
+  ],
+  "has_issues": true
+}

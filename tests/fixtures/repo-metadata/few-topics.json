@@ -1,0 +1,11 @@
+{
+  "name": "cosyvoice.cpp",
+  "archived": false,
+  "private": false,
+  "description": "CosyVoice inference in C/C++",
+  "homepage": null,
+  "topics": [
+    "tts"
+  ],
+  "has_issues": true
+}
