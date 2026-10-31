@@ -20,7 +20,8 @@ from Lectrice/Proso's bird. No character imitation or generated wordmark.
 - [x] Save exact originals, prompts, sanitized receipts and SHA-256 lineage.
 - [x] Render labelled contact sheet and 64px square/circular avatar proofs.
 - [x] Inspect actual pixels and run positive provenance/privacy gate after restoration.
-- [ ] Publish an assigned draft PR; no merge or production publication authorized.
+- [x] Publish [draft PR #11](https://github.com/yolo-labz/.github/pull/11), assigned
+  to phsb5321; no merge or production publication authorized.
 
 Three historical confirmed sends; zero new sends during recovery.
 All numbered sidecars identify chatgpt-c and observed Instant UI label; the image
