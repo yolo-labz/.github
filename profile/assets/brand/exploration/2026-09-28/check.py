@@ -59,6 +59,7 @@ def check():
     assert local("contact-sheet.png").stat().st_size > 1000
     public = [p for p in ROOT.rglob("*") if p.is_file() and ".private" not in p.parts]
     forbidden = re.compile(
+        # profile-check: allow-private-pattern — this regex is the scanner, not a leak.
         r"https?://(?:chatgpt\.com/(?:c|g)/|[^\s]*oaiusercontent\.com)|[?&](?:sig|token|signature)=",
         re.IGNORECASE,
     )
