@@ -34,7 +34,16 @@ Open-source tools for scripting messaging, browser workflows and local services.
 - **[anthropic-throttle-proxy](https://github.com/yolo-labz/anthropic-throttle-proxy)** — pace Anthropic API traffic across clients with per-bearer queues and a live dashboard.
   Enable fair/reactive queue mode; the default is off. Pacing does not create provider quota.
 
+### Shape your workspace
+
+- **[zellij-vertical-tabs](https://github.com/yolo-labz/zellij-vertical-tabs)** — list Zellij tabs in a sidebar that survives heavy load.
+  A Zellij plugin, not a standalone binary; match the plugin version to your Zellij release.
+
 Each project's README has its installation path, operating limits and license.
 Choose one tool, check its requirements, then build from there.
+
+## Report where it breaks
+
+Use the project's README for installation and its issue tracker for problems. Include the version, operating system, expected result and a minimal reproduction. Never attach API keys, private documents, message histories or browser profiles.
 
 [Browse all Yolo Labz repositories →](https://github.com/orgs/yolo-labz/repositories)
