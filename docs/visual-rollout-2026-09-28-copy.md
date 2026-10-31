@@ -2,6 +2,26 @@
 
 **28/09/2026 · copy seat · home-projects w8:p8**
 
+## Recovery readback — 30/10/2026
+
+Restored worktree and residue copy inspected; residue remains untouched.
+Fresh origin/main is still `64880882f235922007dd22a0cdb22c7ea5f09f83`;
+copy, art and front-page branches are all **0 behind**. No rebase/base-update
+or force push is needed. The pinned claim evidence below remains a historical
+28/09/2026 snapshot, not a newly asserted product/runtime audit.
+
+The offline acceptance and its three negative controls were rerun successfully.
+No online source refresh or new image send was made. Draft #9 now consumes this
+branch's `fb4a557` positioning and qualifiers with exact GPT exploration bytes
+from draft art #11. Four actual server renders and their hash-bound verification
+belong to #9's report, not this text-only slice. No master/artwork approval.
+
+PR #10 remains OPEN / DRAFT, assigned to phsb5321. Current PR readback reports
+no checks, **not green CI**. Main remains unprotected with effective rules `[]`.
+Operator's explicit **no merge / no production deploy / no publication** gate
+remains in force. This recovery changes only this report, not the claim matrix.
+Final head is available through the PR API; no canonical vault save-state edit.
+
 Coordinator: **w8:p6**. Consumers: **w8:p2, w8:pA, w8:pB**.
 This report is the durable coordination surface; no sibling seat was interrupted.
 
