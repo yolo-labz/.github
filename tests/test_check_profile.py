@@ -248,6 +248,16 @@ class Extraction(unittest.TestCase):
             self.assertEqual(resolved, root / "docs" / "note.md")
 
 
+class RepositoryTree(unittest.TestCase):
+    """The gate must pass on the tree it ships in: fixtures are never linted, and
+    a scanner that names a forbidden pattern waives that one line."""
+
+    def test_repository_tree_is_gate_clean(self):
+        code, out = run(REPO, "--offline")
+        self.assertEqual(code, 0, out)
+        self.assertIn("RESULT: PASS", out)
+
+
 class Accessibility(unittest.TestCase):
     def test_source_tag_needs_no_alt_or_width(self):
         import tempfile
@@ -335,7 +345,10 @@ class PrivacyWaiver(unittest.TestCase):
             findings = checker.check_privacy(root)
             errors = [f for f in findings if f.level == "error"]
             self.assertEqual(len(errors), 1, findings)
-            self.assertIn("chatgpt.com/c/", errors[0].message)
+            self.assertIn(
+                "chatgpt.com/c/",  # profile-check: allow-private-pattern
+                errors[0].message,
+            )
             self.assertTrue(any("waived in place" in f.message for f in findings))
 
 

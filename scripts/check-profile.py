@@ -59,9 +59,10 @@ PRIVATE_PATTERNS = (
 # Line-scoped waiver for code that must name a forbidden pattern (a scanner).
 PRIVACY_WAIVER = "profile-check: allow-private-pattern"
 
-# Exempt from the privacy scan: this script names the patterns and the fixtures
-# intentionally contain them.
-PRIVACY_EXEMPT = ("scripts/check-profile.py", "tests/fixtures/")
+# The fixtures below intentionally hold every forbidden shape, so they are never
+# linted; this script names the patterns for the same reason.
+FIXTURE_PREFIX = "tests/fixtures/"
+PRIVACY_EXEMPT = ("scripts/check-profile.py", FIXTURE_PREFIX)
 
 TEXT_SUFFIXES = {
     ".md",
@@ -455,9 +456,9 @@ def check_provenance(root: Path) -> list[Finding]:
     findings: list[Finding] = []
     for png in sorted(root.rglob("*.png")):
         rel = png.relative_to(root)
-        if ".git" in rel.parts or not any(
-            part in PROVENANCE_DIRS for part in rel.parts
-        ):
+        if rel.as_posix().startswith(FIXTURE_PREFIX) or ".git" in rel.parts:
+            continue
+        if not any(part in PROVENANCE_DIRS for part in rel.parts):
             continue
         names = {png.name, rel.as_posix()}
         covered = png.with_suffix(".provenance.json").is_file()
