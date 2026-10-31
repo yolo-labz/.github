@@ -1,0 +1,49 @@
+{
+  "verified_at": "30/10/2026 23:02 -03",
+  "scope": "Exact published content head; later report-only receipt commit may follow",
+  "repository": "yolo-labz/.github",
+  "pull_request": {
+    "assignees": [
+      {
+        "id": "MDQ6VXNlcjMwMzAyMjM3",
+        "login": "phsb5321",
+        "name": "Pedro Balbino",
+        "databaseId": 30302237
+      }
+    ],
+    "headRefName": "010-gpt-gremlin-art",
+    "headRefOid": "637a7fbd3f47127f157d0e0dbbccc807bff57c87",
+    "isDraft": true,
+    "mergeStateStatus": "CLEAN",
+    "number": 11,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [],
+    "url": "https://github.com/yolo-labz/.github/pull/11"
+  },
+  "main": {
+    "sha": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "protected": false,
+    "effective_rules": []
+  },
+  "behind_main": 0,
+  "check_runs": {
+    "check_runs": [],
+    "total_count": 0
+  },
+  "commit_status": {
+    "state": "pending",
+    "statuses": [],
+    "total_count": 0
+  },
+  "ci_verdict": "no checks reported; not a CI pass",
+  "operator_gate": "keep draft; no merge, production deploy or publication",
+  "local_acceptance": {
+    "provenance": "pass; 3 images, source/prompt/reference hashes",
+    "private_receipts": "digest, identity, prompt/reference and dimensions reconciled",
+    "privacy": "complete new-commit history scanned; .private ignored",
+    "ruff": "pass",
+    "code_slop": "pass; score 100, zero errors/clones",
+    "alignment": "pass"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "classification": "derived-not-approved-master",
+  "image": "contact-sheet.png",
+  "sha256": "95c02997824992af5963ed6f0831085a7e8b92b4722db7bf32190f05de232422",
+  "width": 1800,
+  "height": 950,
+  "derivation": {
+    "tool": "local image composition (no model call, no network)",
+    "description": "Review sheet: the three confirmed explorations composed into one image so anatomy and drift can be inspected together.",
+    "components": [
+      {
+        "path": "gremlin-anchor.png",
+        "sha256": "dcd882cb9d7f99316f0278d03c172a9f14135c195efe67556d451a9bd172baeb"
+      },
+      {
+        "path": "gremlin-wide-hero.png",
+        "sha256": "da70db22366e8e849b22eb3e8c3dcd0ec53274135ee0bf1ee309cb2704a0d9f4"
+      },
+      {
+        "path": "gremlin-square-avatar.png",
+        "sha256": "ceb4f3cbf60b8254660290e60dc3e61266b3c02a6be3c71a64a8d47ac02bb554"
+      }
+    ]
+  },
+  "postprocessing": "composition only; source pixels not regenerated",
+  "claims": "An inspection aid. A composed sheet proves nothing about anatomy, composition, licensing or approval."
+}
