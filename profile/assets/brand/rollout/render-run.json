@@ -1,0 +1,23 @@
+{
+  "verified_on": "30/10/2026",
+  "status": "pass",
+  "renderer": "existing NixOS server fleet via supported interactive.attach",
+  "identity": "brave-search",
+  "requested_viewports": [
+    1280,
+    360
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "image_sends": 0,
+  "network_assets": 0,
+  "helper_side_effect": {
+    "opened_blank_page": true,
+    "closed_frozen_targets": 1,
+    "scope": "automatic canonical pre-attach sanitizer; not an explicit renderer action",
+    "further_browser_calls_after_observation": 0
+  },
+  "approval": "exploration only; no merge or publication"
+}

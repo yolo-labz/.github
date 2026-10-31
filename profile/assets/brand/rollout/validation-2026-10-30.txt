@@ -1,0 +1,27 @@
+{
+  "mode": "exploration-integrated",
+  "assets": 3,
+  "flagships": 6,
+  "links": [
+    "https://github.com/orgs/yolo-labz/repositories",
+    "https://github.com/yolo-labz/anthropic-throttle-proxy",
+    "https://github.com/yolo-labz/chrome-bridge",
+    "https://github.com/yolo-labz/claude-mac-chrome",
+    "https://github.com/yolo-labz/fand",
+    "https://github.com/yolo-labz/kokoro-speakd",
+    "https://github.com/yolo-labz/wa"
+  ],
+  "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2"
+}
+PASS: four saved render hashes, PNG dimensions and exact profile binding
+test_missing_mobile_theme_fails (test_verify.RenderEvidenceTests.test_missing_mobile_theme_fails) ... ok
+test_modified_png_fails (test_verify.RenderEvidenceTests.test_modified_png_fails) ... ok
+test_saved_evidence_passes (test_verify.RenderEvidenceTests.test_saved_evidence_passes) ... ok
+test_stale_profile_fails (test_verify.RenderEvidenceTests.test_stale_profile_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.007s
+
+OK
+All checks passed!
+4 files already formatted
