@@ -148,16 +148,24 @@ def check_geometry(spec):
             node = node[key]
         assert float(node) == spec["line_weights"][item["line_weight"]] * unit
     rim = params["keyboard"]["rim3d"]
-    assert keys["params_rim_per_side_units"] == rim["pad"] + rim["thickness"]
+    assert keys["params_rim_per_side_units"] == rim["front"]
+    assert keys["params_rim_per_side_units_back"] == rim["back"]
     assert keys["deck_front_H"] == 2 * float(deck["front_half_width"]) / unit
     assert keys["deck_back_H"] == 2 * float(deck["back_half_width"]) / unit
     assert keys["outer_front_H"] == spec["head_units"]["keyboard_width"]
     assert keys["outer_back_H"] == KEYBOARD_BACK / unit
+    # The outline is reached by deck + band, not by the record moving on its own.
+    assert keys["outer_front_H"] == keys["deck_front_H"] + (
+        2 * float(rim["front"]) / unit
+    )
+    assert keys["outer_back_H"] == keys["deck_back_H"] + (
+        2 * float(rim["back"]) / unit
+    )
     assert keys["shortfall_front_per_side_units"] == (
         keys["rim_per_side_units"] - keys["params_rim_per_side_units"]
     )
     assert keys["shortfall_back_per_side_units"] == (
-        keys["rim_per_side_units_back"] - keys["params_rim_per_side_units"]
+        keys["rim_per_side_units_back"] - keys["params_rim_per_side_units_back"]
     )
 
 

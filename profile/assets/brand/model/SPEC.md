@@ -124,22 +124,27 @@ the 3D radius is the 2D half-stroke on every detail that has both.
 | output brackets | 0.05H (4 units) | `produced3d.radius` 2.2 | +0.2 unit |
 | keyboard outline | 0.03125H (2.5 units) | `keyboard.rim3d.thickness` 2.5 | exact |
 
-### One open divergence: keyboard case width
+### Keyboard case width: closed 31/10/2026
 
 The hero keyboard outline is **180 units wide at the front edge and 156 at the
-back** (path `30→210 / 42→198`), i.e. 2.25H / 1.95H. `model/params.json` authors
-the *deck plate* at `front_half_width 78` = 156 units (1.95H) and
-`back_half_width 68` = 136 units (1.70H), with `rim3d` of only pad 3.0 +
-thickness 2.5 = **5.5 units per side**.
+back** (path `30→210 / 42→198`), i.e. 2.25H / 1.95H. `model/params.json` keeps
+the deck plate at `front_half_width 78` = 156 units (1.95H) and
+`back_half_width 68` = 136 units (1.70H) — the values the deck H rows above
+already assert — and now carries the rest as a case band, `rim3d.front 12` and
+`rim3d.back 10` units per side:
 
-- front edge shortfall per side: 90 − 78 − 5.5 = **6.5 units**
-- back edge shortfall per side: 78 − 68 − 5.5 = **4.5 units**
+- front edge: 78 + 12 = 90 units per side → 180 → **2.25H**, exact
+- back edge: 68 + 10 = 78 units per side → 156 → **1.95H**, exact
+- shortfall: **0 units per side on both edges**
 
-So the 3D deck is the inner plate and its rim constants under-account for the 2D
-silhouette by 6.5 / 4.5 units per side. Both sources describe the same shape;
-six the rim (or widen the deck) before any silhouette comparison, and do **not**
-normalise the 2D 2.25H away. `check.py` asserts the deck, rim and shortfall
-arithmetic so this cannot go quiet.
+The 2D was not normalised to the old 3D numbers; the 3D was widened to the art.
+The band is asymmetric because the hero case is a trapezoid, and `rim3d` is a
+per-edge pair for that reason. `rim3d.thickness 2.5` is unchanged and still the
+guide-coloured outline stroke: the case reaches the silhouette in `dark`, with
+the `.kbd` line traced around it, matching the 2D fill/stroke split rather than
+a wide grey frame. `check.py` asserts the deck, per-edge rim, both outline
+widths and the zero shortfall, and that the outline is reached by deck + band
+rather than by the record moving alone.
 
 ## Silhouette, counts and line weights
 

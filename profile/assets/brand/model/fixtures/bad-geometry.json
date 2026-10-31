@@ -102,13 +102,14 @@
     "keyboard": {
       "rim_per_side_units": 12.0,
       "rim_per_side_units_back": 10.0,
-      "params_rim_per_side_units": 5.5,
       "deck_front_H": 1.95,
       "deck_back_H": 1.7,
       "outer_front_H": 2.25,
       "outer_back_H": 1.95,
-      "shortfall_front_per_side_units": 6.5,
-      "shortfall_back_per_side_units": 4.5
+      "params_rim_per_side_units": 12.0,
+      "params_rim_per_side_units_back": 10.0,
+      "shortfall_front_per_side_units": 0.0,
+      "shortfall_back_per_side_units": 0.0
     }
   },
   "sheets": [
