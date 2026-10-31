@@ -1,0 +1,13 @@
+S1 YOLO-LABZ PROGRAMMING GREMLIN — REFERENCE-ANCHORED EXPLORATION.
+Create exactly ONE clear, high-resolution character-reference sheet, not a logo redesign.
+The supplied canonical-reference-board.png is role-assigned: the first five panels are the immutable SVG kit; the last shaded GPT anchor is SECONDARY ATTITUDE ONLY, not anatomy or material authority.
+
+PRESERVE EXACTLY:
+Green programming gremlin, two broad leaf-sweep pointed ears, broad head, mischievous brows, two pale eyes with small mauve node pupils, three jagged triangular fangs (two down, one up), compact body, ONE curved arrow-tip tail. Two hands with exactly THREE clearly separated claws each, not five fingers. Blank-key keyboard is the interface.
+Define H as the head ellipse height excluding ears. Head width 1.20H, ear-tip span 2.45H, tips at x +/-1.225H and y -0.85H from head centre. Eyes radius .1375H; pupils radius .05625H. Head/ear same-colour weld weight .075H; brows .0625H; pale claw details .04375H. No contrasting outline.
+Use flat Mocha colours: skin #a6e3a1, pale eyes/fangs/claws #cdd6f4, mouth/keyboard case #181825, pupils/produced output #cba6f7, keycaps #45475a, keyboard detail #6c7086, background #1e1e2e, supporting guides #a6adc8.
+Mauve pupils only in awake states; additional mauve marks mean produced output. ASLEEP HAS NO MAUVE at all, no visible pupils. No glossy eyes, gradient, shading, dimensional keycaps, fur, clothes, hats, extra props, film/game character imitation or borrowed bird identity.
+Keep full ear tips, claws, tail and feet inside each panel. Quiet organized gutters, consistent character scale, crisp readable forms. NO LETTERING, captions, fake measurement text, watermark or wordmark. Labels will be typeset afterward.
+
+CHANGE ONLY:
+A four-view orthographic turnaround, left-to-right FRONT, THREE-QUARTER, SIDE, BACK (these are panel positions, NOT words to draw). Complete body in each view, common ground line and same head-unit scale. No camera perspective or dramatic foreshortening. Side/back volumes are explicitly exploratory: head depth .80H, torso depth .60H, thin ears .06H; relaxed overall height including ears 2.30H. Maintain one arrow-tip tail in every view, no extra tail/spikes; back view reveals the same leaf ears and compact smooth head. Do not invent a long muzzle or horns. Hands relaxed and three claws clearly shown where visible. No keyboard needed in this turnaround; a subtle baseline may stand for the interface. Wide 4:1 or 3:1 sheet, generous top/bottom safety.

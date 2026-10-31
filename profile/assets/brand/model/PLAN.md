@@ -1,0 +1,21 @@
+# S1 execution plan and checkpoint
+
+1. Inspect actual source SVGs, prior anchor provenance, branch effects, processes
+   and the canonical server GPT pipeline before any send.
+2. Fix source-derived palette and head-unit proportions first. Publish SPEC path
+   in the report and draft PR for the lead to relay to S2, without waiting for art.
+3. Prepare immutable local references and five explicit PRESERVE/CHANGE prompts.
+   Keep imported/raster-composed references distinct from newly generated sheets.
+4. Only when server discovery and the authenticated composer are verified, hold
+   the existing fleet queue lock and call the installed gpt-image shim for one
+   reference-anchored image at a time. Reconcile before every further send.
+   Five planned sends, ceiling eight; stop at the first exact blocker.
+5. Inspect each result, keep exact originals and sanitized provenance, record drift.
+   Default check.py must validate all five actual sheets, not prepared references.
+6. Run negative fixture, source-only and full acceptance separately. Keep the PR
+   draft and assigned phsb5321; never merge, publish, reset a browser or use API/local
+   fallbacks. Preserve the exact hold if generation is blocked.
+
+Current checkpoint: step 4 is blocked before any upload/send by the failed browser
+inventory record. Offline inputs/checks are delivered, not five GPT model sheets.
+The early handoff was published in commit a5d9ea7 / draft PR #12.

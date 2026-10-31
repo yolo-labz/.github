@@ -1,0 +1,13 @@
+{
+  "kind": "reference",
+  "classification": "exploration-not-approved-master",
+  "image": "refs/gremlin-model-sheet.png",
+  "sha256": "144b255c42b70b85c1513a1d8e89f20034e8e7e5b4229724fb5ed77c5ee5a1c1",
+  "source": {
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "path": "profile/assets/brand/mascot/gremlin-model-sheet.png"
+  },
+  "prompt": null,
+  "prompt_sha256": null,
+  "note": "Prepared/imported reference, not a new S1 generation"
+}

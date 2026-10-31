@@ -1,0 +1,32 @@
+{
+  "classification": "exploration-not-approved-master",
+  "status": "blocked-before-attach-upload-send",
+  "sends_used": 0,
+  "maximum_sends": 8,
+  "planned_sends": 5,
+  "generated_images": 0,
+  "attempts": [],
+  "identity": "chatgpt-c",
+  "current_ui_model_observed": null,
+  "current_image_backend_observed": null,
+  "hold": {
+    "tool": "browser_identities",
+    "isError": true,
+    "ok": false,
+    "error": "fleet host unreachable",
+    "detail": "invalid browser endpoint record",
+    "unrelated_identity_and_path": "redacted; discovery failure preserved, not worked around"
+  },
+  "targeted_status": {
+    "ok": true,
+    "status": "active",
+    "tunneled": false,
+    "authenticated_composer_verified": false
+  },
+  "wrapper_candidate": {
+    "historical_head": "feb109d7",
+    "historical_wrapper_present": false,
+    "attempted": false
+  },
+  "new_image_requests": 0
+}

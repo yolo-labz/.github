@@ -1,0 +1,13 @@
+{
+  "kind": "reference",
+  "classification": "exploration-not-approved-master",
+  "image": "refs/gremlin-asleep.png",
+  "sha256": "336cb8d88f45f5311ba17dadf896cfdeffc5ca1d5df6fb7718f4bc1d28532624",
+  "source": {
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "path": "profile/assets/brand/mascot/gremlin-asleep.png"
+  },
+  "prompt": null,
+  "prompt_sha256": null,
+  "note": "Prepared/imported reference, not a new S1 generation"
+}
