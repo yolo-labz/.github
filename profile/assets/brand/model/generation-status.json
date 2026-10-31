@@ -76,5 +76,6 @@
     "no production deploy, merge or publication",
     "no account setting, plan or billing change",
     "no browser restart, reset or local fallback"
-  ]
+  ],
+  "private_evidence_note": "Raw receipts stay in the ignored .private/receipts/. Staged render bytes were moved to ~/.local/state/yolo-labz-model-sheet-013/staging after the canonical copies were committed: the profile provenance scanner walks the working tree, so a second PNG under model/ reads as an unreferenced artifact even when it is git-ignored."
 }
