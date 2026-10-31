@@ -1,0 +1,51 @@
+{
+  "verified_at": "30/10/2026 23:02 -03",
+  "scope": "Exact published content head; later report-only receipt commit may follow",
+  "repository": "yolo-labz/.github",
+  "pull_request": {
+    "assignees": [
+      {
+        "id": "MDQ6VXNlcjMwMzAyMjM3",
+        "login": "phsb5321",
+        "name": "Pedro Balbino",
+        "databaseId": 30302237
+      }
+    ],
+    "headRefName": "011-gremlin-frontpage",
+    "headRefOid": "b40c4fa3eef48b5e67353299dec7da4b07ed2029",
+    "isDraft": true,
+    "mergeStateStatus": "UNKNOWN",
+    "number": 9,
+    "reviewDecision": "",
+    "state": "OPEN",
+    "statusCheckRollup": [],
+    "url": "https://github.com/yolo-labz/.github/pull/9"
+  },
+  "main": {
+    "sha": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "protected": false,
+    "effective_rules": []
+  },
+  "behind_main": 0,
+  "check_runs": {
+    "check_runs": [],
+    "total_count": 0
+  },
+  "commit_status": {
+    "state": "pending",
+    "statuses": [],
+    "total_count": 0
+  },
+  "ci_verdict": "no checks reported; not a CI pass",
+  "operator_gate": "keep draft; no merge, production deploy or publication",
+  "local_acceptance": {
+    "profile_check": "pass",
+    "server_renders": "pass; 1280/360 light/dark",
+    "offline_render_evidence": "pass; exact profile/screenshot hashes",
+    "regression_tests": "4 passed including 3 negative controls",
+    "ruff": "pass",
+    "code_slop": "pass; score 98, zero errors/clones, one checker-length warning",
+    "alignment": "pass",
+    "helper_side_effect": "one frozen target automatically sanitized; recorded in render-run.json"
+  }
+}

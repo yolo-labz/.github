@@ -89,8 +89,14 @@ All under `profile/assets/brand/rollout/`:
 
 Existing #9 and #10 and new #11 are **OPEN / DRAFT**, assigned to phsb5321.
 At recovery readback, all report **no CI checks**; absent checks are not green CI.
-Main is `protected=false`, effective branch rules `[]`. Final exact heads
-and API readback are recorded with delivery evidence in `rollout/`.
+Main is `protected=false`, effective branch rules `[]`.
+Published integration commit: `b40c4fa3eef48b5e67353299dec7da4b07ed2029`.
+Exact content-head API readback is in `rollout/delivery-2026-10-30.json`;
+its later report-only receipt commit does not change the rendered profile.
+Code-slop: PASS, score 98, zero errors/clones; one nonblocking checker-function
+length warning. Alignment: PASS, zero errors/warnings. Git diff check: PASS.
+GitButler refused commits in this unconfigured restored linked worktree;
+worktree-local Git fallback retained existing hooks and left shared main alone.
 
 Operator gate remains **no merge, no production deployment or publication**,
 regardless of local acceptance. Nothing in these checks approves the brand,
