@@ -1,0 +1,18 @@
+{
+  "classification": "derived-not-approved-master",
+  "image": "avatar-proof-64-square.png",
+  "sha256": "671f2da1556db768e56c6c732c61048684ee515fa473b100c18bfa8951ad8dde",
+  "width": 64,
+  "height": 64,
+  "derivation": {
+    "tool": "local resize (no model call, no network)",
+    "description": "64 px square proof: the square avatar downscaled to favicon scale, with no mask.",
+    "mask": "none",
+    "source": {
+      "path": "gremlin-square-avatar.png",
+      "sha256": "ceb4f3cbf60b8254660290e60dc3e61266b3c02a6be3c71a64a8d47ac02bb554"
+    }
+  },
+  "postprocessing": "downscale only; source pixels not regenerated",
+  "known_limitation": "A 64 px proof is legibility evidence, not approval: the circular mask clips the ears, so this is not production-ready."
+}

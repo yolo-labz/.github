@@ -1,0 +1,154 @@
+[
+  {
+    "theme": "light",
+    "mode": "exploration-integrated",
+    "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2",
+    "renderer": "existing NixOS server fleet via interactive.attach",
+    "identity": "brave-search",
+    "browser_version": "155.0.8059.79",
+    "network_assets": "none; exact worktree image bytes embedded",
+    "viewport": 1280,
+    "contentWidth": 1265,
+    "images": [
+      {
+        "alt": "yolo-labz",
+        "source": "logo-wordmark-light.svg",
+        "loaded": true,
+        "naturalWidth": 470,
+        "displayedWidth": 300
+      },
+      {
+        "alt": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
+        "source": "gremlin-wide-hero.png",
+        "loaded": true,
+        "naturalWidth": 1774,
+        "displayedWidth": 640
+      }
+    ],
+    "links": [
+      "https://github.com/yolo-labz/wa",
+      "https://github.com/yolo-labz/chrome-bridge",
+      "https://github.com/yolo-labz/claude-mac-chrome",
+      "https://github.com/yolo-labz/fand",
+      "https://github.com/yolo-labz/kokoro-speakd",
+      "https://github.com/yolo-labz/anthropic-throttle-proxy"
+    ],
+    "screenshot": "exploration-integrated-1280-light.png",
+    "screenshot_sha256": "553573e6d6ddcee1d5df6409600f3deea69fd7504f876b12cf994ff10a271a3c",
+    "imageFailureNavigation": "pass"
+  },
+  {
+    "theme": "light",
+    "mode": "exploration-integrated",
+    "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2",
+    "renderer": "existing NixOS server fleet via interactive.attach",
+    "identity": "brave-search",
+    "browser_version": "155.0.8059.79",
+    "network_assets": "none; exact worktree image bytes embedded",
+    "viewport": 360,
+    "contentWidth": 345,
+    "images": [
+      {
+        "alt": "yolo-labz",
+        "source": "logo-wordmark-light.svg",
+        "loaded": true,
+        "naturalWidth": 470,
+        "displayedWidth": 300
+      },
+      {
+        "alt": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
+        "source": "gremlin-wide-hero.png",
+        "loaded": true,
+        "naturalWidth": 1774,
+        "displayedWidth": 313
+      }
+    ],
+    "links": [
+      "https://github.com/yolo-labz/wa",
+      "https://github.com/yolo-labz/chrome-bridge",
+      "https://github.com/yolo-labz/claude-mac-chrome",
+      "https://github.com/yolo-labz/fand",
+      "https://github.com/yolo-labz/kokoro-speakd",
+      "https://github.com/yolo-labz/anthropic-throttle-proxy"
+    ],
+    "screenshot": "exploration-integrated-360-light.png",
+    "screenshot_sha256": "56cc7fb1e4bcf44fddf5cc067bfaf4d152ff6bf0957a328cfe7be112f0ded0c1",
+    "imageFailureNavigation": "pass"
+  },
+  {
+    "theme": "dark",
+    "mode": "exploration-integrated",
+    "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2",
+    "renderer": "existing NixOS server fleet via interactive.attach",
+    "identity": "brave-search",
+    "browser_version": "155.0.8059.79",
+    "network_assets": "none; exact worktree image bytes embedded",
+    "viewport": 1280,
+    "contentWidth": 1265,
+    "images": [
+      {
+        "alt": "yolo-labz",
+        "source": "logo-wordmark-dark.svg",
+        "loaded": true,
+        "naturalWidth": 470,
+        "displayedWidth": 300
+      },
+      {
+        "alt": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
+        "source": "gremlin-wide-hero.png",
+        "loaded": true,
+        "naturalWidth": 1774,
+        "displayedWidth": 640
+      }
+    ],
+    "links": [
+      "https://github.com/yolo-labz/wa",
+      "https://github.com/yolo-labz/chrome-bridge",
+      "https://github.com/yolo-labz/claude-mac-chrome",
+      "https://github.com/yolo-labz/fand",
+      "https://github.com/yolo-labz/kokoro-speakd",
+      "https://github.com/yolo-labz/anthropic-throttle-proxy"
+    ],
+    "screenshot": "exploration-integrated-1280-dark.png",
+    "screenshot_sha256": "74df0872e48a9ff0149e36ed66688f30a93f91c4cd55019b32759a7c56b86644",
+    "imageFailureNavigation": "pass"
+  },
+  {
+    "theme": "dark",
+    "mode": "exploration-integrated",
+    "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2",
+    "renderer": "existing NixOS server fleet via interactive.attach",
+    "identity": "brave-search",
+    "browser_version": "155.0.8059.79",
+    "network_assets": "none; exact worktree image bytes embedded",
+    "viewport": 360,
+    "contentWidth": 345,
+    "images": [
+      {
+        "alt": "yolo-labz",
+        "source": "logo-wordmark-dark.svg",
+        "loaded": true,
+        "naturalWidth": 470,
+        "displayedWidth": 300
+      },
+      {
+        "alt": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
+        "source": "gremlin-wide-hero.png",
+        "loaded": true,
+        "naturalWidth": 1774,
+        "displayedWidth": 313
+      }
+    ],
+    "links": [
+      "https://github.com/yolo-labz/wa",
+      "https://github.com/yolo-labz/chrome-bridge",
+      "https://github.com/yolo-labz/claude-mac-chrome",
+      "https://github.com/yolo-labz/fand",
+      "https://github.com/yolo-labz/kokoro-speakd",
+      "https://github.com/yolo-labz/anthropic-throttle-proxy"
+    ],
+    "screenshot": "exploration-integrated-360-dark.png",
+    "screenshot_sha256": "54f8d38c8526efe251e4ac23d4160f449882df968048d5bc44aa43ebce2c55f9",
+    "imageFailureNavigation": "pass"
+  }
+]

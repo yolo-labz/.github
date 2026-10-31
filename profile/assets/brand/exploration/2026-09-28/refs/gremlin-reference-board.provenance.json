@@ -1,0 +1,27 @@
+{
+  "classification": "reference-not-approved-master",
+  "image": "gremlin-reference-board.png",
+  "sha256": "1bd4ee7a158591b012f3d40a1c62e37290684c40100429ae758917df2db22036",
+  "width": 1080,
+  "height": 1100,
+  "role": "Generation reference for 02-wide-hero and 03-square-avatar; its sha256 is the reference_sha256 in their provenance records.",
+  "derivation": {
+    "tool": "local composition of existing repository assets (no model call, no network)",
+    "components": [
+      {
+        "path": "profile/assets/brand/mascot/gremlin-hero.png",
+        "sha256": "982c7d800ba571eeef9c129b80aa06389716abc58bf236203c6e82631a4bd6ef",
+        "base_commit": "6488088",
+        "role": "programming pose"
+      },
+      {
+        "path": "profile/assets/brand/mascot/gremlin-model-sheet.png",
+        "sha256": "144b255c42b70b85c1513a1d8e89f20034e8e7e5b4229724fb5ed77c5ee5a1c1",
+        "base_commit": "6488088",
+        "role": "character construction and palette"
+      }
+    ]
+  },
+  "postprocessing": "composition only",
+  "claims": "Inputs already existed in this repository; the board grants no rights or approval."
+}

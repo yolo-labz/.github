@@ -1,0 +1,15 @@
+{
+  "mode": "exploration-integrated",
+  "assets": 3,
+  "flagships": 6,
+  "links": [
+    "https://github.com/orgs/yolo-labz/repositories",
+    "https://github.com/yolo-labz/anthropic-throttle-proxy",
+    "https://github.com/yolo-labz/chrome-bridge",
+    "https://github.com/yolo-labz/claude-mac-chrome",
+    "https://github.com/yolo-labz/fand",
+    "https://github.com/yolo-labz/kokoro-speakd",
+    "https://github.com/yolo-labz/wa"
+  ],
+  "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2"
+}

@@ -1,0 +1,45 @@
+{
+  "classification": "exploration-not-approved-master",
+  "status": "complete",
+  "requested_images": 3,
+  "image_sends": 3,
+  "generated_images": 3,
+  "recovery_image_sends": 0,
+  "verified_on": "30/10/2026",
+  "identity": "chatgpt-c",
+  "ui_model_observed": "Instant",
+  "image_backend_model_observed": null,
+  "provenance": [
+    "01-anchor.provenance.json",
+    "02-wide-hero.provenance.json",
+    "03-square-avatar.provenance.json"
+  ],
+  "historical_blocked_checkpoint": {
+    "classification": "blocked-before-upload-and-send",
+    "requested_images": 3,
+    "image_sends": 0,
+    "generated_images": 0,
+    "canonical_generation_invocations": 1,
+    "attempted_identity": "chatgpt-c",
+    "authenticated_account_observed": false,
+    "ui_model_observed": null,
+    "image_backend_model_observed": null,
+    "status": "error",
+    "failure_stage": "BrowserType.connect_over_cdp",
+    "detail": "Exception: BrowserType.connect_over_cdp: Connection closed while reading from the driver",
+    "receipt_sha256": "84722a5d829c8196c9956b025ae2ee3c5a367f477c153401f04c5478f7875f88",
+    "receipt_fields": [
+      "identity",
+      "prompt",
+      "stamp",
+      "status",
+      "detail"
+    ],
+    "reference_board_sha256": "1bd4ee7a158591b012f3d40a1c62e37290684c40100429ae758917df2db22036",
+    "alternate_read_only_probe": {
+      "identity": "openai-platform",
+      "result": "same attach failure; no generation attempted"
+    },
+    "retries": 0
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "path": "profile/assets/brand/mascot/gremlin-hero.png",
+    "sha256": "982c7d800ba571eeef9c129b80aa06389716abc58bf236203c6e82631a4bd6ef",
+    "base_commit": "6488088",
+    "role": "programming pose"
+  },
+  {
+    "path": "profile/assets/brand/mascot/gremlin-model-sheet.png",
+    "sha256": "144b255c42b70b85c1513a1d8e89f20034e8e7e5b4229724fb5ed77c5ee5a1c1",
+    "base_commit": "6488088",
+    "role": "character construction and palette"
+  }
+]
