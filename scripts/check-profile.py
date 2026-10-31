@@ -15,8 +15,8 @@ Checks
                 ?sig=, ?se=) anywhere in tracked text.
   4. claims     banned unqualified claims from docs/brand-positioning.md are
                 absent. The doc is the authority; when it is absent the check is
-                reported SKIP (ponytail: pass --strict once the copy branch #10
-                lands and every consumer carries the doc).
+                reported SKIP unless --strict is passed (CI passes --strict, so a
+                branch that drops the doc fails there).
   5. a11y       images in the profile README carry alt text and (HTML img) width.
 
 Usage

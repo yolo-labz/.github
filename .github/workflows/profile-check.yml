@@ -33,4 +33,4 @@ jobs:
       - name: Brand/profile gate
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python3 scripts/check-profile.py --repo .
+        run: python3 scripts/check-profile.py --repo . --strict
