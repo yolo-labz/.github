@@ -258,6 +258,30 @@ class RepositoryTree(unittest.TestCase):
         self.assertIn("RESULT: PASS", out)
 
 
+class PrivacyWaiverAboveLine(unittest.TestCase):
+    """A multi-line statement must be waivable without cramming a comment into it."""
+
+    def test_waiver_on_the_line_above_applies(self):
+        import tempfile
+
+        forbidden_host = "oai" + "usercontent"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "scripts").mkdir()
+            (root / "scripts" / "scan.py").write_text(
+                "PATTERN = re.compile(\n"
+                "    # profile-check: allow-private-pattern\n"
+                f'    "{forbidden_host}"\n'
+                ")\n"
+                f'URL = "https://{forbidden_host}.com/x"\n',
+                encoding="utf-8",
+            )
+            findings = checker.check_privacy(root)
+            errors = [f for f in findings if f.level == "error"]
+            self.assertEqual(len(errors), 1, findings)
+            self.assertIn("scan.py:5", errors[0].message)
+
+
 class Accessibility(unittest.TestCase):
     def test_source_tag_needs_no_alt_or_width(self):
         import tempfile
