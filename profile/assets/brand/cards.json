@@ -4,7 +4,7 @@
   "classification": "generated-example",
   "source": {
     "params": "model/params.json",
-    "params_sha256": "6ee964a02e3ebcea52b6afc95e5a78513b4b388dd949216c285903b0addb6b84",
+    "params_sha256": "e0089ca78fc7e6d2797a57a3159465676dd94e0e870536da39ddc51ad02942a2",
     "render": "model/gremlin.py --views hero (workbench, flat)",
     "typeset": "Inter, DejaVu Sans, sans-serif",
     "copy": "docs/brand-positioning.md (positioning line)"
@@ -15,21 +15,21 @@
       "width": 1200,
       "height": 630,
       "use": "Open Graph",
-      "sha256": "037dac825e7dd26953ee936d3b2f92685ecd231ac548cb5585f02b6e2f91a3b3"
+      "sha256": "30918b317993e1ee8ea88c4ef2b08385e0af7f24d0f5b86e5ee86e3f2aa66a9e"
     },
     {
       "file": "twitter-card.png",
       "width": 1200,
       "height": 600,
       "use": "Twitter/X summary_large_image",
-      "sha256": "e954add750af350a0e5d43445ce9aeb16a08b635cf42c45e37a49f2fc55f5933"
+      "sha256": "366d34b6bed3e50f20c12dc590515e9c288493e48b977d73c4df3c39bdc0c7de"
     },
     {
       "file": "social-preview-1280x640.png",
       "width": 1280,
       "height": 640,
       "use": "GitHub repository social preview",
-      "sha256": "9ba08128ebc7aae1cfe09a2ae6582e5d20acb8519d52ea79fdc035661bf4c72c"
+      "sha256": "a939bde40e97ed329e08fbb495d28461e34b942e5df9db63cf3a1837a4117a92"
     }
   ]
 }

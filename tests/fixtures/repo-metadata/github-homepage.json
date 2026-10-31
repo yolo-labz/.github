@@ -1,0 +1,13 @@
+{
+  "name": "github-homepage",
+  "archived": false,
+  "private": false,
+  "description": "A tool whose homepage is just a repository link.",
+  "homepage": "https://github.com/yolo-labz/wa",
+  "topics": [
+    "cli",
+    "automation",
+    "tooling"
+  ],
+  "has_issues": true
+}

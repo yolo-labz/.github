@@ -1,0 +1,13 @@
+{
+  "name": "no-description",
+  "archived": false,
+  "private": false,
+  "description": "   ",
+  "homepage": null,
+  "topics": [
+    "cli",
+    "automation",
+    "tooling"
+  ],
+  "has_issues": true
+}

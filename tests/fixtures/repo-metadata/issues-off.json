@@ -1,0 +1,13 @@
+{
+  "name": "issues-off",
+  "archived": false,
+  "private": false,
+  "description": "A tool that forgot to accept bug reports.",
+  "homepage": null,
+  "topics": [
+    "cli",
+    "automation",
+    "tooling"
+  ],
+  "has_issues": false
+}
