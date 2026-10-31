@@ -1,116 +1,85 @@
-# Visual rollout — image-lab — 28/09/2026
+# Visual rollout — image lab
 
-## Explicit candidate resume — first anchor available
+## Restored delivery — 30/10/2026
 
-Candidate implementation `feb109d7` from draft NixOS #2505 is selected only per invocation.
-The exact queue-locked 45-second owned-blank-page probe returned **ATTACH_OK, exit 0**,
-with empty stderr. Authenticated canonical workflow then passed with an empty composer;
-private screenshot shows **Instant / Pro**, not an exact image-backend model ID.
+The restored branch `010-gpt-gremlin-art` contains **three genuine GPT-generated
+exploration images**. Rescue commit `0ffe2ee` preserved the completed image files
+after checkpoint `8cc64b9`; the old residue copy remains untouched.
+No image request, browser mutation, deployment or publication was made during
+this recovery. This is not an approved brand master or production avatar.
 
-**First anchor for coordinator/consumers:**
-`profile/assets/brand/exploration/2026-09-28/gremlin-anchor.png`
+## Spec → plan → completed work
 
-- SHA-256: `dcd882cb9d7f99316f0278d03c172a9f14135c195efe67556d451a9bd172baeb`
-- 1254×1254 PNG, 1,091,450 bytes, exact downloaded bytes.
-- Receipt: `status=ok`, `send_confirmed=true`; one actual image send so far.
-- Pixel inspection: recognizable green pointed-ear gremlin, asymmetric grin/fangs,
-  mauve pupil/output accents and blank-key keyboard. Drift: shallow shading and
-  dimensional keycaps despite the flat brief; only two claws per hand clearly visible.
-- Direction only, **not an approved master**. Two anchored edits are next.
+The bounded brief and prompts live in
+`profile/assets/brand/exploration/2026-09-28/`. The existing merged gremlin
+hero/model sheet at main `64880882f235922007dd22a0cdb22c7ea5f09f83` provided the
+reference board. One original anchor was followed by two edits, each referencing
+the exact anchor and using explicit PRESERVE/CHANGE constraints. All three
+downloaded originals remain byte-identical; no hand-drawn substitution.
 
-The original blocked checkpoint below is retained as history, not current generation status.
+| Image | Dimensions | SHA-256 |
+| --- | --- | --- |
+| `gremlin-anchor.png` | 1254×1254 | `dcd882cb9d7f99316f0278d03c172a9f14135c195efe67556d451a9bd172baeb` |
+| `gremlin-wide-hero.png` | 1774×887 | `da70db22366e8e849b22eb3e8c3dcd0ec53274135ee0bf1ee309cb2704a0d9f4` |
+| `gremlin-square-avatar.png` | 1254×1254 | `ceb4f3cbf60b8254660290e60dc3e61266b3c02a6be3c71a64a8d47ac02bb554` |
 
-## Historical checkpoint — 20:14 BRT
+Each numbered `*.provenance.json` pins its image, prompt and reference hashes,
+dimensions, byte count, confirmed send and sanitized receipt metadata.
+`contact-sheet.png` labels every image as exploration and includes 64px square
+and circular avatar proofs.
 
-At this checkpoint there was no anchor and zero image sends; those failure receipts remain intact.
+## Runtime and model evidence
 
-## Coordinator handoff (w8:p6; consumers p2/pA/pB)
+On 28/09/2026, isolated NixOS #2505 candidate `feb109d7` was selected per
+invocation using wrapper
+`/nix/store/n26i1xfcmhs568vnq20qzvhq3i0mi30m-browser-patchright` and Patchright
+1.59.1. The queue-locked 45-second owned-page probe returned **ATTACH_OK,
+exit 0**, empty stderr. The authenticated empty-composer sentinel then passed.
+Installed `gpt-image` used the existing server fleet and queue lock.
 
-- Repository: `yolo-labz/.github` (local checkout named `github-profile`).
-- Worktree: `/home/notroot/Documents/Code/yolo-labz/github-profile-010-gpt-gremlin-art`.
-- Branch: `010-gpt-gremlin-art`, based on freshly fetched `origin/main` `6488088` (`#8`).
-- Owned outputs: `profile/assets/brand/exploration/2026-09-28/` and this report only.
-- **First anchor path:** see the explicit candidate-resume section above.
-  `refs/gremlin-reference-board.png` still only composes the pre-existing reference rasters.
-- Local checkpoint: `docs(art): preserve blocked GPT gremlin brief` on the branch above.
-  No push or PR: no successful image outputs to publish. Preparation remains incomplete.
-- Canonical vault save-state, other seats, shared tooling and existing assets untouched.
+Configured identity: **chatgpt-c**. The recorded UI label was **Instant / Pro**;
+the exact image-backend model was **not exposed** and is not inferred from that
+label. This is historical runtime evidence, not a claim about current login.
 
-## Spec → plan → tasks and prepared paths
+During recovery, all three private raw receipt digests matched their public
+sidecars, and each raw receipt had `status=ok`, `send_confirmed=true`.
+The two edit receipts reference the anchor. Total historical sends: **three**;
+new recovery sends: **zero**.
 
-The exploration `README.md` contains the bounded spec, technical plan and current tasks.
-Relative to `profile/assets/brand/exploration/2026-09-28/`:
+## Inspection and limitations
 
-| Path | Actual state |
-|---|---|
-| `prompts/01-anchor.txt` | Original programming-gremlin brief; not submitted |
-| `prompts/02-wide-hero.txt` | PRESERVE/CHANGE edit brief; not attempted |
-| `prompts/03-square-avatar.txt` | PRESERVE/CHANGE edit brief; not attempted |
-| `refs/gremlin-reference-board.png` | Pixel composition of merged hero/model sheet, not new art |
-| `refs/sources.json` | Original repository paths, base commit and SHA-256s |
-| `generation-status.json` | Sanitized failed-attempt evidence, not a success receipt |
-| `check.py` | Offline provenance/lineage/privacy check; correctly rejects absent images |
-| `.private/` | Durable ignored raw receipt/stderr and probe/negative-control evidence, mode 0700 |
+Actual contact-sheet pixels inspected on 30/10/2026: green skin, pointed ears,
+fanged mischievous grin, keyboard and restrained mauve accents are retained.
+The wide edit places the gremlin at the right with ample empty space.
+Soft shading, dimensional keycaps and only two clearly visible claws per hand
+remain drift from the flat/anatomy brief. The circular 64px proof clips ears:
+**not production-avatar-ready**. There is no generated wordmark; existing
+outlined vector wordmarks remain canonical.
 
-Method was GPT anchor once, then two edits using that exact anchor as `--ref` in the
-same owned thread, maximum three sends, each prompt and result in one attach, serialized
-by the installed `gpt-image` shim's queue lock. No image send budget was consumed.
-The live project verb edits an existing project's instructions but implements no
-project creation; the planned isolated thread avoids altering unrelated projects.
-Proso's provenance contract and Lectrice's role-assigned references/drift register informed
-the process, not their bird or palette. No private vault material entered a model prompt.
+## Privacy and verification
 
-## Evidence and reconciliation
+- `python3 profile/assets/brand/exploration/2026-09-28/check.py`: PASS,
+  all three images, prompt/reference hashes, dimensions and anchor lineage.
+- Complete unpublished branch history scanned: no tracked `.private/` files,
+  signed CDN URLs, conversation URLs or raw private receipts.
+- Raw receipts and earlier failures remain under ignored `.private/`; recovery
+  restored its owner-only permissions. Public receipts contain hashes and
+  allowlisted metadata, never private links.
+- Initial blocked attempt is retained in `generation-status.json` as history:
+  CDP failed before upload/send; zero sends at that checkpoint. It is not the
+  current result. No unchanged retry was performed.
+- Main freshly fetched on 30/10/2026: still `6488088`; branch is **0 behind**.
+  No base update or history rewrite was necessary.
+- Local syntax/style, diff and repository gates are recorded with delivery below.
 
-1. Server `browser-fleetctl status chatgpt-c --json` returned ready/headed. Transport
-   `/json/version` responded with Chrome `153.0.8010.47`, CDP `1.3`. Neither proves login.
-2. A read-only canonical `_ui.session_page("chatgpt-c")` probe failed during attachment:
-   `Network.setCacheDisabled: Internal server error, session closed`, then
-   `BrowserType.connect_over_cdp: Connection closed while reading from the driver`.
-3. One invocation of the installed `gpt-image` shim queued behind an existing caller
-   and then returned the same typed attachment failure. No bypass or automatic retry.
-   Raw `01-anchor.json` contains only `identity`, `prompt`, `stamp`, `status`, `detail`:
-   there is **no `reference`, `send_confirmed`, or `conversation` field**. Together with
-   the driver's execution order, this establishes failure before upload/send, not an
-   ambiguous submitted image that should be regenerated.
-4. Hypothesis: the attach failure was local to `chatgpt-c`. **Falsified** by a queue-locked,
-   read-only probe of documented alternate `openai-platform`, which was also ready but
-   failed with the same protocol error. No generation was attempted on that identity.
-5. Exact underlying driver/browser cause remains unverified. Installed Patchright was
-   `1.59.1`; changing shared tooling or restarting a browser is outside this slice and
-   could interrupt another seat. No such action was taken. The image process exited.
-6. The tool repository's main commit was `5c92c67`; its `_ui.py` had pre-existing local
-   modifications, left untouched. Two later fetched commits concern login forms/worker
-   exits and Miniflux credentials, not this measured protocol failure.
+## Delivery and remaining gates
 
-**Model/identity honesty:** `chatgpt-c` is the configured attempted identity, not an
-observed logged-in account claim. Neither UI model label nor image-backend model ID was
-observable: attachment failed before the authenticated-page sentinel. No guessed model ID.
+Draft art PR: pending creation after checks; assign **phsb5321**, verified by
+authenticated GitHub identity and repository assignability.
+Integration consumer: draft [front-page PR #9](https://github.com/yolo-labz/.github/pull/9),
+using [copy PR #10](https://github.com/yolo-labz/.github/pull/10).
 
-## Tests
-
-- `ast.parse(check.py)`, `ruff check`, `ruff format --check`: PASS.
-- Staged-file privacy scan: PASS; `.private/` receipts excluded; no private/CDN URLs.
-- Missing-result negative control: PASS — running
-  `python3 profile/assets/brand/exploration/2026-09-28/check.py` exits nonzero with
-  `Missing: 01-anchor.provenance.json`, as required. This is **not** a successful art gate.
-- Reference-source hashes and the prepared PNG render are locally verifiable.
-- Actual fresh-image inspection, positive provenance gate, and labelled generated-image
-  contact sheet: **not run / impossible without generated images**.
-
-## Pending gates and safe continuation
-
-1. Coordinator routes the shared CDP attachment failure to the browser-tooling owner;
-   repair/recovery must preserve other seats. Do not restart browsers from this slice.
-2. Re-establish authenticated, empty-composer attach. Preserve all failed receipts and
-   reconcile them before an explicitly resumed attempt; never delete guards to resend.
-3. Generate the anchor and two anchored edits, inspect actual pixels, record observed
-   identity/model limitations, hash each prompt/reference/result, build the labelled proof.
-4. Pass `check.py`, then commit/push genuine outputs and open a PR assigned to **`phsb5321`**
-   (verified by `/user` and repository `/assignees`). No publication or API credits.
-5. Recheck repository permissions: `/branches/main` returned **`protected=false`** and
-   `/rules/branches/main` returned **`[]`**. This is not the branch-protected self-merge
-   class. Do not silently merge or change org/repo settings. No CI success is claimed.
-
-No deployment, release, human send, foreign-draft clearing, global cleanup or shared
-worktree pruning occurred. All deliverables/evidence are in this feature worktree, not scratch.
+Main is unprotected and has no branch rules; existing PRs report **no checks**,
+not green CI. Operator explicitly requires draft-only delivery and **no merge**.
+No org settings, approved masters, production profile, deployment, release,
+billing, human messages or canonical vault save-state were changed.

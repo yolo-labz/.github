@@ -58,7 +58,6 @@ def check():
         assert path.is_relative_to(REPO) and sha(path) == source["sha256"]
     assert local("contact-sheet.png").stat().st_size > 1000
     public = [p for p in ROOT.rglob("*") if p.is_file() and ".private" not in p.parts]
-    # ponytail: scan this bounded exploration only; the repository gate owns wider scope.
     forbidden = re.compile(
         r"https?://(?:chatgpt\.com/(?:c|g)/|[^\s]*oaiusercontent\.com)|[?&](?:sig|token|signature)=",
         re.IGNORECASE,
@@ -66,6 +65,21 @@ def check():
     for path in public:
         if path.suffix in {".md", ".txt", ".json", ".html"}:
             assert not forbidden.search(path.read_text()), f"Private URL: {path.name}"
+    tracked = (
+        subprocess.check_output(["git", "ls-files", "-z"], cwd=REPO)
+        .decode()
+        .split("\0")
+    )
+    assert not any(".private" in Path(name).parts for name in tracked)
+    ignored = subprocess.run(
+        ["git", "check-ignore", "-q", str(ROOT / ".private" / "privacy-sentinel")],
+        cwd=REPO,
+        check=False,
+    )
+    assert ignored.returncode == 0, "Private receipts must remain ignored"
+    status = json.loads(local("generation-status.json").read_text())
+    assert status["status"] == "complete"
+    assert status["image_sends"] == status["generated_images"] == len(IDS)
     print(
         "PASS: 3 confirmed images; hashes, anchor lineage, dimensions and public URL hygiene"
     )
