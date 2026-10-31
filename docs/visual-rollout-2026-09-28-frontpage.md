@@ -1,127 +1,99 @@
-# Visual rollout — frontpage
+# Visual rollout — front-page integration
 
-28/09/2026 · GPT/OpenAI integration · home-projects · coordinator w8:p6
+## Restored delivery — 30/10/2026
 
-## Live file handoff
+Draft [PR #9](https://github.com/yolo-labz/.github/pull/9), branch
+`011-gremlin-frontpage`, assigned to **phsb5321**.
+The former placeholder is now replaced with genuine, visibly labelled
+**GPT-generated exploration**, not an approved brand master. No merge,
+production deploy, blog/social publication, org-setting change or new image send.
 
-**BLOCKED INTEGRATION DRAFT / PLACEHOLDER ONLY — 20:09 BRT.** Layout and
-executable draft checks are delivered; final-art acceptance is **not complete**.
-No final GPT artwork or approved brand master is claimed. Producer p9 still
-reports its anchor in flight/queue, not a delivered image; this is a dependency
-blocker, **not a claim that generation definitively failed**. No sibling was
-interrupted and no edits left this seat's ownership surface.
+Worktree: `../github-profile-011-gremlin-frontpage`.
+Spec → plan → tasks: `specs/011-gremlin-frontpage/`.
+Profile: `profile/README.md`. Evidence: `profile/assets/brand/rollout/`.
 
-- Worktree: `../github-profile-011-gremlin-frontpage`
-- Branch: `011-gremlin-frontpage`, based on `6488088` (`origin/main`, PR #8).
-- Profile: `profile/README.md`
-- Spec/plan/tasks: `specs/011-gremlin-frontpage/`
-- Integration assets, checks and previews: `profile/assets/brand/rollout/`
-- Existing outlined wordmarks will be used unchanged; gremlin art is illustration,
-  never a replacement logo. One image, no generated lettering, single-column
-  layout and grouped live-text links. Planned renders: 1280px + 360px, light/dark.
+## Exact inputs and implementation
 
-## Producer inputs
+- Art producer: [draft PR #11](https://github.com/yolo-labz/.github/pull/11),
+  source commit `637a7fbd3f47127f157d0e0dbbccc807bff57c87`.
+  Exact original `gremlin-wide-hero.png` copied into `rollout/`;
+  SHA-256 `da70db22366e8e849b22eb3e8c3dcd0ec53274135ee0bf1ee309cb2704a0d9f4`.
+  `art-provenance.json` embeds the sanitized generation record, anchor hash,
+  prompt/reference hashes and immutable public source link. No private receipt
+  or conversation/CDN URL was copied. The source remains exploration.
+- Copy source: [draft PR #10](https://github.com/yolo-labz/.github/pull/10),
+  `fb4a5570fade07e9ea97fc85695fe95e22bb7a95`,
+  `docs/brand-positioning.md`. Adopted its positioning and six qualified
+  flagship choices: wa, chrome-bridge, claude-mac-chrome, fand, kokoro-speakd,
+  anthropic-throttle-proxy. Limits remain visible; no blanket compliance,
+  licensing, performance or quota claim.
+- Existing outlined light/dark SVG wordmarks are byte-identical to merged #8.
+  The image is an illustration, never the logo or a production avatar.
+- Main freshly fetched: `64880882f235922007dd22a0cdb22c7ea5f09f83`.
+  All three restored branches were **0 behind**; no merge/rebase or history
+  rewrite was necessary. Existing residue directories were untouched.
 
-- p9: exact usable GPT image plus generation provenance from
-  `../github-profile-010-gpt-gremlin-art/profile/assets/brand/exploration/2026-09-28/`.
-  Integration will copy bytes into owned `rollout/`, hash them and cite source.
-  Current hero is an explicit text placeholder, not old SVG artwork.
-- p8: claim matrix from
-  `../github-profile-012-brand-copy/docs/visual-rollout-2026-09-28-copy.md`.
-  Read p8's `docs/brand-positioning.md` and rollout claim-matrix handoff at
-  19:55 BRT; the six flagships are
-  **wa, chrome-bridge, claude-mac-chrome, fand, kokoro-speakd,
-  anthropic-throttle-proxy**. The provisional reader-tool links were replaced,
-  not copied from held PR #7. Platform/protocol/runtime qualifiers remain visible.
-  No licensing/compliance or supply-chain blanket claims remain. Immutable copy
-  source: `74f6cd01a4ce9a121f1fa15d7b0c270ab1caa9b3`,
-  [copy PR #10](https://github.com/yolo-labz/.github/pull/10).
+## Executed verification
 
-## Gates observed
+- `check.py` without `--draft`: PASS, exact six links, qualifiers, image
+  alternatives, existing wordmark bytes and genuine art hash/provenance.
+- GitHub Markdown API generated the sanitized preview; this is not the live org
+  page. Main-based asset URLs intentionally become live only after an authorized
+  future merge. Worktree bytes were embedded for the preview, not published.
+- Actual existing NixOS server fleet rendering via supported
+  `interactive.attach("brave-search")`: PASS at **1280 / 360**, light and dark.
+  No local browser launch or network asset fetch. All images decoded,
+  theme-specific wordmarks selected, no horizontal overflow, six live-text
+  project choices survived image removal.
+- Screenshots were opened and visually inspected together: readable heading,
+  illustration, exploration label, three task groups and all six link choices;
+  no clipped art or text. Art retains soft shading/keycap/anatomy drift.
+- `verify.py`: PASS, all four screenshot hashes and PNG dimensions bound to
+  exact profile SHA-256
+  `09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2`.
+  Chrome excludes its 15px vertical scrollbar from full-page PNGs:
+  1280 viewport → 1265×1471 PNG; 360 viewport → 345×2020 PNG.
+- Four offline regression tests: PASS; modified PNG, stale profile and missing
+  mobile/theme evidence are rejected. No browser used for these tests.
+- Ruff lint/format: PASS. Repository slop/alignment and diff checks are recorded
+  in the final delivery receipt. Earlier placeholder renders remain historical
+  `draft-*.png`, never evidence for the integrated result.
+- One Impeccable detector warning pairs a dark-theme muted token with the
+  light-theme background. It is a cross-media false positive: actual CSS pairs
+  are #59636e/#ffffff **6.11:1** and #9198a1/#0d1117 **6.50:1**.
 
-- `gh api user`: `phsb5321`; repository assignee endpoint accepted that identity.
-- REST `repos/yolo-labz/.github/branches/main`: `protected: false`.
-- REST `repos/yolo-labz/.github/rules/branches/main`: `[]`.
-- **Merge blocked unless a genuinely protected base is independently established.**
-  No settings changes are authorized. Will open an assigned PR, not self-merge
-  around this gate. PR #7 remains OPEN and untouched per the bounded instruction.
-- No production deploy, release, avatar, pin, browser-account mutation, blog/social
-  publication or human-directed send performed.
+### Browser-helper side effect (not hidden)
 
-## Evidence / delivery
+The canonical attach helper automatically opened a blank page and closed **one
+frozen page target** during its pre-attach sanitizer. This was not an explicit
+render command and was outside the intended owned-page-only scope. The render
+itself used only its yielded page; no login, account setting, generation, manual
+foreign-page action or explicit service restart was issued. No further browser
+calls were made after observing this side effect. Do not interpret this run as
+proof that the current helper is universally side-effect-free. See
+`render-run.json`; raw target IDs and unrelated page contents are not published.
 
-- Implemented single-column task groups and exact existing light/dark vector
-  wordmarks in `profile/README.md`; no master or exploration changes.
-- Runnable `profile/assets/brand/rollout/check.py` checks six links, local assets,
-  wordmark byte identity, alt text, final-art checksum and placeholder refusal.
-- `render.cjs` renders GitHub-sanitized Markdown, checks image decoding, theme
-  selection and overflow at 1280/360px, then tests image-failure navigation.
-- First four **draft-only** renders passed; final-art acceptance correctly
-  refused the placeholder. These are not final-art or live GitHub screenshots.
-- After adopting all six p8 flagship choices: seven public Markdown destinations
-  returned HTTP 200; four fresh draft previews passed 1280/360px light/dark.
-  `checks.json` and `renders.json` bind these receipts to the exact profile SHA-256.
-- Layout/checks commit: `f95ccbfc90e8435f5a73c68e54d1fb786c19ba72`.
-- PR: [yolo-labz/.github#9](https://github.com/yolo-labz/.github/pull/9), OPEN,
-  **DRAFT**, assignee `phsb5321` (read back through REST).
-- Evidence/report follow-up commit: `9344184554a27a7e5f6efc229812426698fedfcc`.
-- Fresh CI observation at 20:09 BRT for that head: `check_runs.total_count=0`,
-  combined status `pending` with `statuses=[]`. **No CI check has run/passed**;
-  do not mistake the absent checks for green CI. The repo has no checked-in CI
-  workflow; this slice does not add one or replace branch authorization.
-- Fresh protection readback at 20:09 BRT: main still `6488088`,
-  `protected=false`, rules `[]`. PR #7 is OPEN/unmerged at unchanged `9bfcb26`.
-- Sole producer's public handoff inspected through 20:09 BRT, including a bounded
-  six-minute file-only wait: reference board, prompts and integrity check exist;
-  **no generated anchor/hero/provenance sidecar** exists. Its report remains
-  `in progress`, with the anchor invocation in flight/queue and an earlier CDP
-  attach failure. No browser attachment, retry or service change was made here.
-- Therefore only **draft** render evidence is supplied. Actual final-image
-  desktop/mobile acceptance cannot be truthfully marked passed.
+## Durable render paths
 
-## Render receipts and rerun
+All under `profile/assets/brand/rollout/`:
 
-All paths below are relative to the repo. Screenshots were opened and inspected,
-not inferred from tool exit status. Readable vector type, six links and three
-sections remain visible without cropping or horizontal scrolling.
+- `exploration-integrated-1280-light.png`
+- `exploration-integrated-1280-dark.png`
+- `exploration-integrated-360-light.png`
+- `exploration-integrated-360-dark.png`
+- `checks.json`, `renders.json`, `art-provenance.json`, `render-run.json`
+- `preview.html`, `preview-template.html`, `render.py`, `verify.py`,
+  `test_verify.py` and `README.md` for reproduction.
 
-- `profile/assets/brand/rollout/draft-1280-light.png`
-- `profile/assets/brand/rollout/draft-1280-dark.png`
-- `profile/assets/brand/rollout/draft-360-light.png`
-- `profile/assets/brand/rollout/draft-360-dark.png`
-- `profile/assets/brand/rollout/checks.json`: seven HTTP 200 destinations,
-  six exact flagship links, local SVGs and qualifiers checked.
-- `profile/assets/brand/rollout/renders.json`: decoded theme-correct wordmarks,
-  content widths 1280/360 equal to viewports; image-failure text navigation passes.
+## PR / CI and remaining gates
 
-```sh
-python3 profile/assets/brand/rollout/check.py --draft --online --preview
-NODE_PATH=/home/notroot/Documents/Code/personal/proso/node_modules \
-  node profile/assets/brand/rollout/render.cjs
-git diff --check
-# Expected to FAIL while art is absent; never describe --draft as this pass:
-python3 profile/assets/brand/rollout/check.py
-```
+Existing #9 and #10 and new #11 are **OPEN / DRAFT**, assigned to phsb5321.
+At recovery readback, all report **no CI checks**; absent checks are not green CI.
+Main is `protected=false`, effective branch rules `[]`. Final exact heads
+and API readback are recorded with delivery evidence in `rollout/`.
 
-## First unfinished postcondition / coordinator handoff
-
-1. **T05, producer dependency:** consume p9's actual usable GPT output only after
-   inspecting its image and sanitized prompt/reference/generation proof. Copy
-   exact bytes into owned `rollout/`; do not copy the existing reference board.
-   Write `art-provenance.json` with `file`, `sha256`, `producer: p9`,
-   `status: gpt-generated-exploration`, full `source_commit`, and
-   `generation_evidence` pointing to immutable public proof. No signed URLs,
-   account secrets, conversation URLs or private vault excerpts.
-2. Replace the explicit placeholder with that illustration (not a logo), useful
-   alt text and a visible GPT-generated exploration label. Keep unchanged vector
-   wordmarks. Rerun **without `--draft`**, then render and inspect all four final
-   previews. Only then can T05–T07 be completed and the PR leave draft status.
-3. **Repository authorization blocker:** self-merge remains ineligible while main
-   is unprotected. Coordinator/repository owner must handle any protection change
-   through a separately authorized process. No settings mutation or bypass here.
-   Preserve any checks/reviews subsequently configured; absent CI is not success.
-
-No new workers or advisory model reviewer were launched. No canonical vault note
-was edited. Reversal before merge: close this proposal, leaving main unchanged;
-after a later authorized squash merge, use a normal `git revert <merge-sha>` PR.
-All durable artifacts are in this feature worktree and pushed branch, not scratch.
+Operator gate remains **no merge, no production deployment or publication**,
+regardless of local acceptance. Nothing in these checks approves the brand,
+authorizes use as an org avatar or changes artwork rights.
+No new workers, canonical vault edits, other-seat dispatches or residue cleanup.
+Before merge, reversal is simply closing the draft PRs; main is unchanged.

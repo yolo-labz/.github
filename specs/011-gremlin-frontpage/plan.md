@@ -18,9 +18,11 @@ website, font download, decorative cards or browser account session.
    Never infer GPT provenance from a filename. No generative or vector fallback.
 4. Keep checks and their evidence under `profile/assets/brand/rollout/`: Python
    stdlib for local paths, alt text, provenance hashes and destination checks;
-   GitHub Markdown API for sanitized rendered content; isolated headless Chrome
-   for 1280px desktop and 360px mobile in both color schemes. Preview CSS emulates
-   GitHub's content column only; label previews as local, not live org captures.
+   GitHub Markdown API for sanitized rendered content; existing server browser
+   fleet through supported interactive.attach for 1280px desktop and 360px mobile
+   in both color schemes. Embed exact local image bytes into an owned blank page;
+   no local browser launch, foreign-page interaction or network asset loading.
+   Preview CSS emulates GitHub's content column only, not the live org page.
 5. Commit and open an assigned PR via GitHub REST if GraphQL is rate-limited.
    Verify `phsb5321` through authenticated identity and assignability. Report
    checks honestly; zero configured checks is not green CI. Leave open if main

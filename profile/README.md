@@ -5,10 +5,11 @@
 
 # Small tools. Deliberate automation.
 
-Tools for scripting messaging, browser workflows and local services.
+Open-source tools for scripting messaging, browser workflows and local services.
 
-> **Integration draft — temporary art placeholder.** GPT gremlin artwork from
-> producer p9 is pending. No final GPT artwork is present in this profile yet.
+<img src="https://raw.githubusercontent.com/yolo-labz/.github/main/profile/assets/brand/rollout/gremlin-wide-hero.png" alt="Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents" width="640">
+
+*GPT-generated gremlin exploration — an illustration proposal, not an approved brand master.*
 
 ## Start with a task
 

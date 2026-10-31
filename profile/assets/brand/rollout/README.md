@@ -1,51 +1,64 @@
-# Front-page integration evidence
+# Front-page exploration integration evidence
 
-This directory belongs to the frontpage seat. Canonical logo and mascot masters
-one level up remain unchanged. New GPT art, if present, is a **labelled exploration
-integrated into a profile proposal**, not an approved replacement brand master.
+This is a draft profile proposal, not the live organization page or an approved
+brand master. Existing vector wordmarks remain unchanged. The exact GPT wide
+hero and sanitized lineage are in `art-provenance.json`; copy is pinned to #10.
 
-## Reproduce
+## Offline acceptance (no browser)
 
 From the repository root:
 
 ```sh
-# Requires Python 3 + gh. Online mode reads public link destinations and asks
-# GitHub's Markdown API to render the current README; it publishes nothing.
-python3 profile/assets/brand/rollout/check.py --online --preview
-
-# Requires an already-installed Playwright and Chrome. No package install needed.
-# On this host Playwright is available in the Proso workspace:
-NODE_PATH=/home/notroot/Documents/Code/personal/proso/node_modules \
-  node profile/assets/brand/rollout/render.cjs
+python3 profile/assets/brand/rollout/check.py
+python3 profile/assets/brand/rollout/verify.py
+python3 -m unittest discover -s profile/assets/brand/rollout -p 'test_*.py' -v
+ruff check profile/assets/brand/rollout/*.py
+ruff format --check profile/assets/brand/rollout/*.py
 ```
 
-For a temporary art slot only, add `--draft` to `check.py`. **That is not final-art
-acceptance.** Default checking fails if the placeholder is still present.
-`CHROME_BIN` can select an installed Chrome executable. Headless Chrome uses an
-isolated ephemeral browser context, never the shared browser or account profiles.
+The gate checks six flagship destinations and caveats, meaningful alt text,
+local assets, immutable vector wordmarks, exact art checksum and source evidence.
+Saved renders are bound to the profile hash. Regression tests reject modified
+screenshots, stale source and a missing viewport/theme combination.
 
-## What the checks prove
+## Fresh preview/render (existing server fleet only)
 
-- Six flagship destinations, no blanket compliance/SLSA claims, image alt text,
-  local asset existence, existing outlined wordmarks unchanged byte-for-byte.
-- Final art checksum and p9 provenance sidecar presence; human inspection of the
-  producer evidence is still required (a JSON field cannot prove generation).
-- Optional HTTP GET validation of every Markdown link; redirects are recorded.
-- GitHub-sanitized GFM rendered in a local approximation of its content column.
-  Absolute production asset URLs are mapped to the exact worktree files, so
-  unmerged art can be previewed without publishing it to the org page.
-- Actual decoded images, theme-specific wordmark selection, six text links,
-  no horizontal overflow at 1280/360px, and navigation surviving image removal.
-- SHA-256 binds checks and preview to the exact profile; stale previews fail.
+Read the current browser-automation procedure first and confirm the dedicated
+anonymous identity `brave-search` is ready through the server toolset.
+No local browser, direct HTTP link probes, browser restart or account mutation.
 
-## Output files
+```sh
+# GitHub's Markdown API sanitizes the README; this does not publish it.
+python3 profile/assets/brand/rollout/check.py --preview
 
-- `checks.json`: local and optional link receipts (scope labelled draft/final-art).
-- `preview.html`: GitHub-rendered README in `preview-template.html`'s local shell.
-- `renders.json`: viewport, loaded image names/dimensions, navigation and screenshots.
-- `{draft,final-art}-{1280,360}-{light,dark}.png`: actual headless browser renders.
-- `art-provenance.json` and the cited image: appear **only after** usable p9 art.
+# Existing installed driver and supported fleet attach; no browser launch.
+PYTHONPATH=/home/notroot/Documents/Code/personal/web-automation \
+  browser-patchright profile/assets/brand/rollout/render.py
+```
 
-These renders are not live GitHub org-page captures and do not assert GitHub's
-exact surrounding UI. Production asset URLs resolve only after authorized merge.
-The draft prefix remains visible on any placeholder-only render.
+`render.cjs` is only a compatibility entrypoint to that Python runner.
+Each render embeds exact worktree asset bytes into the owned blank page; no
+network fonts/images or account material. The surrounding CSS approximates
+GitHub's content column, not its full live UI.
+
+**Maintenance caveat:** the canonical attach helper auto-sanitized one frozen
+target on the recorded run. Its cleanup behavior is not owned by this repo.
+Do not rerun under an absolute no-foreign-target-mutation requirement without
+a separately verified compatible helper. No further browser calls were made
+after observing the side effect; offline verification remains safe.
+
+## Evidence
+
+- `checks.json`: exact profile hash, links and asset checks.
+- `preview.html`: sanitized GitHub Markdown in the local preview shell.
+- `renders.json`: server Chrome version, identity, image decoding, actual
+  widths, screenshot hashes and image-failure navigation.
+- `exploration-integrated-{1280,360}-{light,dark}.png`: four real server renders.
+  Full-page PNGs exclude Chrome's 15px vertical scrollbar, while the requested
+  viewports are exactly 1280/360.
+- `render-run.json`: sanitized runtime outcome and helper side effect.
+- Historical `draft-*.png`: placeholder-only renders, not current acceptance.
+
+Live main asset URLs are not expected to resolve for unmerged additions.
+No new HTTP availability check is claimed; prior link receipts are historical.
+No self-merge, publication or artwork approval follows from render success.
