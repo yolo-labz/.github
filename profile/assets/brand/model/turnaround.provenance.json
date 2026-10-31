@@ -1,0 +1,42 @@
+{
+  "image": "turnaround.png",
+  "sha256": "f37fbfebb1bf3f6ba68641eb1076e9dd4167ba0ccf8556c7b3ae155511b83ff1",
+  "width": 2048,
+  "height": 768,
+  "kind": "model-sheet",
+  "classification": "exploration-not-approved-master",
+  "classification_note": "Generated art for construction review only. Not an approved brand master, avatar, logo or publication asset.",
+  "identity": "chatgpt-c",
+  "identity_host": "Nix.Server browser fleet",
+  "timestamp": "2026-10-31T13:13:49-03:00",
+  "prompt": "prompts/01-turnaround.txt",
+  "prompt_sha256": "5dec745d6980239cf051c1bce75c55473db67890de5dcb437873c62e37b9f96f",
+  "references": [
+    {
+      "image": "refs/canonical-reference-board.png",
+      "sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+    }
+  ],
+  "model": {
+    "ui": "chatgpt.com composer, reference-upload image mode",
+    "picker_label_observed": null,
+    "evidence": "chatgpt-c server identity; the composer refused with 'I wasn't able to invoke the image-generation tool' on the quota-refused run, which identifies the built-in ChatGPT image tool as the backend. The model picker label was not read back in this run and is deliberately not guessed."
+  },
+  "receipt": {
+    "status": "ok",
+    "send_confirmed": true,
+    "bytes": 1273822,
+    "candidates": 1,
+    "anchor_turn": 1,
+    "stamp": "20261031T131349914",
+    "image_mode": "reference-upload"
+  },
+  "receipt_sha256": "262c81670c1cc692347e3694c40b482bcf01cf202cc7af53473be3ce22a32700",
+  "drift": [
+    "four views present, but the three-quarter panel repeats the front head angle instead of a distinct 35-degree turn",
+    "soft shadow under the belly and a grey gradient floor line: the flat-fill rule is not held, so this panel set is attitude reference only",
+    "pupils render at ~0.09H against the specified 0.05625H",
+    "fangs read as two down + one up in front and three-quarter; the side view shows two",
+    "claws are three per hand and separated; the arrow-tip tail reads as a flag tip"
+  ]
+}

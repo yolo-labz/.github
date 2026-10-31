@@ -1,0 +1,42 @@
+{
+  "image": "hands-keyboard.png",
+  "sha256": "b4918421b24763f4dcd78c943a5f998dc496162fe31ca81af86cae5b40db767f",
+  "width": 1213,
+  "height": 1296,
+  "kind": "model-sheet",
+  "classification": "exploration-not-approved-master",
+  "classification_note": "Generated art for construction review only. Not an approved brand master, avatar, logo or publication asset.",
+  "identity": "chatgpt-c",
+  "identity_host": "Nix.Server browser fleet",
+  "timestamp": "2026-10-31T13:21:54-03:00",
+  "prompt": "prompts/04-hands-keyboard.txt",
+  "prompt_sha256": "ac577227cb5c7b9a15807efd9b726db322fc678eadd1634623e43e7dd5eca8e2",
+  "references": [
+    {
+      "image": "refs/canonical-reference-board.png",
+      "sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+    }
+  ],
+  "model": {
+    "ui": "chatgpt.com composer, reference-upload image mode",
+    "picker_label_observed": null,
+    "evidence": "chatgpt-c server identity; the composer refused with 'I wasn't able to invoke the image-generation tool' on the quota-refused run, which identifies the built-in ChatGPT image tool as the backend. The model picker label was not read back in this run and is deliberately not guessed."
+  },
+  "receipt": {
+    "status": "ok",
+    "send_confirmed": true,
+    "bytes": 1347864,
+    "candidates": 1,
+    "anchor_turn": 1,
+    "stamp": "20261031T132154223",
+    "image_mode": "reference-upload"
+  },
+  "receipt_sha256": "33b5bce8d2554d1939b972966c6c9f88e2c9281d3355b399bfc569a174fc16ba",
+  "drift": [
+    "both hand close-ups show exactly three separated claws each",
+    "the third-quarter full-body view is a three-quarter back, not a pure back view",
+    "two small mauve strokes float beside the keyboard without a clear produced-output role",
+    "keyboard is a wide grey slab whose keys carry dimensional top faces",
+    "the body-view hands are drawn with outline claws, contradicting the solid pale fill"
+  ]
+}

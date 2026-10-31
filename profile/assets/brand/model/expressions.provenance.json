@@ -1,0 +1,42 @@
+{
+  "image": "expressions.png",
+  "sha256": "4c6cb9f0a2a1e989a70ec024b69d51e6aec1c1cc6bd263b627d883f5f1ad24a2",
+  "width": 1536,
+  "height": 1024,
+  "kind": "model-sheet",
+  "classification": "exploration-not-approved-master",
+  "classification_note": "Generated art for construction review only. Not an approved brand master, avatar, logo or publication asset.",
+  "identity": "chatgpt-c",
+  "identity_host": "Nix.Server browser fleet",
+  "timestamp": "2026-10-31T13:16:49-03:00",
+  "prompt": "prompts/02-expressions.txt",
+  "prompt_sha256": "d7904464336cba54a46ffd81402ec594b8e330b41c984bb300fee04f93ce7a30",
+  "references": [
+    {
+      "image": "refs/canonical-reference-board.png",
+      "sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+    }
+  ],
+  "model": {
+    "ui": "chatgpt.com composer, reference-upload image mode",
+    "picker_label_observed": null,
+    "evidence": "chatgpt-c server identity; the composer refused with 'I wasn't able to invoke the image-generation tool' on the quota-refused run, which identifies the built-in ChatGPT image tool as the backend. The model picker label was not read back in this run and is deliberately not guessed."
+  },
+  "receipt": {
+    "status": "ok",
+    "send_confirmed": true,
+    "bytes": 1311879,
+    "candidates": 1,
+    "anchor_turn": 1,
+    "stamp": "20261031T131649250",
+    "image_mode": "reference-upload"
+  },
+  "receipt_sha256": "0c8cc3eaba45c5412ea02d7cfc4e010e8563a22244fc978d2c4f5a3c625f9c83",
+  "drift": [
+    "six panels present: annoyed, flat, sceptical, surprised, pleased, sleepy",
+    "asleep panel keeps closed lids and zero mauve, as required",
+    "mauve sparks above the surprised head are produced-output marks, allowed by the rule",
+    "pupil radius is again oversized relative to 0.05625H",
+    "the pleased and sleepy panels drop the fang count to three but reorder them; fangs are not consistently two-down/one-up across panels"
+  ]
+}

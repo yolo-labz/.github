@@ -68,3 +68,79 @@ retained normal hooks and did not modify the shared main checkout.
 Private observed-result extract stays under ignored owner-only `.private/`;
 it is labelled as an extract, not a fabricated complete transport receipt.
 No merge, production deploy, publication, avatar or new brand-master approval.
+
+---
+
+# Update — 31/10/2026 13:30 BRT: four of five sheets generated, quota stop
+
+The 30/10 hold (`invalid browser endpoint record`) is stale and was not reused.
+Live route this run: `browser_identities` reported `chatgpt-c` **ready / headed**
+on the Nix.Server fleet; the installed `gpt-image` shim attached through
+`interactive.attach` to the warm browser (CDP forward `127.0.0.1:9615`, verified
+`200` on `/json/version` before each send). No local browser, no API path, no
+restart or reset of the shared browser.
+
+## What exists now (hashes are of the committed bytes)
+
+| Sheet | Size | SHA-256 | Send | Drift summary |
+| --- | --- | --- | --- | --- |
+| `turnaround.png` | 2048×768 | `f37fbfebb1bf3f6ba68641eb1076e9dd4167ba0ccf8556c7b3ae155511b83ff1` | 1 | four views; 3/4 repeats the front angle; soft shadow + floor gradient break flat-fill; pupils ~0.09H vs 0.05625H; side view drops a fang |
+| `expressions.png` | 1536×1024 | `4c6cb9f0a2a1e989a70ec024b69d51e6aec1c1cc6bd263b627d883f5f1ad24a2` | 2 | six panels; asleep has zero mauve; fang order not consistent; pupils oversized |
+| `poses.png` | 1536×1024 | `a172161cb3e558c4384645f13d433cd87dc91370a0848d7660a942b7d421652a` | 3 | typing/thinking/celebrating/asleep present; celebrating shows 4–5 claws per hand; dimensional keycaps |
+| `hands-keyboard.png` | 1213×1296 | `b4918421b24763f4dcd78c943a5f998dc496162fe31ca81af86cae5b40db767f` | 4 | three separated claws in both close-ups; "back" panel is a 3/4 back; keycaps dimensional |
+| `colour-material.png` | — | — | 5 (refused) | NOT GENERATED |
+
+Per-file provenance (`<sheet>.provenance.json`) carries identity, timestamp,
+prompt and reference hashes, the sanitized receipt (`status: ok`,
+`send_confirmed: true`, byte count) and `receipt_sha256` binding the private raw
+receipt. Raw receipts — which contain the conversation and blob URLs — stay in
+the ignored, owner-only `.private/receipts/`.
+
+## Sends used: 5 of 8
+
+1. `20261031T131349914` ok · 2. `20261031T131649250` ok (attempt 1 never sent:
+`/library`, `send_confirmed=false`) · 3. `20261031T131759825` ok ·
+4. `20261031T132154223` ok (attempt 1 died on `ECONNREFUSED 9615` during a tunnel
+reconcile; nothing sent) · 5. `20261031T132559121` **refused by quota**.
+
+## Exact blocker
+
+The account is not on the Pro plan the pipeline assumes: the page shows a
+**Free** badge and, after send 5, *"You've hit the free plan limit for image
+generations requests. You can create more images when the limit resets in 3
+hours"* plus *"I wasn't able to invoke the image-generation tool, so the
+requested character-reference sheet was not created."* Reset ≈ **16:25 BRT**.
+The refused send confirmed it was delivered but produced no image, so
+`colour-material.png` does not exist and no sidecar was fabricated for it.
+This is an account-entitlement finding for the lead, not a code defect: the
+pipeline itself worked four times in a row.
+
+## 2D ↔ 3D parity (re-derived from wT:p6 `model/params.json`)
+
+PR #14 merged to main as `ff1abc0` while this row ran, so the 3D single source of
+truth now sits beside this worktree. `check.py` re-derives every 2D value from it
+and **fails if they disagree** (new `fixtures/bad-geometry.json` plus a unit test
+that mutates the 3D eye radius to prove the gate bites):
+
+- head unit 80, head 1.20H, ear span 2.45H, tips ±1.225H / −0.85H, eye 0.1375H,
+  pupil 0.05625H, torso 1.10H × 0.65H, 3 fangs, 2 eyes, 2 pupils, 8×3 keys — all
+  agree exactly.
+- 3D radii are the 2D half-strokes: brows 2.6 vs 2.5, claws 1.8 vs 1.75, output
+  2.2 vs 2.0, keyboard rim 2.5 exact.
+- **One real divergence:** the hero keyboard outline is 180 units wide at the
+  front and 156 at the back (2.25H / 1.95H), while the 3D deck is authored at
+  156 / 136 with only 5.5 units of rim per side. Shortfall: **6.5 units per side
+  at the front, 4.5 at the back.** Recorded in `SPEC.md` and asserted in
+  `check.py`; S2 must widen the rim (or the deck) rather than normalise 2.25H away.
+
+## Gates actually run
+
+- `check.py --spec-only` → **exit 0** (palette, proportions, reference hashes,
+  privacy; explicitly not sheet delivery).
+- `check.py` (default) → **exit 1**, `FAIL: Missing: colour-material.png`.
+  The gate is not weakened for the quota stop.
+- `check.py --spec-only --spec-json fixtures/bad-palette.json` → **exit 1**.
+- `unittest` (4 tests, incl. the geometry-drift test) → **OK**.
+
+No merge, deploy, publication, account/billing change, foreign Project edit or
+new brand master. PR stayed draft and assigned to `phsb5321`.

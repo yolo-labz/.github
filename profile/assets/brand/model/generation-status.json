@@ -1,32 +1,87 @@
 {
   "classification": "exploration-not-approved-master",
-  "status": "blocked-before-attach-upload-send",
-  "sends_used": 0,
+  "status": "partial-4-of-5-quota-exhausted",
+  "date": "2026-10-31",
+  "identity": "chatgpt-c",
+  "route": "Nix.Server browser fleet via gpt-image -> vendors/chatgpt/generate.py (interactive.attach)",
+  "sends_used": 5,
   "maximum_sends": 8,
   "planned_sends": 5,
-  "generated_images": 0,
-  "attempts": [],
-  "identity": "chatgpt-c",
-  "current_ui_model_observed": null,
-  "current_image_backend_observed": null,
+  "generated_images": 4,
+  "model_ui_observed": "chatgpt.com composer, reference-upload image mode",
+  "model_backend_evidence": "system message 'I wasn't able to invoke the image-generation tool' on the quota-refused run; the picker label was not read back and is not guessed",
+  "attempts": [
+    {
+      "sheet": "turnaround",
+      "stamp": "20261031T131349914",
+      "status": "ok",
+      "send_confirmed": true,
+      "width": 2048,
+      "height": 768,
+      "bytes": 1273822,
+      "sha256": "f37fbfebb1bf3f6ba68641eb1076e9dd4167ba0ccf8556c7b3ae155511b83ff1",
+      "receipt": ".private/receipts/01-turnaround.json"
+    },
+    {
+      "sheet": "expressions",
+      "stamp": "20261031T131649250",
+      "status": "ok",
+      "send_confirmed": true,
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1311879,
+      "sha256": "4c6cb9f0a2a1e989a70ec024b69d51e6aec1c1cc6bd263b627d883f5f1ad24a2",
+      "attempt": 2,
+      "note": "attempt 1 (stamp 20261031T131608545) returned no-conversation at /library with send_confirmed=false: nothing was sent",
+      "receipt": ".private/receipts/02-expressions.attempt2.json"
+    },
+    {
+      "sheet": "poses",
+      "stamp": "20261031T131759825",
+      "status": "ok",
+      "send_confirmed": true,
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1352786,
+      "sha256": "a172161cb3e558c4384645f13d433cd87dc91370a0848d7660a942b7d421652a",
+      "receipt": ".private/receipts/03-poses.json"
+    },
+    {
+      "sheet": "hands-keyboard",
+      "stamp": "20261031T132154223",
+      "status": "ok",
+      "send_confirmed": true,
+      "width": 1213,
+      "height": 1296,
+      "bytes": 1347864,
+      "sha256": "b4918421b24763f4dcd78c943a5f998dc496162fe31ca81af86cae5b40db767f",
+      "attempt": 2,
+      "note": "attempt 1 (stamp 20261031T131852708) failed with ECONNREFUSED on the CDP forward during a tunnel reconcile: nothing was sent",
+      "receipt": ".private/receipts/04-hands-keyboard.attempt2.json"
+    },
+    {
+      "sheet": "colour-material",
+      "stamp": "20261031T132559121",
+      "status": "timeout",
+      "send_confirmed": true,
+      "detail": "prompt sent, no settled image within 260s; the page reported the free-plan image quota exhausted and 'I wasn't able to invoke the image-generation tool'",
+      "receipt": ".private/receipts/05-colour-material.attempt2.json",
+      "screenshot": ".private/staging/20261031T132559121-s1-yolo-labz-programming-gremlin-reference-anchored-explorat-FAILED.png"
+    }
+  ],
   "hold": {
-    "tool": "browser_identities",
-    "isError": true,
-    "ok": false,
-    "error": "fleet host unreachable",
-    "detail": "invalid browser endpoint record",
-    "unrelated_identity_and_path": "redacted; discovery failure preserved, not worked around"
+    "kind": "account-image-quota",
+    "account_state_observed": "signed in as Pedro Henrique with a Free badge and an Upgrade button",
+    "quota_message": "You've hit the free plan limit for image generations requests. You can create more images when the limit resets in 3 hours.",
+    "observed_at": "2026-10-31T13:25:59-03:00",
+    "resets_around": "2026-10-31T16:25-03:00",
+    "sends_remaining_under_ceiling": 3,
+    "next_step": "one send of prompts/05-colour-material.txt with refs/canonical-reference-board.png after the reset; see reproduce.md"
   },
-  "targeted_status": {
-    "ok": true,
-    "status": "active",
-    "tunneled": false,
-    "authenticated_composer_verified": false
-  },
-  "wrapper_candidate": {
-    "historical_head": "feb109d7",
-    "historical_wrapper_present": false,
-    "attempted": false
-  },
-  "new_image_requests": 0
+  "not_done": [
+    "no fifth sheet",
+    "no production deploy, merge or publication",
+    "no account setting, plan or billing change",
+    "no browser restart, reset or local fallback"
+  ]
 }

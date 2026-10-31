@@ -19,6 +19,8 @@ PRIVATE_URL = re.compile(
     re.IGNORECASE,
 )
 SHEETS = ("turnaround", "expressions", "poses", "hands-keyboard", "colour-material")
+KEYBOARD_FRONT = 180.0
+KEYBOARD_BACK = 156.0
 
 
 def digest(path):
@@ -97,6 +99,66 @@ def check_spec(spec):
         "keyboard": 2.5 / unit,
         "output_brackets": 4 / unit,
     }
+
+
+def check_geometry(spec):
+    """Re-derive every 2D number from the merged 3D source, so the two agree."""
+    parity = spec["geometry_parity"]
+    params = json.loads((REPO / parity["source"]).read_text())
+    head = params["head"]
+    unit = 2 * float(head["ellipse2d"][1])
+    tip = head["ear"]["tip"]
+    torso = params["body"]["torso"]["radii2d"]
+    keys = parity["keyboard"]
+    deck = params["keyboard"]["deck"]
+    derived = {
+        "unit": unit,
+        "head_width": 2 * float(head["ellipse2d"][0]) / unit,
+        "head_height": 2 * float(head["ellipse2d"][1]) / unit,
+        "ear_span": 2 * abs(float(tip[0])) / unit,
+        "ear_tip_x": abs(float(tip[0])) / unit,
+        "ear_tip_y": float(tip[1]) / unit,
+        "eye_radius": float(head["eyes"]["r"]) / unit,
+        "pupil_radius": float(head["pupils"][0]["r"]) / unit,
+        "torso_width": 2 * float(torso[0]) / unit,
+        "torso_height": 2 * float(torso[1]) / unit,
+        "keyboard_width": 2
+        * (float(deck["front_half_width"]) + keys["rim_per_side_units"])
+        / unit,
+    }
+    assert derived == spec["head_units"], (
+        f"SPEC proportions disagree with {parity['source']}: {derived}"
+    )
+    counts = spec["counts"]
+    assert len(head["fangs"]) == counts["fangs"]
+    assert len(head["eyes"]["centers"]) == counts["eyes"]
+    assert len(head["pupils"]) == counts["eyes"]
+    assert params["keyboard"]["keys"]["cols"] * params["keyboard"]["keys"]["rows"] == 24
+    for item in parity["radius_checks"]:
+        node = params
+        for key in item["params_path"]:
+            node = node[key]
+        half_stroke = spec["line_weights"][item["line_weight"]] * unit / 2
+        assert abs(float(node) - half_stroke) <= parity["radius_tolerance_units"], (
+            f"{item['line_weight']}: 3D radius {node} is not the 2D half-stroke {half_stroke}"
+        )
+    for item in parity["stroke_exact"]:
+        node = params
+        for key in item["params_path"]:
+            node = node[key]
+        assert float(node) == spec["line_weights"][item["line_weight"]] * unit
+    rim = params["keyboard"]["rim3d"]
+    assert keys["params_rim_per_side_units"] == rim["pad"] + rim["thickness"]
+    assert keys["deck_front_H"] == 2 * float(deck["front_half_width"]) / unit
+    assert keys["deck_back_H"] == 2 * float(deck["back_half_width"]) / unit
+    assert keys["outer_front_H"] == spec["head_units"]["keyboard_width"]
+    assert keys["outer_back_H"] == KEYBOARD_BACK / unit
+    assert keys["shortfall_front_per_side_units"] == (
+        keys["rim_per_side_units"] - keys["params_rim_per_side_units"]
+    )
+    assert keys["shortfall_back_per_side_units"] == (
+        keys["rim_per_side_units_back"] - keys["params_rim_per_side_units"]
+    )
 
 
 def check_references():
@@ -198,6 +260,7 @@ def main():
     args = parser.parse_args()
     spec = json.loads(local(args.spec_json).read_text())
     check_spec(spec)
+    check_geometry(spec)
     check_privacy()
     check_references()
     if args.spec_only:

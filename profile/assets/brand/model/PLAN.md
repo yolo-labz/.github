@@ -15,7 +15,11 @@
 6. Run negative fixture, source-only and full acceptance separately. Keep the PR
    draft and assigned phsb5321; never merge, publish, reset a browser or use API/local
    fallbacks. Preserve the exact hold if generation is blocked.
+7. Re-derive the 2D spec from the merged 3D single source (`model/params.json`,
+   PR #14) so the two cannot drift apart silently; machine-check the parity.
 
-Current checkpoint: step 4 is blocked before any upload/send by the failed browser
-inventory record. Offline inputs/checks are delivered, not five GPT model sheets.
-The early handoff was published in commit a5d9ea7 / draft PR #12.
+Current checkpoint (31/10/2026): steps 1-3, 5 (for the four delivered sheets),
+6 and 7 are complete. Step 4 stopped at the account image quota after five sends:
+sheets 1-4 exist with provenance, `colour-material.png` does not. Default gate
+exits 1 on the missing fifth sheet by design. Resume is one send after the quota
+reset (~16:25 BRT) — see `reproduce.md`.

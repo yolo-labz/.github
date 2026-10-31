@@ -1,7 +1,9 @@
 """Offline discriminating checks; no browser attach, network or image send."""
 
+import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -30,6 +32,23 @@ class AcceptanceTests(unittest.TestCase):
         result = run_check("--spec-only", "--spec-json", "fixtures/bad-palette.json")
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("SPEC palette mismatch", result.stderr)
+
+    def test_geometry_parity_rejects_upstream_drift(self):
+        """A 3D source change the 2D spec did not follow must fail the gate."""
+        spec = json.loads((HERE / "spec.json").read_text())
+        params = json.loads((model_check.REPO / "model/params.json").read_text())
+        params["head"]["eyes"]["r"] = 12
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "model").mkdir()
+            (root / "model" / "params.json").write_text(json.dumps(params))
+            with (
+                patch.object(model_check, "REPO", root),
+                self.assertRaisesRegex(
+                    AssertionError, "disagree with model/params.json"
+                ),
+            ):
+                model_check.check_geometry(spec)
 
     def test_missing_gpt_sheets_cannot_pass(self):
         original = model_check.local

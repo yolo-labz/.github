@@ -1,0 +1,42 @@
+{
+  "image": "poses.png",
+  "sha256": "a172161cb3e558c4384645f13d433cd87dc91370a0848d7660a942b7d421652a",
+  "width": 1536,
+  "height": 1024,
+  "kind": "model-sheet",
+  "classification": "exploration-not-approved-master",
+  "classification_note": "Generated art for construction review only. Not an approved brand master, avatar, logo or publication asset.",
+  "identity": "chatgpt-c",
+  "identity_host": "Nix.Server browser fleet",
+  "timestamp": "2026-10-31T13:17:59-03:00",
+  "prompt": "prompts/03-poses.txt",
+  "prompt_sha256": "d3d5546d0a4102421336454c71c6e849127f5850c32247a8b66abdc3c6205f59",
+  "references": [
+    {
+      "image": "refs/canonical-reference-board.png",
+      "sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+    }
+  ],
+  "model": {
+    "ui": "chatgpt.com composer, reference-upload image mode",
+    "picker_label_observed": null,
+    "evidence": "chatgpt-c server identity; the composer refused with 'I wasn't able to invoke the image-generation tool' on the quota-refused run, which identifies the built-in ChatGPT image tool as the backend. The model picker label was not read back in this run and is deliberately not guessed."
+  },
+  "receipt": {
+    "status": "ok",
+    "send_confirmed": true,
+    "bytes": 1352786,
+    "candidates": 1,
+    "anchor_turn": 1,
+    "stamp": "20261031T131759825",
+    "image_mode": "reference-upload"
+  },
+  "receipt_sha256": "ca7d6da90141751fd5bbb80e998e148d022bcf2d699f5388b1f1a95dd8fee5a1",
+  "drift": [
+    "typing, thinking, celebrating and asleep are all present with the keyboard",
+    "the celebrating pose shows four to five pale claw marks per hand, not three",
+    "the thinking hand merges its claws into one mass",
+    "keycaps render with a lighter top face, i.e. dimensional keys, which the flat rule forbids",
+    "asleep pose has no mauve mark and no visible pupils"
+  ]
+}

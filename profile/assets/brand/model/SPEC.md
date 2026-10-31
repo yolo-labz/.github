@@ -9,10 +9,12 @@ Absolute handoff path:
 `/home/notroot/Documents/Code/yolo-labz/github-profile-013-gremlin-model-sheet/profile/assets/brand/model/SPEC.md`
 
 Palette and 2D construction below are fixed to merged SVG kit commit
-`64880882f235922007dd22a0cdb22c7ea5f09f83`. They take precedence over GPT
-rasters, including the 28/09/2026 anchor. This is the S1/S2 exchange specification,
-not a claim that the org has approved a new 3D master. Back/side depth is an
-explicit exploratory extension, not something measured from a front-only SVG.
+`64880882f235922007dd22a0cdb22c7ea5f09f83` and re-derived against the merged 3D
+single source of truth `model/params.json` (PR #14, main `ff1abc0`). They take
+precedence over GPT rasters, including the 28/09/2026 anchor and the 31/10/2026
+sheets. This is the S1/S2 exchange specification, not a claim that the org has
+approved a new 3D master. Back/side depth is an explicit exploratory extension,
+not something measured from a front-only SVG.
 
 ## Authority and identity
 
@@ -94,6 +96,51 @@ These four are proposed S1 constants, not measurements or an approved model.
 Keep them separate in the 3D source so later silhouette review can revise them.
 Do not invent a long muzzle, horns, fur, clothes, gender markers or extra anatomy.
 
+## 2D ↔ 3D parity — re-derived from `model/params.json`
+
+PR #14 (wT:p6) merged a single source of truth for the character at
+`model/params.json` (main `ff1abc0`). **It is the 3D authority; this file is the
+2D reading of it.** `check.py` re-derives every number below from that file at
+check time — nothing here is copied by hand, and a change upstream fails the
+gate instead of silently drifting.
+
+| Quantity | Expression in `model/params.json` | Value |
+| --- | --- | --- |
+| head unit H | `2 * head.ellipse2d[1]` | 80 |
+| head width | `2 * ellipse2d[0] / H` | 1.20H |
+| ear-tip x / y | `|head.ear.tip[0]| / H`, `head.ear.tip[1] / H` | 1.225H / −0.85H |
+| eye / pupil radius | `head.eyes.r / H`, `head.pupils[0].r / H` | 0.1375H / 0.05625H |
+| torso width / height | `2 * body.torso.radii2d / H` | 1.10H / 0.65H |
+| fangs / eyes / pupils | list lengths | 3 / 2 / 2 |
+| key grid | `keys.cols * keys.rows` | 8 × 3 |
+
+The line weights agree with the 3D primitives, which is the useful cross-check:
+the 3D radius is the 2D half-stroke on every detail that has both.
+
+| Line | 2D weight | 3D primitive | Delta |
+| --- | --- | --- | --- |
+| brows | 0.0625H (5 units) | `head.brow3d.radius` 2.6 = half-stroke | +0.1 unit |
+| claws | 0.04375H (3.5 units) | `body.claws3d.radius` 1.8 | +0.05 unit |
+| output brackets | 0.05H (4 units) | `produced3d.radius` 2.2 | +0.2 unit |
+| keyboard outline | 0.03125H (2.5 units) | `keyboard.rim3d.thickness` 2.5 | exact |
+
+### One open divergence: keyboard case width
+
+The hero keyboard outline is **180 units wide at the front edge and 156 at the
+back** (path `30→210 / 42→198`), i.e. 2.25H / 1.95H. `model/params.json` authors
+the *deck plate* at `front_half_width 78` = 156 units (1.95H) and
+`back_half_width 68` = 136 units (1.70H), with `rim3d` of only pad 3.0 +
+thickness 2.5 = **5.5 units per side**.
+
+- front edge shortfall per side: 90 − 78 − 5.5 = **6.5 units**
+- back edge shortfall per side: 78 − 68 − 5.5 = **4.5 units**
+
+So the 3D deck is the inner plate and its rim constants under-account for the 2D
+silhouette by 6.5 / 4.5 units per side. Both sources describe the same shape;
+six the rim (or widen the deck) before any silhouette comparison, and do **not**
+normalise the 2D 2.25H away. `check.py` asserts the deck, rim and shortfall
+arithmetic so this cannot go quiet.
+
 ## Silhouette, counts and line weights
 
 - **Two** large leaf-sweep pointed ears; broad head, compact rounded body.
@@ -122,6 +169,11 @@ Five separate reference-anchored GPT images; planned sends **5**, absolute
 request ceiling **8**. All use the same role-labelled canonical reference board.
 No generation is authorized when the server/session route is unavailable.
 
+Status after the 31/10/2026 run: **4 of 5 delivered** (`turnaround`,
+`expressions`, `poses`, `hands-keyboard`); `colour-material` blocked by the
+account's image-generation quota at send 5 of 8. The default `check.py` therefore
+still exits non-zero, by design.
+
 1. `turnaround.png`: front, 3/4, side, back, left-to-right; same scale,
    aligned ground, complete ears/tail/feet. Orthographic, no camera perspective.
 2. `expressions.png`: 2×3, row-major: ready/mischievous, focused, curious,
@@ -137,19 +189,24 @@ No generation is authorized when the server/session route is unavailable.
 No generated lettering, fake measurements or watermarks. Labels, palette chips
 and dimensions come from deterministic source composition, not GPT text.
 
-## Drift register — 30/10/2026
+## Drift register — 31/10/2026 (actual renders)
+
+Four reference-anchored sheets were generated and inspected; the fifth is
+blocked by the account's image quota, not by a design decision. Per-panel notes
+and the sanitized provenance live beside each PNG in
+`<sheet>.provenance.json`.
 
 | Render | Actual state / drift |
 | --- | --- |
-| turnaround | NOT GENERATED — browser discovery hold; no view consistency inspected |
-| expressions | NOT GENERATED — six expressions remain unverified |
-| poses | NOT GENERATED — no action/asleep semantic validation claimed |
-| hands-keyboard | NOT GENERATED — three-claw detail remains unverified |
-| colour-material | NOT GENERATED — palette/material matching remains unverified |
+| `turnaround.png` | Four views, common ground line, flat mocha palette, three claws per hand, arrow-tip tail. Drift: the three-quarter panel repeats the front head angle; a soft belly shadow and a grey floor gradient break the flat-fill rule; pupils render ~0.09H instead of 0.05625H; the side view drops a fang. |
+| `expressions.png` | Six panels, asleep keeps closed lids and zero mauve, mauve sparks are produced-output marks. Drift: pupils oversized; fang order is not consistently two-down/one-up across panels. |
+| `poses.png` | Typing, thinking, celebrating and asleep all read, keyboard present, asleep has no mauve. Drift: celebrating shows four to five claw marks per hand; the thinking hand merges its claws; keycaps carry a lighter top face (dimensional keys are forbidden). |
+| `hands-keyboard.png` | Both hand close-ups show exactly three separated claws. Drift: the "back" full-body panel is a three-quarter back; two mauve strokes float without a produced-output role; keys are dimensional; body-view claws are outlined instead of solid pale. |
+| `colour-material.png` | NOT GENERATED — the account hit its image-generation quota after send 5. Palette/material matching therefore remains unverified. |
 
-Existing anchor drift: shallow shading, dimensional keyboard keys, asymmetric
-ears and only two claws clearly visible per hand. These are correction targets,
-not approval to carry them into S2.
+Carry-forward for S2: none of these drifts is construction authority. The SVG kit
+plus the parity table above remain authoritative; the rasters are attitude and
+volume reference only.
 
 ## Do / don't and acceptance
 

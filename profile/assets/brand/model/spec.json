@@ -59,6 +59,31 @@
     "ear_thickness": 0.06,
     "relaxed_height_including_ears": 2.3
   },
+  "geometry_parity": {
+    "source": "model/params.json",
+    "source_ref": "PR #14, merged to main as ff1abc0 (wT:p6 single source of truth)",
+    "note": "Every 2D value is re-derived from the 3D source at check time; nothing is copied by hand.",
+    "radius_tolerance_units": 0.25,
+    "radius_checks": [
+      { "line_weight": "brows", "params_path": ["head", "brow3d", "radius"] },
+      { "line_weight": "claws", "params_path": ["body", "claws3d", "radius"] },
+      { "line_weight": "output_brackets", "params_path": ["produced3d", "radius"] }
+    ],
+    "stroke_exact": [
+      { "line_weight": "keyboard", "params_path": ["keyboard", "rim3d", "thickness"] }
+    ],
+    "keyboard": {
+      "rim_per_side_units": 12.0,
+      "rim_per_side_units_back": 10.0,
+      "params_rim_per_side_units": 5.5,
+      "deck_front_H": 1.95,
+      "deck_back_H": 1.7,
+      "outer_front_H": 2.25,
+      "outer_back_H": 1.95,
+      "shortfall_front_per_side_units": 6.5,
+      "shortfall_back_per_side_units": 4.5
+    }
+  },
   "sheets": [
     "turnaround",
     "expressions",
