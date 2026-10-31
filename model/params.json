@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "meta": {
+    "character": "the programming gremlin",
+    "org": "yolo-labz",
+    "note": "Single source of truth for the gremlin. 2D sections use SVG hero/avatar units, [x, y] with y pointing DOWN. 3D-only sections are marked *3d and use [x, z] with z pointing UP (z = -y). 1 SVG unit == 1 Blender unit.",
+    "masters": [
+      "profile/assets/brand/mascot/gremlin-model-sheet.svg",
+      "profile/assets/brand/mascot/gremlin-avatar.svg",
+      "profile/assets/brand/mascot/gremlin-hero.svg"
+    ],
+    "derivation": "Every number below is lifted from the three masters above. Nothing is freehand."
+  },
+
+  "palette": {
+    "base":  { "hex": "#1e1e2e", "role": "background plate", "check": true },
+    "skin":  { "hex": "#a6e3a1", "role": "skin - the character, never recolour", "check": true },
+    "pale":  { "hex": "#cdd6f4", "role": "teeth, eyes, claws", "check": true },
+    "dark":  { "hex": "#181825", "role": "mouth interior, keyboard deck", "check": true },
+    "node":  { "hex": "#cba6f7", "role": "pupils; produced output only", "check": true },
+    "key":   { "hex": "#45475a", "role": "keycaps", "check": true },
+    "guide": { "hex": "#6c7086", "role": "keyboard rim", "check": false }
+  },
+
+  "head": {
+    "ellipse2d": [48, 40],
+    "radii3d": [48, 36, 40],
+    "ear": {
+      "start": [-28, -16],
+      "c1": [-42, -38],
+      "c2": [-62, -60],
+      "tip": [-98, -68],
+      "c3": [-98, -34],
+      "c4": [-76, -2],
+      "base": [-44, 12],
+      "base_radius3d": 17.0,
+      "tip_radius3d": 2.5,
+      "inset3d": 10.0,
+      "squash3d": 0.65,
+      "sweep3d": 30.0
+    },
+    "eyes": {
+      "centers": [[-21, -8], [21, -8]],
+      "r": 11,
+      "depth3d": 6.0,
+      "proud3d": 2.0
+    },
+    "pupils": [
+      { "at": [-19, -7], "r": 4.5 },
+      { "at": [23, -7], "r": 4.5 }
+    ],
+    "pupil3d": { "half_depth": 2.5, "proud3d": 4.0 },
+    "brow": { "outer": [-36, -25], "inner": [-8, -19], "width": 5 },
+    "brow3d": { "radius": 2.6, "proud3d": 1.5 },
+    "grin": {
+      "start": [-40, 12],
+      "c1": [0, 54],
+      "c2": [40, 12],
+      "c3": [0, 32],
+      "z_scale3d": 0.62,
+      "proud3d": 1.0,
+      "thickness3d": 3.0,
+      "samples": 24
+    },
+    "fangs": [
+      [[-28, 16], [-17, 15], [-23, 30]],
+      [[17, 15], [28, 16], [23, 29]],
+      [[-6, 35], [6, 35], [0, 25]]
+    ],
+    "fang3d": { "proud3d": 4.0, "thickness3d": 2.0 }
+  },
+
+  "body": {
+    "torso": { "center": [0, 58], "radii2d": [44, 26], "depth3d": 28.0 },
+    "arms3d": {
+      "rest": {
+        "shoulder": [-32, -10, -48],
+        "elbow": [-40, -20, -58],
+        "hand": [-26, -30, -62]
+      },
+      "reach": {
+        "shoulder": [-34, -12, -46],
+        "elbow": [-52, -46, -58],
+        "hand": [-30, -62, -68]
+      }
+    },
+    "arm_radius3d": 6.0,
+    "claws3d": { "length": 9.0, "radius": 1.8, "spread": 8.0, "drop": 6.0 }
+  },
+
+  "keyboard": {
+    "deck": {
+      "back_half_width": 68.0,
+      "front_half_width": 78.0,
+      "y_back": -40.0,
+      "y_front": -96.0,
+      "z_top": -70.0,
+      "thickness": 11.0,
+      "tilt_deg": 18.0
+    },
+    "rim3d": { "pad": 3.0, "thickness": 2.5 },
+    "keys": {
+      "cols": 8,
+      "rows": 3,
+      "width": 15.5,
+      "depth": 11.0,
+      "height": 2.5,
+      "spacebar": { "rows_after": 1, "inset": 10.0 }
+    }
+  },
+
+  "produced3d": {
+    "y": -16.0,
+    "radius": 2.2,
+    "brackets": [
+      [[94, 34], [81, 22], [94, 10]],
+      [[103, 34], [116, 22], [103, 10]]
+    ],
+    "sparks": [
+      [[-62, -38], [-69, -45]],
+      [[-70, -49], [-79, -52]],
+      [[64, -38], [71, -45]],
+      [[72, -49], [81, -52]]
+    ]
+  },
+
+  "render": {
+    "resolution": [900, 900],
+    "ortho_scale": 250.0,
+    "framing_center": [0.0, -8.0, -12.0],
+    "aa": "8",
+    "threads": 4,
+    "seed": 1,
+    "eevee_samples": 16,
+    "views": [
+      { "name": "front", "azimuth": 0.0, "elevation": 6.0, "pose": "rest", "produced": false },
+      { "name": "three-quarter", "azimuth": 35.0, "elevation": 14.0, "pose": "rest", "produced": false },
+      { "name": "side", "azimuth": 90.0, "elevation": 6.0, "pose": "rest", "produced": false },
+      { "name": "back", "azimuth": 180.0, "elevation": 6.0, "pose": "rest", "produced": false },
+      { "name": "hero", "azimuth": 32.0, "elevation": 16.0, "pose": "reach", "produced": true }
+    ],
+    "lights": [
+      { "name": "key", "location": [-150.0, -240.0, 190.0], "energy": 1900000.0, "size": 170.0 },
+      { "name": "fill", "location": [220.0, -170.0, 60.0], "energy": 720000.0, "size": 220.0 },
+      { "name": "rim", "location": [70.0, 260.0, 150.0], "energy": 1300000.0, "size": 150.0 }
+    ]
+  },
+
+  "svg": {
+    "viewBox": [0, 0, 128, 128],
+    "tile_radius": 26,
+    "figure": { "translate": [64, 68], "scale": 0.58 },
+    "compare_target": "profile/assets/brand/mascot/gremlin-avatar.svg",
+    "iou_min": 0.85,
+    "raster_px": 512
+  },
+
+  "checks": {
+    "delta_e_max": 3.0,
+    "delta_e_min_pixels": 200,
+    "determinism_max_changed_fraction": 0.005
+  }
+}

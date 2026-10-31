@@ -1,0 +1,31 @@
+{
+  "classification": "exploration-not-approved-master",
+  "image": "gremlin-wide-hero.png",
+  "sha256": "da70db22366e8e849b22eb3e8c3dcd0ec53274135ee0bf1ee309cb2704a0d9f4",
+  "width": 1774,
+  "height": 887,
+  "prompt": "prompts/02-wide-hero.txt",
+  "prompt_sha256": "90af1c9ffe971a69d6c2b08f62ab25c87986a41996c67850b8d5ebbe450333ac",
+  "reference": "gremlin-anchor.png",
+  "reference_sha256": "dcd882cb9d7f99316f0278d03c172a9f14135c195efe67556d451a9bd172baeb",
+  "tool": "gpt-image (ChatGPT web UI)",
+  "identity": "chatgpt-c",
+  "model": {
+    "ui_label": "Instant",
+    "image_backend": null,
+    "evidence": "Private authenticated empty-composer screenshot shows Instant and Pro. Image backend model ID is not exposed by the driver; no exact backend claimed."
+  },
+  "candidate_implementation": "feb109d7",
+  "candidate_wrapper": "/nix/store/n26i1xfcmhs568vnq20qzvhq3i0mi30m-browser-patchright",
+  "receipt_sha256": "a1f882b01041a7f93975f54285c0a6542ab2fe8c2e1e907b8b68a90b5f47d00c",
+  "receipt": {
+    "status": "ok",
+    "send_confirmed": true,
+    "stamp": "20260928T202801045",
+    "format": "png",
+    "bytes": 1053173,
+    "candidates": 2,
+    "baseline_images": 2
+  },
+  "postprocessing": "none; exact original downloaded bytes"
+}
