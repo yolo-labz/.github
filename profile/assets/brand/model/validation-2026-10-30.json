@@ -1,0 +1,64 @@
+{
+  "verified_at": "30/10/2026 23:41 -03",
+  "checker_sha256": "4c12d18b8b50c556c1181bf9d2ee820ba69f2a339c3fd814d4e7449f67acc330",
+  "row_delivery": "blocked; five GPT sheets absent",
+  "sends_used": 0,
+  "send_limit": 8,
+  "results": [
+    {
+      "name": "spec-only",
+      "argv": [
+        "/run/current-system/sw/bin/python3",
+        "profile/assets/brand/model/check.py",
+        "--spec-only"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "PASS: source palette, proportions, reference provenance and privacy; NOT sheet delivery\n",
+      "stderr": ""
+    },
+    {
+      "name": "full-delivery",
+      "argv": [
+        "/run/current-system/sw/bin/python3",
+        "profile/assets/brand/model/check.py"
+      ],
+      "exit_code": 1,
+      "expected_exit": 1,
+      "stdout": "",
+      "stderr": "FAIL: Missing: turnaround.png\n"
+    },
+    {
+      "name": "negative-fixture",
+      "argv": [
+        "/run/current-system/sw/bin/python3",
+        "profile/assets/brand/model/check.py",
+        "--spec-only",
+        "--spec-json",
+        "fixtures/bad-palette.json"
+      ],
+      "exit_code": 1,
+      "expected_exit": 1,
+      "stdout": "",
+      "stderr": "FAIL: SPEC palette mismatch against SVG kit\n"
+    },
+    {
+      "name": "unit-tests",
+      "argv": [
+        "/run/current-system/sw/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "profile/assets/brand/model",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_bad_palette_fixture_is_rejected (test_check.AcceptanceTests.test_bad_palette_fixture_is_rejected) ... ok\ntest_missing_gpt_sheets_cannot_pass (test_check.AcceptanceTests.test_missing_gpt_sheets_cannot_pass) ... ok\ntest_source_spec_and_references_pass (test_check.AcceptanceTests.test_source_spec_and_references_pass) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.658s\n\nOK\n"
+    }
+  ]
+}

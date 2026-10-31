@@ -1,0 +1,124 @@
+{
+  "classification": "exploration-not-approved-master",
+  "base_commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+  "palette": {
+    "mocha": {
+      "skin": "#a6e3a1",
+      "pale": "#cdd6f4",
+      "dark": "#181825",
+      "node": "#cba6f7",
+      "key": "#45475a",
+      "keyboard_detail": "#6c7086",
+      "background": "#1e1e2e",
+      "support": "#a6adc8"
+    },
+    "latte": {
+      "skin": "#40a02b",
+      "pale": "#eff1f5",
+      "dark": "#dce0e8",
+      "node": "#8839ef",
+      "key": "#9ca0b0",
+      "keyboard_detail": "#9ca0b0",
+      "background": "#eff1f5",
+      "support": "#7c7f93"
+    }
+  },
+  "head_units": {
+    "unit": 80,
+    "head_width": 1.2,
+    "head_height": 1,
+    "ear_span": 2.45,
+    "ear_tip_x": 1.225,
+    "ear_tip_y": -0.85,
+    "eye_radius": 0.1425,
+    "pupil_radius": 0.05625,
+    "torso_width": 1.1,
+    "torso_height": 0.65,
+    "keyboard_width": 2.25
+  },
+  "counts": {
+    "ears": 2,
+    "eyes": 2,
+    "fangs": 3,
+    "claws_per_hand": 3,
+    "hands": 2,
+    "feet": 2,
+    "tails": 1
+  },
+  "line_weights": {
+    "head": 0.075,
+    "brows": 0.0625,
+    "claws": 0.04375,
+    "keyboard": 0.03125,
+    "output_brackets": 0.05
+  },
+  "proposed_depth_extension": {
+    "source": "S1 exploration assumptions; not measured from SVG",
+    "head_depth": 0.8,
+    "torso_depth": 0.6,
+    "ear_thickness": 0.06,
+    "relaxed_height_including_ears": 2.3
+  },
+  "geometry_parity": {
+    "source": "model/params.json",
+    "source_ref": "PR #14, merged to main as ff1abc0 (wT:p6 single source of truth)",
+    "note": "Every 2D value is re-derived from the 3D source at check time; nothing is copied by hand.",
+    "radius_tolerance_units": 0.25,
+    "radius_checks": [
+      {
+        "line_weight": "brows",
+        "params_path": [
+          "head",
+          "brow3d",
+          "radius"
+        ]
+      },
+      {
+        "line_weight": "claws",
+        "params_path": [
+          "body",
+          "claws3d",
+          "radius"
+        ]
+      },
+      {
+        "line_weight": "output_brackets",
+        "params_path": [
+          "produced3d",
+          "radius"
+        ]
+      }
+    ],
+    "stroke_exact": [
+      {
+        "line_weight": "keyboard",
+        "params_path": [
+          "keyboard",
+          "rim3d",
+          "thickness"
+        ]
+      }
+    ],
+    "keyboard": {
+      "rim_per_side_units": 12.0,
+      "rim_per_side_units_back": 10.0,
+      "deck_front_H": 1.95,
+      "deck_back_H": 1.7,
+      "outer_front_H": 2.25,
+      "outer_back_H": 1.95,
+      "params_rim_per_side_units": 12.0,
+      "params_rim_per_side_units_back": 10.0,
+      "shortfall_front_per_side_units": 0.0,
+      "shortfall_back_per_side_units": 0.0
+    }
+  },
+  "sheets": [
+    "turnaround",
+    "expressions",
+    "poses",
+    "hands-keyboard",
+    "colour-material"
+  ],
+  "maximum_sends": 8,
+  "planned_sends": 5
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "reference",
+  "classification": "exploration-not-approved-master",
+  "image": "refs/gremlin-idle.png",
+  "sha256": "0d24e9dd5b37775dd8930208eeb9f7f271331b53aea8fbb3eb2aac17e48f4d19",
+  "source": {
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "path": "profile/assets/brand/mascot/gremlin-idle.png"
+  },
+  "prompt": null,
+  "prompt_sha256": null,
+  "note": "Prepared/imported reference, not a new S1 generation"
+}

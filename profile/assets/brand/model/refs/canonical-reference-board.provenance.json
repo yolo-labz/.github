@@ -1,0 +1,39 @@
+{
+  "kind": "reference",
+  "classification": "exploration-not-approved-master",
+  "image": "refs/canonical-reference-board.png",
+  "sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71",
+  "source": {
+    "method": "deterministic vertical composition; no image generation",
+    "recipe": "prepare_refs.py",
+    "inputs": [
+      {
+        "image": "refs/gremlin-model-sheet.png",
+        "sha256": "144b255c42b70b85c1513a1d8e89f20034e8e7e5b4229724fb5ed77c5ee5a1c1"
+      },
+      {
+        "image": "refs/gremlin-hero.png",
+        "sha256": "982c7d800ba571eeef9c129b80aa06389716abc58bf236203c6e82631a4bd6ef"
+      },
+      {
+        "image": "refs/gremlin-idle.png",
+        "sha256": "0d24e9dd5b37775dd8930208eeb9f7f271331b53aea8fbb3eb2aac17e48f4d19"
+      },
+      {
+        "image": "refs/gremlin-working.png",
+        "sha256": "0891ea2542de91d2112bebf9cce4ce0ad0e6f7bd97e67d879d17333e0fae3164"
+      },
+      {
+        "image": "refs/gremlin-asleep.png",
+        "sha256": "336cb8d88f45f5311ba17dadf896cfdeffc5ca1d5df6fb7718f4bc1d28532624"
+      },
+      {
+        "image": "refs/anchor-2026-09-28.png",
+        "sha256": "dcd882cb9d7f99316f0278d03c172a9f14135c195efe67556d451a9bd172baeb"
+      }
+    ]
+  },
+  "prompt": null,
+  "prompt_sha256": null,
+  "note": "Prepared/imported reference, not a new S1 generation"
+}

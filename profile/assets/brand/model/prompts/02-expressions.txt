@@ -1,0 +1,13 @@
+S1 YOLO-LABZ PROGRAMMING GREMLIN — REFERENCE-ANCHORED EXPLORATION.
+Create exactly ONE clear, high-resolution character-reference sheet, not a logo redesign.
+The supplied canonical-reference-board.png is role-assigned: the first five panels are the immutable SVG kit; the last shaded GPT anchor is SECONDARY ATTITUDE ONLY, not anatomy or material authority.
+
+PRESERVE EXACTLY:
+Green programming gremlin, two broad leaf-sweep pointed ears, broad head, mischievous brows, two pale eyes with small mauve node pupils, three jagged triangular fangs (two down, one up), compact body, ONE curved arrow-tip tail. Two hands with exactly THREE clearly separated claws each, not five fingers. Blank-key keyboard is the interface.
+Define H as the head ellipse height excluding ears. Head width 1.20H, ear-tip span 2.45H, tips at x +/-1.225H and y -0.85H from head centre. Eyes radius .1375H; pupils radius .05625H. Head/ear same-colour weld weight .075H; brows .0625H; pale claw details .04375H. No contrasting outline.
+Use flat Mocha colours: skin #a6e3a1, pale eyes/fangs/claws #cdd6f4, mouth/keyboard case #181825, pupils/produced output #cba6f7, keycaps #45475a, keyboard detail #6c7086, background #1e1e2e, supporting guides #a6adc8.
+Mauve pupils only in awake states; additional mauve marks mean produced output. ASLEEP HAS NO MAUVE at all, no visible pupils. No glossy eyes, gradient, shading, dimensional keycaps, fur, clothes, hats, extra props, film/game character imitation or borrowed bird identity.
+Keep full ear tips, claws, tail and feet inside each panel. Quiet organized gutters, consistent character scale, crisp readable forms. NO LETTERING, captions, fake measurement text, watermark or wordmark. Labels will be typeset afterward.
+
+CHANGE ONLY:
+One six-expression head sheet arranged 2 rows x 3 columns. Row-major positions: ready/mischievous grin; focused concentration; curious questioning; surprised alertness; pleased accomplishment; sleepy with shut lids. Preserve identical ear roots, head width, eye placement and three-fang construction across the six heads; change only brows/lids/grin and slight ear posture. Do not make six unrelated characters. Bottom-right sleepy head has NO mauve or open pupils; no mauve decorative marks anywhere else. Three fangs remain triangular, not rows of human teeth. Landscape sheet, large faces, equal scale and clean gutters.

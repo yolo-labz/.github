@@ -1,0 +1,13 @@
+{
+  "kind": "reference",
+  "classification": "exploration-not-approved-master",
+  "image": "refs/anchor-2026-09-28.png",
+  "sha256": "dcd882cb9d7f99316f0278d03c172a9f14135c195efe67556d451a9bd172baeb",
+  "source": {
+    "commit": "637a7fbd3f47127f157d0e0dbbccc807bff57c87",
+    "path": "profile/assets/brand/exploration/2026-09-28/gremlin-anchor.png"
+  },
+  "prompt": null,
+  "prompt_sha256": null,
+  "note": "Prepared/imported reference, not a new S1 generation"
+}

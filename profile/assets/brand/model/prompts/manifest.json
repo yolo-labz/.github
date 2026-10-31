@@ -1,0 +1,37 @@
+[
+  {
+    "id": "01-turnaround",
+    "prompt": "prompts/01-turnaround.txt",
+    "prompt_sha256": "5dec745d6980239cf051c1bce75c55473db67890de5dcb437873c62e37b9f96f",
+    "reference": "refs/canonical-reference-board.png",
+    "reference_sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+  },
+  {
+    "id": "02-expressions",
+    "prompt": "prompts/02-expressions.txt",
+    "prompt_sha256": "d7904464336cba54a46ffd81402ec594b8e330b41c984bb300fee04f93ce7a30",
+    "reference": "refs/canonical-reference-board.png",
+    "reference_sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+  },
+  {
+    "id": "03-poses",
+    "prompt": "prompts/03-poses.txt",
+    "prompt_sha256": "d3d5546d0a4102421336454c71c6e849127f5850c32247a8b66abdc3c6205f59",
+    "reference": "refs/canonical-reference-board.png",
+    "reference_sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+  },
+  {
+    "id": "04-hands-keyboard",
+    "prompt": "prompts/04-hands-keyboard.txt",
+    "prompt_sha256": "ac577227cb5c7b9a15807efd9b726db322fc678eadd1634623e43e7dd5eca8e2",
+    "reference": "refs/canonical-reference-board.png",
+    "reference_sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+  },
+  {
+    "id": "05-colour-material",
+    "prompt": "prompts/05-colour-material.txt",
+    "prompt_sha256": "a464900fe1594b44ae5bd4a10939cd231c34560dc4901f33bcca8c4938df44ed",
+    "reference": "refs/canonical-reference-board.png",
+    "reference_sha256": "f96c9fc6a3008a456613a0d6c5c5a1c72295361200bae9e8b63e02fce919ad71"
+  }
+]

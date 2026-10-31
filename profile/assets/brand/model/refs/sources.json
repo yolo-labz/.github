@@ -1,0 +1,57 @@
+[
+  {
+    "path": "profile/assets/brand/mascot/gremlin-asleep.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "4cc63fd3ca50340f47967ef794492918c20d5b6863b7c6df4d7be4a20a2815d6"
+  },
+  {
+    "path": "profile/assets/brand/mascot/gremlin-avatar.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "6752b26a4c2c2272d3486c9634c8c9949d3d199eb3e53a6aa26715ad1c9405ea"
+  },
+  {
+    "path": "profile/assets/brand/mascot/gremlin-hero.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "96c9d38c17263cb3cb8943a3e86d4f88053e5965416febb2eda1c7a3d2500543"
+  },
+  {
+    "path": "profile/assets/brand/mascot/gremlin-idle.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "adf2cd4231d1e0fc4641308fceba5d9db3bcef452c0a91cfba9ae8fac9c8c1a5"
+  },
+  {
+    "path": "profile/assets/brand/mascot/gremlin-loading.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "e7797cb39203494dd71c0f42b11e81d0a3275596c77830ba30412bcf33dce27c"
+  },
+  {
+    "path": "profile/assets/brand/mascot/gremlin-model-sheet.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "51cbbe7f6b21c75ee94979ac41664e24b32349042956e2c894006640d7297345"
+  },
+  {
+    "path": "profile/assets/brand/mascot/gremlin-paused.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "d008143b3837b137a68918c5f290c7156d283acc84d981cee041d1edcb629516"
+  },
+  {
+    "path": "profile/assets/brand/mascot/gremlin-working.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "e7604b928692e99a93f8093986053f11466e259b5da5a7fcfa60c16ec6e724fd"
+  },
+  {
+    "path": "profile/assets/brand/logo-mark-dark.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "4f0b2c31c673019f32563b4c2bdcb0d491f8d190e6133cec5fdc42f143e5dfe9"
+  },
+  {
+    "path": "profile/assets/brand/logo-mark-light.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "4e6f0c1e8b928c67730fbe73c2c67d5df66d0e1da0fa66c2c78c853c7b4f505c"
+  },
+  {
+    "path": "profile/assets/brand/logo-mark-mono.svg",
+    "commit": "64880882f235922007dd22a0cdb22c7ea5f09f83",
+    "sha256": "d22b48ace5ec78ac0eae0acf87b309c99f85cfd84e02453cb962705a9c324979"
+  }
+]
