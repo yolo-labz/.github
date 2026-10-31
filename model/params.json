@@ -98,7 +98,17 @@
       "thickness": 11.0,
       "tilt_deg": 18.0
     },
-    "rim3d": { "pad": 3.0, "thickness": 2.5 },
+    "rim3d": {
+      "front": 12.0,
+      "back": 10.0,
+      "thickness": 2.5,
+      "note": "case band around the deck plate. front/back are per-side units, so deck + band == hero2d below; thickness is the guide-coloured outline stroke."
+    },
+    "hero2d": {
+      "front_half_width": 90.0,
+      "back_half_width": 78.0,
+      "source": "profile/assets/brand/mascot/gremlin-hero.svg .kbd path M 42 132 L 198 132 L 210 154 L 30 154 Z (x 30..210 front, 42..198 back, head unit 80); model/check.py re-reads it"
+    },
     "keys": {
       "cols": 8,
       "rows": 3,
@@ -127,6 +137,7 @@
   "render": {
     "resolution": [900, 900],
     "ortho_scale": 250.0,
+    "ortho_scale_note": "per-view override; the 3/4 and hero cameras look at the 90-unit case corner-on, where the 2.25H case projects past a 250-unit frame. Framing only, geometry is view-independent.",
     "framing_center": [0.0, -8.0, -12.0],
     "aa": "8",
     "threads": 4,
@@ -134,10 +145,10 @@
     "eevee_samples": 16,
     "views": [
       { "name": "front", "azimuth": 0.0, "elevation": 6.0, "pose": "rest", "produced": false },
-      { "name": "three-quarter", "azimuth": 35.0, "elevation": 14.0, "pose": "rest", "produced": false },
+      { "name": "three-quarter", "azimuth": 35.0, "elevation": 14.0, "pose": "rest", "produced": false, "ortho_scale": 266.0 },
       { "name": "side", "azimuth": 90.0, "elevation": 6.0, "pose": "rest", "produced": false },
       { "name": "back", "azimuth": 180.0, "elevation": 6.0, "pose": "rest", "produced": false },
-      { "name": "hero", "azimuth": 32.0, "elevation": 16.0, "pose": "reach", "produced": true }
+      { "name": "hero", "azimuth": 32.0, "elevation": 16.0, "pose": "reach", "produced": true, "ortho_scale": 266.0 }
     ],
     "lights": [
       { "name": "key", "location": [-150.0, -240.0, 190.0], "energy": 1900000.0, "size": 170.0 },
