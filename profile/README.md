@@ -34,7 +34,25 @@ Open-source tools for scripting messaging, browser workflows and local services.
 - **[anthropic-throttle-proxy](https://github.com/yolo-labz/anthropic-throttle-proxy)** — pace Anthropic API traffic across clients with per-bearer queues and a live dashboard.
   Enable fair/reactive queue mode; the default is off. Pacing does not create provider quota.
 
+### Read and listen
+
+- **[Proso](https://github.com/phsb5321/Proso)** — read a page or a selection aloud in Firefox, with word highlighting and playback controls.
+  Audio needs your own provider key, a synthesis host you run, or an eligible managed plan. There is no built-in browser TTS fallback and provider charges may apply.
+- **[Lectrice](https://github.com/phsb5321/Tauri-PDF-Reader)** — keep your place in local PDFs, highlight passages and optionally listen to them.
+  PDF viewing works offline; the published v0.2.0 narration path uses ElevenLabs with your own key and sends the requested text to that provider. Apple-silicon macOS gets a personal Nix channel rather than a notarized installer, and Windows packages are unpublished.
+
+Both live under [phsb5321](https://github.com/phsb5321) and are linked here as-is: ownership and URLs are unchanged.
+
+### Shape your workspace
+
+- **[zellij-vertical-tabs](https://github.com/yolo-labz/zellij-vertical-tabs)** — list Zellij tabs in a sidebar that survives heavy load.
+  A Zellij plugin, not a standalone binary; match the plugin version to your Zellij release.
+
 Each project's README has its installation path, operating limits and license.
 Choose one tool, check its requirements, then build from there.
+
+## Report where it breaks
+
+Use the project's README for installation and its issue tracker for problems. Include the version, operating system, expected result and a minimal reproduction. Never attach API keys, private documents, message histories or browser profiles.
 
 [Browse all Yolo Labz repositories →](https://github.com/orgs/yolo-labz/repositories)
