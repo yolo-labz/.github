@@ -12,7 +12,9 @@ Checks
   2. provenance every PNG under an exploration/ or model/ directory is named by
                 a provenance JSON record in its own directory.
   3. privacy    no signed or private URLs (chatgpt.com/c/, oaiusercontent,
-                ?sig=, ?se=) anywhere in tracked text.
+                ?sig=, ?se=) anywhere in tracked text; a scanner that must name a
+                pattern waives that statement with a comment on its matching line
+                or on a comment line inside the same statement.
   4. claims     banned unqualified claims from docs/brand-positioning.md are
                 absent. The doc is the authority; when it is absent the check is
                 reported SKIP unless --strict is passed (CI passes --strict, so a
@@ -56,8 +58,12 @@ PRIVATE_PATTERNS = (
     (re.compile(r"[?&]se=", re.IGNORECASE), "signed URL expiry parameter"),
 )
 
-# Line-scoped waiver for code that must name a forbidden pattern (a scanner).
+# Statement-scoped waiver for code that must name a forbidden pattern (a scanner):
+# put it on the matching line, or on a comment line inside the same statement.
 PRIVACY_WAIVER = "profile-check: allow-private-pattern"
+
+# A line ending in one of these is still open, so a waiver inside it is statement-scoped.
+CONTINUATION = ("(", "[", "{", ",", "\\")
 
 # The fixtures below intentionally hold every forbidden shape, so they are never
 # linted; this script names the patterns for the same reason.
@@ -512,6 +518,29 @@ def text_files(root: Path) -> list[Path]:
     ]
 
 
+def inside_waived_statement(text: str, match_start: int) -> bool:
+    """True when a waiver comment sits inside the multi-line statement we are in.
+
+    A waiver on a comment-only line counts only when the nearest code line above
+    it opens a bracket (or ends in a continuation), i.e. the comment belongs to
+    that statement. A waiver on a finished line never carries to the next one.
+    """
+    index = text.rfind("\n", 0, match_start) + 1
+    while index > 0:
+        previous_end = index - 1
+        previous_start = text.rfind("\n", 0, previous_end) + 1
+        previous = text[previous_start:previous_end]
+        code = previous.split("#", 1)[0].rstrip()
+        if PRIVACY_WAIVER in previous and not code:
+            index = previous_start
+            continue
+        if not code:
+            index = previous_start
+            continue
+        return code.endswith(CONTINUATION)
+    return False
+
+
 def check_privacy(root: Path) -> list[Finding]:
     findings: list[Finding] = []
     for path in text_files(root):
@@ -526,9 +555,10 @@ def check_privacy(root: Path) -> list[Finding]:
                 end = text.find("\n", match.start())
                 current = text[start : len(text) if end < 0 else end]
                 where = f"{path.relative_to(root).as_posix()}:{line}"
-                if PRIVACY_WAIVER in current:
+                if PRIVACY_WAIVER in current or inside_waived_statement(text, start):
                     # A scanner that names the pattern is not a leak; the waiver is
-                    # explicit and line-scoped, so it cannot silence a real URL.
+                    # explicit and statement-scoped, so it cannot silence a URL
+                    # outside the statement it sits in.
                     findings.append(
                         Finding("privacy", "note", f"{where}: {label} waived in place")
                     )
