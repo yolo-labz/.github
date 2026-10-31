@@ -1,0 +1,13 @@
+{
+  "name": "readme-noorg",
+  "archived": false,
+  "private": false,
+  "description": "A tool whose README never mentions the org.",
+  "homepage": null,
+  "topics": [
+    "cli",
+    "automation",
+    "tooling"
+  ],
+  "has_issues": true
+}
