@@ -374,21 +374,41 @@ def build_keyboard(params, mats):
     rim = params["keyboard"]["rim3d"]
     keys = params["keyboard"]["keys"]
     objs = {}
-    def outline(pad):
+
+    def outline(front, back):
+        """Case footprint: the deck plate plus its band, per edge.
+
+        The band is what makes the 3D case reach the 2D hero outline
+        (180/156 units wide, i.e. 90/78 half-widths), so the band widths are
+        asymmetric: 12 units per side at the front, 10 at the back.
+        """
         return [
-            (-deck["back_half_width"] - pad, deck["y_back"] - pad),
-            (deck["back_half_width"] + pad, deck["y_back"] - pad),
-            (deck["front_half_width"] + pad, deck["y_front"] + pad),
-            (-deck["front_half_width"] - pad, deck["y_front"] + pad),
+            (-deck["back_half_width"] - back, deck["y_back"] - back),
+            (deck["back_half_width"] + back, deck["y_back"] - back),
+            (deck["front_half_width"] + front, deck["y_front"] - front),
+            (-deck["front_half_width"] - front, deck["y_front"] - front),
         ]
 
-    objs["kb_rim"] = prism("kb_rim", outline(rim["pad"]),
-                           deck["z_top"] - deck["thickness"] - rim["thickness"],
-                           deck["z_top"] - deck["thickness"],
-                           mats["guide"])
-    objs["kb_deck"] = prism("kb_deck", outline(0.0),
+    case = outline(rim["front"], rim["back"])
+    objs["kb_case"] = prism("kb_case", case,
                             deck["z_top"] - deck["thickness"], deck["z_top"],
                             mats["dark"])
+
+    # The 2D case is one dark trapezoid outlined by a 2.5 stroke (.kbd). In 3D
+    # the deck plate is that trapezoid's inner face and this loop is the stroke:
+    # it is inset by half its own width so its outer edge lands exactly on the
+    # case silhouette instead of overhanging it.
+    stroke = rim["thickness"] / 2.0
+    y_mid = (deck["y_back"] + deck["y_front"]) / 2.0
+    loop = []
+    for x, y in case:
+        # Inset toward the centre on both axes, so the tube's outer edge lands on
+        # the case silhouette instead of adding its own radius to it.
+        loop.append((x - stroke if x > 0 else x + stroke,
+                     y + stroke if y < y_mid else y - stroke,
+                     deck["z_top"]))
+    loop.append(loop[0])
+    objs["kb_outline"] = polyline("kb_outline", loop, stroke, mats["guide"])
 
     rows = keys["rows"] + keys["spacebar"]["rows_after"]
     for row in range(keys["rows"]):
@@ -438,7 +458,11 @@ def tilt_keyboard(objs, params):
               @ Matrix.Translation(-pivot))
     for obj in objs.values():
         obj.data.transform(matrix)
-        obj.data.update()
+        # Mesh datablocks need an explicit update; curve datablocks (the case
+        # outline) have no such method and are re-evaluated on access.
+        update = getattr(obj.data, "update", None)
+        if update is not None:
+            update()
 
 
 def build_produced(params, mats):
@@ -488,9 +512,13 @@ def build_rig(params, mats):
     return camera
 
 
-def place_camera(camera, cache, azimuth_deg, elevation_deg, params):
+def place_camera(camera, cache, azimuth_deg, elevation_deg, params, view=None):
     render = params["render"]
     target = Vector(render["framing_center"])
+    # A view may widen its own frame: the case is 2.25H wide, so the cameras that
+    # look at it corner-on would otherwise crop it.
+    camera.data.ortho_scale = float((view or {}).get("ortho_scale",
+                                                    render["ortho_scale"]))
     azimuth = math.radians(azimuth_deg)
     elevation = math.radians(elevation_deg)
     distance = cache
@@ -580,7 +608,7 @@ def main():
                 visible = view["produced"]
             obj.hide_render = not visible
 
-        place_camera(camera, 800.0, view["azimuth"], view["elevation"], params)
+        place_camera(camera, 800.0, view["azimuth"], view["elevation"], params, view)
         scene.render.filepath = os.path.join(out_dir, "gremlin-%s.png" % view["name"])
         bpy.ops.render.render(write_still=True)
         normalise_png(scene.render.filepath)

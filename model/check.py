@@ -25,6 +25,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import struct
 import sys
 import zlib
@@ -32,6 +33,8 @@ from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PARAMS = os.path.join(HERE, "params.json")
+REPO = os.path.dirname(HERE)
+HERO_SVG = os.path.join(REPO, "profile/assets/brand/mascot/gremlin-hero.svg")
 LEDGER = os.path.join(HERE, ".determinism", "last.json")
 
 CHANNELS = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}
@@ -391,6 +394,113 @@ def check_iou(params, build, report):
 
 
 # --------------------------------------------------------------------------- #
+# 2D/3D agreement
+# --------------------------------------------------------------------------- #
+KEYBOARD_CASE = re.compile(
+    r'<path class="kbd" stroke-width="([\d.]+)" d="M (-?[\d.]+) (-?[\d.]+) '
+    r'L (-?[\d.]+) (-?[\d.]+) L (-?[\d.]+) (-?[\d.]+) '
+    r'L (-?[\d.]+) (-?[\d.]+) Z"'
+)
+
+def hero_keyboard_outline(path=HERO_SVG):
+    """Read the keyboard case straight out of the hero SVG.
+
+    The case is one trapezoid: the ``.kbd`` stroke and the ``.dark`` fill share
+    the same path, so these numbers describe the same shape the 2D art draws.
+    Returns (stroke_width, front_half_width, back_half_width) in SVG units.
+    """
+    text = open(path, "r", encoding="utf-8").read()
+    case = KEYBOARD_CASE.search(text)
+    if case is None:
+        raise SystemExit("check.py: no keyboard case path in %s" % path)
+    stroke, coords = float(case.group(1)), [float(v) for v in case.groups()[1:]]
+    xs = coords[0::2]
+    # The path runs back-left -> back-right -> front-right -> front-left.
+    back, front = xs[:2], xs[2:]
+    return ((max(front) - min(front)) / 2.0,
+            (max(back) - min(back)) / 2.0,
+            stroke)
+
+
+def check_geometry(params, report):
+    """The 3D keyboard must reach the 2D hero outline, not approximate it.
+
+    deck + rim band == hero outline, per edge. The band is asymmetric (12 units
+    per side at the front, 10 at the back), so a single padding value cannot
+    satisfy this, and shrinking the deck instead would move the case colour
+    boundary away from the 2D fill.
+    """
+    keyboard = params["keyboard"]
+    deck = keyboard["deck"]
+    rim = keyboard["rim3d"]
+    hero = keyboard["hero2d"]
+    unit = 2.0 * float(params["head"]["ellipse2d"][1])
+    front_svg, back_svg, stroke_svg = hero_keyboard_outline()
+    ok = True
+    if (float(hero["front_half_width"]), float(hero["back_half_width"])) != (
+            front_svg, back_svg):
+        report.append("  GEOMETRY: FAIL hero2d %.1f/%.1f != SVG %.1f/%.1f"
+                      % (float(hero["front_half_width"]),
+                         float(hero["back_half_width"]), front_svg, back_svg))
+        ok = False
+    for edge in ("front", "back"):
+        key = edge + "_half_width"
+        total = float(deck[key]) + float(rim[edge])
+        status = "pass" if total == float(hero[key]) else "FAIL"
+        if total != float(hero[key]):
+            ok = False
+        report.append(
+            "  GEOMETRY %-5s %s deck %.1f + rim %.1f = %.1f, hero %.1f "
+            "(%.3fH)"
+            % (edge, status, float(deck[key]), float(rim[edge]), total,
+               float(hero[key]), 2.0 * total / unit))
+    stroke_ok = float(rim["thickness"]) == stroke_svg
+    if not stroke_ok:
+        ok = False
+    report.append("  GEOMETRY rim   %s outline stroke %.2f vs 2D .kbd stroke %.2f"
+                  % ("pass" if stroke_ok else "FAIL", float(rim["thickness"]),
+                     stroke_svg))
+    return ok
+
+
+def check_case_width(params, render_paths, report):
+    """Measure the rendered case against the 2D outline, not just the params.
+
+    The front camera is orthographic with no roll, so one screen pixel is
+    ``ortho_scale / resolution_x`` world units and the dark case's widest row is
+    its front edge. This catches a modelling error that leaves the arithmetic
+    correct (an outline loop hanging outside the case, for example).
+    """
+    render = params["render"]
+    views = {view["name"]: view for view in render["views"]}
+    path = os.path.join(os.path.dirname(render_paths[0]), "gremlin-front.png")
+    if not os.path.exists(path):
+        report.append("  CASE: FAIL missing %s" % path)
+        return False
+    width, height, bpp, rows = decode_png(path)
+    scale = float(views["front"].get("ortho_scale", render["ortho_scale"]))
+    px_per_unit = width / scale
+    wanted = params["palette"]["dark"]["hex"].lstrip("#")
+    best = 0
+    for row in rows:
+        columns = [x for x in range(width)
+                   if row[x * bpp:(x + 1) * bpp][:3].hex() == wanted]
+        if columns:
+            best = max(best, max(columns) - min(columns) + 1)
+    measured = best / px_per_unit
+    expected = 2.0 * float(params["keyboard"]["hero2d"]["front_half_width"])
+    # One pixel of anti-aliasing on each edge; anything larger is geometry.
+    tolerance = 2.0
+    ok = abs(measured - expected) <= tolerance
+    report.append("  CASE front edge %s measured %.1f units vs hero %.1f "
+                  "(%.2fH, tolerance %.1f)"
+                  % ("pass" if ok else "FAIL", measured, expected,
+                     measured / (2.0 * float(params["head"]["ellipse2d"][1])),
+                     tolerance))
+    return ok
+
+
+# --------------------------------------------------------------------------- #
 # self test
 # --------------------------------------------------------------------------- #
 def self_test():
@@ -472,6 +582,8 @@ def main(argv):
 
     report = ["check.py: %s" % build]
     results = [
+        ("geometry", check_geometry(params, report)),
+        ("case-width", check_case_width(params, render_paths, report)),
         ("palette", check_palette(params, render_paths, report)),
         ("determinism", check_determinism(params, build, render_paths, report)),
         ("iou", check_iou(params, build, report)),

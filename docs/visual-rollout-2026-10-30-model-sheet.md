@@ -127,11 +127,12 @@ that mutates the 3D eye radius to prove the gate bites):
   agree exactly.
 - 3D radii are the 2D half-strokes: brows 2.6 vs 2.5, claws 1.8 vs 1.75, output
   2.2 vs 2.0, keyboard rim 2.5 exact.
-- **One real divergence:** the hero keyboard outline is 180 units wide at the
-  front and 156 at the back (2.25H / 1.95H), while the 3D deck is authored at
-  156 / 136 with only 5.5 units of rim per side. Shortfall: **6.5 units per side
-  at the front, 4.5 at the back.** Recorded in `SPEC.md` and asserted in
-  `check.py`; S2 must widen the rim (or the deck) rather than normalise 2.25H away.
+- **Divergence closed 31/10/2026:** the hero keyboard outline is 180 units wide
+  at the front and 156 at the back (2.25H / 1.95H). The 3D deck stays at
+  156 / 136 and the case band carries the rest (12 units per side at the front,
+  10 at the back), so both edges now match the art exactly: shortfall **0**.
+  Recorded in `SPEC.md` and asserted in `check.py`, including that deck + band
+  reaches the outline rather than the record alone. The 2D was not normalised.
 
 ## Gates actually run
 
