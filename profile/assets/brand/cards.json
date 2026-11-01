@@ -4,7 +4,7 @@
   "classification": "generated-example",
   "source": {
     "params": "model/params.json",
-    "params_sha256": "e0089ca78fc7e6d2797a57a3159465676dd94e0e870536da39ddc51ad02942a2",
+    "params_sha256": "3500e8f7033c243f9d455f5b8e2e76a79d8e5a0ffb0bd49433e95bdec323e2cb",
     "render": "model/gremlin.py --views hero (workbench, flat)",
     "typeset": "Inter, DejaVu Sans, sans-serif",
     "copy": "docs/brand-positioning.md (positioning line)"

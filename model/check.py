@@ -35,7 +35,21 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PARAMS = os.path.join(HERE, "params.json")
 REPO = os.path.dirname(HERE)
 HERO_SVG = os.path.join(REPO, "profile/assets/brand/mascot/gremlin-hero.svg")
-LEDGER = os.path.join(HERE, ".determinism", "last.json")
+
+
+def state_dir():
+    """Where consecutive-run state lives: the host, not the tree.
+
+    The determinism ledger keeps a copy of the previous run's PNGs. Inside the
+    repo that is both gitignored *and* walked by the profile provenance gate,
+    which reads the working tree and will not skip it because git does. Runtime
+    state belongs outside the checkout; XDG_STATE_HOME is the documented place.
+    """
+    base = os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state")
+    return os.path.join(base, "yolo-labz-model")
+
+
+LEDGER = os.path.join(state_dir(), "determinism.json")
 
 CHANNELS = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}
 
@@ -263,7 +277,7 @@ def check_determinism(params, build, render_paths, report):
 
     Byte-identical is the contract.  If a hash moves, the run is downgraded to
     the documented pixel-diff budget: the previous PNGs are kept under
-    ``model/.determinism/previous/`` precisely so the drift can be measured
+    ``$XDG_STATE_HOME/yolo-labz-model/previous/`` precisely so the drift can be measured
     instead of asserted.
     """
     budget = params["checks"]["determinism_max_changed_fraction"]

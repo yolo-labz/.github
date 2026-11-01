@@ -6,6 +6,9 @@
 #   make cards   render the same gremlin once and typeset the Open Graph,
 #                Twitter and repository social cards from it; a repeat run
 #                must reproduce every committed byte.
+#   make renders publish the hero plate at the sizes consumers ask for, in Mocha
+#                and Latte, as PNG + WebP + AVIF; a repeat run must reproduce
+#                every committed byte (manifest.json pins the sha256).
 #   make check   the checker's own self-test (CIEDE2000 reference pairs).
 #
 # Requires: blender (>= 5), rsvg-convert, python3. No pip packages.
@@ -15,7 +18,7 @@ PYTHON  ?= python3
 THREADS ?= 4
 BUILD   ?= build
 
-.PHONY: model cards cards-verify check clean
+.PHONY: model cards cards-verify renders renders-verify check clean
 
 model:
 	rm -rf $(BUILD)
@@ -30,10 +33,19 @@ cards:
 cards-verify:
 	$(PYTHON) model/cards.py --verify
 
+renders:
+	$(PYTHON) model/renders.py --build $(BUILD)/renders --blender $(BLENDER) --threads $(THREADS)
+
+# Blender-free: sha256 + pixel size + format for every published plate.
+renders-verify:
+	$(PYTHON) model/renders.py --verify
+
 check:
 	$(PYTHON) model/check.py --self-test
 
-# `clean` also drops the determinism baseline, which is what you want after an
+# `clean` also drops the determinism baseline (kept under $XDG_STATE_HOME, outside
+# the checkout, so the provenance gate never has to see another copy of the renders),
+# which is what you want after an
 # intentional change to model/params.json or model/gremlin.py.
 clean:
 	rm -rf $(BUILD) model/.determinism

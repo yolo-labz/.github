@@ -22,6 +22,16 @@
     "guide": { "hex": "#6c7086", "role": "keyboard rim", "check": false }
   },
 
+  "palette_light": {
+    "base":  { "hex": "#eff1f5", "role": "background plate (Latte)", "check": false },
+    "skin":  { "hex": "#40a02b", "role": "skin (Latte) - the character, never recolour", "check": false },
+    "pale":  { "hex": "#eff1f5", "role": "teeth, eyes, claws (Latte, from the hero kit's light query)", "check": false },
+    "dark":  { "hex": "#dce0e8", "role": "mouth interior, keyboard case (Latte)", "check": false },
+    "node":  { "hex": "#8839ef", "role": "pupils; produced output only (Latte)", "check": false },
+    "key":   { "hex": "#9ca0b0", "role": "keycaps (Latte)", "check": false },
+    "guide": { "hex": "#9ca0b0", "role": "keyboard outline stroke (Latte)", "check": false }
+  },
+
   "head": {
     "ellipse2d": [48, 40],
     "radii3d": [48, 36, 40],
@@ -164,6 +174,23 @@
     "compare_target": "profile/assets/brand/mascot/gremlin-avatar.svg",
     "iou_min": 0.85,
     "raster_px": 512
+  },
+
+  "renders": {
+    "note": "Published hero plates for downstream consumers. Each size is rendered with the camera fitted to the character, so the frame is the artwork, not a crop of a bigger render. Themes are the two Catppuccin flavours the kit already defines; nothing here is a new colour.",
+    "sizes": [[1600, 1200], [800, 600], [390, 520], [804, 770], [402, 385]],
+    "themes": ["dark", "light"],
+    "formats": ["png", "webp", "avif"],
+    "view": {
+      "azimuth": 32.0,
+      "elevation": 16.0,
+      "pose": "reach",
+      "produced": true,
+      "why": "the hero pose from model/check.py's view list: claws on the keys, mauve code marks"
+    },
+    "margin": 0.06,
+    "quality": { "webp": 88, "avif": 60 },
+    "consumer_note": "804x770 and 402x385 are the two widths the portfolio home render currently ships; 1600x1200, 800x600 and 390x520 are the generic hero set."
   },
 
   "checks": {
