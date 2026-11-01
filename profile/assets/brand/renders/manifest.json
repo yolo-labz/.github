@@ -1,0 +1,300 @@
+{
+ "about": "Hero plates generated from model/params.json. Regenerate with `make renders`; never retouch these bytes.",
+ "source": {
+  "params_sha256": "3500e8f7033c243f9d455f5b8e2e76a79d8e5a0ffb0bd49433e95bdec323e2cb",
+  "gremlin_sha256": "c64d82c1ed8063e0647c1aa148f05e95e9df587b57eabfd28e004dcc77cbcb3c",
+  "render_hero_sha256": "4a89a88da38fe0cc1093fc98167bacc3554db56f3b5c9d8de5755daaeccdf949"
+ },
+ "tooling": {
+  "blender": "Blender 5.2.2 LTS",
+  "imagemagick": "Version: ImageMagick 7.1.2-31 Q16-HDRI x86_64 8309dc92a:20260903 https://imagemagick.org",
+  "encoder": {
+   "webp": "-quality Q -define webp:method=4 -define webp:thread-level=1",
+   "avif": "-quality Q -define heic:speed=4 -define heic:threads=1"
+  }
+ },
+ "view": {
+  "azimuth": 32.0,
+  "elevation": 16.0,
+  "pose": "reach",
+  "produced": true,
+  "why": "the hero pose from model/check.py's view list: claws on the keys, mauve code marks"
+ },
+ "margin": 0.06,
+ "quality": {
+  "webp": 88,
+  "avif": 60
+ },
+ "renders": [
+  {
+   "file": "gremlin-hero-1600x1200-dark.png",
+   "format": "png",
+   "theme": "dark",
+   "width": 1600,
+   "height": 1200,
+   "bytes": 138316,
+   "sha256": "de451685640851998a6f21994a9afa6c401d2e9d689e90086aa7d73a3b98c52b"
+  },
+  {
+   "file": "gremlin-hero-1600x1200-dark.webp",
+   "format": "webp",
+   "theme": "dark",
+   "width": 1600,
+   "height": 1200,
+   "bytes": 34738,
+   "sha256": "baf2fe64dead4905d64254d410bf31a8cfd1d07e5e495c03e31c7555a91f7a19"
+  },
+  {
+   "file": "gremlin-hero-1600x1200-dark.avif",
+   "format": "avif",
+   "theme": "dark",
+   "width": 1600,
+   "height": 1200,
+   "bytes": 17845,
+   "sha256": "c9cfdbd959288166543942ddcc43677670e639847fe84ceba215ff05039de6ab"
+  },
+  {
+   "file": "gremlin-hero-1600x1200-light.png",
+   "format": "png",
+   "theme": "light",
+   "width": 1600,
+   "height": 1200,
+   "bytes": 132016,
+   "sha256": "53748f763e5085b30837808177d1c8fa5d0e4b118890367ea34a04c67b26d7e2"
+  },
+  {
+   "file": "gremlin-hero-1600x1200-light.webp",
+   "format": "webp",
+   "theme": "light",
+   "width": 1600,
+   "height": 1200,
+   "bytes": 37524,
+   "sha256": "b42d6ea8deabf2747c19a699c9d3a565fd6e784db35f1d5c6421175771445b0f"
+  },
+  {
+   "file": "gremlin-hero-1600x1200-light.avif",
+   "format": "avif",
+   "theme": "light",
+   "width": 1600,
+   "height": 1200,
+   "bytes": 17451,
+   "sha256": "a466960761797886ffd14f1629c14b311e08543ce49d392f14bc8b1bba99c5ba"
+  },
+  {
+   "file": "gremlin-hero-800x600-dark.png",
+   "format": "png",
+   "theme": "dark",
+   "width": 800,
+   "height": 600,
+   "bytes": 56716,
+   "sha256": "52c37ad22d10636e69cbbcf790f90700e8c9d8823877800588ea507b70406905"
+  },
+  {
+   "file": "gremlin-hero-800x600-dark.webp",
+   "format": "webp",
+   "theme": "dark",
+   "width": 800,
+   "height": 600,
+   "bytes": 16150,
+   "sha256": "f77e6269071df98d8be1ba40bec359c660056d2eb9e2b7d43408a92c1186b753"
+  },
+  {
+   "file": "gremlin-hero-800x600-dark.avif",
+   "format": "avif",
+   "theme": "dark",
+   "width": 800,
+   "height": 600,
+   "bytes": 7450,
+   "sha256": "4dbdee63a45073e2af57b74c1c10319baf7e02c4af61fc7107acf517803dc4d2"
+  },
+  {
+   "file": "gremlin-hero-800x600-light.png",
+   "format": "png",
+   "theme": "light",
+   "width": 800,
+   "height": 600,
+   "bytes": 54012,
+   "sha256": "d3bae398ee46655f2f8782552c519dffadd10d85b9c2e0326e2872fbec44ff90"
+  },
+  {
+   "file": "gremlin-hero-800x600-light.webp",
+   "format": "webp",
+   "theme": "light",
+   "width": 800,
+   "height": 600,
+   "bytes": 17464,
+   "sha256": "bfbf983838e682df9c80414eeeca5dbc2bf87ab67c200b1e40e773fe2c73583d"
+  },
+  {
+   "file": "gremlin-hero-800x600-light.avif",
+   "format": "avif",
+   "theme": "light",
+   "width": 800,
+   "height": 600,
+   "bytes": 7546,
+   "sha256": "3583a2674a0fb746fa489f3b4556d202628fa23f295052375da725c77610ece4"
+  },
+  {
+   "file": "gremlin-hero-390x520-dark.png",
+   "format": "png",
+   "theme": "dark",
+   "width": 390,
+   "height": 520,
+   "bytes": 32302,
+   "sha256": "91c9f12f78418ff92d1e28607df9bb8ddc210760e813dbbb24d99e9f0fc495d5"
+  },
+  {
+   "file": "gremlin-hero-390x520-dark.webp",
+   "format": "webp",
+   "theme": "dark",
+   "width": 390,
+   "height": 520,
+   "bytes": 9572,
+   "sha256": "1da48a4786b3f1f2a25e21c82f13b87fbb4247323b24033296acd4d0bfb6ec1a"
+  },
+  {
+   "file": "gremlin-hero-390x520-dark.avif",
+   "format": "avif",
+   "theme": "dark",
+   "width": 390,
+   "height": 520,
+   "bytes": 5063,
+   "sha256": "10e552465b779074063319d9189348603d598f766d460c8fc9f15ae00f8dab7a"
+  },
+  {
+   "file": "gremlin-hero-390x520-light.png",
+   "format": "png",
+   "theme": "light",
+   "width": 390,
+   "height": 520,
+   "bytes": 30438,
+   "sha256": "ec63b43abb8b61824331679e5499b0d7dfddb09f3630c9f3c1de7fbdea89ec10"
+  },
+  {
+   "file": "gremlin-hero-390x520-light.webp",
+   "format": "webp",
+   "theme": "light",
+   "width": 390,
+   "height": 520,
+   "bytes": 10398,
+   "sha256": "a07d1fdcc2c46c1466e5398897e700facc80814141d7ac32fdf5a2958917fc5f"
+  },
+  {
+   "file": "gremlin-hero-390x520-light.avif",
+   "format": "avif",
+   "theme": "light",
+   "width": 390,
+   "height": 520,
+   "bytes": 5064,
+   "sha256": "8a82419acda2323bef197d0f236b138d4bcc03b61fd4d4e87f4c479a207c65f4"
+  },
+  {
+   "file": "gremlin-hero-804x770-dark.png",
+   "format": "png",
+   "theme": "dark",
+   "width": 804,
+   "height": 770,
+   "bytes": 72209,
+   "sha256": "770fcdfa8d550ef0f37cb1a74ec8078518ec4ca628f25d2d03383e3df005d6ef"
+  },
+  {
+   "file": "gremlin-hero-804x770-dark.webp",
+   "format": "webp",
+   "theme": "dark",
+   "width": 804,
+   "height": 770,
+   "bytes": 20740,
+   "sha256": "7dde69d5dff81424f5c45d93b33d23e50d91a7811aba70ac29cf57c8855183b9"
+  },
+  {
+   "file": "gremlin-hero-804x770-dark.avif",
+   "format": "avif",
+   "theme": "dark",
+   "width": 804,
+   "height": 770,
+   "bytes": 9139,
+   "sha256": "bc380a7ceb1fa840071c1df979a8c01be564c8ddbfb45281d426e43561aa9359"
+  },
+  {
+   "file": "gremlin-hero-804x770-light.png",
+   "format": "png",
+   "theme": "light",
+   "width": 804,
+   "height": 770,
+   "bytes": 68557,
+   "sha256": "3059dd11dcf1b438e99443e415296a433c8acc76c39caeaf0e3bf92f2022b5fd"
+  },
+  {
+   "file": "gremlin-hero-804x770-light.webp",
+   "format": "webp",
+   "theme": "light",
+   "width": 804,
+   "height": 770,
+   "bytes": 22568,
+   "sha256": "194826c1cdbf6063ec36b5c943fa2a3c9633e881f96c94489b04cc90227faa6d"
+  },
+  {
+   "file": "gremlin-hero-804x770-light.avif",
+   "format": "avif",
+   "theme": "light",
+   "width": 804,
+   "height": 770,
+   "bytes": 9450,
+   "sha256": "544a0483917087946acb1c7a0c52c173ca1441396981ae00e69d288e8e4826b3"
+  },
+  {
+   "file": "gremlin-hero-402x385-dark.png",
+   "format": "png",
+   "theme": "dark",
+   "width": 402,
+   "height": 385,
+   "bytes": 31312,
+   "sha256": "d3359c729cf098656142346d4510dbff2400ab9cb3d348c2631ba5cd0a2e5b59"
+  },
+  {
+   "file": "gremlin-hero-402x385-dark.webp",
+   "format": "webp",
+   "theme": "dark",
+   "width": 402,
+   "height": 385,
+   "bytes": 9618,
+   "sha256": "4f21cdbd86c27a003a8be3ceeba8ca9a51922c396a1b3b1478e6a9028d07fdcb"
+  },
+  {
+   "file": "gremlin-hero-402x385-dark.avif",
+   "format": "avif",
+   "theme": "dark",
+   "width": 402,
+   "height": 385,
+   "bytes": 5245,
+   "sha256": "f72d0a08c00206d3498ddc9bb7bbaf6a67812322445ff6cb7a39c46dfaf86d6f"
+  },
+  {
+   "file": "gremlin-hero-402x385-light.png",
+   "format": "png",
+   "theme": "light",
+   "width": 402,
+   "height": 385,
+   "bytes": 29496,
+   "sha256": "9b0144e522f0d009cd22cac478c330cf46a6a018b336f1f3c4180ab4cc21e7d3"
+  },
+  {
+   "file": "gremlin-hero-402x385-light.webp",
+   "format": "webp",
+   "theme": "light",
+   "width": 402,
+   "height": 385,
+   "bytes": 10436,
+   "sha256": "67bbc057914eb521886a9733747125c56a3fa8ed76d71af24f1cc76e42aa2303"
+  },
+  {
+   "file": "gremlin-hero-402x385-light.avif",
+   "format": "avif",
+   "theme": "light",
+   "width": 402,
+   "height": 385,
+   "bytes": 5153,
+   "sha256": "10d334196dc5100e99a82c8cc78f24bbad43be31b2b4d19268a0959c14add9f9"
+  }
+ ]
+}
