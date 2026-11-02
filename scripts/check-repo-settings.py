@@ -64,6 +64,12 @@ class RepoState:
     ruleset: str | None = None  # name of the protecting ruleset
     ruleset_blocked: str | None = None  # "plan-ceiling" when the API refuses
     updater: str | None = None  # "dependabot" | "renovate"
+    # Rule coverage: what the ruleset demands vs what a workflow actually
+    # reports on the default branch. A required context nothing produces is a
+    # gate that can never be satisfied — cosyvoice.cpp shipped exactly that
+    # before it had any CI at all.
+    required_checks: tuple[str, ...] = ()
+    produced_checks: frozenset[str] = frozenset()
     last_success: datetime | None = None
     max_age_days: int = MAX_AGE_DAYS
 
@@ -78,6 +84,16 @@ class RepoState:
         age = datetime.now(timezone.utc) - self.last_success
         return "fresh" if age <= timedelta(days=self.max_age_days) else f"stale({age.days}d)"
 
+    @property
+    def check_coverage(self) -> str:
+        if not self.required_checks:
+            return "-"
+        present = sum(1 for c in self.required_checks if c in self.produced_checks)
+        return f"{present}/{len(self.required_checks)}"
+
+    def missing_checks(self) -> tuple[str, ...]:
+        return tuple(c for c in self.required_checks if c not in self.produced_checks)
+
     def row(self) -> str:
         ruleset = self.ruleset or (
             "plan-ceiling" if self.ruleset_blocked else ("-" if self.private else "MISSING")
@@ -85,7 +101,8 @@ class RepoState:
         return (
             f"  {self.name:28.28} {self.visibility:7} "
             f"{yn(self.secret_scanning):4} {yn(self.push_protection):4} "
-            f"{ruleset:16.16} {self.updater or '-':10.10} {self.ci}"
+            f"{ruleset:16.16} {self.updater or '-':10.10} "
+            f"{self.check_coverage:>7} {self.ci}"
         )
 
 
@@ -141,6 +158,16 @@ def check(state: RepoState) -> list[Finding]:
                 )
             )
 
+    for name in state.missing_checks():
+        findings.append(
+            Finding(
+                state.name,
+                "ruleset-check",
+                "error",
+                f"required check {name!r} is not produced on {state.default_branch}",
+            )
+        )
+
     if state.updater is None:
         findings.append(
             Finding(
@@ -187,12 +214,12 @@ def covers_default_branch(detail: dict, default_branch: str) -> bool:
 
 def fetch_rulesets(
     org: str, repo: str, default_branch: str
-) -> tuple[str | None, str | None]:
-    """(protecting ruleset name, plan-ceiling reason)."""
+) -> tuple[str | None, tuple[str, ...], str | None]:
+    """(protecting ruleset name, required status-check contexts, plan-ceiling reason)."""
     listing, error = api_optional(f"repos/{org}/{repo}/rulesets")
     if listing is None:
         if PLAN_CEILING_MARK in error:
-            return None, "plan-ceiling"
+            return None, (), "plan-ceiling"
         raise ApiError(f"rulesets {repo}: {error}")
     for summary in listing if isinstance(listing, list) else []:
         if summary.get("target") != "branch" or summary.get("enforcement") != "active":
@@ -203,8 +230,68 @@ def fetch_rulesets(
         if detail is None:
             raise ApiError(f"ruleset {repo}/{summary['id']}: {detail_error}")
         if covers_default_branch(detail, default_branch):
-            return summary.get("name") or str(summary["id"]), None
-    return None, None
+            return summary.get("name") or str(summary["id"]), required_checks(detail), None
+    return None, (), None
+
+
+def required_checks(detail: dict) -> tuple[str, ...]:
+    """Every context a ruleset demands, deduplicated and sorted."""
+    contexts: set[str] = set()
+    for rule in detail.get("rules", []):
+        if rule.get("type") != "required_status_checks":
+            continue
+        for entry in (rule.get("parameters") or {}).get("required_status_checks", []):
+            context = entry.get("context")
+            if context:
+                contexts.add(context)
+    return tuple(sorted(contexts))
+
+
+def produced_checks_for(org: str, repo: str, branch: str) -> frozenset[str]:
+    """Every check name the repo reports for its default branch OR its newest PR.
+
+    Both are needed: a ruleset gates PR merges, and most required contexts are
+    produced only on `pull_request` (code-slop, commitlint, Sonar, the Forgejo
+    mirror statuses). Reading the default branch alone would call every one of
+    them impossible.
+    """
+    names = set(fetch_produced_checks(org, repo, branch))
+    head = latest_pull_head(org, repo)
+    if head and head != branch:
+        names |= fetch_produced_checks(org, repo, head)
+    return frozenset(names)
+
+
+def latest_pull_head(org: str, repo: str) -> str | None:
+    """Head SHA of the most recently updated PR, or None when there is none."""
+    pulls, _ = api_optional(
+        f"repos/{org}/{repo}/pulls?state=all&sort=updated&direction=desc&per_page=1"
+    )
+    for pull in pulls or []:
+        head = (pull.get("head") or {}).get("sha")
+        if head:
+            return head
+    return None
+
+
+def fetch_produced_checks(org: str, repo: str, ref: str) -> frozenset[str]:
+    """Check names the repo actually reports for `ref`.
+
+    Two sources, because a ruleset context can be satisfied by either: check
+    runs (workflow jobs) and plain commit statuses (what the Forgejo mirror
+    pushes for wa's forgejo/* contexts). Reading only check runs reports a
+    requirement as impossible when it is merely delivered the other way.
+    """
+    names: set[str] = set()
+    runs, _ = api_optional(f"repos/{org}/{repo}/commits/{ref}/check-runs?per_page=100")
+    for run in (runs or {}).get("check_runs", []):
+        if run.get("name"):
+            names.add(run["name"])
+    status, _ = api_optional(f"repos/{org}/{repo}/commits/{ref}/status")
+    for entry in (status or {}).get("statuses", []):
+        if entry.get("context"):
+            names.add(entry["context"])
+    return frozenset(names)
 
 
 UPDATE_CONFIGS = (
@@ -254,6 +341,8 @@ def state_from(
     updater: str | None,
     last_success: datetime | None,
     max_age_days: int,
+    required: tuple[str, ...] = (),
+    produced: frozenset[str] = frozenset(),
 ) -> RepoState:
     """One RepoState from an API/fixture repo payload plus its side data."""
     analysis = payload.get("security_and_analysis") or {}
@@ -270,6 +359,8 @@ def state_from(
         ruleset=ruleset,
         ruleset_blocked=blocked,
         updater=updater,
+        required_checks=required,
+        produced_checks=produced,
         last_success=last_success,
         max_age_days=max_age_days,
     )
@@ -282,7 +373,7 @@ def live_states(org: str, max_age_days: int) -> list[RepoState]:
         if item.get("archived"):
             continue
         branch = item.get("default_branch") or "main"
-        ruleset, blocked = fetch_rulesets(org, item["name"], branch)
+        ruleset, required, blocked = fetch_rulesets(org, item["name"], branch)
         states.append(
             state_from(
                 item,
@@ -291,6 +382,12 @@ def live_states(org: str, max_age_days: int) -> list[RepoState]:
                 updater=fetch_updater(org, item["name"]),
                 last_success=fetch_last_success(org, item["name"], max_age_days),
                 max_age_days=max_age_days,
+                required=required,
+                # Only worth the two API calls when the ruleset demands
+                # something: otherwise there is nothing to compare against.
+                produced=(
+                    produced_checks_for(org, item["name"], branch) if required else frozenset()
+                ),
             )
         )
     return states
@@ -315,6 +412,8 @@ def fixture_states(directory: Path, max_age_days: int) -> list[RepoState]:
                 if summary.get("target") == "branch" and summary.get("enforcement") == "active":
                     ruleset = summary.get("name")
         last_success = snapshot.get("last_success")
+        required = tuple(snapshot.get("required_checks") or ())
+        produced = frozenset(snapshot.get("produced_checks") or ())
         states.append(
             state_from(
                 repo,
@@ -327,6 +426,8 @@ def fixture_states(directory: Path, max_age_days: int) -> list[RepoState]:
                     else None
                 ),
                 max_age_days=max_age_days,
+                required=required,
+                produced=produced,
             )
         )
     return states
@@ -387,6 +488,8 @@ def run(args: argparse.Namespace) -> int:
                 "ruleset": state.ruleset,
                 "ruleset_blocked": state.ruleset_blocked,
                 "updater": state.updater,
+                "required_checks": list(state.required_checks),
+                "produced_checks": sorted(state.produced_checks),
                 "ci": state.ci,
             }
             for state in states

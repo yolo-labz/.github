@@ -107,6 +107,55 @@ class CheckTests(unittest.TestCase):
         )
         self.assertEqual(findings, [])
 
+    def test_required_check_nothing_produces_is_an_error(self) -> None:
+        """A ruleset can demand a context no workflow reports — cosyvoice.cpp's
+        ruleset had no CI to require at all before this column existed."""
+        findings = settings.check(
+            settings.RepoState(
+                name="r",
+                private=False,
+                secret_scanning=True,
+                push_protection=True,
+                ruleset="main-protection",
+                required_checks=("build", "does-not-exist"),
+                produced_checks=frozenset({"build"}),
+                updater="dependabot",
+                last_success=datetime.now(timezone.utc),
+            )
+        )
+        rules = {(f.rule, f.level) for f in findings}
+        self.assertEqual(rules, {("ruleset-check", "error")})
+        self.assertIn("does-not-exist", findings[0].message)
+
+    def test_full_check_coverage_has_no_findings(self) -> None:
+        findings = settings.check(
+            settings.RepoState(
+                name="r",
+                private=False,
+                secret_scanning=True,
+                push_protection=True,
+                ruleset="main-protection",
+                required_checks=("build", "test"),
+                produced_checks=frozenset({"build", "test", "extra"}),
+                updater="dependabot",
+                last_success=datetime.now(timezone.utc),
+            )
+        )
+        self.assertEqual(findings, [])
+
+    def test_coverage_column_reports_present_over_required(self) -> None:
+        full = settings.RepoState(
+            name="r", required_checks=("a", "b"), produced_checks=frozenset({"a", "b"})
+        )
+        partial = settings.RepoState(
+            name="r", required_checks=("a", "b"), produced_checks=frozenset({"a"})
+        )
+        none = settings.RepoState(name="r")
+        self.assertEqual(full.check_coverage, "2/2")
+        self.assertEqual(partial.check_coverage, "1/2")
+        self.assertEqual(none.check_coverage, "-")
+        self.assertIn("2/2", full.row())
+
     def test_stale_ci_is_a_note_never_an_error(self) -> None:
         stale = datetime.now(timezone.utc) - timedelta(days=90)
         findings = settings.check(
