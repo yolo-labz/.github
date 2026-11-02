@@ -20,11 +20,18 @@ Checks
                 reported SKIP unless --strict is passed (CI passes --strict, so a
                 branch that drops the doc fails there).
   5. a11y       images in the profile README carry alt text and (HTML img) width.
+  6. share-card each page family's share image (profile/assets/brand/share-cards.json)
+                (a) exists in its repo, (b) is not older than the canonical card
+                that supersedes it, (c) has the declared mime and pixel size.
+                The default run covers the families inside this repo; the
+                `share-cards` subcommand also reads the other repos via `gh api`.
 
 Usage
   python3 scripts/check-profile.py [--repo PATH] [--offline] [--strict]
                                   [--readme PATH] [--claims-doc PATH]
                                   [--timeout SECONDS]
+  python3 scripts/check-profile.py share-cards [--repo PATH]   # all families, live
+
 
 Exit 0 = pass, 1 = violation, 2 = usage/IO error.
 """
@@ -35,6 +42,7 @@ import argparse
 import json
 import os
 import re
+import struct
 import subprocess
 import sys
 import urllib.error
@@ -44,6 +52,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 DEFAULT_README = "profile/README.md"
+SHARE_POLICY = "profile/assets/brand/share-cards.json"
 CLAIMS_DOC = "docs/brand-positioning.md"
 DEFAULT_TIMEOUT = 10.0
 
@@ -649,6 +658,116 @@ def check_a11y(root: Path, readme: Path) -> list[Finding]:
 # --------------------------------------------------------------------------- #
 
 
+# --------------------------------------------------------------------------- #
+# share cards
+# --------------------------------------------------------------------------- #
+
+
+def image_facts(data: bytes) -> tuple[str, int, int] | None:
+    """(mime, width, height) read from the bytes, never from the file name."""
+    if data[:8] == b"\x89PNG\r\n\x1a\n" and data[12:16] == b"IHDR":
+        return ("image/png", *struct.unpack(">II", data[16:24]))
+    if data[:2] == b"\xff\xd8":
+        i = 2
+        while i + 9 < len(data):
+            if data[i] != 0xFF:
+                return None
+            marker, size = data[i + 1], struct.unpack(">H", data[i + 2 : i + 4])[0]
+            if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+                height, width = struct.unpack(">HH", data[i + 5 : i + 9])
+                return ("image/jpeg", width, height)
+            i += 2 + size
+    return None
+
+
+class LocalCards:
+    """Files of the checkout under test; no commit dates (CI clones are shallow)."""
+
+    def __init__(self, root: Path):
+        self.root = root
+
+    def fetch(self, repo: str, path: str) -> tuple[bytes, str | None] | None:
+        file = self.root / path
+        return (file.read_bytes(), None) if file.is_file() else None
+
+
+class GhCards:
+    """Any repo of the org through `gh api`: bytes at the default branch + last commit date."""
+
+    def __init__(self, timeout: float):
+        self.timeout = timeout
+
+    def _gh(self, *args: str) -> bytes | None:
+        try:
+            done = subprocess.run(
+                ["gh", "api", *args], capture_output=True, timeout=self.timeout, check=False
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            return None
+        return done.stdout if done.returncode == 0 else None
+
+    def fetch(self, repo: str, path: str) -> tuple[bytes, str | None] | None:
+        data = self._gh("-H", "Accept: application/vnd.github.raw", f"repos/{repo}/contents/{path}")
+        if data is None:
+            return None
+        log = self._gh(f"repos/{repo}/commits?path={path}&per_page=1", "--jq", ".[0].commit.committer.date")
+        return data, (log or b"").decode().strip() or None
+
+
+def check_share_cards(root: Path, remote: object | None) -> list[Finding]:
+    """The share-image policy, one finding per broken promise.
+
+    `remote` reads cards outside this checkout (None = in-repo families only).
+    ISO-8601 UTC dates compare as strings.
+    """
+    policy_file = root / SHARE_POLICY
+    if not policy_file.is_file():
+        return [Finding("share-card", "note", f"SKIP no {SHARE_POLICY}")]
+    policy = json.loads(policy_file.read_text(encoding="utf-8"))
+    local = LocalCards(root)
+    findings: list[Finding] = []
+
+    def load(repo: str, path: str):
+        return (local if repo == "." else remote).fetch(repo, path) if repo == "." or remote else None
+
+    canon = policy["canonical"]
+    canon_card = load(canon["repo"], canon["path"]) if remote else None
+    for fam in policy["families"]:
+        name = f"{fam['name']} ({fam['repo']}:{fam['image']})"
+        if fam["repo"] != "." and remote is None:
+            findings.append(Finding("share-card", "note", f"{name}: skipped (needs `share-cards`)"))
+            continue
+        card = load(fam["repo"], fam["image"])
+        if card is None:
+            findings.append(Finding("share-card", "error", f"{name}: does not resolve in its repo"))
+            continue
+        data, updated = card
+        facts = image_facts(data)
+        if facts is None:
+            findings.append(Finding("share-card", "error", f"{name}: not a readable PNG/JPEG"))
+        elif facts != (fam["mime"], fam["width"], fam["height"]):
+            findings.append(
+                Finding(
+                    "share-card",
+                    "error",
+                    f"{name}: is {facts[0]} {facts[1]}x{facts[2]}, "
+                    f"declared {fam['mime']} {fam['width']}x{fam['height']}",
+                )
+            )
+        if fam["repo"] == canon["repo"] and fam["image"] == canon["path"]:
+            continue  # the canonical card cannot be older than itself
+        if canon_card and canon_card[1] and updated and updated < canon_card[1]:
+            findings.append(
+                Finding(
+                    "share-card",
+                    "error",
+                    f"{name}: stale, last changed {updated}, the canonical card "
+                    f"{canon['path']} changed {canon_card[1]}",
+                )
+            )
+    return findings
+
+
 def run(args: argparse.Namespace) -> int:
     root = Path(args.repo).resolve()
     readme = (root / args.readme).resolve()
@@ -666,6 +785,7 @@ def run(args: argparse.Namespace) -> int:
     findings += check_privacy(root)
     findings += check_claims(root, readme, claims_doc=claims_doc, strict=args.strict)
     findings += check_a11y(root, readme)
+    findings += check_share_cards(root, None)
 
     errors = [f for f in findings if f.level == "error"]
     others = [f for f in findings if f.level != "error"]
@@ -684,7 +804,26 @@ def run(args: argparse.Namespace) -> int:
     return 1 if errors else 0
 
 
+def run_share_cards(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(prog="check-profile share-cards")
+    parser.add_argument("--repo", default=str(Path(__file__).resolve().parents[1]))
+    parser.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT)
+    args = parser.parse_args(argv)
+    root = Path(args.repo).resolve()
+    findings = check_share_cards(root, GhCards(args.timeout))
+    errors = [f for f in findings if f.level == "error"]
+    print(f"== share cards: {root}")
+    for finding in findings:
+        print(finding.render())
+    print(f"-- violations: {len(errors)}")
+    print("RESULT: " + ("FAIL" if errors else "PASS"))
+    return 1 if errors else 0
+
+
 def main(argv: list[str] | None = None) -> int:
+    args_in = sys.argv[1:] if argv is None else argv
+    if args_in[:1] == ["share-cards"]:
+        return run_share_cards(args_in[1:])
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--repo", default=str(Path(__file__).resolve().parents[1]))
     parser.add_argument("--readme", default=DEFAULT_README)
@@ -700,7 +839,7 @@ def main(argv: list[str] | None = None) -> int:
         help="an absent claims doc is a violation instead of a skip",
     )
     parser.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT)
-    return run(parser.parse_args(argv))
+    return run(parser.parse_args(args_in))
 
 
 if __name__ == "__main__":

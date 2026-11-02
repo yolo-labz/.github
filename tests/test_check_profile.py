@@ -8,8 +8,12 @@ exercised as a subprocess (same entry point CI uses); pure helpers are imported.
 from __future__ import annotations
 
 import importlib.util
+import json
+import shutil
+import struct
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -374,6 +378,108 @@ class PrivacyWaiver(unittest.TestCase):
                 errors[0].message,
             )
             self.assertTrue(any("waived in place" in f.message for f in findings))
+
+
+def png(width: int, height: int) -> bytes:
+    """A minimal valid PNG header (signature + IHDR); enough for size/mime checks."""
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
+    return b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + b"IHDR" + ihdr + b"\0\0\0\0"
+
+
+class FakeRemote:
+    """Stands in for `gh api`: {(repo, path): (bytes, iso date)}."""
+
+    def __init__(self, files):
+        self.files = files
+
+    def fetch(self, repo, path):
+        return self.files.get((repo, path))
+
+
+CANON = ("yolo-labz/.github", "profile/assets/brand/og-card.png")
+OLD, NEW = "2026-05-29T01:18:45Z", "2026-10-31T17:53:07Z"
+POLICY = {
+    "canonical": {"repo": CANON[0], "path": CANON[1]},
+    "families": [
+        {
+            "name": "blog",
+            "repo": "o/blog",
+            "image": "og.png",
+            "mime": "image/png",
+            "width": 1200,
+            "height": 630,
+        }
+    ],
+}
+
+
+class ShareCards(unittest.TestCase):
+    def tree(self):
+        root = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, root, True)
+        (root / "profile/assets/brand").mkdir(parents=True)
+        (root / checker.SHARE_POLICY).write_text(json.dumps(POLICY), encoding="utf-8")
+        return root
+
+    def errors(self, files, policy=None):
+        root = self.tree()
+        if policy:
+            (root / checker.SHARE_POLICY).write_text(json.dumps(policy), encoding="utf-8")
+        found = checker.check_share_cards(root, FakeRemote(files))
+        return [f.message for f in found if f.level == "error"]
+
+    def files(self, card=None, updated=NEW, canon_updated=NEW):
+        return {
+            CANON: (png(1200, 630), canon_updated),
+            ("o/blog", "og.png"): (card or png(1200, 630), updated),
+        }
+
+    def test_card_newer_than_the_canonical_one_passes(self):
+        self.assertEqual(self.errors(self.files()), [])
+
+    def test_card_older_than_the_canonical_one_fails(self):
+        errors = self.errors(self.files(updated=OLD))
+        self.assertEqual(len(errors), 1, errors)
+        self.assertIn("stale", errors[0])
+
+    def test_missing_card_fails(self):
+        files = self.files()
+        del files[("o/blog", "og.png")]
+        self.assertIn("does not resolve", self.errors(files)[0])
+
+    def test_wrong_dimensions_fail(self):
+        errors = self.errors(self.files(card=png(1200, 600)))
+        self.assertIn("1200x600", errors[0])
+        self.assertIn("declared image/png 1200x630", errors[0])
+
+    def test_wrong_mime_fails_even_with_a_png_name(self):
+        errors = self.errors(self.files(card=b"\xff\xd8\xff\xe0" + b"\0" * 40))
+        self.assertTrue(errors, "JPEG bytes must not pass as image/png")
+
+    def test_svg_text_is_not_an_image(self):
+        self.assertIn("not a readable", self.errors(self.files(card=b"<svg/>"))[0])
+
+    def test_without_remote_only_in_repo_families_run(self):
+        root = self.tree()
+        found = checker.check_share_cards(root, None)
+        self.assertEqual([f.level for f in found], ["note"])
+        self.assertIn("skipped", found[0].message)
+
+    def test_in_repo_family_is_checked_without_a_remote(self):
+        policy = {**POLICY, "families": [{**POLICY["families"][0], "repo": "."}]}
+        root = self.tree()
+        (root / checker.SHARE_POLICY).write_text(json.dumps(policy), encoding="utf-8")
+        self.assertIn("does not resolve", checker.check_share_cards(root, None)[0].message)
+        (root / "og.png").write_bytes(png(1200, 630))
+        self.assertEqual(checker.check_share_cards(root, None), [])
+
+    def test_missing_policy_is_a_skip_not_a_failure(self):
+        found = checker.check_share_cards(Path(tempfile.mkdtemp()), None)
+        self.assertEqual([f.level for f in found], ["note"])
+
+    def test_real_policy_lists_the_three_families(self):
+        policy = json.loads((REPO / checker.SHARE_POLICY).read_text(encoding="utf-8"))
+        self.assertEqual([f["name"] for f in policy["families"]], ["org-profile", "portfolio", "blog"])
 
 
 if __name__ == "__main__":
