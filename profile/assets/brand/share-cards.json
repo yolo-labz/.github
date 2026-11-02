@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "about": "Share images served by each page family. Checked by `scripts/check-profile.py` (check 6): the image must resolve, must not be older than the canonical card, and must have the declared mime and pixel size.",
+  "canonical": {
+    "repo": "yolo-labz/.github",
+    "path": "profile/assets/brand/og-card.png"
+  },
+  "families": [
+    {
+      "name": "org-profile",
+      "repo": ".",
+      "image": "profile/assets/brand/og-card.png",
+      "mime": "image/png",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "name": "portfolio",
+      "repo": "yolo-labz/portfolio",
+      "image": ".github/og-card.png",
+      "mime": "image/png",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "name": "blog",
+      "repo": "phsb5321/blog",
+      "image": "assets/img/og-card.png",
+      "mime": "image/png",
+      "width": 1200,
+      "height": 630
+    }
+  ]
+}
