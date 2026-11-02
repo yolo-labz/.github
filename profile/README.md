@@ -36,8 +36,8 @@ Open-source tools for scripting messaging, browser workflows and local services.
 
 ### Shape your workspace
 
-- **[zellij-vertical-tabs](https://github.com/yolo-labz/zellij-vertical-tabs)** — list Zellij tabs in a sidebar that survives heavy load.
-  A Zellij plugin, not a standalone binary; match the plugin version to your Zellij release.
+- **[zellij-vertical-tabs](https://github.com/yolo-labz/zellij-vertical-tabs)** — list Zellij tabs vertically in a sidebar whose scrolling viewport keeps the focused tab visible.
+  A WASM plugin you build with `nix build` or `cargo build`, not a standalone binary; it needs the ReadApplicationState and ChangeApplicationState permissions.
 
 Each project's README has its installation path, operating limits and license.
 Choose one tool, check its requirements, then build from there.
