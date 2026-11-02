@@ -1,6 +1,11 @@
 {
-  "repo": {"name": "archived", "private": false, "archived": true, "default_branch": "main"},
+  "repo": {
+    "name": "archived",
+    "private": false,
+    "archived": true,
+    "default_branch": "main"
+  },
   "rulesets": [],
-  "dependabot": null,
-  "last_success": null
+  "last_success": null,
+  "updater": null
 }
