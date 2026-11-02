@@ -138,6 +138,66 @@ class Rules(unittest.TestCase):
         self.assertIn("README does not link back to github.com/yolo-labz", errors[0])
 
 
+NOTICE = (
+    "Mirror of https://forge.example/pedro/{name} \u2014 "
+    "Forgejo is the merge-of-record; open PRs there."
+)
+
+
+def mirror_repo(name: str, **payload) -> metadata.Repo:
+    """A flagship-shaped repo that is otherwise compliant, so only the description varies."""
+    base = {"name": name, "topics": ["a-b", "c-d", "e-f"], "has_issues": True}
+    repo = metadata.Repo.from_payload({**base, **payload})
+    repo.readme = f"see https://{metadata.SITE_ROOT}"
+    return repo
+
+
+class MirrorAware(unittest.TestCase):
+    def setUp(self):
+        self.flagships = metadata.flagship_sentences(REPO / metadata.CLAIMS_DOC)
+
+    def findings(self, repo):
+        return metadata.check_repo(repo, self.flagships)
+
+    def test_forgejo_notice_naming_this_repo_is_accepted_with_a_note(self):
+        found = self.findings(mirror_repo("wa", description=NOTICE.format(name="wa")))
+        self.assertEqual([f.level for f in found], ["note"])
+        self.assertIn("one-liner rule does not apply", found[0].message)
+        self.assertIn("Forgejo mirror notice", found[0].message)
+
+    def test_mirror_url_alone_is_enough(self):
+        repo = mirror_repo("wa", description="anything", mirror_url="https://x/y")
+        found = self.findings(repo)
+        self.assertEqual([f.level for f in found], ["note"])
+        self.assertIn("mirror_url=https://x/y", found[0].message)
+
+    def test_non_mirror_flagship_still_needs_the_one_liner(self):
+        found = self.findings(mirror_repo("wa", description="A WhatsApp thing."))
+        self.assertEqual([f.level for f in found], ["error"])
+        self.assertIn("positioning one-liner", found[0].message)
+
+    def test_notice_for_another_repo_does_not_opt_out(self):
+        repo = mirror_repo("wa", description=NOTICE.format(name="fand"))
+        self.assertIsNone(repo.is_mirror)
+        self.assertEqual([f.level for f in self.findings(repo)], ["error"])
+
+    def test_mirror_still_fails_the_other_rules(self):
+        repo = mirror_repo("wa", description=NOTICE.format(name="wa"), has_issues=False)
+        repo.readme = "no org link"
+        rules = sorted(f.rule for f in self.findings(repo) if f.level == "error")
+        self.assertEqual(rules, ["has_issues", "readme"])
+
+    def test_mirror_without_description_still_fails(self):
+        repo = mirror_repo("wa", mirror_url="https://x/y")
+        self.assertEqual([f.message for f in self.findings(repo) if f.level == "error"], ["missing"])
+
+    def test_fix_does_not_fight_the_mirror_sync(self):
+        repo = mirror_repo("wa", description=NOTICE.format(name="wa"))
+        self.assertNotIn("description", metadata.plan_fix(repo, self.flagships))
+        plain = mirror_repo("wa", description="A WhatsApp thing.")
+        self.assertEqual(metadata.plan_fix(plain, self.flagships)["description"], self.flagships["wa"])
+
+
 class RepairPlan(unittest.TestCase):
     def setUp(self):
         self.flagships = metadata.flagship_sentences(REPO / metadata.CLAIMS_DOC)

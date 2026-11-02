@@ -5,6 +5,9 @@ Checks every public, non-archived repository for:
 
   1. description   non-empty; the six flagships must carry the exact sentence
                    from docs/brand-positioning.md (the doc stays the source).
+                   Mirrors (see is_mirror) keep their generated description: the
+                   mirror sync owns it, so the one-liner rule is skipped and a
+                   note says why. Every other rule still applies to them.
   2. homepage      may be empty, but if set it must be an https site URL and not
                    a github.com repository link (a self-link carries nothing).
                    Repos in SITE_HOMEPAGES must match the mapped URL.
@@ -63,6 +66,13 @@ TOPICS = {
     "zellij-automation": ["zellij", "shell", "automation"],
 }
 
+# The Forgejo push-mirror writes this description; GitHub's own `mirror_url` stays
+# null for it, so the notice (naming this very repo) is the only signal there.
+MIRROR_NOTICE_RE = re.compile(
+    r"^Mirror of https://[^\s/]+/[^\s/]+/(?P<name>[^\s/]+?)(?:\.git)? [—-] "
+    r"Forgejo is the merge-of-record"
+)
+
 MIN_TOPICS = 3
 TOPIC_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,49}$")
 FLAGSHIP_ROW_RE = re.compile(
@@ -91,6 +101,7 @@ class Repo:
     topics: list[str] = field(default_factory=list)
     has_issues: bool = True
     readme: str = ""
+    mirror_url: str | None = None
 
     @classmethod
     def from_payload(cls, payload: dict) -> Repo:
@@ -102,7 +113,22 @@ class Repo:
             homepage=(payload.get("homepage") or "").strip() or None,
             topics=list(payload.get("topics") or []),
             has_issues=bool(payload.get("has_issues", True)),
+            mirror_url=(payload.get("mirror_url") or "").strip() or None,
         )
+
+    @property
+    def is_mirror(self) -> str | None:
+        """Why this repo counts as a mirror, or None.
+
+        `mirror_url` is the API's own flag; the Forgejo notice counts only when
+        it names this repository, so a copied description cannot opt a repo out.
+        """
+        if self.mirror_url:
+            return f"mirror_url={self.mirror_url}"
+        match = MIRROR_NOTICE_RE.match(self.description or "")
+        if match and match.group("name") == self.name:
+            return "Forgejo mirror notice"
+        return None
 
 
 # --------------------------------------------------------------------------- #
@@ -266,8 +292,19 @@ def check_repo(repo: Repo, flagships: dict[str, str]) -> list[Finding]:
     def fail(rule: str, message: str) -> None:
         findings.append(Finding(repo.name, rule, "error", message))
 
+    mirror = repo.is_mirror
     if not repo.description:
         fail("description", "missing")
+    elif mirror:
+        findings.append(
+            Finding(
+                repo.name,
+                "description",
+                "note",
+                f"mirror ({mirror}): generated description accepted, "
+                "the one-liner rule does not apply",
+            )
+        )
     elif repo.name in flagships and normalize(repo.description) != normalize(
         flagships[repo.name]
     ):
@@ -310,7 +347,9 @@ def check_repo(repo: Repo, flagships: dict[str, str]) -> list[Finding]:
 def plan_fix(repo: Repo, flagships: dict[str, str]) -> dict:
     """The API fields this repo needs, and nothing else."""
     changes: dict = {}
-    if repo.name in flagships and normalize(repo.description or "") != normalize(
+    if repo.is_mirror and repo.description:
+        pass  # the mirror sync owns the description; patching it would fight the sync
+    elif repo.name in flagships and normalize(repo.description or "") != normalize(
         flagships[repo.name]
     ):
         changes["description"] = flagships[repo.name]
