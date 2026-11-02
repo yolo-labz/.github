@@ -153,6 +153,62 @@ class RemoteLinks(unittest.TestCase):
         )
         self.assertEqual([f for f in findings if f.level == "error"], [])
 
+    def test_link_to_a_private_repository_is_a_violation(self):
+        # The author's token gets HTTP 200 for a private repo; only the `private`
+        # flag tells a visitor-visible link from one that 404s for everyone else.
+        asked = []
+
+        def visibility(slug, token, timeout):
+            asked.append(slug)
+            return True
+
+        findings = checker.check_links(
+            POSITIVE,
+            POSITIVE / "profile" / "README.md",
+            offline=False,
+            token="t",
+            timeout=1,
+            status=lambda url, token, timeout: 200,
+            visibility=visibility,
+        )
+        errors = [f.message for f in findings if f.level == "error"]
+        self.assertTrue(errors, findings)
+        self.assertTrue(all("private repository" in m for m in errors), errors)
+        self.assertEqual(len(asked), len(set(asked)), "one lookup per repository")
+
+    def test_link_to_a_public_repository_passes(self):
+        findings = checker.check_links(
+            POSITIVE,
+            POSITIVE / "profile" / "README.md",
+            offline=False,
+            token=None,
+            timeout=1,
+            status=lambda url, token, timeout: 200,
+            visibility=lambda *args: False,
+        )
+        self.assertEqual([f for f in findings if f.level == "error"], [])
+
+    def test_unreadable_visibility_is_not_a_violation(self):
+        findings = checker.check_links(
+            POSITIVE,
+            POSITIVE / "profile" / "README.md",
+            offline=False,
+            token=None,
+            timeout=1,
+            status=lambda url, token, timeout: 200,
+            visibility=lambda *args: None,
+        )
+        self.assertEqual([f for f in findings if f.level == "error"], [])
+
+    def test_repo_slug_names_repositories_only(self):
+        self.assertEqual(checker.repo_slug("https://github.com/a/b/tree/main/x"), "a/b")
+        self.assertEqual(checker.repo_slug("https://github.com/a/b.git"), "a/b")
+        self.assertIsNone(checker.repo_slug("https://github.com/a"))
+        self.assertIsNone(checker.repo_slug("https://github.com/orgs/a/repositories"))
+        self.assertEqual(
+            checker.repo_slug("https://raw.githubusercontent.com/a/b/main/x.svg", "raw"), "a/b"
+        )
+
     def test_rate_limit_is_a_warning_not_a_violation(self):
         findings = checker.check_links(
             POSITIVE,
