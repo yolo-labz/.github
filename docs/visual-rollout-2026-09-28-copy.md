@@ -1,5 +1,7 @@
 # Visual rollout — copy and claim evidence
 
+> **Archived 02/11/2026 — superseded by [`brand-positioning.md`](brand-positioning.md).** Kept unedited as the dated delivery record of the 28/09 copy slice; it cites two private repositories and pre-refresh pins, so do not use it as a claim source.
+
 **28/09/2026 · copy seat · home-projects w8:p8**
 
 ## Recovery readback — 30/10/2026
