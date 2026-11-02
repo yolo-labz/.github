@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "name": "private-bare",
+    "private": true,
+    "default_branch": "main",
+    "security_and_analysis": null
+  },
+  "rulesets": {"status": 403, "message": "Upgrade to GitHub Pro or make this repository public to enable this feature."},
+  "dependabot": ".github/dependabot.yml",
+  "last_success": "2026-11-01T10:00:00Z"
+}
