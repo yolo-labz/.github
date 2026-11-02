@@ -44,6 +44,9 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from org_api import api_get, api_optional, gh
+
 ORG = "yolo-labz"
 CLAIMS_DOC = "docs/brand-positioning.md"
 SITE_ROOT = "github.com/yolo-labz"
@@ -136,15 +139,6 @@ class Repo:
 # --------------------------------------------------------------------------- #
 
 
-def gh(*args: str) -> str:
-    result = subprocess.run(["gh", *args], capture_output=True, text=True, check=False)
-    if result.returncode != 0:
-        raise RuntimeError(f"gh {' '.join(args)} failed: {result.stderr.strip()}")
-    return result.stdout
-
-
-def api_get(path: str) -> object:
-    return json.loads(gh("api", path))
 
 
 def api_patch(path: str, fields: dict) -> None:
