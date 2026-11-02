@@ -2,7 +2,7 @@
   {
     "theme": "light",
     "mode": "exploration-integrated",
-    "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2",
+    "profile_sha256": "4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a",
     "renderer": "existing NixOS server fleet via interactive.attach",
     "identity": "brave-search",
     "browser_version": "155.0.8059.79",
@@ -31,16 +31,17 @@
       "https://github.com/yolo-labz/claude-mac-chrome",
       "https://github.com/yolo-labz/fand",
       "https://github.com/yolo-labz/kokoro-speakd",
-      "https://github.com/yolo-labz/anthropic-throttle-proxy"
+      "https://github.com/yolo-labz/anthropic-throttle-proxy",
+      "https://github.com/yolo-labz/zellij-vertical-tabs"
     ],
     "screenshot": "exploration-integrated-1280-light.png",
-    "screenshot_sha256": "553573e6d6ddcee1d5df6409600f3deea69fd7504f876b12cf994ff10a271a3c",
+    "screenshot_sha256": "b3ccbe65c5424260335a8d84e1a1827665f6b9ba8cc250ca1b60540c35526748",
     "imageFailureNavigation": "pass"
   },
   {
     "theme": "light",
     "mode": "exploration-integrated",
-    "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2",
+    "profile_sha256": "4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a",
     "renderer": "existing NixOS server fleet via interactive.attach",
     "identity": "brave-search",
     "browser_version": "155.0.8059.79",
@@ -69,16 +70,17 @@
       "https://github.com/yolo-labz/claude-mac-chrome",
       "https://github.com/yolo-labz/fand",
       "https://github.com/yolo-labz/kokoro-speakd",
-      "https://github.com/yolo-labz/anthropic-throttle-proxy"
+      "https://github.com/yolo-labz/anthropic-throttle-proxy",
+      "https://github.com/yolo-labz/zellij-vertical-tabs"
     ],
     "screenshot": "exploration-integrated-360-light.png",
-    "screenshot_sha256": "56cc7fb1e4bcf44fddf5cc067bfaf4d152ff6bf0957a328cfe7be112f0ded0c1",
+    "screenshot_sha256": "1b8b643aeb24a468c124355080519f47ad5256b697d865d850432e3c4abb56ce",
     "imageFailureNavigation": "pass"
   },
   {
     "theme": "dark",
     "mode": "exploration-integrated",
-    "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2",
+    "profile_sha256": "4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a",
     "renderer": "existing NixOS server fleet via interactive.attach",
     "identity": "brave-search",
     "browser_version": "155.0.8059.79",
@@ -107,16 +109,17 @@
       "https://github.com/yolo-labz/claude-mac-chrome",
       "https://github.com/yolo-labz/fand",
       "https://github.com/yolo-labz/kokoro-speakd",
-      "https://github.com/yolo-labz/anthropic-throttle-proxy"
+      "https://github.com/yolo-labz/anthropic-throttle-proxy",
+      "https://github.com/yolo-labz/zellij-vertical-tabs"
     ],
     "screenshot": "exploration-integrated-1280-dark.png",
-    "screenshot_sha256": "74df0872e48a9ff0149e36ed66688f30a93f91c4cd55019b32759a7c56b86644",
+    "screenshot_sha256": "e1635dce50d2b70150dce767113630343325b53635ef7dc6bc827adb68a33a6c",
     "imageFailureNavigation": "pass"
   },
   {
     "theme": "dark",
     "mode": "exploration-integrated",
-    "profile_sha256": "09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2",
+    "profile_sha256": "4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a",
     "renderer": "existing NixOS server fleet via interactive.attach",
     "identity": "brave-search",
     "browser_version": "155.0.8059.79",
@@ -145,10 +148,11 @@
       "https://github.com/yolo-labz/claude-mac-chrome",
       "https://github.com/yolo-labz/fand",
       "https://github.com/yolo-labz/kokoro-speakd",
-      "https://github.com/yolo-labz/anthropic-throttle-proxy"
+      "https://github.com/yolo-labz/anthropic-throttle-proxy",
+      "https://github.com/yolo-labz/zellij-vertical-tabs"
     ],
     "screenshot": "exploration-integrated-360-dark.png",
-    "screenshot_sha256": "54f8d38c8526efe251e4ac23d4160f449882df968048d5bc44aa43ebce2c55f9",
+    "screenshot_sha256": "4b3d1837a3a7a7f7f5e2151ea97b6dd1b76bacc0c6ad260cfdb08bd1f5c02eca",
     "imageFailureNavigation": "pass"
   }
 ]
