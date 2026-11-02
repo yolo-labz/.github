@@ -1,0 +1,395 @@
+{
+ "plate": "#1e1e2e",
+ "encoders": {
+  "webp": [
+   "-quality",
+   "88",
+   "-define",
+   "webp:method=4",
+   "-define",
+   "webp:thread-level=1"
+  ],
+  "avif": [
+   "-quality",
+   "60",
+   "-define",
+   "heic:speed=4",
+   "-define",
+   "heic:threads=1"
+  ]
+ },
+ "slots": [
+  [
+   "org",
+   "Org profile area",
+   887,
+   640
+  ],
+  [
+   "portfolio",
+   "Portfolio desktop hero",
+   804,
+   770
+  ],
+  [
+   "mobile",
+   "Mobile hero",
+   390,
+   520
+  ],
+  [
+   "avatar",
+   "Org avatar",
+   96,
+   96
+  ]
+ ],
+ "cells": [
+  {
+   "slot": "org",
+   "slot_label": "Org profile area",
+   "source": "gpt",
+   "source_label": "GPT master",
+   "width": 887,
+   "height": 640,
+   "weights": {
+    "png": 442447,
+    "webp": 23416,
+    "avif": 11836
+   },
+   "character_px": [
+    633,
+    574
+   ],
+   "skin": "#a6e49f",
+   "delta_e2000": 0.61,
+   "fit": "art-directed crop to the character, same margin as the Blender fit",
+   "crop": [
+    1229,
+    887
+   ],
+   "scale": 0.7217,
+   "upscaled": false,
+   "padded": false,
+   "character_bbox_native": [
+    877,
+    795
+   ]
+  },
+  {
+   "slot": "org",
+   "slot_label": "Org profile area",
+   "source": "blender",
+   "source_label": "Blender render",
+   "width": 887,
+   "height": 640,
+   "weights": {
+    "png": 62208,
+    "webp": 17182,
+    "avif": 8077
+   },
+   "character_px": [
+    626,
+    574
+   ],
+   "skin": "#a6e3a1",
+   "delta_e2000": 0.0,
+   "fit": "rendered natively at the slot size, camera fitted to the content",
+   "crop": [
+    887,
+    640
+   ],
+   "scale": 1.0,
+   "upscaled": false,
+   "padded": false
+  },
+  {
+   "slot": "org",
+   "slot_label": "Org profile area",
+   "source": "svgkit",
+   "source_label": "Vector model-sheet kit",
+   "width": 887,
+   "height": 640,
+   "weights": {
+    "png": 39435,
+    "webp": 16228,
+    "avif": 7682
+   },
+   "character_px": [
+    754,
+    533
+   ],
+   "skin": "#a6e3a1",
+   "delta_e2000": 0.0,
+   "fit": "vector, contained at 94 % (3:2 viewBox letterboxed on the plate)",
+   "crop": [
+    240,
+    160
+   ],
+   "scale": null,
+   "upscaled": false,
+   "padded": true
+  },
+  {
+   "slot": "portfolio",
+   "slot_label": "Portfolio desktop hero",
+   "source": "gpt",
+   "source_label": "GPT master",
+   "width": 804,
+   "height": 770,
+   "weights": {
+    "png": 489167,
+    "webp": 28762,
+    "avif": 14318
+   },
+   "character_px": [
+    761,
+    690
+   ],
+   "skin": "#a6e49f",
+   "delta_e2000": 0.61,
+   "fit": "art-directed crop to the character, same margin as the Blender fit",
+   "crop": [
+    926,
+    887
+   ],
+   "scale": 0.8683,
+   "upscaled": false,
+   "padded": false,
+   "character_bbox_native": [
+    877,
+    795
+   ]
+  },
+  {
+   "slot": "portfolio",
+   "slot_label": "Portfolio desktop hero",
+   "source": "blender",
+   "source_label": "Blender render",
+   "width": 804,
+   "height": 770,
+   "weights": {
+    "png": 72209,
+    "webp": 20740,
+    "avif": 9139
+   },
+   "character_px": [
+    753,
+    691
+   ],
+   "skin": "#a6e3a1",
+   "delta_e2000": 0.0,
+   "fit": "rendered natively at the slot size, camera fitted to the content",
+   "crop": [
+    804,
+    770
+   ],
+   "scale": 1.0,
+   "upscaled": false,
+   "padded": false
+  },
+  {
+   "slot": "portfolio",
+   "slot_label": "Portfolio desktop hero",
+   "source": "svgkit",
+   "source_label": "Vector model-sheet kit",
+   "width": 804,
+   "height": 770,
+   "weights": {
+    "png": 37007,
+    "webp": 14780,
+    "avif": 6677
+   },
+   "character_px": [
+    684,
+    483
+   ],
+   "skin": "#a6e3a1",
+   "delta_e2000": 0.0,
+   "fit": "vector, contained at 94 % (3:2 viewBox letterboxed on the plate)",
+   "crop": [
+    240,
+    160
+   ],
+   "scale": null,
+   "upscaled": false,
+   "padded": true
+  },
+  {
+   "slot": "mobile",
+   "slot_label": "Mobile hero",
+   "source": "gpt",
+   "source_label": "GPT master",
+   "width": 390,
+   "height": 520,
+   "weights": {
+    "png": 133439,
+    "webp": 11714,
+    "avif": 6096
+   },
+   "character_px": [
+    348,
+    315
+   ],
+   "skin": "#a6e49f",
+   "delta_e2000": 0.61,
+   "fit": "art-directed crop to the character, same margin as the Blender fit, plate-padded where the art has no room",
+   "crop": [
+    982,
+    1310
+   ],
+   "scale": 0.3971,
+   "upscaled": false,
+   "padded": true,
+   "character_bbox_native": [
+    877,
+    795
+   ]
+  },
+  {
+   "slot": "mobile",
+   "slot_label": "Mobile hero",
+   "source": "blender",
+   "source_label": "Blender render",
+   "width": 390,
+   "height": 520,
+   "weights": {
+    "png": 32302,
+    "webp": 9572,
+    "avif": 5063
+   },
+   "character_px": [
+    367,
+    336
+   ],
+   "skin": "#a6e3a1",
+   "delta_e2000": 0.0,
+   "fit": "rendered natively at the slot size, camera fitted to the content",
+   "crop": [
+    390,
+    520
+   ],
+   "scale": 1.0,
+   "upscaled": false,
+   "padded": false
+  },
+  {
+   "slot": "mobile",
+   "slot_label": "Mobile hero",
+   "source": "svgkit",
+   "source_label": "Vector model-sheet kit",
+   "width": 390,
+   "height": 520,
+   "weights": {
+    "png": 19153,
+    "webp": 7210,
+    "avif": 3626
+   },
+   "character_px": [
+    332,
+    235
+   ],
+   "skin": "#a6e3a1",
+   "delta_e2000": 0.0,
+   "fit": "vector, contained at 94 % (3:2 viewBox letterboxed on the plate)",
+   "crop": [
+    240,
+    160
+   ],
+   "scale": null,
+   "upscaled": false,
+   "padded": true
+  },
+  {
+   "slot": "avatar",
+   "slot_label": "Org avatar",
+   "source": "gpt",
+   "source_label": "GPT master",
+   "width": 96,
+   "height": 96,
+   "weights": {
+    "png": 12169,
+    "webp": 2484,
+    "avif": 1688
+   },
+   "character_px": [
+    96,
+    87
+   ],
+   "skin": "#a4e59f",
+   "delta_e2000": 0.89,
+   "fit": "dedicated square avatar master, downscaled",
+   "crop": [
+    1254,
+    1254
+   ],
+   "scale": 0.0766,
+   "upscaled": false,
+   "padded": false
+  },
+  {
+   "slot": "avatar",
+   "slot_label": "Org avatar",
+   "source": "blender",
+   "source_label": "Blender render",
+   "width": 96,
+   "height": 96,
+   "weights": {
+    "png": 4923,
+    "webp": 1498,
+    "avif": 1210
+   },
+   "character_px": [
+    88,
+    74
+   ],
+   "skin": "#a6e3a1",
+   "delta_e2000": 0.0,
+   "fit": "rendered natively at the slot size, camera fitted to the content (head only)",
+   "crop": [
+    96,
+    96
+   ],
+   "scale": 1.0,
+   "upscaled": false,
+   "padded": false
+  },
+  {
+   "slot": "avatar",
+   "slot_label": "Org avatar",
+   "source": "svgkit",
+   "source_label": "Vector model-sheet kit",
+   "width": 96,
+   "height": 96,
+   "weights": {
+    "png": 3191,
+    "webp": 1294,
+    "avif": 811
+   },
+   "character_px": [
+    88,
+    50
+   ],
+   "skin": "#a6e3a1",
+   "delta_e2000": 0.0,
+   "fit": "vector avatar tile, rendered at 96 px",
+   "crop": [
+    128,
+    128
+   ],
+   "scale": 0.75,
+   "upscaled": false,
+   "padded": false
+  }
+ ],
+ "sources_sha256": {
+  "gremlin-avatar.svg": "6752b26a4c2c2272d3486c9634c8c9949d3d199eb3e53a6aa26715ad1c9405ea",
+  "gremlin-hero.svg": "96c9d38c17263cb3cb8943a3e86d4f88053e5965416febb2eda1c7a3d2500543",
+  "gremlin-square-avatar.png": "ceb4f3cbf60b8254660290e60dc3e61266b3c02a6be3c71a64a8d47ac02bb554",
+  "gremlin-wide-hero.png": "da70db22366e8e849b22eb3e8c3dcd0ec53274135ee0bf1ee309cb2704a0d9f4",
+  "logo-mark-dark.png": "a3868d9146ab79e18d98a3aad7bce8db00e691551deba3c5dfada4c236553a6f",
+  "logo-mark-dark.svg": "4f0b2c31c673019f32563b4c2bdcb0d491f8d190e6133cec5fdc42f143e5dfe9",
+  "logo-wordmark-dark.png": "69ce4d3ab501907709db1b866e1381b1a06c07317cac5a914e09787a37daa189",
+  "logo-wordmark-dark.svg": "237802a4999beb4b1a917205897303b7078b80bf01f33be40d5ec808a252ca86"
+ }
+}
