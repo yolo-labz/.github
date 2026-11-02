@@ -4,11 +4,21 @@
     "private": false,
     "default_branch": "main",
     "security_and_analysis": {
-      "secret_scanning": {"status": "enabled"},
-      "secret_scanning_push_protection": {"status": "enabled"}
+      "secret_scanning": {
+        "status": "enabled"
+      },
+      "secret_scanning_push_protection": {
+        "status": "enabled"
+      }
     }
   },
-  "rulesets": [{"name": "main-protection", "target": "branch", "enforcement": "active"}],
-  "dependabot": ".github/dependabot.yml",
-  "last_success": "2026-11-01T10:00:00Z"
+  "rulesets": [
+    {
+      "name": "main-protection",
+      "target": "branch",
+      "enforcement": "active"
+    }
+  ],
+  "last_success": "2026-11-01T10:00:00Z",
+  "updater": "dependabot"
 }

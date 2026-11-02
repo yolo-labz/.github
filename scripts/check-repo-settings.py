@@ -63,7 +63,7 @@ class RepoState:
     push_protection: bool = False
     ruleset: str | None = None  # name of the protecting ruleset
     ruleset_blocked: str | None = None  # "plan-ceiling" when the API refuses
-    dependabot: bool = False
+    updater: str | None = None  # "dependabot" | "renovate"
     last_success: datetime | None = None
     max_age_days: int = MAX_AGE_DAYS
 
@@ -85,7 +85,7 @@ class RepoState:
         return (
             f"  {self.name:28.28} {self.visibility:7} "
             f"{yn(self.secret_scanning):4} {yn(self.push_protection):4} "
-            f"{ruleset:16.16} {yn(self.dependabot):4} {self.ci}"
+            f"{ruleset:16.16} {self.updater or '-':10.10} {self.ci}"
         )
 
 
@@ -141,9 +141,14 @@ def check(state: RepoState) -> list[Finding]:
                 )
             )
 
-    if not state.dependabot:
+    if state.updater is None:
         findings.append(
-            Finding(state.name, "dependabot", "error", "no .github/dependabot.yml")
+            Finding(
+                state.name,
+                "updater",
+                "error",
+                "no .github/dependabot.yml and no renovate config",
+            )
         )
 
     if state.ci == "none":
@@ -202,12 +207,29 @@ def fetch_rulesets(
     return None, None
 
 
-def fetch_dependabot(org: str, repo: str) -> bool:
-    for name in (".github/dependabot.yml", ".github/dependabot.yaml"):
+UPDATE_CONFIGS = (
+    (".github/dependabot.yml", "dependabot"),
+    (".github/dependabot.yaml", "dependabot"),
+    ("renovate.json", "renovate"),
+    (".github/renovate.json", "renovate"),
+    (".renovaterc", "renovate"),
+    (".renovaterc.json", "renovate"),
+)
+
+
+def fetch_updater(org: str, repo: str) -> str | None:
+    """Which dependency updater owns this repo, if any.
+
+    Dependabot is not the only correct answer: `wa` and `zellij-vertical-tabs`
+    run Renovate, and a second updater there would duplicate every PR. The gate
+    asks "is anything maintaining dependencies?", not "is the file called
+    dependabot.yml?".
+    """
+    for name, owner in UPDATE_CONFIGS:
         payload, _ = api_optional(f"repos/{org}/{repo}/contents/{name}")
         if payload is not None:
-            return True
-    return False
+            return owner
+    return None
 
 
 def fetch_last_success(org: str, repo: str, max_age_days: int) -> datetime | None:
@@ -229,7 +251,7 @@ def state_from(
     *,
     ruleset: str | None,
     blocked: str | None,
-    dependabot: bool,
+    updater: str | None,
     last_success: datetime | None,
     max_age_days: int,
 ) -> RepoState:
@@ -247,7 +269,7 @@ def state_from(
         == "enabled",
         ruleset=ruleset,
         ruleset_blocked=blocked,
-        dependabot=dependabot,
+        updater=updater,
         last_success=last_success,
         max_age_days=max_age_days,
     )
@@ -266,7 +288,7 @@ def live_states(org: str, max_age_days: int) -> list[RepoState]:
                 item,
                 ruleset=ruleset,
                 blocked=blocked,
-                dependabot=fetch_dependabot(org, item["name"]),
+                updater=fetch_updater(org, item["name"]),
                 last_success=fetch_last_success(org, item["name"], max_age_days),
                 max_age_days=max_age_days,
             )
@@ -298,7 +320,7 @@ def fixture_states(directory: Path, max_age_days: int) -> list[RepoState]:
                 repo,
                 ruleset=ruleset,
                 blocked=blocked,
-                dependabot=bool(snapshot.get("dependabot")),
+                updater=snapshot.get("updater"),
                 last_success=(
                     datetime.fromisoformat(last_success.replace("Z", "+00:00"))
                     if last_success
@@ -330,7 +352,7 @@ def run(args: argparse.Namespace) -> int:
     notes = [f for f in findings if f.level == "note"]
 
     print(f"== repo settings: {len(states)} active repos in {args.org}")
-    print(f"  {'repo':28.28} {'vis':7} {'ss':4} {'pp':4} {'ruleset':16.16} {'dep':4} ci")
+    print(f"  {'repo':28.28} {'vis':7} {'ss':4} {'pp':4} {'ruleset':16.16} {'updater':10.10} ci")
     for state in states:
         print(state.row())
 
@@ -364,7 +386,7 @@ def run(args: argparse.Namespace) -> int:
                 "push_protection": state.push_protection,
                 "ruleset": state.ruleset,
                 "ruleset_blocked": state.ruleset_blocked,
-                "dependabot": state.dependabot,
+                "updater": state.updater,
                 "ci": state.ci,
             }
             for state in states

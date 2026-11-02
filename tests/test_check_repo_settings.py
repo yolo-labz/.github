@@ -54,12 +54,12 @@ class CheckTests(unittest.TestCase):
     def test_public_repo_missing_everything_is_an_error(self) -> None:
         findings = settings.check(settings.RepoState(name="r", private=False))
         rules = {f.rule for f in findings if f.level == "error"}
-        self.assertEqual(rules, {"secret_scanning", "push_protection", "ruleset", "dependabot"})
+        self.assertEqual(rules, {"secret_scanning", "push_protection", "ruleset", "updater"})
         self.assertNotIn("plan-ceiling", {f.level for f in findings})
 
     def test_private_repo_missing_protection_is_plan_ceiling_not_drift(self) -> None:
         findings = settings.check(
-            settings.RepoState(name="r", private=True, dependabot=True)
+            settings.RepoState(name="r", private=True, updater="dependabot")
         )
         self.assertEqual(
             {f.rule for f in findings if f.level == "plan-ceiling"},
@@ -78,7 +78,21 @@ class CheckTests(unittest.TestCase):
                 last_success=datetime.now(timezone.utc) - timedelta(days=1),
             )
         )
-        self.assertEqual([(f.rule, f.level) for f in findings], [("dependabot", "error")])
+        self.assertEqual([(f.rule, f.level) for f in findings], [("updater", "error")])
+
+    def test_renovate_satisfies_the_updater_rule(self) -> None:
+        """wa and zellij-vertical-tabs run Renovate; a second updater would duplicate PRs."""
+        findings = settings.check(
+            settings.RepoState(
+                name="r",
+                secret_scanning=True,
+                push_protection=True,
+                ruleset="main-protection",
+                updater="renovate",
+                last_success=datetime.now(timezone.utc) - timedelta(days=1),
+            )
+        )
+        self.assertEqual(findings, [])
 
     def test_compliant_repo_has_no_findings(self) -> None:
         findings = settings.check(
@@ -87,7 +101,7 @@ class CheckTests(unittest.TestCase):
                 secret_scanning=True,
                 push_protection=True,
                 ruleset="main-protection",
-                dependabot=True,
+                updater="dependabot",
                 last_success=datetime.now(timezone.utc) - timedelta(days=1),
             )
         )
@@ -101,7 +115,7 @@ class CheckTests(unittest.TestCase):
                 secret_scanning=True,
                 push_protection=True,
                 ruleset="main-protection",
-                dependabot=True,
+                updater="dependabot",
                 last_success=stale,
             )
         )
@@ -112,8 +126,8 @@ class CliTests(unittest.TestCase):
     def test_mixed_fixtures_fail_with_counts(self) -> None:
         code, output = run(FIXTURES)
         self.assertEqual(code, 1, output)
-        # public-bare: scanning + push + ruleset + dependabot. private-bare has
-        # dependabot, so its three gaps are plan-ceiling, not violations.
+        # public-bare: scanning + push + ruleset + updater. private-bare has a
+        # dependabot config, so its three gaps are plan-ceiling, not violations.
         self.assertIn("violations: 4", output)
         self.assertIn("plan-ceiling: 3", output)
         self.assertIn("RESULT: FAIL", output)
@@ -134,7 +148,7 @@ class CliTests(unittest.TestCase):
             code, output = run(CLEAN, "--max-age-days", "36500", "--json-log", str(log))
             self.assertEqual(code, 0, output)
             rows = json.loads(log.read_text(encoding="utf-8"))
-            self.assertEqual([row["repo"] for row in rows], ["public-clean"])
+            self.assertEqual([row["repo"] for row in rows], ["public-clean", "renovate-repo"])
             self.assertTrue(rows[0]["ruleset"])
 
 
