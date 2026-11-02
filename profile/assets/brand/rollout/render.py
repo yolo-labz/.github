@@ -76,13 +76,18 @@ def render():
                 assert all(img["loaded"] and img["alt"] for img in evidence["images"])
                 assert evidence["images"][0]["source"] == f"logo-wordmark-{theme}.svg"
                 assert any(img["source"] == proof["file"] for img in evidence["images"])
-                assert len(evidence["links"]) == 6, "Missing flagship navigation"
+                assert len(evidence["links"]) == checks["listed_projects"], (
+                    "Missing project navigation"
+                )
                 screenshot = f"exploration-integrated-{width}-{theme}.png"
                 page.screenshot(path=str(HERE / screenshot), full_page=True)
                 page.locator("main img").evaluate_all(
                     "images => images.forEach(img => img.remove())"
                 )
-                assert page.locator("main li strong a").count() == 6
+                assert (
+                    page.locator("main li strong a").count()
+                    == checks["listed_projects"]
+                )
                 assert page.locator("main h1").is_visible()
                 results.append(
                     {
