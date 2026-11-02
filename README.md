@@ -30,15 +30,16 @@ cries wolf and the real drift hides in the noise:
 | secret scanning | missing on a **public** repo | missing on a **private** repo |
 | push protection | missing on a **public** repo | missing on a **private** repo |
 | default-branch ruleset | missing on a **public** repo | missing on a **private** repo |
-| dependabot config | missing on any repo | — |
+| dependency updater (`dependabot.yml` or Renovate) | neither present | — |
 | successful run ≤ 30 days | — (a `note`, not a failure) | — |
 
 Why the ceiling is real: the free org plan answers `403 Upgrade to GitHub Pro or make this
 repository public` for rulesets and secret scanning on private repos (measured 02/11/2026 on six
 private repos). Flagging those as drift would produce 27 permanent errors that nobody can fix
 without a plan or visibility change, so they are marked `plan-ceiling` in the table and counted
-separately. Dependabot is free everywhere, so a missing config is always a violation. A dormant
-repo with no recent run is inactive, not insecure — hence a note.
+separately. An updater is free everywhere, so having neither Dependabot nor Renovate is always a
+violation; `wa` and `zellij-vertical-tabs` run Renovate, and asking them for a second updater would
+only duplicate every PR. A dormant repo with no recent run is inactive, not insecure — hence a note.
 
 The check runs weekly (Monday 06:00 UTC) and on `workflow_dispatch` from `.github/workflows/profile-check.yml`;
 its own steps are skipped on `pull_request`, where the org-wide token is unavailable.
