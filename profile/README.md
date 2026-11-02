@@ -7,7 +7,7 @@
 
 Open-source tools for scripting messaging, browser workflows and local services.
 
-<img src="https://raw.githubusercontent.com/yolo-labz/.github/main/profile/assets/brand/rollout/gremlin-wide-hero.png" alt="Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents" width="640">
+<img src="https://raw.githubusercontent.com/yolo-labz/.github/main/profile/assets/brand/rollout/gremlin-wide-hero.png" alt="Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents" width="640" height="320">
 
 *GPT-generated gremlin exploration — an illustration proposal, not an approved brand master.*
 
