@@ -27,6 +27,14 @@ gh pr view <n> --repo <owner/repo> --json headRefOid --jq .headRefOid
 gh pr merge <n> --repo <owner/repo> --squash --delete-branch
 ```
 
+**And the flip side, tested 04/11/2026 on `yolo-labz/diploma-equivalence#43`:** a *hand* edit of a
+workflow file cannot even be written with this token, so the recipe covers bot heads only. Trying to
+add one input (`enable-cache: true`) to two workflow files on a dependabot branch returned
+`403 refusing to allow an OAuth App to create or update workflow '.github/workflows/mypy.yml' without
+'workflow' scope` for one file and a plain `404 Not Found` for the other (`ci.yml`) — GitHub surfaces the
+same refusal differently per file. Nothing landed, and no amount of branch freshness changes that: for
+the *edit* itself you need the scope.
+
 The requirement is a **dependabot-authored head**. `gh pr update-branch` does *not* qualify — it fails
 with the same scope error (`updatePullRequestBranch`) even though it moves the sha. Hand-made workflow
 changes (a human editing a pin, a new step) cannot use this path at all; they need the scope:
