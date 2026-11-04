@@ -156,6 +156,45 @@ class CheckTests(unittest.TestCase):
         self.assertEqual(none.check_coverage, "-")
         self.assertIn("2/2", full.row())
 
+    def test_every_runner_offline_is_an_error(self) -> None:
+        """vm103 carried five repos' only runners; when it went down on
+        04/11/2026 those repos were red for infrastructure, not for code."""
+        findings = settings.check(
+            settings.RepoState(
+                name="r",
+                private=False,
+                secret_scanning=True,
+                push_protection=True,
+                ruleset="main-protection",
+                runner_total=1,
+                runner_online=0,
+                updater="dependabot",
+                last_success=datetime.now(timezone.utc),
+            )
+        )
+        self.assertEqual([(f.rule, f.level) for f in findings], [("runner", "error")])
+
+    def test_one_runner_online_is_enough(self) -> None:
+        findings = settings.check(
+            settings.RepoState(
+                name="r",
+                private=False,
+                secret_scanning=True,
+                push_protection=True,
+                ruleset="main-protection",
+                runner_total=2,
+                runner_online=1,
+                updater="dependabot",
+                last_success=datetime.now(timezone.utc),
+            )
+        )
+        self.assertEqual(findings, [])
+
+    def test_runner_column_reports_online_over_total(self) -> None:
+        self.assertEqual(settings.RepoState(name="r").runners, "-")
+        self.assertEqual(settings.RepoState(name="r", runner_total=2, runner_online=1).runners, "1/2")
+        self.assertIn("0/1", settings.RepoState(name="r", runner_total=1, runner_online=0).row())
+
     def test_stale_ci_is_a_note_never_an_error(self) -> None:
         stale = datetime.now(timezone.utc) - timedelta(days=90)
         findings = settings.check(
