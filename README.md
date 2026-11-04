@@ -8,6 +8,10 @@ Org-level GitHub configuration for [yolo-labz](https://github.com/yolo-labz). Pr
 - (future) `ISSUE_TEMPLATE/` — org-default issue templates
 - (future) `workflow-templates/` — reusable GHA workflow templates for plugin repos
 
+## Merging
+
+- [`docs/merging-workflow-prs.md`](docs/merging-workflow-prs.md) — how to land a PR that touches `.github/workflows/*` without the `workflow` token scope (the `@dependabot recreate` recipe), plus the routine-vs-major-jump checks. Read this before filing a permissions blocker.
+
 ## Checks
 
 Both checkers are stdlib-only, read GitHub through `gh`, and accept `--offline <dir>` so the test
