@@ -70,6 +70,11 @@ class RepoState:
     # before it had any CI at all.
     required_checks: tuple[str, ...] = ()
     produced_checks: frozenset[str] = frozenset()
+    # Self-hosted registrations in this repo: how many exist and how many are
+    # online. A repo whose every runner is offline is red for infrastructure,
+    # not for code — the vm103 outage of 04/11/2026 reddened five repos at once.
+    runner_total: int = 0
+    runner_online: int = 0
     last_success: datetime | None = None
     max_age_days: int = MAX_AGE_DAYS
 
@@ -83,6 +88,12 @@ class RepoState:
             return "none"
         age = datetime.now(timezone.utc) - self.last_success
         return "fresh" if age <= timedelta(days=self.max_age_days) else f"stale({age.days}d)"
+
+    @property
+    def runners(self) -> str:
+        if not self.runner_total:
+            return "-"
+        return f"{self.runner_online}/{self.runner_total}"
 
     @property
     def check_coverage(self) -> str:
@@ -102,7 +113,7 @@ class RepoState:
             f"  {self.name:28.28} {self.visibility:7} "
             f"{yn(self.secret_scanning):4} {yn(self.push_protection):4} "
             f"{ruleset:16.16} {self.updater or '-':10.10} "
-            f"{self.check_coverage:>7} {self.ci}"
+            f"{self.check_coverage:>7} {self.runners:>7} {self.ci}"
         )
 
 
@@ -157,6 +168,16 @@ def check(state: RepoState) -> list[Finding]:
                     f"no active ruleset on {state.default_branch}",
                 )
             )
+
+    if state.runner_total and state.runner_online == 0:
+        findings.append(
+            Finding(
+                state.name,
+                "runner",
+                "error",
+                f"all {state.runner_total} self-hosted runner(s) offline",
+            )
+        )
 
     for name in state.missing_checks():
         findings.append(
@@ -245,6 +266,14 @@ def required_checks(detail: dict) -> tuple[str, ...]:
             if context:
                 contexts.add(context)
     return tuple(sorted(contexts))
+
+
+def fetch_runners(org: str, repo: str) -> tuple[int, int]:
+    """(registered self-hosted runners, how many are online)."""
+    payload, _ = api_optional(f"repos/{org}/{repo}/actions/runners?per_page=100")
+    runners = (payload or {}).get("runners", [])
+    online = sum(1 for r in runners if r.get("status") == "online")
+    return len(runners), online
 
 
 def produced_checks_for(org: str, repo: str, branch: str) -> frozenset[str]:
@@ -343,6 +372,8 @@ def state_from(
     max_age_days: int,
     required: tuple[str, ...] = (),
     produced: frozenset[str] = frozenset(),
+    runner_total: int = 0,
+    runner_online: int = 0,
 ) -> RepoState:
     """One RepoState from an API/fixture repo payload plus its side data."""
     analysis = payload.get("security_and_analysis") or {}
@@ -361,6 +392,8 @@ def state_from(
         updater=updater,
         required_checks=required,
         produced_checks=produced,
+        runner_total=runner_total,
+        runner_online=runner_online,
         last_success=last_success,
         max_age_days=max_age_days,
     )
@@ -374,6 +407,7 @@ def live_states(org: str, max_age_days: int) -> list[RepoState]:
             continue
         branch = item.get("default_branch") or "main"
         ruleset, required, blocked = fetch_rulesets(org, item["name"], branch)
+        runner_total, runner_online = fetch_runners(org, item["name"])
         states.append(
             state_from(
                 item,
@@ -382,6 +416,8 @@ def live_states(org: str, max_age_days: int) -> list[RepoState]:
                 updater=fetch_updater(org, item["name"]),
                 last_success=fetch_last_success(org, item["name"], max_age_days),
                 max_age_days=max_age_days,
+                runner_total=runner_total,
+                runner_online=runner_online,
                 required=required,
                 # Only worth the two API calls when the ruleset demands
                 # something: otherwise there is nothing to compare against.
@@ -412,6 +448,8 @@ def fixture_states(directory: Path, max_age_days: int) -> list[RepoState]:
                 if summary.get("target") == "branch" and summary.get("enforcement") == "active":
                     ruleset = summary.get("name")
         last_success = snapshot.get("last_success")
+        runner_total = int(snapshot.get("runner_total") or 0)
+        runner_online = int(snapshot.get("runner_online") or 0)
         required = tuple(snapshot.get("required_checks") or ())
         produced = frozenset(snapshot.get("produced_checks") or ())
         states.append(
@@ -426,6 +464,8 @@ def fixture_states(directory: Path, max_age_days: int) -> list[RepoState]:
                     else None
                 ),
                 max_age_days=max_age_days,
+                runner_total=runner_total,
+                runner_online=runner_online,
                 required=required,
                 produced=produced,
             )
@@ -488,6 +528,8 @@ def run(args: argparse.Namespace) -> int:
                 "ruleset": state.ruleset,
                 "ruleset_blocked": state.ruleset_blocked,
                 "updater": state.updater,
+                "runner_total": state.runner_total,
+                "runner_online": state.runner_online,
                 "required_checks": list(state.required_checks),
                 "produced_checks": sorted(state.produced_checks),
                 "ci": state.ci,
