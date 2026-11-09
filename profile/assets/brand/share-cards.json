@@ -20,7 +20,8 @@
       "image": ".github/og-card.png",
       "mime": "image/png",
       "width": 1200,
-      "height": 630
+      "height": 630,
+      "note": "SITE card, not a copy of the canonical: the site's own sentence on the brand frame (portfolio docs/share-card-decision.md, Option A, 08/11/2026). When it goes stale, re-render it with that repo's scripts/make-share-card.py; never copy the org card over it."
     },
     {
       "name": "blog",
