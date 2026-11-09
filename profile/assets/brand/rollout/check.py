@@ -14,6 +14,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 RAW = "https://raw.githubusercontent.com/yolo-labz/.github/main/"
+HERO = "gremlin-hero-gpt-887x640.webp"
 BOLD_LINK_RE = re.compile(r"\*\*\[([^]]+)\]\((https://[^)]+)\)\*\*")
 
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -131,9 +132,20 @@ def main(argv=None):
         assert generation["reference"] == "gremlin-anchor.png"
         assert generation["receipt"]["bytes"] == image.stat().st_size
         assert proof["copy_source_commit"] == "fb4a5570fade07e9ea97fc85695fe95e22bb7a95"
-        assert f"profile/assets/brand/rollout/{proof['file']}" in text
-        assert "GPT-generated" in text and "exploration" in text
-        assert "not an approved brand master" in text
+        # Adopted 08/11/2026 (hero-decision/README.md): the README serves a WebP
+        # crop published from this exact GPT master, never the master PNG itself.
+        served = json.loads((HERE.parent / "hero/manifest.json").read_text())
+        assert served["inputs"][f"rollout/{proof['file']}"] == proof["sha256"]
+        hero = next(f for f in served["files"] if f["file"] == HERO)
+        assert (
+            hashlib.sha256((HERE.parent / "hero" / HERO).read_bytes()).hexdigest()
+            == hero["sha256"]
+        )
+        assert f"profile/assets/brand/hero/{HERO}" in text
+        assert served["alt"]["hero"] in text, (
+            "Hero alt text must match the published one"
+        )
+        assert "GPT-generated" in text
     links = sorted(set(re.findall(r"\]\((https://[^)]+)\)", text)))
     receipt = {
         "mode": "draft" if placeholder else "exploration-integrated",
