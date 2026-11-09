@@ -36,8 +36,9 @@ same refusal differently per file. Nothing landed, and no amount of branch fresh
 the *edit* itself you need the scope — or SSH:
 
 **Hand edits to workflow files go over SSH:** OAuth scopes do not apply to an SSH-key push, so
-`git push git@github.com:<owner>/<repo>.git HEAD:<branch>` lands the edit the API refused (verified
-08/11/2026: `diploma-equivalence#43` head `d84e51e5`).
+`git push git@github.com:<owner>/<repo>.git HEAD:<branch>` lands the edit the API refused, and the PR then merges with the normal `gh pr merge` (verified
+08/11/2026: `diploma-equivalence#43`, SSH-pushed head `40208071`, merged `51c6be92`; update a BEHIND branch the same
+way — `git merge origin/main` + SSH push — because `gh pr update-branch` is refused).
 
 The requirement is a **dependabot-authored head**. `gh pr update-branch` does *not* qualify — it fails
 with the same scope error (`updatePullRequestBranch`) even though it moves the sha. Hand-made workflow
