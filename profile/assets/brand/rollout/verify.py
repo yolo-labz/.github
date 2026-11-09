@@ -52,7 +52,7 @@ def verify():
         assert len(result["links"]) == expected_links
         assert all(img["loaded"] and img["alt"] for img in result["images"])
         assert result["images"][0]["source"] == f"logo-wordmark-{result['theme']}.svg"
-        assert any(img["source"] == "gremlin-wide-hero.png" for img in result["images"])
+        assert any(img["source"] == "gremlin-hero-gpt-887x640.webp" for img in result["images"])
         name = f"exploration-integrated-{result['viewport']}-{result['theme']}.png"
         assert result["screenshot"] == name
         png = (HERE / name).read_bytes()

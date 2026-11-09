@@ -2,7 +2,7 @@
   {
     "theme": "light",
     "mode": "exploration-integrated",
-    "profile_sha256": "4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a",
+    "profile_sha256": "b30d995645bf423e3e06a2a8fea716d081b7952b1fd76f83a87c97d3422d285c",
     "renderer": "existing NixOS server fleet via interactive.attach",
     "identity": "brave-search",
     "browser_version": "155.0.8059.79",
@@ -19,9 +19,9 @@
       },
       {
         "alt": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
-        "source": "gremlin-wide-hero.png",
+        "source": "gremlin-hero-gpt-887x640.webp",
         "loaded": true,
-        "naturalWidth": 1774,
+        "naturalWidth": 887,
         "displayedWidth": 640
       }
     ],
@@ -35,13 +35,13 @@
       "https://github.com/yolo-labz/zellij-vertical-tabs"
     ],
     "screenshot": "exploration-integrated-1280-light.png",
-    "screenshot_sha256": "b3ccbe65c5424260335a8d84e1a1827665f6b9ba8cc250ca1b60540c35526748",
+    "screenshot_sha256": "34422b75cb2baf3251d0929b8f6c880e35c331ed71cef572b0b9f15d9a8bc942",
     "imageFailureNavigation": "pass"
   },
   {
     "theme": "light",
     "mode": "exploration-integrated",
-    "profile_sha256": "4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a",
+    "profile_sha256": "b30d995645bf423e3e06a2a8fea716d081b7952b1fd76f83a87c97d3422d285c",
     "renderer": "existing NixOS server fleet via interactive.attach",
     "identity": "brave-search",
     "browser_version": "155.0.8059.79",
@@ -58,9 +58,9 @@
       },
       {
         "alt": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
-        "source": "gremlin-wide-hero.png",
+        "source": "gremlin-hero-gpt-887x640.webp",
         "loaded": true,
-        "naturalWidth": 1774,
+        "naturalWidth": 887,
         "displayedWidth": 313
       }
     ],
@@ -74,13 +74,13 @@
       "https://github.com/yolo-labz/zellij-vertical-tabs"
     ],
     "screenshot": "exploration-integrated-360-light.png",
-    "screenshot_sha256": "1b8b643aeb24a468c124355080519f47ad5256b697d865d850432e3c4abb56ce",
+    "screenshot_sha256": "5e3a1050f23d76dacbe962b4d2bb5aedf5b46aa633a8dd99b8024425b4b79a46",
     "imageFailureNavigation": "pass"
   },
   {
     "theme": "dark",
     "mode": "exploration-integrated",
-    "profile_sha256": "4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a",
+    "profile_sha256": "b30d995645bf423e3e06a2a8fea716d081b7952b1fd76f83a87c97d3422d285c",
     "renderer": "existing NixOS server fleet via interactive.attach",
     "identity": "brave-search",
     "browser_version": "155.0.8059.79",
@@ -97,9 +97,9 @@
       },
       {
         "alt": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
-        "source": "gremlin-wide-hero.png",
+        "source": "gremlin-hero-gpt-887x640.webp",
         "loaded": true,
-        "naturalWidth": 1774,
+        "naturalWidth": 887,
         "displayedWidth": 640
       }
     ],
@@ -113,13 +113,13 @@
       "https://github.com/yolo-labz/zellij-vertical-tabs"
     ],
     "screenshot": "exploration-integrated-1280-dark.png",
-    "screenshot_sha256": "e1635dce50d2b70150dce767113630343325b53635ef7dc6bc827adb68a33a6c",
+    "screenshot_sha256": "62b963e692d893111973ef4eec8d0ca0379b6c425b7d9a3bbc5804a7bf69b46c",
     "imageFailureNavigation": "pass"
   },
   {
     "theme": "dark",
     "mode": "exploration-integrated",
-    "profile_sha256": "4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a",
+    "profile_sha256": "b30d995645bf423e3e06a2a8fea716d081b7952b1fd76f83a87c97d3422d285c",
     "renderer": "existing NixOS server fleet via interactive.attach",
     "identity": "brave-search",
     "browser_version": "155.0.8059.79",
@@ -136,9 +136,9 @@
       },
       {
         "alt": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
-        "source": "gremlin-wide-hero.png",
+        "source": "gremlin-hero-gpt-887x640.webp",
         "loaded": true,
-        "naturalWidth": 1774,
+        "naturalWidth": 887,
         "displayedWidth": 313
       }
     ],
@@ -152,7 +152,7 @@
       "https://github.com/yolo-labz/zellij-vertical-tabs"
     ],
     "screenshot": "exploration-integrated-360-dark.png",
-    "screenshot_sha256": "4b3d1837a3a7a7f7f5e2151ea97b6dd1b76bacc0c6ad260cfdb08bd1f5c02eca",
+    "screenshot_sha256": "84f42fb7daabda1132aa5bb5c10af4e0460014dde79055e85371f053de5eaf16",
     "imageFailureNavigation": "pass"
   }
 ]
