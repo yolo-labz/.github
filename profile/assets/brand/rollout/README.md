@@ -1,7 +1,8 @@
 # Front-page exploration integration evidence
 
-This is a draft profile proposal, not the live organization page or an approved
-brand master. Existing vector wordmarks remain unchanged. The exact GPT wide
+This began as a draft profile proposal. Since 08/11/2026 the hero is adopted
+(`../hero-decision/README.md`): the README serves `../hero/gremlin-hero-gpt-887x640.webp`,
+cut from the GPT master below, and `check.py` pins that chain. Existing vector wordmarks remain unchanged. The exact GPT wide
 hero and sanitized lineage are in `art-provenance.json`; copy is pinned to #10.
 
 ## Offline acceptance (no browser)

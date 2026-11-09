@@ -58,6 +58,8 @@ brand/
 │   ├── favicon-{16,32,64,128,512}.png
 │   ├── favicon.ico                   multi-res 16+32+64
 │   └── apple-touch-icon.png          180px, dark mark on base
+├── hero/                             SERVED hero + avatar (adopted 08/11/2026): GPT hero crops
+│                                     (WebP/AVIF), vector avatar at 96/460 px; manifest.json pins bytes
 ├── mascot/                           the programming gremlin — 5-state character system
 │   ├── README.md                     grammar + states + binding usage rules
 │   ├── gremlin-model-sheet.svg       construction spec (head geometry, palette, rules)

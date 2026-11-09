@@ -25,7 +25,9 @@ def embedded_preview(checks):
     for name in set(re.findall(r'(?:src|srcset)="(profile/[^"?#]+)"', html)):
         path = (ROOT / name).resolve()
         assert path.is_relative_to(ROOT) and path.is_file(), "Invalid preview asset"
-        mime = "image/svg+xml" if path.suffix == ".svg" else "image/png"
+        mime = {".svg": "image/svg+xml", ".webp": "image/webp"}.get(
+            path.suffix, "image/png"
+        )
         data = f"data:{mime};base64," + base64.b64encode(path.read_bytes()).decode()
         assets[data] = path.name
         html = html.replace(f'="{name}"', f'="{data}"')
@@ -35,7 +37,6 @@ def embedded_preview(checks):
 
 def render():
     checks = json.loads((HERE / "checks.json").read_text())
-    proof = json.loads((HERE / "art-provenance.json").read_text())
     assert checks["mode"] == "exploration-integrated"
     html, assets = embedded_preview(checks)
     results = []
@@ -75,7 +76,10 @@ def render():
                 assert evidence["contentWidth"] <= width, "Horizontal overflow"
                 assert all(img["loaded"] and img["alt"] for img in evidence["images"])
                 assert evidence["images"][0]["source"] == f"logo-wordmark-{theme}.svg"
-                assert any(img["source"] == proof["file"] for img in evidence["images"])
+                assert any(
+                    img["source"] == "gremlin-hero-gpt-887x640.webp"
+                    for img in evidence["images"]
+                )
                 assert len(evidence["links"]) == checks["listed_projects"], (
                     "Missing project navigation"
                 )
