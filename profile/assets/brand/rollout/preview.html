@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="profile-sha256" content="09fbf802ea139a97daaee4d3ece83f0833963480b62498f4b65e7eda0d3b07e2">
+<meta name="profile-sha256" content="4f6c6cfb96a40dc99d8c6cd2be2f985b7e656dd53d7d5ef41fac08105640560a">
 <base href="../../../../">
 <title>Yolo Labz — local README integration preview</title>
 <style>
@@ -37,7 +37,7 @@
 </picture></themed-picture>
 <h1 dir="auto">Small tools. Deliberate automation.</h1>
 <p dir="auto">Open-source tools for scripting messaging, browser workflows and local services.</p>
-<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="profile/assets/brand/rollout/gremlin-wide-hero.png"><img src="profile/assets/brand/rollout/gremlin-wide-hero.png" alt="Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents" width="640" style="max-width: 100%;"></a></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="profile/assets/brand/rollout/gremlin-wide-hero.png"><img src="profile/assets/brand/rollout/gremlin-wide-hero.png" alt="Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents" width="640" height="320" style="max-width: 100%; height: auto; max-height: 320px;; aspect-ratio: 640 / 320; background-color: var(--bgColor-muted); border-radius: 6px" class="js-gh-image-fallback"></a></p>
 <p dir="auto"><em>GPT-generated gremlin exploration — an illustration proposal, not an approved brand master.</em></p>
 <h2 dir="auto">Start with a task</h2>
 <h3 dir="auto">Connect your workflows</h3>
@@ -61,8 +61,15 @@ Single-user Unix-socket daemon; model assets and an audio player required. Queue
 <li><strong><a href="https://github.com/yolo-labz/anthropic-throttle-proxy">anthropic-throttle-proxy</a></strong> — pace Anthropic API traffic across clients with per-bearer queues and a live dashboard.<br>
 Enable fair/reactive queue mode; the default is off. Pacing does not create provider quota.</li>
 </ul>
+<h3 dir="auto">Shape your workspace</h3>
+<ul dir="auto">
+<li><strong><a href="https://github.com/yolo-labz/zellij-vertical-tabs">zellij-vertical-tabs</a></strong> — list Zellij tabs vertically in a sidebar whose scrolling viewport keeps the focused tab visible.<br>
+A WASM plugin you build with <code class="notranslate">nix build</code> or <code class="notranslate">cargo build</code>, not a standalone binary; it needs the ReadApplicationState and ChangeApplicationState permissions.</li>
+</ul>
 <p dir="auto">Each project's README has its installation path, operating limits and license.<br>
 Choose one tool, check its requirements, then build from there.</p>
+<h2 dir="auto">Report where it breaks</h2>
+<p dir="auto">Use the project's README for installation and its issue tracker for problems. Include the version, operating system, expected result and a minimal reproduction. Never attach API keys, private documents, message histories or browser profiles.</p>
 <p dir="auto"><a href="https://github.com/orgs/yolo-labz/repositories">Browse all Yolo Labz repositories →</a></p>
 </main>
 </html>

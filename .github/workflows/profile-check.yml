@@ -2,6 +2,10 @@ name: profile-check
 
 on:
   pull_request:
+  # Weekly drift report for org repo settings. Cheap, and nobody remembers to
+  # run a manual audit until something is discovered by accident.
+  schedule:
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions: {}
@@ -21,16 +25,85 @@ jobs:
       contents: read
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@f808768d1510423e83855289c910610ca9b43176 # v2.17.0
+        uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # rollout/check.py proves the outlined wordmarks are unchanged against
+          # commit 6488088, and its tests run that check: they need history.
+          fetch-depth: 0
 
       - name: Checker unit tests
-        run: python3 -m unittest -v
+        run: |
+          python3 -m unittest -v
+          python3 -m unittest discover -s profile/assets/brand/rollout -p 'test_*.py' -v
+
+      # The flagship set comes from docs/brand-positioning.md, not from the script.
+      # Read-only: a plain check never rewrites checks.json.
+      - name: Rollout contract
+        run: python3 profile/assets/brand/rollout/check.py
+
+      # Integrity always fails the run. Whether the saved renders still match the
+      # current README is a drift report: a warning on a pull request, a failed
+      # weekly/manual run until someone re-renders (needs the server browser
+      # fleet, which CI does not have).
+      - name: Rollout evidence integrity
+        if: github.event_name == 'pull_request'
+        run: python3 profile/assets/brand/rollout/verify.py
+
+      - name: Rollout evidence freshness
+        if: github.event_name != 'pull_request'
+        run: python3 profile/assets/brand/rollout/verify.py --require-fresh
 
       - name: Brand/profile gate
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/check-profile.py --repo . --strict
+
+  settings-check:
+    name: Org repo-settings baseline
+    # Needs an org-wide token, which a pull_request run cannot hold.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # GITHUB_TOKEN only sees this repository. The audit needs every repo in
+      # the org, so it runs on a fine-grained PAT (org read: administration
+      # metadata + actions + secret scanning). Until that secret exists the
+      # step announces the gap instead of failing a schedule nobody can satisfy.
+      - name: Token availability
+        id: token
+        env:
+          ORG_TOKEN: ${{ secrets.ORG_SETTINGS_TOKEN }}
+        run: |
+          if [ -n "$ORG_TOKEN" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::ORG_SETTINGS_TOKEN is not set — org settings audit skipped"
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Settings baseline
+        if: steps.token.outputs.available == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.ORG_SETTINGS_TOKEN }}
+        run: python3 scripts/check-repo-settings.py --json-log settings.json
+
+      - name: Upload snapshot
+        if: steps.token.outputs.available == 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: repo-settings
+          path: settings.json
+          retention-days: 30

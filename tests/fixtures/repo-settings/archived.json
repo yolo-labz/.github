@@ -1,0 +1,11 @@
+{
+  "repo": {
+    "name": "archived",
+    "private": false,
+    "archived": true,
+    "default_branch": "main"
+  },
+  "rulesets": [],
+  "last_success": null,
+  "updater": null
+}

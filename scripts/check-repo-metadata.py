@@ -44,8 +44,11 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from flagships import CLAIMS_DOC, flagship_sentences
+from org_api import api_get, api_optional, gh
+
 ORG = "yolo-labz"
-CLAIMS_DOC = "docs/brand-positioning.md"
 SITE_ROOT = "github.com/yolo-labz"
 
 # Repos with a real site; the homepage must be that site.
@@ -75,9 +78,6 @@ MIRROR_NOTICE_RE = re.compile(
 
 MIN_TOPICS = 3
 TOPIC_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,49}$")
-FLAGSHIP_ROW_RE = re.compile(
-    r"^\|\s*\[([a-z0-9.-]+)\]\[[^\]]*\]\s*\|\s*(.+?)\s*\|", re.MULTILINE
-)
 
 
 @dataclass(frozen=True)
@@ -136,15 +136,6 @@ class Repo:
 # --------------------------------------------------------------------------- #
 
 
-def gh(*args: str) -> str:
-    result = subprocess.run(["gh", *args], capture_output=True, text=True, check=False)
-    if result.returncode != 0:
-        raise RuntimeError(f"gh {' '.join(args)} failed: {result.stderr.strip()}")
-    return result.stdout
-
-
-def api_get(path: str) -> object:
-    return json.loads(gh("api", path))
 
 
 def api_patch(path: str, fields: dict) -> None:
@@ -265,17 +256,6 @@ class FixtureSource:
 # --------------------------------------------------------------------------- #
 # rules
 # --------------------------------------------------------------------------- #
-
-
-def flagship_sentences(doc: Path) -> dict[str, str]:
-    if not doc.is_file():
-        return {}
-    text = doc.read_text(encoding="utf-8")
-    start = text.find("## Six flagship propositions")
-    if start < 0:
-        return {}
-    section = text[start:]
-    return {m.group(1): m.group(2).strip() for m in FLAGSHIP_ROW_RE.finditer(section)}
 
 
 def normalize(text: str) -> str:

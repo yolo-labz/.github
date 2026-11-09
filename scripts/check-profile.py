@@ -9,6 +9,8 @@ silently passed).
 Checks
   1. links      every Markdown link/image and HTML img/source in the profile
                 README resolves: local path exists, remote returns HTTP 200.
+                A linked repository must also be public (the API `private` flag):
+                the author's token opens a private repo that 404s for visitors.
   2. provenance every PNG under an exploration/ or model/ directory is named by
                 a provenance JSON record in its own directory.
   3. privacy    no signed or private URLs (chatgpt.com/c/, oaiusercontent,
@@ -329,6 +331,43 @@ def http_status(url: str, token: str | None, timeout: float) -> int:
         raise RuntimeError(f"transport error for {url}: {exc}") from exc
 
 
+def repo_slug(url: str, kind: str = "github") -> str | None:
+    """`owner/repo` of a link into a repository (github.com or raw), else None.
+
+    Account pages (`/owner`, `/orgs/x/repositories`) are not repositories.
+    """
+    if kind == "raw":
+        parts = [p for p in urllib.parse.urlparse(url).path.split("/") if p]
+        return f"{parts[0]}/{parts[1]}" if len(parts) >= 3 else None
+    endpoint = github_api_target(url)
+    match = re.match(r"/repos/([^/?]+)/([^/?]+)", endpoint or "")
+    return f"{match.group(1)}/{re.sub(r'[.]git$', '', match.group(2))}" if match else None
+
+
+def repo_is_private(slug: str, token: str | None, timeout: float) -> bool | None:
+    """True/False from the API `private` flag; None when it cannot be read.
+
+    A token sees its own private repositories as HTTP 200, so the status probe
+    alone cannot tell a visitor-visible link from one only the author can open.
+    """
+    headers = {
+        "User-Agent": "yolo-labz-profile-check",
+        "Accept": "application/vnd.github+json",
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    request = urllib.request.Request(
+        f"https://api.github.com/repos/{slug}", headers=headers, method="GET"
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return json.load(response).get("private")
+    except urllib.error.HTTPError as exc:
+        return True if exc.code == 404 else None
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError):
+        return None
+
+
 # --------------------------------------------------------------------------- #
 # checks
 # --------------------------------------------------------------------------- #
@@ -380,9 +419,19 @@ def check_links(
     token: str | None,
     timeout: float,
     status=http_status,
+    visibility=None,
 ) -> list[Finding]:
+    """Every link resolves; every linked repository is public.
+
+    `visibility(slug, token, timeout) -> bool|None` (True = private) defaults to
+    the live API only when `status` is the live probe, so injected fake statuses
+    never touch the network.
+    """
+    if visibility is None and status is http_status:
+        visibility = repo_is_private
     findings: list[Finding] = []
     probed: dict[str, int] = {}
+    private: dict[str, bool | None] = {}
     origin = repo_origin(root)
     for link in readme_links(readme):
         kind = classify_url(link.target)
@@ -429,6 +478,19 @@ def check_links(
                 continue
         code = probed[probe]
         if code == 200:
+            slug = repo_slug(link.target, kind)
+            if slug and visibility:
+                if slug not in private:
+                    private[slug] = visibility(slug, token, timeout)
+                if private[slug]:
+                    findings.append(
+                        Finding(
+                            "links",
+                            "error",
+                            f"{where}: links to private repository {slug}: "
+                            f"visitors get a 404 ({link.target})",
+                        )
+                    )
             continue
         if code == 404:
             pending = unpublished_asset_path(link.target, kind, origin)

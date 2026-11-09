@@ -1,0 +1,18 @@
+{
+  "repo": {
+    "name": "public-bare",
+    "private": false,
+    "default_branch": "main",
+    "security_and_analysis": {
+      "secret_scanning": {
+        "status": "disabled"
+      },
+      "secret_scanning_push_protection": {
+        "status": "disabled"
+      }
+    }
+  },
+  "rulesets": [],
+  "last_success": null,
+  "updater": null
+}

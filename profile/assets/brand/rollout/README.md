@@ -16,10 +16,20 @@ ruff check profile/assets/brand/rollout/*.py
 ruff format --check profile/assets/brand/rollout/*.py
 ```
 
-The gate checks six flagship destinations and caveats, meaningful alt text,
+The gate checks every flagship destination and caveat, meaningful alt text,
 local assets, immutable vector wordmarks, exact art checksum and source evidence.
-Saved renders are bound to the profile hash. Regression tests reject modified
-screenshots, stale source and a missing viewport/theme combination.
+Which repositories are flagships is read from the table in
+`docs/brand-positioning.md` (via `scripts/flagships.py`), never from a count in
+these scripts. `check.py` is read-only; `--write-receipt` (implied by `--preview`)
+rewrites `checks.json`.
+
+Saved renders are bound to the profile hash. `verify.py` separates two questions:
+*integrity* (receipts, hashes and PNG sizes agree; failure exits 1) and
+*freshness* (the renders match the README as it is now; drift prints `STALE:` and
+exits 0, or 3 with `--require-fresh`). CI runs both: pull requests get the drift as
+a warning, the weekly/manual run fails until the renders are redone below.
+Regression tests reject modified screenshots, disagreeing receipts and a missing
+viewport/theme combination.
 
 ## Fresh preview/render (existing server fleet only)
 

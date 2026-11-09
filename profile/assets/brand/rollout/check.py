@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
@@ -13,6 +14,10 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 RAW = "https://raw.githubusercontent.com/yolo-labz/.github/main/"
+BOLD_LINK_RE = re.compile(r"\*\*\[([^]]+)\]\((https://[^)]+)\)\*\*")
+
+sys.path.insert(0, str(ROOT / "scripts"))
+from flagships import CLAIMS_DOC, flagship_sentences
 
 
 class Images(HTMLParser):
@@ -30,7 +35,30 @@ class Images(HTMLParser):
             self.paths.append(attrs["srcset"])
 
 
-def main():
+def flagship_contract(text, doc):
+    """README entries vs the flagship table in docs/brand-positioning.md.
+
+    The doc is the single authority for which repositories are flagships, so no
+    count or name list lives here: every flagship must be listed once and link to
+    its own repository. Other bold project links are allowed (the doc lets the
+    profile list a non-flagship outside the flagship headings) but must link to a
+    yolo-labz repository of the same name. Returns (flagship names, listed names).
+    """
+    flagships = sorted(flagship_sentences(doc))
+    assert flagships, f"No flagship table found in {doc}"
+    entries = BOLD_LINK_RE.findall(text)
+    listed = [name for name, _ in entries]
+    assert len(set(listed)) == len(listed), "A project is listed twice"
+    missing = sorted(set(flagships) - set(listed))
+    assert not missing, f"Flagships missing from the profile: {missing}"
+    for name, url in entries:
+        assert url == f"https://github.com/yolo-labz/{name}", (
+            f"{name} must link to its own repository, got {url}"
+        )
+    return flagships, listed
+
+
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--draft", action="store_true")
     parser.add_argument(
@@ -38,19 +66,15 @@ def main():
         action="store_true",
         help="Render README through GitHub Markdown API",
     )
-    args = parser.parse_args()
+    parser.add_argument(
+        "--write-receipt",
+        action="store_true",
+        help="Rewrite checks.json (the render evidence's profile binding). "
+        "Implied by --preview; a plain check never mutates the tree.",
+    )
+    args = parser.parse_args(argv)
     text = (ROOT / "profile/README.md").read_text()
-    flagships = re.findall(r"\*\*\[([^]]+)\]\((https://[^)]+)\)\*\*", text)
-    expected = {
-        "wa",
-        "chrome-bridge",
-        "claude-mac-chrome",
-        "fand",
-        "kokoro-speakd",
-        "anthropic-throttle-proxy",
-    }
-    assert len(flagships) == 6 and {name for name, _ in flagships} == expected
-    assert all(url == f"https://github.com/yolo-labz/{name}" for name, url in flagships)
+    flagships, listed = flagship_contract(text, ROOT / CLAIMS_DOC)
     for qualifier in (
         "unofficial",
         "macOS only",
@@ -114,7 +138,8 @@ def main():
     receipt = {
         "mode": "draft" if placeholder else "exploration-integrated",
         "assets": len(images.paths),
-        "flagships": 6,
+        "flagships": len(flagships),
+        "listed_projects": len(listed),
         "links": links,
         "profile_sha256": hashlib.sha256(text.encode()).hexdigest(),
     }
@@ -133,7 +158,8 @@ def main():
         assert template.count("<!-- README -->") == 1
         template = template.replace("<!-- PROFILE HASH -->", receipt["profile_sha256"])
         (HERE / "preview.html").write_text(template.replace("<!-- README -->", html))
-    (HERE / "checks.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    if args.write_receipt or args.preview:
+        (HERE / "checks.json").write_text(json.dumps(receipt, indent=2) + "\n")
     print(json.dumps(receipt, indent=2))
 
 
