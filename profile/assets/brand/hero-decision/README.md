@@ -1,9 +1,24 @@
 # Hero decision sheet
 
-Input to Pedro's hero decision — **nothing served changes**. No recorded approval exists for any
-gremlin master; `profile/README.md` still shows the GPT wide hero under its "not an approved brand
-master" caption. This directory puts the three candidates side by side at the sizes the hero is
-actually shown, so the choice is a five-second comparison.
+## Decision — 08/11/2026: the split is adopted
+
+**Approved by the loop lead on Pedro's delegation (08/11/2026)**, adopting the recommendation below
+unchanged:
+
+- **Hero, any slot ≥ 390 px** (org profile, portfolio desktop and phone): the **GPT master**, served
+  as WebP/AVIF crops — never the 1.05 MB PNG.
+- **Avatar, 96 px** (the org avatar beside the `yolo-labz` wordmark): the **vector model-sheet kit**,
+  `mascot/gremlin-avatar.svg`.
+- **Blender is out of the served slots** until the model carries the GPT character (brows, jagged
+  grin, claws, tail). It stays the source of the share cards, which this decision does not touch.
+
+This sheet records the comparison the decision was made on; the served files are published
+separately with their own provenance.
+
+---
+
+The text below is the sheet as it was put to the decision (02/11/2026). It puts the three candidates
+side by side at the sizes the hero is actually shown, so the choice is a five-second comparison.
 
 ![Contact sheet: rows are the four slots, columns are GPT master, Blender render, vector model-sheet kit](contact-sheet.png)
 
