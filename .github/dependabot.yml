@@ -14,3 +14,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    # Routine bumps arrive as one PR; a major arrives alone, for review.
+    groups:
+      minor-and-patch:
+        update-types: ["minor", "patch"]
