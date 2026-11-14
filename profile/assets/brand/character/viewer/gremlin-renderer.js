@@ -12,8 +12,7 @@ export const THEMES = {
   light: { skin: "#388c26", node: "#8839ef", key: "#9ca0b0", guide: "#9ca0b0", dark: "#dce0e8", feature: "#181825", ink: "#1e1e2e" },
 };
 // The camera and the three lights are the ones the still images use (model/character.json).
-// The model faces -z, so the stills' camera (24 degrees) sits at 156 here (the data is mirrored in x).
-const CAMERA = { azimuth: 156, elevation: 9, scale: 292, center: [0, -36, 0] };
+const CAMERA = { azimuth: 24, elevation: 9, scale: 292, center: [0, -36, 0] };
 const LIGHTS = [
   { dir: [-0.486, 0.532, 0.694], color: [1.0, 1.0, 1.0] },
   { dir: [0.748, 0.201, 0.633], color: [0.8, 0.8, 0.8] },
