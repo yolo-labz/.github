@@ -1,75 +1,75 @@
 {
   "schema": 1,
   "alt": {
-    "hero": "Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents",
-    "avatar": "The yolo-labz gremlin's head: pointed ears, mauve eyes and a fanged grin"
+    "hero": "The yolo-labz gremlin typing on a keyboard, angular dark eyes with purple pupils, pointed ears and a small fanged grin",
+    "avatar": "The yolo-labz gremlin's head: pointed ears, dark angular eyes with purple pupils"
   },
   "inputs": {
-    "mascot/gremlin-avatar.svg": "6752b26a4c2c2272d3486c9634c8c9949d3d199eb3e53a6aa26715ad1c9405ea"
+    "mark/character.py": "98dda2c9c7cb590021cc3f9e03e0639e5a12d1fb6ef80e12c65fcdf384cd2b3c"
   },
   "files": [
     {
       "file": "gremlin-hero-887x640.webp",
       "width": 887,
       "height": 640,
-      "bytes": 23416,
-      "sha256": "4281d6a53c912b2839c8bb5fd2f145c15a1b4f1321550b27ad4369ad67ae594c"
+      "bytes": 17514,
+      "sha256": "d66ddca7f0d48a5cf0cf1e77573776713f043ea1d3114e5e42c0109e6fcea9d0"
     },
     {
       "file": "gremlin-hero-804x770.avif",
       "width": 804,
       "height": 770,
-      "bytes": 14318,
-      "sha256": "32d6e47f45bcd38afb5a33007ef97c23eefd8b9862a9ba52c72d63785015560e"
+      "bytes": 10500,
+      "sha256": "a54235d56c07e2ec8da7152192c851cfc822d86bd38176bdc79b6b9ad119e1e6"
     },
     {
       "file": "gremlin-hero-804x770.webp",
       "width": 804,
       "height": 770,
-      "bytes": 28762,
-      "sha256": "66ad1491640b1be50b1cbad80e3e5066b5a7c967c86574df57c1e627c45439eb"
+      "bytes": 20652,
+      "sha256": "eaf15272e90ecb2e3bd91b2ac150d72e719ab08ce24c3c81806229e942db7167"
     },
     {
       "file": "gremlin-hero-804x770.png",
       "width": 804,
       "height": 770,
-      "bytes": 489167,
-      "sha256": "d04b5272b0901d4798c3bde68fd460562b84adefccf59a6860164cdfb29d1f7b"
+      "bytes": 39097,
+      "sha256": "ab6423565c3628036de518fa397b9267b8c6c15073946ca29dbbcec3dd1a70a4"
     },
     {
       "file": "gremlin-hero-402x385.avif",
       "width": 402,
       "height": 385,
-      "bytes": 6881,
-      "sha256": "89116e28d4f24119b02005c04ce42af5342c1a9a86cba87c26f6049b9227584f"
+      "bytes": 5437,
+      "sha256": "fdcf3e52865d7bca72e7d6a6a04786a336aec99e6b8ac7c84e077f03fc8f353f"
     },
     {
       "file": "gremlin-hero-402x385.webp",
       "width": 402,
       "height": 385,
-      "bytes": 12606,
-      "sha256": "58d8d6aa408a2bc114207ae190dd2cf2dcbccf8b432f4d6750df342689729bed"
+      "bytes": 10228,
+      "sha256": "feb419f6353a172640f5bf7ca78f695cc1b8cdfb0a7653022762c6ba0c747f31"
     },
     {
       "file": "gremlin-avatar-96.png",
       "width": 96,
       "height": 96,
-      "bytes": 3140,
-      "sha256": "93ee2d7b68ebbd701f75c6484d7124d1035382914ead355dae6b9ca24a9ed5df"
+      "bytes": 1709,
+      "sha256": "f700ec2a5b99bfe13584363532b34be35d4176fbd0f0c5f8aa68c1f293992a0d"
     },
     {
       "file": "gremlin-avatar-96.webp",
       "width": 96,
       "height": 96,
-      "bytes": 1294,
-      "sha256": "b4d71d05e0fe1b4d1d412a6c36ffb206b66beab7ee8fe9202f7b43be593c4022"
+      "bytes": 1540,
+      "sha256": "babfe36d30c00805b07a0fe400b88abf9ad6f205fe9ff76ef09518d4d62649ac"
     },
     {
       "file": "gremlin-avatar-460.png",
       "width": 460,
       "height": 460,
-      "bytes": 16871,
-      "sha256": "9c39e4808d5687cee09dd26cf301af9bf25976d5663be2865bc918717ebfa2ff"
+      "bytes": 12379,
+      "sha256": "7a47e2eef243820ff676866db8a43596b3d04f5b3651869416f863823248d61a"
     }
   ]
 }

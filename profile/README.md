@@ -7,7 +7,7 @@
 
 Open-source tools for scripting messaging, browser workflows and local services.
 
-<img src="https://raw.githubusercontent.com/yolo-labz/.github/main/profile/assets/brand/hero/gremlin-hero-887x640.webp" alt="Green programming gremlin with pointed ears and a fanged grin typing on a keyboard, with mauve code accents" width="640" height="462">
+<img src="https://raw.githubusercontent.com/yolo-labz/.github/main/profile/assets/brand/hero/gremlin-hero-887x640.webp" alt="The yolo-labz gremlin typing on a keyboard, angular dark eyes with purple pupils, pointed ears and a small fanged grin" width="640" height="462">
 
 ## Start with a task
 
