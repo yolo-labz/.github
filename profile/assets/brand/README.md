@@ -25,7 +25,7 @@ never raw hex outside these masters.
 | background | `#1e1e2e` base | `#eff1f5` base |
 | surface | `#181825` mantle / `#11111b` crust | n/a |
 | ink (strokes / text) | `#cdd6f4` text · `#a6adc8` subtext | `#4c4f69` text |
-| surface | `#181825` mantle / `#11111b` crust | — |
+| surface | `#181825` mantle / `#11111b` crust | n/a |
 | ink (text, mono mark) | `#cdd6f4` text · `#a6adc8` subtext | `#1e1e2e` |
 | gremlin skin | `#a6e3a1` | `#388c26` (3.75:1 on `#eff1f5`) |
 | node / accent | `#cba6f7` mauve | `#8839ef` mauve |
@@ -62,9 +62,9 @@ brand/
 │   ├── favicon.ico                   multi-res 16+32+48
 │   └── apple-touch-icon.png          180px, square, mark on base
 ├── mark/                             master, build script, tests, avatar, social template
-├── hero/                             SERVED hero + avatar (adopted 08/11/2026): GPT hero crops
-│                                     (WebP/AVIF), vector avatar at 96/460 px; manifest.json pins bytes
-├── mascot/                           the programming gremlin — 5-state character system
+├── hero/                             SERVED hero + avatar: hero crops (WebP/AVIF),
+│                                     vector avatar at 96/460 px; manifest.json pins bytes
+├── mascot/                           the programming gremlin, 5-state character system
 │   ├── README.md                     grammar + states + binding usage rules
 │   ├── gremlin-model-sheet.svg       construction spec (head geometry, palette, rules)
 │   ├── gremlin-hero.svg              signature piece, the gremlin programming (240×160)

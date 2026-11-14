@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" width="360" height="200" role="img" aria-labelledby="t d">
-  <title id="t">yolo-labz mascot — gremlin model sheet</title>
+  <title id="t">yolo-labz mascot: gremlin model sheet</title>
   <desc id="d">Construction spec for the programming gremlin: head geometry on guide grid, palette chips, and the accent rule. The reference every new state or pose must follow.</desc>
   <!--
     MODEL SHEET — the construction spec (engineering-reference aesthetic).
@@ -54,7 +54,7 @@
   <!-- palette chips + rules -->
   <g transform="translate(212 44)">
     <rect class="skin" x="0" y="0" width="14" height="14" rx="3"/>
-    <text class="lbl" x="22" y="11">skin · the character — never recolour</text>
+    <text class="lbl" x="22" y="11">skin · the character, never recolour</text>
     <rect class="pale" x="0" y="24" width="14" height="14" rx="3"/>
     <text class="lbl" x="22" y="35">pale · teeth / eyes / claws</text>
     <rect class="chipd" x="0" y="48" width="14" height="14" rx="3"/>
