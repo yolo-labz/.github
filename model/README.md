@@ -1,8 +1,8 @@
-# Gremlin model — the mascot as reproducible code
+# Gremlin model: the mascot as reproducible code
 
 The programming gremlin, rebuilt from source. Nothing here is a hand-edited
-binary: `model/params.json` is the single source of truth and both outputs — the
-Blender turnaround and the flat vector avatar — are generated from it.
+binary: `model/params.json` is the single source of truth and both outputs, the
+Blender turnaround and the flat vector avatar, are generated from it.
 
 ```bash
 make model      # render + regenerate + machine-check   (run twice: the second
@@ -24,7 +24,7 @@ Python dependencies inside Blender beyond what ships with it.
 | `gremlin-three-quarter.png` | turnaround, 3/4 |
 | `gremlin-side.png` | turnaround, side |
 | `gremlin-back.png` | turnaround, back |
-| `gremlin-hero.png` | the signature pose — claws on the keys, mauve brackets |
+| `gremlin-hero.png` | the signature pose, claws on the keys, mauve brackets |
 | `gremlin-avatar.svg` | flat vector avatar regenerated from the same numbers |
 | `compare/{generated,kit}.png` | silhouette pair used for the IoU check |
 
@@ -42,7 +42,7 @@ Python dependencies inside Blender beyond what ships with it.
 | `pngmeta.py` | strips volatile PNG metadata so identical pixels == identical bytes. |
 
 Numbers are lifted from the frozen masters in
-`profile/assets/brand/mascot/` — `gremlin-model-sheet.svg` (construction),
+`profile/assets/brand/mascot/`: `gremlin-model-sheet.svg` (construction),
 `gremlin-avatar.svg` (head cut), `gremlin-hero.svg` (body, limbs, keyboard).
 `params.json` records where each one came from; nothing is freehand.
 
@@ -56,7 +56,7 @@ albedo to the PNG unchanged, which buys three things at once:
   `params.json` instead of a tolerance;
 - there is no stochastic sampling, denoiser or seed to drift, so two runs are
   byte-identical;
-- flat filled forms are the brand's own grammar (mascot README rule 3 — "no
+- flat filled forms are the brand's own grammar (mascot README rule 3: "no
   gradients, glow, or 3D"). Shading here would be a defect, not a nicety.
 
 `--engine eevee` renders the same geometry through the fixed light rig for a
@@ -79,8 +79,8 @@ drops those metadata chunks, so identical pixels mean identical bytes.
 Each card is a deterministic compose of two generated things: the character,
 rendered from `params.json` through Blender exactly as `make model` does (one
 `hero` view), and the title, typeset in a real font over an SVG template that
-`rsvg-convert` rasterises — never generated lettering, never a screenshot of a
-hand-made HTML page. Colours come from `params.json`, so a palette change moves
+`rsvg-convert` rasterises. It is never painted lettering and never a screenshot of an
+HTML page. Colours come from `params.json`, so a palette change moves
 the cards with the character.
 
 `profile/assets/brand/cards.json` records each card's size and sha256. A run
@@ -104,7 +104,7 @@ byte-identical output against `profile/assets/brand/cards.json`.
 
 Candidates are classified to their nearest palette role first, so the two
 adjacent dark entries (`#181825` mouth vs `#1e1e2e` plate) cannot vouch for each
-other, and a colour only counts once it covers real area — an anti-aliasing
+other, and a colour only counts once it covers real area, so an anti-aliasing
 blend can never satisfy an entry.
 
 Run 1 has no previous run to compare with, so it records the baseline and

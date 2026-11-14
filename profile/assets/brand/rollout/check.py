@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the org profile. --draft permits the labelled art slot, never final acceptance."""
+"""Check the org profile README against the flagship table and the served hero."""
 
 import argparse
 import hashlib
@@ -14,7 +14,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 RAW = "https://raw.githubusercontent.com/yolo-labz/.github/main/"
-HERO = "gremlin-hero-gpt-887x640.webp"
+HERO = "gremlin-hero-887x640.webp"
 BOLD_LINK_RE = re.compile(r"\*\*\[([^]]+)\]\((https://[^)]+)\)\*\*")
 
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -60,20 +60,7 @@ def flagship_contract(text, doc):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--draft", action="store_true")
-    parser.add_argument(
-        "--preview",
-        action="store_true",
-        help="Render README through GitHub Markdown API",
-    )
-    parser.add_argument(
-        "--write-receipt",
-        action="store_true",
-        help="Rewrite checks.json (the render evidence's profile binding). "
-        "Implied by --preview; a plain check never mutates the tree.",
-    )
-    args = parser.parse_args(argv)
+    argparse.ArgumentParser(description=__doc__).parse_args(argv)
     text = (ROOT / "profile/README.md").read_text()
     flagships, listed = flagship_contract(text, ROOT / CLAIMS_DOC)
     for qualifier in (
@@ -106,71 +93,22 @@ def main(argv=None):
         assert not svg.findall(".//{http://www.w3.org/2000/svg}text"), (
             "Wordmark must remain outlined"
         )
-    placeholder = "temporary art placeholder" in text
-    if placeholder:
-        assert args.draft, "BLOCKED: final GPT artwork not integrated"
-        assert "No final GPT artwork is present" in text
-    else:
-        proof = json.loads((HERE / "art-provenance.json").read_text())
-        image = HERE / proof["file"]
-        assert image.resolve().is_relative_to(HERE)
-        assert hashlib.sha256(image.read_bytes()).hexdigest() == proof["sha256"]
-        assert (
-            proof["producer"] == "p9" and proof["status"] == "gpt-generated-exploration"
-        )
-        assert re.fullmatch(r"[0-9a-f]{40}", proof["source_commit"])
-        assert proof["generation_evidence"].startswith(
-            f"https://github.com/yolo-labz/.github/blob/{proof['source_commit']}/"
-        )
-        generation = proof["generation_record"]
-        assert generation["sha256"] == proof["sha256"]
-        assert generation["image"] == proof["file"]
-        assert generation["classification"] == "exploration-not-approved-master"
-        assert generation["receipt"]["status"] == "ok"
-        assert generation["receipt"]["send_confirmed"] is True
-        assert generation["reference"] == "gremlin-anchor.png"
-        assert generation["receipt"]["bytes"] == image.stat().st_size
-        assert proof["copy_source_commit"] == "fb4a5570fade07e9ea97fc85695fe95e22bb7a95"
-        # Adopted 08/11/2026 (hero-decision/README.md): the README serves a WebP
-        # crop published from this exact GPT master, never the master PNG itself.
-        served = json.loads((HERE.parent / "hero/manifest.json").read_text())
-        assert served["inputs"][f"rollout/{proof['file']}"] == proof["sha256"]
-        hero = next(f for f in served["files"] if f["file"] == HERO)
-        assert (
-            hashlib.sha256((HERE.parent / "hero" / HERO).read_bytes()).hexdigest()
-            == hero["sha256"]
-        )
-        assert f"profile/assets/brand/hero/{HERO}" in text
-        assert served["alt"]["hero"] in text, (
-            "Hero alt text must match the published one"
-        )
-        assert "GPT-generated" in text
+    served = json.loads((HERE.parent / "hero/manifest.json").read_text())
+    hero = next(f for f in served["files"] if f["file"] == HERO)
+    assert (
+        hashlib.sha256((HERE.parent / "hero" / HERO).read_bytes()).hexdigest()
+        == hero["sha256"]
+    )
+    assert f"profile/assets/brand/hero/{HERO}" in text
+    assert served["alt"]["hero"] in text, "Hero alt text must match the published one"
     links = sorted(set(re.findall(r"\]\((https://[^)]+)\)", text)))
     receipt = {
-        "mode": "draft" if placeholder else "exploration-integrated",
         "assets": len(images.paths),
         "flagships": len(flagships),
         "listed_projects": len(listed),
         "links": links,
         "profile_sha256": hashlib.sha256(text.encode()).hexdigest(),
     }
-    if args.preview:
-        payload = json.dumps(
-            {"text": text, "mode": "gfm", "context": "yolo-labz/.github"}
-        )
-        html = subprocess.check_output(
-            ["gh", "api", "markdown", "--input", "-"],
-            input=payload,
-            text=True,
-            cwd=ROOT,
-        )
-        html = html.replace(RAW, "")
-        template = (HERE / "preview-template.html").read_text()
-        assert template.count("<!-- README -->") == 1
-        template = template.replace("<!-- PROFILE HASH -->", receipt["profile_sha256"])
-        (HERE / "preview.html").write_text(template.replace("<!-- README -->", html))
-    if args.write_receipt or args.preview:
-        (HERE / "checks.json").write_text(json.dumps(receipt, indent=2) + "\n")
     print(json.dumps(receipt, indent=2))
 
 

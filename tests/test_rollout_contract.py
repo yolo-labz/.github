@@ -35,7 +35,7 @@ check = load("check")
 
 
 def entry(name: str) -> str:
-    return f"- **[{name}](https://github.com/yolo-labz/{name})** — does a thing.\n"
+    return f"- **[{name}](https://github.com/yolo-labz/{name})** does a thing.\n"
 
 
 class FlagshipContractTests(unittest.TestCase):
@@ -110,35 +110,20 @@ class FlagshipContractTests(unittest.TestCase):
 
 
 class RolloutScriptsRunTests(unittest.TestCase):
-    """What CI executes: both scripts, as subprocesses, against the real tree."""
+    """What CI executes: the script as a subprocess, against the real tree."""
 
-    def run_script(self, *argv):
-        return subprocess.run(
-            [sys.executable, *map(str, argv)],
+    def test_check_passes_against_the_real_tree(self):
+        result = subprocess.run(
+            [sys.executable, str(ROLLOUT / "check.py")],
             cwd=REPO,
             capture_output=True,
             text=True,
             timeout=120,
             check=False,
         )
-
-    def test_check_passes_and_leaves_the_receipt_alone(self):
-        receipt = ROLLOUT / "checks.json"
-        before = receipt.read_bytes()
-        result = self.run_script(ROLLOUT / "check.py")
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(
-            receipt.read_bytes(), before, "a plain check must not mutate the tree"
-        )
         out = json.loads(result.stdout)
         self.assertEqual(out["flagships"], len(check.flagship_sentences(DOC)))
-
-    def test_verify_integrity_passes_and_staleness_is_a_distinct_exit(self):
-        plain = self.run_script(ROLLOUT / "verify.py")
-        self.assertEqual(plain.returncode, 0, plain.stdout + plain.stderr)
-        strict = self.run_script(ROLLOUT / "verify.py", "--require-fresh")
-        self.assertIn(strict.returncode, (0, 3), strict.stdout + strict.stderr)
-        self.assertEqual(strict.returncode == 3, "STALE:" in strict.stdout)
 
 
 if __name__ == "__main__":

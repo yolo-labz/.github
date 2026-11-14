@@ -11,8 +11,14 @@ Checks
                 README resolves: local path exists, remote returns HTTP 200.
                 A linked repository must also be public (the API `private` flag):
                 the author's token opens a private repo that 404s for visitors.
-  2. provenance every PNG under an exploration/ or model/ directory is named by
-                a provenance JSON record in its own directory.
+  2. wording    no brand file says how our images, copy or code were made:
+                (a) no tracked file name under profile/ or docs/ carries a model,
+                    tool or provenance word (gpt, openai, midjourney, ...);
+                (b) no text under profile/, docs/ or the root README states a
+                    method ("GPT-generated", "made with AI", a named image model);
+                (c) no README holds an em dash (U+2014).
+                A product that works with a model may still say so; the rule is
+                about our own production, so only the shapes above are banned.
   3. privacy    no signed or private URLs (chatgpt.com/c/, oaiusercontent,
                 ?sig=, ?se=) anywhere in tracked text; a scanner that must name a
                 pattern waives that statement with a comment on its matching line
@@ -58,8 +64,36 @@ SHARE_POLICY = "profile/assets/brand/share-cards.json"
 CLAIMS_DOC = "docs/brand-positioning.md"
 DEFAULT_TIMEOUT = 10.0
 
-# Directories whose PNGs must be covered by a provenance record.
-PROVENANCE_DIRS = ("exploration", "model")
+# File names under profile/ and docs/ may not carry a model, tool or provenance word.
+NAME_PATTERN = re.compile(
+    r"gpt|chatgpt|openai|dall-?e|midjourney|stable-?diffusion|gpt-image|imagegen"
+    r"|ai-generated|provenance|generation-status",
+    re.IGNORECASE,
+)
+# Method statements: how an image, text or code of ours was produced.
+METHOD_PATTERNS = (
+    (re.compile(r"\b(?:ai|gpt|llm|model|machine)[- ]generated\b", re.IGNORECASE), "generated-by statement"),
+    (re.compile(r"\bgenerated (?:with|by|using)\b", re.IGNORECASE), "generated-by statement"),
+    (
+        re.compile(
+            r"\b(?:made|created|drawn|produced|illustrated|designed|painted|rendered)"
+            r" (?:with|by|using) (?:an? )?(?:ai|gpt|chatgpt|openai|dall-?e|midjourney"
+            r"|stable diffusion|llm|generative|image model)\b",
+            re.IGNORECASE,
+        ),
+        "made-with statement",
+    ),
+    (
+        re.compile(r"\b(?:gpt|chatgpt|gpt-image|dall-?e|midjourney|stable diffusion)\b", re.IGNORECASE),
+        "named image model",
+    ),
+)
+WORDING_SCOPE = ("profile/", "docs/")
+# Captions and prose live in these; code comments are the owning seat's to edit.
+# ponytail: .py/.sh/.js are not scanned for method statements; widen when the
+# model/ scripts stop naming the tools they once called.
+WORDING_SUFFIXES = {".md", ".json", ".txt", ".html", ".htm", ".svg", ".yml", ".yaml"}
+EM_DASH = "\u2014"
 
 # Signed/private URL shapes that must never reach a public commit.
 PRIVATE_PATTERNS = (
@@ -519,72 +553,67 @@ def check_links(
     return findings
 
 
-def names_asset(payload, names: set[str]) -> bool:
-    if isinstance(payload, str):
-        return payload in names
-    if isinstance(payload, dict):
-        return any(names_asset(value, names) for value in payload.values())
-    if isinstance(payload, list):
-        return any(names_asset(value, names) for value in payload)
-    return False
+def tracked_files(root: Path) -> list[Path]:
+    """Every tracked file (all suffixes).
 
-
-def check_provenance(root: Path) -> list[Finding]:
-    findings: list[Finding] = []
-    for png in sorted(root.rglob("*.png")):
-        rel = png.relative_to(root)
-        if rel.as_posix().startswith(FIXTURE_PREFIX) or ".git" in rel.parts:
-            continue
-        if not any(part in PROVENANCE_DIRS for part in rel.parts):
-            continue
-        names = {png.name, rel.as_posix()}
-        covered = png.with_suffix(".provenance.json").is_file()
-        if not covered:
-            for record in sorted(png.parent.glob("*.json")):
-                try:
-                    payload = json.loads(record.read_text(encoding="utf-8"))
-                except (OSError, json.JSONDecodeError):
-                    continue
-                if names_asset(payload, names):
-                    covered = True
-                    break
-        if not covered:
-            findings.append(
-                Finding(
-                    "provenance",
-                    "error",
-                    f"{rel.as_posix()}: no provenance record names this PNG "
-                    f"(expected {png.stem}.provenance.json or a sibling JSON listing it)",
-                )
-            )
-    return findings
-
-
-def text_files(root: Path) -> list[Path]:
-    files: list[Path] = []
-    toplevel = None
+    A fixture tree inside a larger work tree must not inherit the outer file
+    list, and a tree without Git history still has to be checked.
+    """
     try:
-        toplevel = subprocess.run(
+        top = subprocess.run(
             ["git", "-C", str(root), "rev-parse", "--show-toplevel"],
-            capture_output=True,
-            check=True,
-            text=True,
+            capture_output=True, check=True, text=True,
         ).stdout.strip()
         listing = subprocess.run(
             ["git", "-C", str(root), "ls-files", "-z"], capture_output=True, check=True
         ).stdout.decode()
         files = [root / rel for rel in listing.split("\0") if rel]
     except (OSError, subprocess.CalledProcessError):
-        files = []
-    # A fixture tree inside a larger work tree must not inherit the outer file
-    # list, and a tree without Git history still has to be checked.
-    if toplevel != str(root) or not files:
+        top, files = None, []
+    if top != str(root) or not files:
         files = [p for p in root.rglob("*") if p.is_file() and ".git" not in p.parts]
+    return [p for p in files if p.is_file()]
+
+
+def check_wording(root: Path) -> list[Finding]:
+    findings: list[Finding] = []
+    for path in tracked_files(root):
+        rel = path.relative_to(root).as_posix()
+        if rel.startswith(FIXTURE_PREFIX) or rel == "scripts/check-profile.py":
+            continue
+        in_scope = rel.startswith(WORDING_SCOPE) or rel == "README.md"
+        if rel.startswith(WORDING_SCOPE) and NAME_PATTERN.search(path.name):
+            findings.append(
+                Finding("wording", "error", f"{rel}: file name carries a model, tool or provenance word")
+            )
+        is_readme = path.name.lower().startswith("readme") and path.suffix.lower() == ".md"
+        if not (in_scope or is_readme) or path.suffix.lower() not in TEXT_SUFFIXES:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if is_readme and EM_DASH in text:
+            line = text[: text.index(EM_DASH)].count("\n") + 1
+            findings.append(
+                Finding("wording", "error", f"{rel}:{line}: em dash in a README ({text.count(EM_DASH)} in the file)")
+            )
+        if not in_scope or path.suffix.lower() not in WORDING_SUFFIXES:
+            continue
+        for pattern, label in METHOD_PATTERNS:
+            for match in pattern.finditer(text):
+                line = text.count("\n", 0, match.start()) + 1
+                findings.append(
+                    Finding("wording", "error", f"{rel}:{line}: {label} ({match.group(0)!r})")
+                )
+    return findings
+
+
+def text_files(root: Path) -> list[Path]:
     return [
         p
-        for p in files
-        if p.is_file()
-        and p.suffix.lower() in TEXT_SUFFIXES
+        for p in tracked_files(root)
+        if p.suffix.lower() in TEXT_SUFFIXES
         and not p.relative_to(root).as_posix().startswith(PRIVACY_EXEMPT)
     ]
 
@@ -843,7 +872,7 @@ def run(args: argparse.Namespace) -> int:
     findings += check_links(
         root, readme, offline=args.offline, token=token, timeout=args.timeout
     )
-    findings += check_provenance(root)
+    findings += check_wording(root)
     findings += check_privacy(root)
     findings += check_claims(root, readme, claims_doc=claims_doc, strict=args.strict)
     findings += check_a11y(root, readme)

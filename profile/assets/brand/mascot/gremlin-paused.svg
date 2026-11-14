@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="t d">
-  <title id="t">yolo-labz mascot — gremlin paused</title>
+  <title id="t">yolo-labz mascot: gremlin paused</title>
   <desc id="d">The programming gremlin with its head turned over the shoulder toward two faint incoming arcs, one claw raised. Paused state: holding for input, nothing produced.</desc>
   <!--
     state: paused / waiting for input · head mirrored (scale(-0.55,0.55)) to
