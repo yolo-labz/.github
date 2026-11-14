@@ -17,7 +17,7 @@ a palette can be checked, not so pages can reach for them.
 **Rules**
 - Colour carries meaning and nothing else. Emerald means act. Peach means audit. Yellow means compliance only.
 - Text is 4.5:1 or better on its ground, in both themes. Control borders and the focus ring are 3:1. `test_tokens.py` checks it.
-- Mauve stays inside the gremlin. It is not a UI colour.
+- Mauve is the node, the gremlin and the blog's wayfinding. It is not an action colour; the action is emerald.
 - Rules between rows are `border.default`; a control's own edge is `border.strong`.
 
 **Right:** `color: var(--yl-color-text-muted)` on a caption.
