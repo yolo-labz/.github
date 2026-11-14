@@ -517,5 +517,12 @@
       "$type": "dimension",
       "$description": "no text renders below this on any width, labels and meta included"
     }
+  },
+  "shadow": {
+    "float": {
+      "$value": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+      "$type": "shadow",
+      "$description": "floating layers only (drawer, menu, dialog); nothing resting on the page casts one"
+    }
   }
 }

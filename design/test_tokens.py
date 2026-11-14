@@ -76,6 +76,13 @@ class Tokens(unittest.TestCase):
         self.assertGreaterEqual(contrast(theme("color.mark-skin", "dark"), theme("color.surface.base", "dark")), 3.0)
         self.assertGreaterEqual(contrast(theme("color.mark-skin", "light"), theme("color.surface.base", "light")), 3.0)
 
+    def test_tailwind_preset_names_the_scale(self):
+        css = build.build()["tailwind.css"]
+        for want in ("--radius-md: var(--yl-radius-md)", "--leading-tight: var(--yl-text-leading-tight)",
+                     "--tracking-heading: var(--yl-text-tracking-heading)", "--container-measure: var(--yl-text-measure)",
+                     "--shadow-float: var(--yl-shadow-float)", "--text-sm: var(--yl-text-size-small)"):
+            self.assertIn(want, css)
+
     def test_build_is_deterministic_and_dist_is_current(self):
         self.assertEqual(build.build(), build.build())
         run = subprocess.run([sys.executable, str(HERE / "build.py"), "--check"], capture_output=True, text=True)
