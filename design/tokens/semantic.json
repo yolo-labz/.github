@@ -1,0 +1,256 @@
+{
+  "$description": "yolo-labz semantic tokens. $value is the dark theme; the light theme is in $extensions['org.yolo-labz.mode'].light. 'org.yolo-labz.tailwind' names the Tailwind colour utility.",
+  "color": {
+    "surface": {
+      "base": {
+        "$value": "{color.mocha.base}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.base}"
+          },
+          "org.yolo-labz.tailwind": "bg"
+        },
+        "$description": "page ground; the gremlin plate is exactly this colour on dark"
+      },
+      "raised": {
+        "$value": "{color.mocha.mantle}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.mantle}"
+          },
+          "org.yolo-labz.tailwind": "bg-elevated"
+        },
+        "$description": "the one raised band"
+      },
+      "sunken": {
+        "$value": "{color.mocha.crust}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.crust}"
+          },
+          "org.yolo-labz.tailwind": "crust"
+        },
+        "$description": "code blocks, deepest layer"
+      },
+      "panel": {
+        "$value": "{color.mocha.surface0}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.surface0}"
+          },
+          "org.yolo-labz.tailwind": "surface"
+        },
+        "$description": "chips, inline code ground"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.mocha.surface1}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.surface1}"
+          },
+          "org.yolo-labz.tailwind": "border"
+        },
+        "$description": "1px rules; decorative, under 3:1 on purpose"
+      },
+      "strong": {
+        "$value": "{color.mocha.overlay0}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.overlay2}"
+          },
+          "org.yolo-labz.tailwind": "overlay"
+        },
+        "$description": "boundaries of controls, 3:1 against the ground"
+      }
+    },
+    "text": {
+      "default": {
+        "$value": "{color.mocha.text}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.text}"
+          },
+          "org.yolo-labz.tailwind": "text"
+        }
+      },
+      "muted": {
+        "$value": "{color.mocha.subtext0}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.subtext1}"
+          },
+          "org.yolo-labz.tailwind": "text-muted"
+        },
+        "$description": "secondary text; 4.5:1 on both themes"
+      },
+      "soft": {
+        "$value": "{color.mocha.subtext1}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.subtext1}"
+          }
+        },
+        "$description": "blog reading text between default and muted"
+      }
+    },
+    "accent": {
+      "default": {
+        "$value": "{color.emerald.base}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.emerald.deep}"
+          },
+          "org.yolo-labz.tailwind": "accent"
+        },
+        "$description": "the one action: primary button, active row, outcome line"
+      },
+      "hover": {
+        "$value": "{color.emerald.hover}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.emerald.deep-hover}"
+          },
+          "org.yolo-labz.tailwind": "accent-hover"
+        }
+      },
+      "on": {
+        "$value": "{color.mocha.base}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.base}"
+          }
+        },
+        "$description": "text on an accent fill"
+      }
+    },
+    "link": {
+      "default": {
+        "$value": "{color.mocha.blue}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.blue-deep}"
+          },
+          "org.yolo-labz.tailwind": "link"
+        },
+        "$description": "links that leave the page, repository labels"
+      },
+      "hover": {
+        "$value": "{color.mocha.lavender}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.lavender}"
+          }
+        }
+      },
+      "visited": {
+        "$value": "{color.mocha.mauve}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.mauve}"
+          }
+        }
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{color.emerald.base}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.emerald.deep}"
+          }
+        },
+        "$description": "2px ring, 3px offset, on every focusable element"
+      }
+    },
+    "role": {
+      "audit": {
+        "$value": "{color.mocha.peach}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.peach}"
+          },
+          "org.yolo-labz.tailwind": "warn"
+        },
+        "$description": "audit trail: case-file labels, constraint lines"
+      },
+      "compliance": {
+        "$value": "{color.mocha.yellow}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.yellow}"
+          },
+          "org.yolo-labz.tailwind": "compliance"
+        },
+        "$description": "compliance badges only"
+      },
+      "mark": {
+        "$value": "{color.mocha.mauve}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.mauve}"
+          }
+        },
+        "$description": "the gremlin's pupils and glyphs; never UI chrome"
+      }
+    },
+    "signal": {
+      "info": {
+        "$value": "{color.mocha.blue}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.blue}"
+          }
+        }
+      },
+      "success": {
+        "$value": "{color.mocha.green}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.green}"
+          }
+        }
+      },
+      "warn": {
+        "$value": "{color.mocha.yellow}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.yellow}"
+          }
+        }
+      },
+      "error": {
+        "$value": "{color.mocha.red}",
+        "$type": "color",
+        "$extensions": {
+          "org.yolo-labz.mode": {
+            "light": "{color.latte.red}"
+          }
+        }
+      }
+    }
+  }
+}

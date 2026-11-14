@@ -1,0 +1,490 @@
+{
+  "$description": "yolo-labz primitive tokens. W3C Design Tokens format. Palettes are Catppuccin Mocha (dark) and Latte (light); emerald is the org action colour. Hex only: no consumer converts.",
+  "color": {
+    "mocha": {
+      "rosewater": {
+        "$value": "#f5e0dc",
+        "$type": "color"
+      },
+      "flamingo": {
+        "$value": "#f2cdcd",
+        "$type": "color"
+      },
+      "pink": {
+        "$value": "#f5c2e7",
+        "$type": "color"
+      },
+      "mauve": {
+        "$value": "#cba6f7",
+        "$type": "color"
+      },
+      "red": {
+        "$value": "#f38ba8",
+        "$type": "color"
+      },
+      "maroon": {
+        "$value": "#eba0ac",
+        "$type": "color"
+      },
+      "peach": {
+        "$value": "#fab387",
+        "$type": "color"
+      },
+      "yellow": {
+        "$value": "#f9e2af",
+        "$type": "color"
+      },
+      "green": {
+        "$value": "#a6e3a1",
+        "$type": "color"
+      },
+      "teal": {
+        "$value": "#94e2d5",
+        "$type": "color"
+      },
+      "sky": {
+        "$value": "#89dceb",
+        "$type": "color"
+      },
+      "sapphire": {
+        "$value": "#74c7ec",
+        "$type": "color"
+      },
+      "blue": {
+        "$value": "#89b4fa",
+        "$type": "color"
+      },
+      "lavender": {
+        "$value": "#b4befe",
+        "$type": "color"
+      },
+      "text": {
+        "$value": "#cdd6f4",
+        "$type": "color"
+      },
+      "subtext1": {
+        "$value": "#bac2de",
+        "$type": "color"
+      },
+      "subtext0": {
+        "$value": "#a6adc8",
+        "$type": "color"
+      },
+      "overlay2": {
+        "$value": "#9399b2",
+        "$type": "color"
+      },
+      "overlay1": {
+        "$value": "#7f849c",
+        "$type": "color"
+      },
+      "overlay0": {
+        "$value": "#6c7086",
+        "$type": "color"
+      },
+      "surface2": {
+        "$value": "#585b70",
+        "$type": "color"
+      },
+      "surface1": {
+        "$value": "#45475a",
+        "$type": "color"
+      },
+      "surface0": {
+        "$value": "#313244",
+        "$type": "color"
+      },
+      "base": {
+        "$value": "#1e1e2e",
+        "$type": "color"
+      },
+      "mantle": {
+        "$value": "#181825",
+        "$type": "color"
+      },
+      "crust": {
+        "$value": "#11111b",
+        "$type": "color"
+      }
+    },
+    "latte": {
+      "rosewater": {
+        "$value": "#dc8a78",
+        "$type": "color"
+      },
+      "flamingo": {
+        "$value": "#dd7878",
+        "$type": "color"
+      },
+      "pink": {
+        "$value": "#ea76cb",
+        "$type": "color"
+      },
+      "mauve": {
+        "$value": "#8839ef",
+        "$type": "color"
+      },
+      "red": {
+        "$value": "#d20f39",
+        "$type": "color"
+      },
+      "maroon": {
+        "$value": "#e64553",
+        "$type": "color"
+      },
+      "peach": {
+        "$value": "#fe640b",
+        "$type": "color"
+      },
+      "yellow": {
+        "$value": "#df8e1d",
+        "$type": "color"
+      },
+      "green": {
+        "$value": "#40a02b",
+        "$type": "color"
+      },
+      "teal": {
+        "$value": "#179299",
+        "$type": "color"
+      },
+      "sky": {
+        "$value": "#04a5e5",
+        "$type": "color"
+      },
+      "sapphire": {
+        "$value": "#209fb5",
+        "$type": "color"
+      },
+      "blue": {
+        "$value": "#1e66f5",
+        "$type": "color"
+      },
+      "lavender": {
+        "$value": "#7287fd",
+        "$type": "color"
+      },
+      "text": {
+        "$value": "#4c4f69",
+        "$type": "color"
+      },
+      "subtext1": {
+        "$value": "#5c5f77",
+        "$type": "color"
+      },
+      "subtext0": {
+        "$value": "#6c6f85",
+        "$type": "color"
+      },
+      "overlay2": {
+        "$value": "#7c7f93",
+        "$type": "color"
+      },
+      "overlay1": {
+        "$value": "#8c8fa1",
+        "$type": "color"
+      },
+      "overlay0": {
+        "$value": "#9ca0b0",
+        "$type": "color"
+      },
+      "surface2": {
+        "$value": "#acb0be",
+        "$type": "color"
+      },
+      "surface1": {
+        "$value": "#bcc0cc",
+        "$type": "color"
+      },
+      "surface0": {
+        "$value": "#ccd0da",
+        "$type": "color"
+      },
+      "base": {
+        "$value": "#eff1f5",
+        "$type": "color"
+      },
+      "mantle": {
+        "$value": "#e6e9ef",
+        "$type": "color"
+      },
+      "crust": {
+        "$value": "#dce0e8",
+        "$type": "color"
+      }
+    },
+    "emerald": {
+      "base": {
+        "$value": "#00c77a",
+        "$type": "color",
+        "$description": "the one action on dark (portfolio, locked 01/06/2026)"
+      },
+      "hover": {
+        "$value": "#00db8c",
+        "$type": "color"
+      },
+      "deep": {
+        "$value": "#007045",
+        "$type": "color",
+        "$description": "emerald for light surfaces: 5.46:1 on Latte base"
+      },
+      "deep-hover": {
+        "$value": "#006b40",
+        "$type": "color"
+      }
+    },
+    "blue-deep": {
+      "$value": "#1650d8",
+      "$type": "color",
+      "$description": "link blue on light surfaces; Latte blue is 4.34:1, under the 4.5:1 text floor"
+    }
+  },
+  "font": {
+    "family": {
+      "sans": {
+        "$value": "Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "$type": "fontFamily"
+      },
+      "mono": {
+        "$value": "\"JetBrains Mono\", ui-monospace, \"SF Mono\", Menlo, Consolas, monospace",
+        "$type": "fontFamily"
+      }
+    },
+    "weight": {
+      "regular": {
+        "$value": 400,
+        "$type": "fontWeight"
+      },
+      "medium": {
+        "$value": 500,
+        "$type": "fontWeight"
+      },
+      "semibold": {
+        "$value": 600,
+        "$type": "fontWeight"
+      }
+    }
+  },
+  "space": {
+    "0": {
+      "$value": "0",
+      "$type": "dimension"
+    },
+    "1": {
+      "$value": "4px",
+      "$type": "dimension"
+    },
+    "2": {
+      "$value": "8px",
+      "$type": "dimension"
+    },
+    "3": {
+      "$value": "12px",
+      "$type": "dimension"
+    },
+    "4": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "6": {
+      "$value": "24px",
+      "$type": "dimension"
+    },
+    "8": {
+      "$value": "32px",
+      "$type": "dimension"
+    },
+    "12": {
+      "$value": "48px",
+      "$type": "dimension"
+    },
+    "16": {
+      "$value": "64px",
+      "$type": "dimension"
+    },
+    "28": {
+      "$value": "112px",
+      "$type": "dimension"
+    }
+  },
+  "radius": {
+    "none": {
+      "$value": "0",
+      "$type": "dimension"
+    },
+    "sm": {
+      "$value": "2px",
+      "$type": "dimension"
+    },
+    "md": {
+      "$value": "6px",
+      "$type": "dimension"
+    },
+    "lg": {
+      "$value": "12px",
+      "$type": "dimension"
+    }
+  },
+  "duration": {
+    "fast": {
+      "$value": "150ms",
+      "$type": "duration"
+    },
+    "base": {
+      "$value": "200ms",
+      "$type": "duration"
+    },
+    "medium": {
+      "$value": "300ms",
+      "$type": "duration"
+    },
+    "slow": {
+      "$value": "520ms",
+      "$type": "duration"
+    }
+  },
+  "ease": {
+    "out-expo": {
+      "$value": [
+        0.16,
+        1,
+        0.3,
+        1
+      ],
+      "$type": "cubicBezier"
+    },
+    "standard": {
+      "$value": [
+        0.4,
+        0,
+        0.2,
+        1
+      ],
+      "$type": "cubicBezier"
+    }
+  },
+  "breakpoint": {
+    "sm": {
+      "$value": "640px",
+      "$type": "dimension"
+    },
+    "md": {
+      "$value": "768px",
+      "$type": "dimension"
+    },
+    "lg": {
+      "$value": "1024px",
+      "$type": "dimension"
+    },
+    "xl": {
+      "$value": "1280px",
+      "$type": "dimension"
+    }
+  },
+  "viewport": {
+    "floor": {
+      "$value": "360px",
+      "$type": "dimension",
+      "$description": "narrowest width the sites must work at: no horizontal overflow"
+    },
+    "gutter-mobile": {
+      "$value": "16px",
+      "$type": "dimension"
+    },
+    "gutter-desktop": {
+      "$value": "24px",
+      "$type": "dimension"
+    }
+  },
+  "touch": {
+    "min": {
+      "$value": "44px",
+      "$type": "dimension",
+      "$description": "minimum target height and width on a phone (WCAG 2.5.5 level AAA, kept as the house floor)"
+    },
+    "gap": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "minimum distance between two targets"
+    }
+  },
+  "text": {
+    "min-body": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "body copy never renders below this on any width"
+    },
+    "measure": {
+      "$value": "50ch",
+      "$type": "dimension",
+      "$description": "prose column; Inter's ch is wide, so about 70 characters"
+    },
+    "leading": {
+      "body": {
+        "$value": 1.625,
+        "$type": "number"
+      },
+      "heading": {
+        "$value": 1.2,
+        "$type": "number"
+      },
+      "tight": {
+        "$value": 1.15,
+        "$type": "number"
+      }
+    },
+    "tracking": {
+      "display": {
+        "$value": "-0.025em",
+        "$type": "dimension"
+      },
+      "heading": {
+        "$value": "-0.02em",
+        "$type": "dimension"
+      },
+      "label": {
+        "$value": "0.025em",
+        "$type": "dimension"
+      }
+    },
+    "size": {
+      "label": {
+        "$value": "0.75rem",
+        "$type": "dimension"
+      },
+      "small": {
+        "$value": "0.875rem",
+        "$type": "dimension"
+      },
+      "body": {
+        "$value": "1rem",
+        "$type": "dimension"
+      },
+      "step-1": {
+        "$value": "clamp(1.125rem, 1.096rem + 0.13vw, 1.2rem)",
+        "$type": "dimension"
+      },
+      "step-2": {
+        "$value": "clamp(1.266rem, 1.197rem + 0.303vw, 1.44rem)",
+        "$type": "dimension"
+      },
+      "step-3": {
+        "$value": "clamp(1.424rem, 1.305rem + 0.529vw, 1.728rem)",
+        "$type": "dimension"
+      },
+      "step-4": {
+        "$value": "clamp(1.602rem, 1.417rem + 0.821vw, 2.074rem)",
+        "$type": "dimension"
+      },
+      "step-5": {
+        "$value": "clamp(1.802rem, 1.533rem + 1.194vw, 2.488rem)",
+        "$type": "dimension"
+      },
+      "step-6": {
+        "$value": "clamp(2.027rem, 1.652rem + 1.667vw, 2.986rem)",
+        "$type": "dimension",
+        "$description": "modular scale: ratio 1.125 at 360px growing to 1.2 at 1280px"
+      }
+    }
+  }
+}
