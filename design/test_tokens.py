@@ -64,9 +64,17 @@ class Tokens(unittest.TestCase):
         self.assertGreaterEqual(px("touch.min"), 44)
         self.assertGreaterEqual(px("touch.gap"), 8)
         self.assertGreaterEqual(px("text.min-body"), 16)
+        self.assertGreaterEqual(px("text.min-text"), 14)
+        rem = lambda p: float(build.lookup(TREE, p)["$value"].removesuffix("rem")) * 16
+        for k in ("label", "small"):
+            self.assertGreaterEqual(rem(f"text.size.{k}"), px("text.min-text"), k)
         self.assertLessEqual(px("viewport.floor"), 360)
         bps = [px(f"breakpoint.{k}") for k in ("sm", "md", "lg", "xl")]
         self.assertEqual(bps, sorted(bps))
+
+    def test_gremlin_skin_is_visible_on_both_grounds(self):
+        self.assertGreaterEqual(contrast(theme("color.mark-skin", "dark"), theme("color.surface.base", "dark")), 3.0)
+        self.assertGreaterEqual(contrast(theme("color.mark-skin", "light"), theme("color.surface.base", "light")), 3.0)
 
     def test_build_is_deterministic_and_dist_is_current(self):
         self.assertEqual(build.build(), build.build())

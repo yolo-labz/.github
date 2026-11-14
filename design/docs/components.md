@@ -15,7 +15,7 @@ and a failing example. A rule with no failing example is decoration.
 8. **Brand art comes from the published brand files,** never from type. Wrong: a share card drawn in code (portfolio#184).
 9. **A quality claim needs a sample,** a distribution and a bound. Wrong: "fixed" after six clean loads.
 
-**Primary action:** emerald fill, `accent.on` text, 2px radius. In the header only; elsewhere the action is an underlined link.
+**Primary action:** emerald fill, `accent.on` text, `radius.sm`. In the header only; elsewhere the action is an underlined link.
 **Focus:** a 2px ring in `focus.ring`, 3px offset, on every focusable element. Never `outline: none` without a replacement.
 **Icons:** 16px line arrows, 1.5 stroke, round caps, `currentColor`. No text glyph stands in for an icon.
 

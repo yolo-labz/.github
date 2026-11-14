@@ -1,4 +1,4 @@
-# yolo-labz brand — generated assets.
+# yolo-labz brand: assets built from code.
 #
 #   make model   render the gremlin turnaround + vector avatar from
 #                model/params.json, then machine-check the result
@@ -9,6 +9,11 @@
 #   make renders publish the hero plate at the sizes consumers ask for, in Mocha
 #                and Latte, as PNG + WebP + AVIF; a repeat run must reproduce
 #                every committed byte (manifest.json pins the sha256).
+#   make web     the rigged .glb (five state clips), a still per state and a
+#                turntable, from model/params.json + model/character.json.
+#                Needs gltfpack (nixpkgs#meshoptimizer) and ffmpeg.
+#   make web-verify  sha256, size, clip and palette checks on the committed
+#                files, no blender.
 #   make check   the checker's own self-test (CIEDE2000 reference pairs).
 #
 # Requires: blender (>= 5), rsvg-convert, python3. No pip packages.
@@ -18,7 +23,7 @@ PYTHON  ?= python3
 THREADS ?= 4
 BUILD   ?= build
 
-.PHONY: model cards cards-verify renders renders-verify check clean
+.PHONY: model cards cards-verify renders renders-verify web web-verify check clean mark mark-verify
 
 model:
 	rm -rf $(BUILD)
@@ -40,6 +45,15 @@ renders:
 renders-verify:
 	$(PYTHON) model/renders.py --verify
 
+GLTFPACK ?= gltfpack
+
+web:
+	$(PYTHON) model/web.py --build $(BUILD)/web --blender $(BLENDER) --threads $(THREADS) --gltfpack $(GLTFPACK)
+	$(PYTHON) model/web.py --compare $(BUILD)/web
+
+web-verify:
+	$(PYTHON) model/web.py --verify
+
 check:
 	$(PYTHON) model/check.py --self-test
 
@@ -49,3 +63,9 @@ check:
 # intentional change to model/params.json or model/gremlin.py.
 clean:
 	rm -rf $(BUILD) model/.determinism
+
+mark:
+	$(PYTHON) profile/assets/brand/mark/build.py
+
+mark-verify:
+	$(PYTHON) profile/assets/brand/mark/build.py --verify

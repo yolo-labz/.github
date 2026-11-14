@@ -97,6 +97,7 @@ def build() -> dict[str, str]:
         else:
             sem["dark"].append((name, css))
             sem["light"].append((name, render(tree, light, tok.get("$type", ""))))
+    # color-scheme is the page's decision (the blog follows the OS, the portfolio is dark-only), not a token.
     head = (
         "/* @yolo-labz/design: GENERATED, do not edit. Source: yolo-labz/.github design/tokens.\n"
         f" * inputs sha256:{digest} */\n"
@@ -104,8 +105,8 @@ def build() -> dict[str, str]:
     block = lambda sel, rows, extra="": sel + " {\n" + extra + "".join(f"  {n}: {v};\n" for n, v in rows) + "}\n"
     tokens_css = (
         head
-        + block(":root", prim + sem["dark"], "  color-scheme: dark;\n")
-        + block(':root[data-theme="light"]', sem["light"], "  color-scheme: light;\n")
+        + block(":root", prim + sem["dark"])
+        + block(':root[data-theme="light"]', sem["light"])
     )
 
     tw: list[tuple[str, str]] = []

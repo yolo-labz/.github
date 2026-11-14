@@ -1,7 +1,6 @@
 /* @yolo-labz/design: GENERATED, do not edit. Source: yolo-labz/.github design/tokens.
- * inputs sha256:9da64ee366f248e11c5911532d343d55d4900cb9f47a569128d08836c493fa3d */
+ * inputs sha256:f7648f6fc4cfb727bde3562b1e21a2e4e7e86667107ddfbf13b87ca17ee82227 */
 :root {
-  color-scheme: dark;
   --yl-color-mocha-rosewater: #f5e0dc;
   --yl-color-mocha-flamingo: #f2cdcd;
   --yl-color-mocha-pink: #f5c2e7;
@@ -58,9 +57,12 @@
   --yl-color-emerald-hover: #00db8c;
   --yl-color-emerald-deep: #007045;
   --yl-color-emerald-deep-hover: #006b40;
-  --yl-color-blue-deep: #1650d8;
+  --yl-color-blue-deep: #154fc3;
+  --yl-color-gremlin-skin-light: #388c26;
   --yl-font-family-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   --yl-font-family-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --yl-font-family-serif: "Noto Serif", Georgia, serif;
+  --yl-font-family-serif-display: "Noto Serif Display", "Noto Serif", Georgia, serif;
   --yl-font-weight-regular: 400;
   --yl-font-weight-medium: 500;
   --yl-font-weight-semibold: 600;
@@ -72,13 +74,13 @@
   --yl-space-6: 24px;
   --yl-space-8: 32px;
   --yl-space-12: 48px;
-  --yl-space-16: 64px;
+  --yl-space-18: 72px;
   --yl-space-28: 112px;
   --yl-radius-none: 0;
-  --yl-radius-sm: 2px;
-  --yl-radius-md: 6px;
+  --yl-radius-sm: 4px;
+  --yl-radius-md: 8px;
   --yl-radius-lg: 12px;
-  --yl-duration-fast: 150ms;
+  --yl-duration-fast: 160ms;
   --yl-duration-base: 200ms;
   --yl-duration-medium: 300ms;
   --yl-duration-slow: 520ms;
@@ -101,7 +103,7 @@
   --yl-text-tracking-display: -0.025em;
   --yl-text-tracking-heading: -0.02em;
   --yl-text-tracking-label: 0.025em;
-  --yl-text-size-label: 0.75rem;
+  --yl-text-size-label: 0.875rem;
   --yl-text-size-small: 0.875rem;
   --yl-text-size-body: 1rem;
   --yl-text-size-step-1: clamp(1.125rem, 1.096rem + 0.13vw, 1.2rem);
@@ -110,6 +112,7 @@
   --yl-text-size-step-4: clamp(1.602rem, 1.417rem + 0.821vw, 2.074rem);
   --yl-text-size-step-5: clamp(1.802rem, 1.533rem + 1.194vw, 2.488rem);
   --yl-text-size-step-6: clamp(2.027rem, 1.652rem + 1.667vw, 2.986rem);
+  --yl-text-min-text: 14px;
   --yl-color-surface-base: var(--yl-color-mocha-base);
   --yl-color-surface-raised: var(--yl-color-mocha-mantle);
   --yl-color-surface-sunken: var(--yl-color-mocha-crust);
@@ -133,9 +136,9 @@
   --yl-color-signal-success: var(--yl-color-mocha-green);
   --yl-color-signal-warn: var(--yl-color-mocha-yellow);
   --yl-color-signal-error: var(--yl-color-mocha-red);
+  --yl-color-mark-skin: var(--yl-color-mocha-green);
 }
 :root[data-theme="light"] {
-  color-scheme: light;
   --yl-color-surface-base: var(--yl-color-latte-base);
   --yl-color-surface-raised: var(--yl-color-latte-mantle);
   --yl-color-surface-sunken: var(--yl-color-latte-crust);
@@ -159,4 +162,5 @@
   --yl-color-signal-success: var(--yl-color-latte-green);
   --yl-color-signal-warn: var(--yl-color-latte-yellow);
   --yl-color-signal-error: var(--yl-color-latte-red);
+  --yl-color-mark-skin: var(--yl-color-gremlin-skin-light);
 }

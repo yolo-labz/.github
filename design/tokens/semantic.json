@@ -211,7 +211,7 @@
             "light": "{color.latte.mauve}"
           }
         },
-        "$description": "the gremlin's pupils and glyphs; never UI chrome"
+        "$description": "the node, and the gremlin's pupils and glyphs: wayfinding and the mark; never the action"
       }
     },
     "signal": {
@@ -251,6 +251,16 @@
           }
         }
       }
+    },
+    "mark-skin": {
+      "$value": "{color.mocha.green}",
+      "$type": "color",
+      "$extensions": {
+        "org.yolo-labz.mode": {
+          "light": "{color.gremlin.skin-light}"
+        }
+      },
+      "$description": "the gremlin's skin; a loose mark on a page uses the skin for that page's mode, never recoloured"
     }
   }
 }

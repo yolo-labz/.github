@@ -8,7 +8,7 @@ design/
   tokens/primitive.json   palettes (Mocha, Latte, emerald), fonts, space, radius, motion, breakpoints, mobile floors
   tokens/semantic.json    surface, border, text, accent, link, focus, role, signal; dark value + light value
   build.py                stdlib only; writes dist/ or checks it (--check)
-  dist/tokens.css         CSS custom properties, --yl-*; dark on :root, light on [data-theme="light"]
+  dist/tokens.css         CSS custom properties, --yl-*; dark on :root, light on [data-theme="light"]; it never sets color-scheme
   dist/tailwind.css       Tailwind v4 `@theme` preset (utilities read `--color-*`, which point at those properties)
   test_tokens.py          format, references, contrast on both themes, mobile floors, dist is current
   docs/                   the written system, one page per topic
