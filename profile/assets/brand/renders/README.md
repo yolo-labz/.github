@@ -60,7 +60,7 @@ unverifiable if it were left on the default thread count.
 </picture>
 ```
 
-The plate colour is the theme's `base` — `#1e1e2e` (Mocha) and `#eff1f5` (Latte) —
+The plate colour is the theme's `base`, `#1e1e2e` (Mocha) and `#eff1f5` (Latte),
 which is what the profile surface uses, so a plate sits on the page ground with no
 frame. Never retouch, letter, filter or re-encode these outside `model/`: the
 sha256 in `manifest.json` is the only reason a consumer can trust the bytes.

@@ -1,7 +1,7 @@
 # yolo-labz brand assets
 
 Canonical brand system for the org. Everything here is generated from the
-SVG masters and the two HTML templates — regenerate, never hand-edit the PNGs.
+SVG masters and the two HTML templates. Regenerate the PNGs, never edit them by hand.
 
 ## The mark
 
@@ -23,16 +23,16 @@ Stroke width 6 (7 in the favicon/OG lockup for small-size weight),
 
 ## Color
 
-Catppuccin — Mocha for dark surfaces, Latte for light. Token classes only,
+Catppuccin: Mocha for dark surfaces, Latte for light. Token classes only,
 never raw hex outside these masters.
 
 | Role | Mocha (dark) | Latte (light) |
 |------|--------------|---------------|
 | background | `#1e1e2e` base | `#eff1f5` base |
-| surface | `#181825` mantle / `#11111b` crust | — |
+| surface | `#181825` mantle / `#11111b` crust | n/a |
 | ink (strokes / text) | `#cdd6f4` text · `#a6adc8` subtext | `#4c4f69` text |
 | node / accent | `#cba6f7` mauve | `#8839ef` mauve |
-| syntax (deck code) | `#a6e3a1` green · `#fab387` peach · `#89b4fa` blue | — |
+| syntax (deck code) | `#a6e3a1` green · `#fab387` peach · `#89b4fa` blue | n/a |
 
 ## Type
 
@@ -58,12 +58,12 @@ brand/
 │   ├── favicon-{16,32,64,128,512}.png
 │   ├── favicon.ico                   multi-res 16+32+64
 │   └── apple-touch-icon.png          180px, dark mark on base
-├── hero/                             SERVED hero + avatar (adopted 08/11/2026): GPT hero crops
-│                                     (WebP/AVIF), vector avatar at 96/460 px; manifest.json pins bytes
-├── mascot/                           the programming gremlin — 5-state character system
+├── hero/                             SERVED hero + avatar: hero crops (WebP/AVIF),
+│                                     vector avatar at 96/460 px; manifest.json pins bytes
+├── mascot/                           the programming gremlin, 5-state character system
 │   ├── README.md                     grammar + states + binding usage rules
 │   ├── gremlin-model-sheet.svg       construction spec (head geometry, palette, rules)
-│   ├── gremlin-hero.svg              signature piece — the gremlin programming (240×160)
+│   ├── gremlin-hero.svg              signature piece, the gremlin programming (240×160)
 │   ├── gremlin-avatar.svg            head cut for social avatar / app icon
 │   └── gremlin-{idle,working,        state masters (.svg) + 320px rasters (.png)
 │       paused,loading,asleep}.{svg,png}
@@ -95,7 +95,7 @@ cd mascot && for f in gremlin-idle gremlin-working gremlin-paused gremlin-loadin
 # outline wordmark text to paths (font-independent)
 inkscape in.svg --export-text-to-path --export-plain-svg --export-filename=out.svg
 
-# OG / Twitter / social-preview cards — from the gremlin model, no hand art
+# OG / Twitter / social-preview cards, rendered from the gremlin model
 # (from the repo root; needs blender + rsvg-convert, ~45 s, deterministic)
 make cards
 

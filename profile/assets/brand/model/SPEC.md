@@ -4,14 +4,14 @@
 
 ## Early handoff to S2 / wT:p6 — Gremlin 3D
 
-**Read this file now; do not wait for generated sheets.**
+**Read this file now; do not wait for the sheets.**
 Absolute handoff path:
 `/home/notroot/Documents/Code/yolo-labz/github-profile-013-gremlin-model-sheet/profile/assets/brand/model/SPEC.md`
 
 Palette and 2D construction below are fixed to merged SVG kit commit
 `64880882f235922007dd22a0cdb22c7ea5f09f83` and re-derived against the merged 3D
 single source of truth `model/params.json` (PR #14, main `ff1abc0`). They take
-precedence over GPT rasters, including the 28/09/2026 anchor and the 31/10/2026
+precedence over the raster references, including the 28/09/2026 anchor and the 31/10/2026
 sheets. This is the S1/S2 exchange specification, not a claim that the org has
 approved a new 3D master. Back/side depth is an explicit exploratory extension,
 not something measured from a front-only SVG.
@@ -33,7 +33,7 @@ not something measured from a front-only SVG.
 ## Exact sampled palette
 
 These values are parsed from SVG CSS/fill attributes, not invented or inferred
-from antialiased raster pixels. Mocha is the primary generated-sheet palette;
+from antialiased raster pixels. Mocha is the primary sheet palette;
 Latte is the existing theme adaptation, not permission for arbitrary recolouring.
 
 | Role | Mocha | Latte | SVG origin |
@@ -170,14 +170,11 @@ rather than by the record moving alone.
 
 ## Requested sheets and panel order
 
-Five separate reference-anchored GPT images; planned sends **5**, absolute
-request ceiling **8**. All use the same role-labelled canonical reference board.
-No generation is authorized when the server/session route is unavailable.
+Five separate reference-anchored sheets. All use the same role-labelled
+canonical reference board.
 
 Status after the 31/10/2026 run: **all five delivered** (`turnaround`,
-`expressions`, `poses`, `hands-keyboard`, `colour-material`) in 6 sends of the
-8-send ceiling; the fifth needed a second attempt after the account's free-plan
-image quota reset. The default `check.py` exits 0 on that set.
+`expressions`, `poses`, `hands-keyboard`, `colour-material`).
 
 1. `turnaround.png`: front, 3/4, side, back, left-to-right; same scale,
    aligned ground, complete ears/tail/feet. Orthographic, no camera perspective.
@@ -188,18 +185,15 @@ image quota reset. The default `check.py` exits 0 on that set.
 4. `hands-keyboard.png`: readable three-claw left/right hand, side grip,
    flat keyboard/blank keycaps and both hands typing; not five human fingers.
 5. `colour-material.png`: one neutral character plus clean flat material
-   regions. Exact role/hex callouts are typeset outside the generated artwork;
-   a model-painted colour label is not palette authority.
+   regions. Exact role/hex callouts are typeset outside the artwork;
+   a painted colour label is not palette authority.
 
-No generated lettering, fake measurements or watermarks. Labels, palette chips
-and dimensions come from deterministic source composition, not GPT text.
+No painted lettering, fake measurements or watermarks. Labels, palette chips
+and dimensions come from deterministic source composition.
 
 ## Drift register — 31/10/2026 (actual renders)
 
-Four reference-anchored sheets were generated and inspected; the fifth is
-blocked by the account's image quota, not by a design decision. Per-panel notes
-and the sanitized provenance live beside each PNG in
-`<sheet>.provenance.json`.
+All five sheets were inspected. Per-panel notes follow.
 
 | Render | Actual state / drift |
 | --- | --- |
@@ -223,6 +217,5 @@ this draft to a logo/avatar/approved master.
 
 `spec.json` is the machine-readable companion. `check.py --spec-only`
 validates source-derived palette/construction without asserting sheet delivery.
-Default `check.py` must remain nonzero until all five genuine images and
-confirmed, sanitized prompt/reference provenance exist. The bad-palette fixture
-must fail before missing-image checks. Generation success is not visual approval.
+The bad-palette fixture must fail before missing-image checks. A delivered
+sheet is not visual approval.

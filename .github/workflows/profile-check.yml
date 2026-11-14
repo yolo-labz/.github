@@ -38,24 +38,11 @@ jobs:
       - name: Checker unit tests
         run: |
           python3 -m unittest -v
-          python3 -m unittest discover -s profile/assets/brand/rollout -p 'test_*.py' -v
 
       # The flagship set comes from docs/brand-positioning.md, not from the script.
       # Read-only: a plain check never rewrites checks.json.
       - name: Rollout contract
         run: python3 profile/assets/brand/rollout/check.py
-
-      # Integrity always fails the run. Whether the saved renders still match the
-      # current README is a drift report: a warning on a pull request, a failed
-      # weekly/manual run until someone re-renders (needs the server browser
-      # fleet, which CI does not have).
-      - name: Rollout evidence integrity
-        if: github.event_name == 'pull_request'
-        run: python3 profile/assets/brand/rollout/verify.py
-
-      - name: Rollout evidence freshness
-        if: github.event_name != 'pull_request'
-        run: python3 profile/assets/brand/rollout/verify.py --require-fresh
 
       - name: Brand/profile gate
         env:

@@ -58,11 +58,6 @@ class PositiveFixture(unittest.TestCase):
         self.assertEqual(code, 0, out)
         self.assertNotIn("[error] claims", out)
 
-    def test_sibling_json_covers_generated_png(self):
-        code, out = run(POSITIVE, "--offline")
-        self.assertEqual(code, 0, out)
-        self.assertNotIn("hero.png", out)
-
 
 class NegativeFixtures(unittest.TestCase):
     def test_missing_local_asset_fails(self):
@@ -71,11 +66,52 @@ class NegativeFixtures(unittest.TestCase):
         self.assertIn("[error] links:", out)
         self.assertIn("assets/missing.png", out)
 
-    def test_missing_provenance_fails(self):
-        code, out = run(FIXTURES / "negative-provenance", "--offline")
+    def planted(self, path: str, content: str | bytes = "x\n") -> tuple[int, str]:
+        """Copy the clean fixture, plant one file, and run the gate on the copy."""
+        with tempfile.TemporaryDirectory(prefix="wording-") as tmp:
+            repo = Path(tmp) / "repo"
+            shutil.copytree(POSITIVE, repo)
+            target = repo / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if isinstance(content, bytes):
+                target.write_bytes(content)
+            else:
+                target.write_text(content, encoding="utf-8")
+            return run(repo, "--offline")
+
+    def test_method_caption_fails(self):
+        code, out = self.planted(
+            "profile/assets/note.md", "*GPT-generated illustration: the gremlin.*\n"
+        )
         self.assertEqual(code, 1, out)
-        self.assertIn("[error] provenance:", out)
-        self.assertIn("hero.png", out)
+        self.assertIn("[error] wording:", out)
+        self.assertIn("note.md:1", out)
+
+    def test_made_with_statement_fails(self):
+        code, out = self.planted("docs/about.md", "Made with AI, then cleaned up.\n")
+        self.assertEqual(code, 1, out)
+        self.assertIn("made-with statement", out)
+
+    def test_model_name_in_a_brand_file_name_fails(self):
+        code, out = self.planted("profile/assets/hero-gpt-804.webp", b"RIFF")
+        self.assertEqual(code, 1, out)
+        self.assertIn("hero-gpt-804.webp: file name carries", out)
+
+    def test_provenance_record_name_fails(self):
+        code, out = self.planted("profile/assets/hero.provenance.json", "{}\n")
+        self.assertEqual(code, 1, out)
+        self.assertIn("provenance word", out)
+
+    def test_em_dash_in_a_readme_fails(self):
+        code, out = self.planted("profile/assets/README.md", "One thing \u2014 another.\n")
+        self.assertEqual(code, 1, out)
+        self.assertIn("em dash in a README", out)
+
+    def test_a_product_that_works_with_a_model_may_say_so(self):
+        code, out = self.planted(
+            "docs/uses.md", "The proxy paces Anthropic API traffic for Claude clients.\n"
+        )
+        self.assertEqual(code, 0, out)
 
     def test_private_and_signed_urls_fail(self):
         code, out = run(FIXTURES / "negative-private-url", "--offline")

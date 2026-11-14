@@ -1,3 +1,0 @@
-PASS: 3 confirmed images; hashes, anchor lineage, dimensions and public URL hygiene
-All checks passed!
-1 file already formatted
