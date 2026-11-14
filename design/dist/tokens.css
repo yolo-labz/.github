@@ -1,5 +1,5 @@
 /* @yolo-labz/design: GENERATED, do not edit. Source: yolo-labz/.github design/tokens.
- * inputs sha256:f7648f6fc4cfb727bde3562b1e21a2e4e7e86667107ddfbf13b87ca17ee82227 */
+ * inputs sha256:9eb83c75a73205ebb6a80daa850077895bce02bef5655c20612625d90b4772a0 */
 :root {
   --yl-color-mocha-rosewater: #f5e0dc;
   --yl-color-mocha-flamingo: #f2cdcd;
@@ -113,6 +113,7 @@
   --yl-text-size-step-5: clamp(1.802rem, 1.533rem + 1.194vw, 2.488rem);
   --yl-text-size-step-6: clamp(2.027rem, 1.652rem + 1.667vw, 2.986rem);
   --yl-text-min-text: 14px;
+  --yl-shadow-float: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --yl-color-surface-base: var(--yl-color-mocha-base);
   --yl-color-surface-raised: var(--yl-color-mocha-mantle);
   --yl-color-surface-sunken: var(--yl-color-mocha-crust);

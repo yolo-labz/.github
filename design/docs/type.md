@@ -25,3 +25,10 @@ that line up. Both sites use weights 400 and 600. The files are wired by each ap
 
 **Open.** The blog keeps its own reading scale (`--step--2` to `--step-5`, ratio 1.25 on a fluid 17 to 19px base) in
 `00-system.css`. It is not in the tokens: moving it changes how every post reads, so it waits for a visual review.
+
+## Tailwind names (the portfolio)
+
+`tracking-display`, `tracking-heading`, `tracking-label`; `leading-body`, `leading-heading`, `leading-tight`; `max-w-measure`;
+`text-sm` (14px) and `text-base` (16px); `rounded-sm` 4px, `rounded-md` 8px, `rounded-lg` 12px; `shadow-float`. These replace
+Tailwind's own values of the same names (`leading-tight` was 1.25, `rounded-md` was 6px), so a utility means one thing in every repo.
+Wrong: `tracking-[-0.025em]`, `leading-[1.1]`, `max-w-[50ch]`. Right: `tracking-display`, `leading-tight`, `max-w-measure`.

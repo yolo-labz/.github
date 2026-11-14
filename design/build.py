@@ -115,18 +115,27 @@ def build() -> dict[str, str]:
         if name:
             tw.append((f"--color-{name}", f"var({prop(path)})"))
     for path, tok in leaves(tree):
-        if path[:2] == ("text", "size") and path[2].startswith("step-"):
-            tw.append((f"--text-{path[2]}", f"var({prop(path)})"))
+        if path[:2] == ("text", "size") and (path[2].startswith("step-") or path[2] in ("small", "body")):
+            name = {"small": "sm", "body": "base"}.get(path[2], path[2])  # text-sm 14px, text-base 16px
+            tw.append((f"--text-{name}", f"var({prop(path)})"))
         elif path[0] == "breakpoint":
             tw.append((f"--breakpoint-{path[1]}", tok["$value"]))  # literal: @media cannot take var()
         elif path[:2] == ("ease", "out-expo"):
             tw.append(("--ease-out-expo", f"var({prop(path)})"))
+        elif path[:2] == ("text", "tracking") or path[:2] == ("text", "leading"):
+            tw.append((f"--{path[1]}-{path[2]}", f"var({prop(path)})"))  # tracking-heading, leading-tight
+        elif path == ("text", "measure"):
+            tw.append(("--container-measure", f"var({prop(path)})"))  # max-w-measure
+        elif path[0] == "radius" and path[1] in ("sm", "md", "lg"):
+            tw.append((f"--radius-{path[1]}", f"var({prop(path)})"))  # rounded-sm is 4px, md 8px, lg 12px
+        elif path[0] == "shadow":
+            tw.append((f"--shadow-{path[1]}", f"var({prop(path)})"))  # shadow-float
     tailwind_css = (
         head
         + "/* Tailwind v4 preset. Plain @theme, not `inline`: utilities read var(--color-x), so an app can still\n"
         + " * override --color-x (prefers-contrast) after this file. Breakpoints are literals because a media\n"
-        + " * query cannot take var(). Fonts and radius are left to the app: next/font wires the font file, and\n"
-        + " * Tailwind's radius defaults are what the portfolio ships today. */\n"
+        + " * query cannot take var(). Fonts are left to the app: next/font wires the font file. Radius, tracking,\n"
+        + " * leading and shadow rename Tailwind's own scale (rounded-md is 8px, leading-tight is 1.15). */\n"
         + block("@theme", tw)
     )
     return {"tokens.css": tokens_css, "tailwind.css": tailwind_css}
