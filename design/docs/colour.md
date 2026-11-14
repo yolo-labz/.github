@@ -13,6 +13,7 @@ a palette can be checked, not so pages can reach for them.
 | `link.default` | `#89b4fa` | `#154fc3` | links that leave the page |
 | `role.audit` / `role.compliance` | peach / yellow | peach / yellow | audit trail, compliance badges |
 | `role.mark` | mauve | mauve | the gremlin's pupils and glyphs |
+| `mark-skin` | green `#a6e3a1` | `#388c26` | the gremlin's skin; the light value is darker than Latte green because `#40a02b` is 2.96:1 on Latte base |
 
 **Rules**
 - Colour carries meaning and nothing else. Emerald means act. Peach means audit. Yellow means compliance only.
