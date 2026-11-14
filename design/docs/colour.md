@@ -10,7 +10,7 @@ a palette can be checked, not so pages can reach for them.
 | `surface.raised` | `#181825` | `#e6e9ef` | the one raised band |
 | `text.default` / `text.muted` | `#cdd6f4` / `#a6adc8` | `#4c4f69` / `#5c5f77` | body, secondary |
 | `accent.default` | `#00c77a` | `#007045` | the one action |
-| `link.default` | `#89b4fa` | `#1650d8` | links that leave the page |
+| `link.default` | `#89b4fa` | `#154fc3` | links that leave the page |
 | `role.audit` / `role.compliance` | peach / yellow | peach / yellow | audit trail, compliance badges |
 | `role.mark` | mauve | mauve | the gremlin's pupils and glyphs |
 

@@ -234,9 +234,9 @@
       }
     },
     "blue-deep": {
-      "$value": "#1650d8",
+      "$value": "#154fc3",
       "$type": "color",
-      "$description": "link blue on light surfaces; Latte blue is 4.34:1, under the 4.5:1 text floor"
+      "$description": "link blue on light surfaces; same value as the blog --l-blue-ink (oklch 47% 0.19 262.1). Latte blue is 4.34:1, under the 4.5:1 text floor"
     }
   },
   "font": {
