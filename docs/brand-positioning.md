@@ -82,7 +82,6 @@ plausible outcome, but no suitable measurement in this slice.
 | M01 | kokoro-speakd starts speech in under 200ms; the tools are uniformly fast. | needs measurement | [queued precedes playback][KS-C]. Measure request acceptance, synthesis and audible onset separately, with hardware, text, voice, revision, load, sample count and p50/p95; never reuse old illustrated timing tokens. |
 | M02 | fand improves cooling/noise, or a source diagram proves a live browser action. | needs measurement | [fand][FA-R], [claude-mac-chrome][CM-R] and [chrome-bridge][CB-R] explicitly limit their historical media. Require controlled hardware comparisons or isolated real captures, not animations. |
 | M03 | Scorecard or star counts demonstrate growth, adoption or trust. | needs measurement | A star count or security-practice score is a point-in-time number, not a trend or a user study, and none is quoted in this copy. Need a dated same-scope series plus usage/retention evidence; a security-practice score is not market demand. |
-| M04 | New GPT directions are approved masters or proven to improve conversion. | needs measurement | No artwork is approved by this copy audit. Approval requires the exact rendered asset and a recorded decision; conversion claims additionally require a controlled outcome study. Generation success alone establishes neither. |
 
 ## Public source and release inventory
 
@@ -104,59 +103,6 @@ branch.
 | chrome-bridge · `860a9eb605ee14f0a095a82bd9ab16285870e0e5` | [MIT][CB-L] | [v0.1.0][CB-REL] · 07/05/2026 BRT | Four assets: source archive, checksum, two SBOMs; event behavior cannot be inferred from the release. |
 | kokoro-speakd · `b9850e6cda5812632cc88d587332abc3e62b4dca` | [MIT][KS-L] | [v0.3.0][KS-REL] · 29/05/2026 | Wheel, sdist and two SBOMs. Publication is not proof of complete pip runtime or PEP 740 verification. |
 | zellij-vertical-tabs · `da8efee8d2423760306bf4e1292585bd26e3a6c3` (not a flagship) | [MIT][ZV-L] | [No published GitHub Release or tag returned][ZV-REL] | Public, 0 open issues. Install is build-from-source per its README; see the decision above. |
-
-## GPT workflow and asset usage contract
-
-The reusable lesson is the process: separate traced or generated marks from real
-type, and separate vector checks from inspecting the rendered bytes. This section
-relies only on public yolo-labz sources; other products' brand specifications are
-not cited, and nothing here is permission to copy another brand's identity.
-
-The exploration plates in this repository were produced with gpt-image through the
-ChatGPT web UI. Their provenance sidecars
-([example][YL-P]) record prompt and reference hashes, the tool, a generation
-receipt hash and the post-processing applied (`none; exact original downloaded
-bytes` for the wide hero). The UI label of the model is recorded as a label; no
-backend model ID is claimed. A successful generation receipt proves bytes were
-obtained, not that the composition, anatomy, palette or identity is correct.
-
-| Asset class | Permitted role after its own review | Consumer obligation |
-| --- | --- | --- |
-| Existing versioned vector mark / mascot | Reuse the exact approved source for the named brand and surface; deterministically regenerate derivatives. | Pin path, commit and hash; preserve geometry, optical cut, palette and real wordmark typography. Tracing does not make model-origin art hand-drawn. A changed path requires a new review. |
-| GPT image direction | Labelled exploration or reference input. | Preserve prompt/reference provenance and generation receipt; inspect the actual image. Do not promote it to logo, favicon, UI icon or site identity because the tool returned success. Do not assume this document approved it. |
-| Editorial art / composed banner | A separately accepted illustration, with real type and existing vector marks composited afterward. | Retain image hash and provenance; review at the target crop/size, provide useful alt text, and distinguish illustration from product screenshot, telemetry or benchmark. Publication is a separate gate. |
-
-For **yolo-labz**, start with the existing [YL mark system][YL-B] and
-[programming-gremlin grammar][YL-M] at the inspected base. Importing another
-brand's motif or palette, or a new GPT gremlin pose, does not amend yolo-labz's
-identity. This audit does not certify those existing assets' appearance or approve
-any newly proposed artwork; the profile hero keeps its "exploration, not an
-approved master" caption until a recorded decision exists.
-
-### Attribution and handoff fields
-
-Every consumer should retain the following beside the asset, not in a disposable
-scratch directory. This is a provenance contract, **not a new copyright license**.
-Public source visibility alone is not permission to reuse every asset. Check
-font/art/dependency terms and preserve their required notices; ask the owner for
-missing rights before external reuse. Do not describe output as OpenAI-endorsed.
-
-```text
-Asset: repo-relative source and derivative paths
-Origin: GPT/OpenAI-assisted direction, or the actual non-model origin
-Transformation: selected raster → vector trace / composed editorial image / none
-Identity source: brand, exact source commit and SHA-256
-Generation record: prompt/reference IDs and tool receipt (private IDs kept private)
-Typography: real font/version and license; no model-painted wordmark
-Review: exact rendered bytes, target sizes/crops, reviewer and recorded decision
-Status: exploration / accepted for named use / rejected (never inferred from success)
-Usage: named surfaces, required attribution/rights, remaining publication gate
-```
-
-Do not invent an image-model version from a ChatGPT UI label. Keep private
-account identifiers, chat URLs, credentials and vault excerpts out of public
-sidecars. Each surface owner must verify the actual render and its permissions;
-copy approval cannot stand in for an artwork or deployment decision.
 
 [WA-R]: https://github.com/yolo-labz/wa/blob/f8274f8ba389b4f3519d608885fb531dfda321d8/README.md
 [WA-C]: https://github.com/yolo-labz/wa/blob/f8274f8ba389b4f3519d608885fb531dfda321d8/internal/app/safety.go#L5-L28
@@ -182,9 +128,6 @@ copy approval cannot stand in for an artwork or deployment decision.
 [KS-C]: https://github.com/yolo-labz/kokoro-speakd/blob/b9850e6cda5812632cc88d587332abc3e62b4dca/daemon.py#L96-L347
 [KS-L]: https://github.com/yolo-labz/kokoro-speakd/blob/b9850e6cda5812632cc88d587332abc3e62b4dca/LICENSE
 [KS-REL]: https://github.com/yolo-labz/kokoro-speakd/releases/tag/v0.3.0
-[YL-B]: https://github.com/yolo-labz/.github/blob/9c77ec628587137ea70e5e729bd107945f207866/profile/assets/brand/README.md
-[YL-M]: https://github.com/yolo-labz/.github/blob/9c77ec628587137ea70e5e729bd107945f207866/profile/assets/brand/mascot/README.md
-[YL-P]: https://github.com/yolo-labz/.github/blob/9c77ec628587137ea70e5e729bd107945f207866/profile/assets/brand/exploration/2026-09-28/02-wide-hero.provenance.json
 [ZV-R]: https://github.com/yolo-labz/zellij-vertical-tabs/blob/da8efee8d2423760306bf4e1292585bd26e3a6c3/README.md
 [ZV-L]: https://github.com/yolo-labz/zellij-vertical-tabs/blob/da8efee8d2423760306bf4e1292585bd26e3a6c3/LICENSE
 [ZV-M]: https://github.com/yolo-labz/zellij-vertical-tabs/blob/da8efee8d2423760306bf4e1292585bd26e3a6c3/docs/MEDIA.md
