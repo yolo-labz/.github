@@ -1,8 +1,9 @@
 /* @yolo-labz/design: GENERATED, do not edit. Source: yolo-labz/.github design/tokens.
  * inputs sha256:9da64ee366f248e11c5911532d343d55d4900cb9f47a569128d08836c493fa3d */
-/* Tailwind v4 preset. Fonts and radius are left to the app: next/font wires the font file, and
- * Tailwind's radius defaults are what the portfolio ships today. */
-@theme inline {
+/* Tailwind v4 preset. Plain @theme, not `inline`: utilities read var(--color-x), so an app can still
+ * override --color-x (prefers-contrast) after this file. Fonts and radius are left to the app: next/font
+ * wires the font file, and Tailwind's radius defaults are what the portfolio ships today. */
+@theme {
   --color-bg: var(--yl-color-surface-base);
   --color-bg-elevated: var(--yl-color-surface-raised);
   --color-crust: var(--yl-color-surface-sunken);

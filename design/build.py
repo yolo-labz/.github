@@ -7,7 +7,7 @@
 Sources: design/tokens/primitive.json, semantic.json (W3C Design Tokens format).
 Outputs:
     dist/tokens.css    CSS custom properties (--yl-*), dark on :root, light on [data-theme="light"]
-    dist/tailwind.css  Tailwind v4 `@theme inline` preset that points at those properties
+    dist/tailwind.css  Tailwind v4 `@theme` preset that points at those properties
 """
 from __future__ import annotations
 
@@ -122,9 +122,10 @@ def build() -> dict[str, str]:
             tw.append(("--ease-out-expo", f"var({prop(path)})"))
     tailwind_css = (
         head
-        + "/* Tailwind v4 preset. Fonts and radius are left to the app: next/font wires the font file, and\n"
-        + " * Tailwind's radius defaults are what the portfolio ships today. */\n"
-        + block("@theme inline", tw)
+        + "/* Tailwind v4 preset. Plain @theme, not `inline`: utilities read var(--color-x), so an app can still\n"
+        + " * override --color-x (prefers-contrast) after this file. Fonts and radius are left to the app: next/font\n"
+        + " * wires the font file, and Tailwind's radius defaults are what the portfolio ships today. */\n"
+        + block("@theme", tw)
     )
     return {"tokens.css": tokens_css, "tailwind.css": tailwind_css}
 
