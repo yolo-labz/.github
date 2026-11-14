@@ -1,0 +1,98 @@
+{
+ "schema": 1,
+ "files": {
+  "model": {
+   "glb": {
+    "file": "gremlin.glb",
+    "bytes": 224688,
+    "sha256": "d132172685f37c01bd6374538dde8fa1180a8a3ab2297bed197881acad3e256a",
+    "limit_bytes": 1572864
+   },
+   "clips": [
+    "idle",
+    "working",
+    "paused",
+    "loading",
+    "asleep"
+   ]
+  },
+  "idle": {
+   "webp": {
+    "file": "gremlin-idle.webp",
+    "bytes": 23646,
+    "sha256": "dec0c5941ee04fe03692dbd658a884cbe1cf56c6644d4373ee5c9cea9fe12614"
+   },
+   "avif": {
+    "file": "gremlin-idle.avif",
+    "bytes": 14194,
+    "sha256": "44b0072a09d2baea8f982ce23446fa959ecf3667ba6e881586cce0a7ac0534d3"
+   },
+   "alt": "The gremlin standing with its hands down and its tail curled up."
+  },
+  "working": {
+   "webp": {
+    "file": "gremlin-working.webp",
+    "bytes": 30476,
+    "sha256": "c27595db73cbc2b59fb989e238080fd39cabbf93edb646d0535dc5c8206c9293"
+   },
+   "avif": {
+    "file": "gremlin-working.avif",
+    "bytes": 18484,
+    "sha256": "baef44f345fbb7edd9ee1c84a355657aaa40de8a97c25b06bfc9a39419ef4a68"
+   },
+   "alt": "The gremlin leaning over a keyboard, typing, with code brackets floating beside it."
+  },
+  "paused": {
+   "webp": {
+    "file": "gremlin-paused.webp",
+    "bytes": 24938,
+    "sha256": "c391af5644dc9b3d1771a7f0c1cdea282c8cd3a637c79001a6481d44863a2094"
+   },
+   "avif": {
+    "file": "gremlin-paused.avif",
+    "bytes": 14937,
+    "sha256": "9a1af2a02e1e9d63c2903e87361d8f034fe21ba61e06d49dcc35134b2f23eee8"
+   },
+   "alt": "The gremlin with one hand raised to its chin and two sound arcs beside its ear."
+  },
+  "loading": {
+   "webp": {
+    "file": "gremlin-loading.webp",
+    "bytes": 22996,
+    "sha256": "16054e9588bc3fbb4a989a4b110e816fbca73ed3a6279ef5ab2bb7f6c8cad588"
+   },
+   "avif": {
+    "file": "gremlin-loading.avif",
+    "bytes": 13638,
+    "sha256": "067f7177305bf5a51115874f1a8e99ca26c490dfe986aeaba141a3b6f5b9d805"
+   },
+   "alt": "The gremlin mid-stride, one ear swept back, with speed lines behind it and dashes below."
+  },
+  "asleep": {
+   "webp": {
+    "file": "gremlin-asleep.webp",
+    "bytes": 23784,
+    "sha256": "bff1aac2cd821f4fb06fd5fc9a5db8803c86b6dffb98d9dad2ce76754e37e243"
+   },
+   "avif": {
+    "file": "gremlin-asleep.avif",
+    "bytes": 13932,
+    "sha256": "e96e2e935f8fe5afec44f8a6f238d98f89336f663f5aba8319105a4502f0b6f3"
+   },
+   "alt": "The gremlin with its eyes closed and its ears drooping, a crescent moon above its head."
+  },
+  "turntable": {
+   "webp": {
+    "file": "gremlin-turntable.webp",
+    "bytes": 203136,
+    "sha256": "a2dcb8cee8c22a12851ceb39002f638d04506b392c2a2f0258bb9e893e5fd6f7"
+   },
+   "avif": {
+    "file": "gremlin-turntable.avif",
+    "bytes": 19322,
+    "sha256": "a27898a9feeb137d1ad29613f7f7b184c08682b3bbddb7607e77d2d11cba0efd"
+   },
+   "alt": "The gremlin standing still while the camera circles it once."
+  }
+ }
+}
