@@ -173,7 +173,7 @@ function viewMatrix(azimuth, aspect) {
   const c = CAMERA.center, d = (u) => u[0] * c[0] + u[1] * c[1] + u[2] * c[2];
   const look = new Float32Array([x[0], y[0], z[0], 0, x[1], y[1], z[1], 0, x[2], y[2], z[2], 0, -d(x), -d(y), -d(z), 1]);
   const h = CAMERA.scale / 2, far = 2000;
-  const ortho = new Float32Array([1 / (h * aspect), 0, 0, 0, 0, 1 / h, 0, 0, 0, 0, -2 / far, 0, 0, 0, -1, 1]);
+  const ortho = new Float32Array([1 / (h * aspect), 0, 0, 0, 0, 1 / h, 0, 0, 0, 0, -1 / far, 0, 0, 0, 0, 1]);
   return mul(ortho, look);
 }
 
