@@ -36,3 +36,13 @@ Numbers: `tests.json` in the loop evidence for row NX-BRAND-MARK; rerun `tests.p
 - Clear space: one ear-to-head gap (1/16 of the mark width) on every side; a tile keeps the mark at 82% of its width
   (70% for the org avatar so the ear tips survive a circle crop).
 - Minimum size: 16 px as the tile (favicon). Loose mark: 24 px.
+
+## The character
+
+`character.py` draws the whole gremlin from the same geometry: head front, three-quarter and side, the full body and
+the five states. `build.py` writes `character-sheet.svg` (and a PNG) plus `states/gremlin-{idle,working,paused,loading,asleep}.svg`
+(adaptive, `prefers-color-scheme`). Eye, mouth and proportion rules: the sheet itself.
+
+- Eyes and brow are the mark's: two dark slanted sockets, node pupils from 64 px up.
+- The mouth (grin, two fangs on a dark slot) appears when the head is 64 px wide or more. The mark never has one.
+- Hands and tail are skin colour. Pale never touches skin.

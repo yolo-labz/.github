@@ -22,5 +22,17 @@
  "mark/avatar-460.png": "7a47e2eef243820ff676866db8a43596b3d04f5b3651869416f863823248d61a",
  "mark/avatar-96.png": "f700ec2a5b99bfe13584363532b34be35d4176fbd0f0c5f8aa68c1f293992a0d",
  "mark/social-org.svg": "718f86823666e2ad9fcf39c159ea77820f1da3c56981498c42a76329fcc16809",
- "mark/social-org-1280x640.png": "15bbbe2bd5725ee308dcacc938a6e8317fc1794cfe1aa7287db50edeed1f7d18"
+ "mark/social-org-1280x640.png": "15bbbe2bd5725ee308dcacc938a6e8317fc1794cfe1aa7287db50edeed1f7d18",
+ "mark/character-sheet.svg": "d0d9d6756cc2a102f70740ede4794740e17e84ed91f035c75de14a41bce49d8a",
+ "mark/character-sheet.png": "db71d32e7ff8b69275f4e995cda64570d9a4687f80179c7fde45d56c417a70dc",
+ "mark/states/gremlin-idle.svg": "e7e3165393e4da2dd966493d53cfd18a0a73e4297fe6da853e093e8ab61e543c",
+ "mark/states/gremlin-idle.png": "977abfed2d28016bf440383369eeefc29b026387b12a2d35b9141c98490b3a1c",
+ "mark/states/gremlin-working.svg": "1521720de6578b863bb1675b254d14cfeec57f8c74b1a0b5b1dc625b74829867",
+ "mark/states/gremlin-working.png": "d4b7d3cd9944c5d376d52bcc90840fb3f051e57d7f6662e20d35a3f6b7e7c189",
+ "mark/states/gremlin-paused.svg": "85cd00200ffd60524189305cc778a430ef69c94d0f0f7fe263aa3a696c77bfc5",
+ "mark/states/gremlin-paused.png": "aec66fd90d83d4f827e95026398a16754f085553d95d49a24db897694fbc13d7",
+ "mark/states/gremlin-loading.svg": "0f22a8044d6c622b3a446453a2fb4419c9018cb2f1cf3296e3360ce120fe7804",
+ "mark/states/gremlin-loading.png": "ac30ccdf01991ded280055b65cfe4e45b46524e0cc7d8a5f1d96e280ab7973da",
+ "mark/states/gremlin-asleep.svg": "4178c3ed2443d145f18c360c793f3268d1a79a7821e3a8885d0ecd7fa1358e32",
+ "mark/states/gremlin-asleep.png": "0b39b3c6345aacef4f1603354b7cc151dc28d60ca852fa0b3030d467a90ff81c"
 }

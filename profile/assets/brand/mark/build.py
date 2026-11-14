@@ -12,6 +12,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from master import DIRS, PAL, SHIP, svg
+import character
 
 BRAND = HERE.parent
 TITLE = "yolo-labz"
@@ -87,10 +88,14 @@ def build(root):
     # org avatar: full-bleed square (GitHub rounds or circles it), mark at 0.70 so the ear tips survive a circle crop
     av = head(tile("dark", pupils=True, scale=0.70, rx=0), "yolo-labz org avatar: the gremlin's head on the base colour.")
     W("mark/avatar.svg", av); raster(av, 460, 460, root / "mark/avatar-460.png"); raster(av, 96, 96, root / "mark/avatar-96.png")
+    (root / "mark/states").mkdir(parents=True, exist_ok=True)
+    sh = character.sheet("dark"); W("mark/character-sheet.svg", sh); raster(sh, 1600, 1260, root / "mark/character-sheet.png")
+    for n in character.STATES:
+        st = character.state_svg(n); W(f"mark/states/gremlin-{n}.svg", st); raster(st, 360, 310, root / f"mark/states/gremlin-{n}.png")
     s = social(); W("mark/social-org.svg", s); raster(s, 1280, 640, root / "mark/social-org-1280x640.png")
 
 OUT = ["logo-mark-dark.svg","logo-mark-dark.png","logo-mark-light.svg","logo-mark-light.png","logo-mark-mono.svg","logo-wordmark-dark.svg","logo-wordmark-dark.png","logo-wordmark-light.svg","logo-wordmark-light.png",
-       "favicons/favicon.svg","favicons/favicon.ico","favicons/apple-touch-icon.png"]+[f"favicons/favicon-{n}.png" for n in (16,32,48,64,128,192,512)]+["mark/avatar.svg","mark/avatar-460.png","mark/avatar-96.png","mark/social-org.svg","mark/social-org-1280x640.png"]
+       "favicons/favicon.svg","favicons/favicon.ico","favicons/apple-touch-icon.png"]+[f"favicons/favicon-{n}.png" for n in (16,32,48,64,128,192,512)]+["mark/avatar.svg","mark/avatar-460.png","mark/avatar-96.png","mark/social-org.svg","mark/social-org-1280x640.png","mark/character-sheet.svg","mark/character-sheet.png"]+[f"mark/states/gremlin-{n}.{e}" for n in character.STATES for e in ("svg","png")]
 sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
 if __name__ == "__main__":
