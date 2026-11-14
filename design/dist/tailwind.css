@@ -1,9 +1,9 @@
 /* @yolo-labz/design: GENERATED, do not edit. Source: yolo-labz/.github design/tokens.
- * inputs sha256:f7648f6fc4cfb727bde3562b1e21a2e4e7e86667107ddfbf13b87ca17ee82227 */
+ * inputs sha256:9eb83c75a73205ebb6a80daa850077895bce02bef5655c20612625d90b4772a0 */
 /* Tailwind v4 preset. Plain @theme, not `inline`: utilities read var(--color-x), so an app can still
  * override --color-x (prefers-contrast) after this file. Breakpoints are literals because a media
- * query cannot take var(). Fonts and radius are left to the app: next/font wires the font file, and
- * Tailwind's radius defaults are what the portfolio ships today. */
+ * query cannot take var(). Fonts are left to the app: next/font wires the font file. Radius, tracking,
+ * leading and shadow rename Tailwind's own scale (rounded-md is 8px, leading-tight is 1.15). */
 @theme {
   --color-bg: var(--yl-color-surface-base);
   --color-bg-elevated: var(--yl-color-surface-raised);
@@ -18,15 +18,28 @@
   --color-link: var(--yl-color-link-default);
   --color-warn: var(--yl-color-role-audit);
   --color-compliance: var(--yl-color-role-compliance);
+  --radius-sm: var(--yl-radius-sm);
+  --radius-md: var(--yl-radius-md);
+  --radius-lg: var(--yl-radius-lg);
   --ease-out-expo: var(--yl-ease-out-expo);
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
+  --container-measure: var(--yl-text-measure);
+  --leading-body: var(--yl-text-leading-body);
+  --leading-heading: var(--yl-text-leading-heading);
+  --leading-tight: var(--yl-text-leading-tight);
+  --tracking-display: var(--yl-text-tracking-display);
+  --tracking-heading: var(--yl-text-tracking-heading);
+  --tracking-label: var(--yl-text-tracking-label);
+  --text-sm: var(--yl-text-size-small);
+  --text-base: var(--yl-text-size-body);
   --text-step-1: var(--yl-text-size-step-1);
   --text-step-2: var(--yl-text-size-step-2);
   --text-step-3: var(--yl-text-size-step-3);
   --text-step-4: var(--yl-text-size-step-4);
   --text-step-5: var(--yl-text-size-step-5);
   --text-step-6: var(--yl-text-size-step-6);
+  --shadow-float: var(--yl-shadow-float);
 }
