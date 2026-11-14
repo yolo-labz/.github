@@ -29,6 +29,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 import gremlin as g
+import markshape as ms
 from pngmeta import normalise_png
 
 STATES = ("idle", "working", "paused", "loading", "asleep")
@@ -48,6 +49,10 @@ def parse_args(argv):
     parser.add_argument("--mode", default="all", choices=("glb", "stills", "turntable", "all"))
     parser.add_argument("--states", type=lambda v: v.split(","))
     parser.add_argument("--light", action="store_true")
+    parser.add_argument("--azimuth", type=float)
+    parser.add_argument("--elevation", type=float)
+    parser.add_argument("--samples", type=int)
+    parser.add_argument("--size", type=int)
     parser.add_argument("--frames", type=lambda v: range(*map(int, v.split(":"))))
     return vars(parser.parse_args(argv))
 
@@ -135,20 +140,18 @@ def loft(name, upper, lower, half_thickness, mat, ring_verts=12, bend=None):
     return obj
 
 
-def ear(cfg, params, mat, sign, name):
-    spec = params["head"]["ear"]
-    sweep = cfg["anatomy"]["ear"]["sweep"]
+def ear(cfg, frame, path, mat, name):
+    """An ear lofted between the two edges of the mark's ear path, tip to base."""
+    segs = ms.segments(path)
     n = cfg["anatomy"]["ear"]["rings"]
+    top = ms.bezier(segs[0][1], n)[::-1]
+    bottom = ms.bezier(segs[2][1], n)
+    to3 = lambda p: (frame.xz(p)[0], 0.0, frame.xz(p)[1])
     thick = cfg["anatomy"]["ear"]["thickness"]
-
-    def xz(p):
-        return (sign * -p[0], 0.0, -p[1])
-
-    upper = cubic(xz(spec["start"]), xz(spec["c1"]), xz(spec["c2"]), xz(spec["tip"]), n)
-    lower = cubic(xz(spec["base"]), xz(spec["c4"]), xz(spec["c3"]), xz(spec["tip"]), n)
     prof = [thick / 2.0 * (1.0 - i / float(n - 1)) ** 0.55 for i in range(n)]
-    return loft(name, upper, lower, prof, mat, ring_verts=cfg["anatomy"]["ear"]["ring_verts"],
-                bend=lambda t: sweep * t * t)
+    sweep = cfg["anatomy"]["ear"]["sweep"]
+    return loft(name, [to3(p) for p in top], [to3(p) for p in bottom], prof, mat,
+                ring_verts=cfg["anatomy"]["ear"]["ring_verts"], bend=lambda t: sweep * t * t)
 
 
 def limb(name, a, b, ra, rb, mat, segments=20):
@@ -185,6 +188,241 @@ def build_materials(params, cfg, light):
 # --------------------------------------------------------------------------- #
 # the parts, each tagged with the bone that carries it
 # --------------------------------------------------------------------------- #
+def head_mesh(name, radius_at, depth, mat):
+    """A head whose front view is the mark's head path and whose depth is a half ellipsoid."""
+    obj = g.ellipsoid(name, (0, 0, 0), (1.0, 1.0, 1.0), mat, segments=64, rings=32)
+    for v in obj.data.vertices:
+        r = radius_at(math.atan2(v.co.z, v.co.x))
+        v.co.x, v.co.y, v.co.z = v.co.x * r, v.co.y * depth, v.co.z * r
+    return tag_smooth(obj, 90.0)
+
+
+def surface_shell(name, outline, front_y, offset, thickness, mat, cuts=5):
+    """A thin shell that follows the head surface under ``outline`` (x, z points).
+
+    The outline face is subdivided and every vertex put back on the surface, so the
+    shell does not cut a chord through the curved head.
+    """
+    bm = bmesh.new()
+    face = bm.faces.new([bm.verts.new((x, 0.0, z)) for x, z in outline])
+    bmesh.ops.triangulate(bm, faces=[face])
+    bmesh.ops.subdivide_edges(bm, edges=bm.edges[:], cuts=cuts, use_grid_fill=True)
+    for v in bm.verts:
+        v.co.y = front_y(v.co.x, v.co.z) - offset
+    back = {v: bm.verts.new((v.co.x, v.co.y + thickness, v.co.z)) for v in bm.verts[:]}
+    for f in bm.faces[:]:
+        bm.faces.new([back[v] for v in reversed(f.verts)])
+    for e in bm.edges[:]:
+        if e.verts[0] in back and e.verts[1] in back and len(e.link_faces) == 1:
+            a, b = e.verts
+            bm.faces.new((a, b, back[b], back[a]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    return g.finish(name, bm, mat)
+
+
+def face_parts(add, cfg, mats, mark):
+    """Head, ears, brows, eye sockets, pupils and closed-eye lines, all from the mark's paths."""
+    F = cfg["anatomy"]["face"]
+    frame = ms.Frame(F["unit"])
+    depth = F["depth"]
+    radius_at = ms.head_profile(frame, mark.HEAD, [mark.EAR_L, mark.EAR_R], widen=F["widen"])
+    add(head_mesh("head", radius_at, depth, mats["skin"]), "head")
+
+    def front_y(x, z):
+        rho = min(math.hypot(x, z) / radius_at(math.atan2(z, x)), 1.0)
+        return -depth * math.sqrt(1.0 - rho * rho)
+
+    # the mark's right ear is on the +x side of the screen
+    add(ear(cfg, frame, mark.EAR_R, mats["skin"], "ear_L"), "ear_L")
+    add(ear(cfg, frame, mark.EAR_L, mats["skin"], "ear_R"), "ear_R")
+
+    sockets = {"L": mark.EYE_R, "R": mark.EYE_L}
+    for side, path in sockets.items():
+        outline = [frame.xz(p) for p in ms.polyline(path, 8)]
+        add(tag_smooth(surface_shell("socket_" + side, outline, front_y, F["socket"]["proud"],
+                                     F["socket"]["thickness"], mats["feature"]), 40.0), "eyes")
+        # brow: a skin ridge along the slanted top edge of the socket
+        corner, inner = [frame.xz(p) for p in ms.polyline(path, 2)][:2]
+        edge = Vector((inner[0] - corner[0], inner[1] - corner[1]))
+        up = Vector((-edge.y, edge.x)).normalized()
+        if up.y < 0:
+            up = -up
+        lift = up * F["brow"]["lift"]
+        a = Vector(corner) + lift
+        b = Vector(inner) + lift
+        r = F["brow"]["radius"]
+        steps = 7
+        pts = []
+        for k in range(steps):
+            q = a.lerp(b, k / (steps - 1.0))
+            pts.append((q.x, front_y(q.x, q.y) - F["brow"]["proud"], q.y))
+        for k in range(steps):
+            rk = r * (1.0 - 0.15 * k / (steps - 1.0))
+            add(ball("brow_%s_%d" % (side, k), pts[k], rk, mats["skin"], segments=16, rings=8), "head")
+            if k:
+                add(tag_smooth(limb("brow_%s_seg%d" % (side, k), pts[k - 1], pts[k], rk, rk, mats["skin"], 16), 70.0), "head")
+    for i, (cx, cy, rr) in enumerate(mark.DIRS[mark.SHIP]["pupil"]):
+        x, z = frame.xz((cx, cy))
+        p = F["pupil"]
+        add(ball("pupil_%d" % i, (x, front_y(x, z) - p["proud"], z), rr * frame.unit,
+                 mats["node"], (1, p["half_depth"] / (rr * frame.unit), 1), 28, 14), "pupils")
+        # closed lid line: a downward bow under the pupil
+        pts = []
+        for k in range(11):
+            t = -1.0 + 2.0 * k / 10.0
+            lx, lz = x + t * F["lid"]["half_width"], z - F["lid"]["bow"] * (1.0 - t * t) + F["lid"]["lift"]
+            pts.append((lx, front_y(lx, lz) - 2.0, lz))
+        curve = g.polyline("lid_%d" % i, pts, F["lid"]["radius"], mats["feature"], smooth=True)
+        add(bake(curve), "lids")
+
+
+def metaball_body(prims, res, blend):
+    """Union of ball chains and ellipsoids as one blended surface, weighted to the bones.
+
+    ``prims`` is a list of (bone, kind, data). Balls are (centre, radius); ellipsoids are
+    (centre, radii). Each vertex takes weights from how far it is from every primitive.
+    """
+    k = math.sqrt(1.0 - (0.6 / 2.0) ** (1.0 / 3.0))
+    mb = bpy.data.metaballs.new("body_mb")
+    mb.resolution, mb.render_resolution, mb.threshold = res, res, 0.6
+    holder = bpy.data.objects.new("body_mb", mb)
+    bpy.context.scene.collection.objects.link(holder)
+    for bone, kind, data in prims:
+        el = mb.elements.new(type="BALL" if kind == "ball" else "ELLIPSOID")
+        el.stiffness = 2.0
+        el.co = data[0]
+        if kind == "ball":
+            el.radius = data[1] * 0.82 / k
+        else:
+            el.radius = 10.0
+            el.size_x, el.size_y, el.size_z = (r / (10.0 * k) for r in data[1])
+    bpy.context.view_layer.update()
+    mesh = bpy.data.meshes.new_from_object(holder.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    bpy.data.objects.remove(holder)
+    bpy.data.metaballs.remove(mb)
+    return mesh
+
+
+def vertex_weights(mesh, prims, blend):
+    """{bone: {vertex index: weight}}, nearest primitive first, falling off over ``blend`` units."""
+    gap = []
+    for bone, kind, data in prims:
+        c = Vector(data[0])
+        if kind == "ball":
+            gap.append((bone, c, data[1], None))
+        else:
+            gap.append((bone, c, min(data[1]), Vector(data[1])))
+    groups = {}
+    for v in mesh.vertices:
+        best = {}
+        for bone, c, r, radii in gap:
+            d = v.co - c
+            dist = d.length - r if radii is None else (Vector((d.x / radii.x, d.y / radii.y, d.z / radii.z)).length - 1.0) * r
+            if dist < best.get(bone, 1e9):
+                best[bone] = dist
+        low = min(best.values())
+        w = {b: math.exp(-(dd - low) / blend) for b, dd in best.items()}
+        top = sorted(w.items(), key=lambda kv: -kv[1])[:4]
+        total = sum(x for _, x in top)
+        for b, x in top:
+            if x / total > 0.03:
+                groups.setdefault(b, {})[v.index] = x / total
+    return groups
+
+
+def chain_balls(bone, a, b, ra, rb, gap=0.5):
+    a, b = Vector(a), Vector(b)
+    n = max(2, int(math.ceil((b - a).length / (gap * (ra + rb) / 2.0))) + 1)
+    return [(bone, "ball", (tuple(a.lerp(b, i / (n - 1.0))), ra + (rb - ra) * i / (n - 1.0))) for i in range(n)]
+
+
+def body_parts(add, cfg, mats):
+    """Torso, legs, arms, hands and tail as one blended skin, plus fingers and the tail spade."""
+    A, bones = cfg["anatomy"], cfg["bones"]
+    B = A["body"]
+    t = A["torso"]
+    prims = [("torso", "ellipsoid", (tuple(t["center"]), tuple(t["radii"])))]
+    prims += chain_balls("torso", (0, 3, -43), (0, 3, -36), B["neck"][0], B["neck"][1])
+    prims += chain_balls("head", (0, 3, -36), (0, 2, -28), B["neck"][1], B["neck"][1])
+    for side in ("L", "R"):
+        leg = bones["leg_" + side]
+        prims += chain_balls("leg_" + side, leg["head"], leg["tail"], A["thigh"]["r0"], A["thigh"]["r1"])
+        f = A["foot"]
+        foot = Vector(leg["tail"]) + Vector((0.0, -f["forward"], -f["down"]))
+        prims.append(("leg_" + side, "ellipsoid", (tuple(foot), tuple(f["radii"]))))
+        arm = A["arm"]
+        s, e = bones["upper_arm_" + side]["head"], bones["forearm_" + side]["head"]
+        w = bones["hand_" + side]["head"]
+        prims += chain_balls("upper_arm_" + side, s, e, arm["r_shoulder"], arm["r_elbow"])
+        prims += chain_balls("forearm_" + side, e, w, arm["r_elbow"], arm["r_wrist"])
+        axis = (Vector(bones["hand_" + side]["tail"]) - Vector(w)).normalized()
+        palm = A["hand"]["palm"]
+        prims += chain_balls("hand_" + side, w, Vector(w) + axis * palm["length"], palm["r0"], palm["r1"])
+    r = A["tail"]["r"]
+    for i, name in enumerate(("tail_1", "tail_2", "tail_3")):
+        prims += chain_balls(name, bones[name]["head"], bones[name]["tail"], r[i], r[i + 1])
+    prims.append(("tail_3", "ball", (tuple(bones["tail_3"]["tail"]), r[3])))
+    mesh = metaball_body(prims, B["resolution"], B["blend"])
+    groups = vertex_weights(mesh, prims, B["blend"])
+    for poly in mesh.polygons:
+        poly.use_smooth = True
+    obj = bpy.data.objects.new("body", mesh)
+    bpy.context.scene.collection.objects.link(obj)
+    obj.data.materials.append(mats["skin"])
+    for bone, weights in sorted(groups.items()):
+        vg = obj.vertex_groups.new(name=bone)
+        for index, w in sorted(weights.items()):
+            vg.add([index], w, "REPLACE")
+    add(obj, None)
+
+    for side in ("L", "R"):
+        hand_parts(add, cfg, mats, side)
+
+    tip = Vector(bones["tail_3"]["tail"])
+    sp = A["spade"]
+    base_pts = [Vector((p[0], 0.0, p[1])) for p in sp["points"]]
+    spade = loft("spade", [base_pts[0], base_pts[1], base_pts[2]], [base_pts[0], base_pts[3], base_pts[2]],
+                 [sp["thickness"] / 2.0, sp["thickness"] / 2.0, 0.2], mats["skin"], 10)
+    spade.data.transform(Matrix.Translation(tip) @ Matrix.Rotation(math.radians(-14.0), 4, "Y"))
+    add(spade, "tail_3")
+
+
+def hand_parts(add, cfg, mats, side):
+    """Three fingers and a thumb with two joints each, bent down towards the keys, and a small claw."""
+    A, bones = cfg["anatomy"], cfg["bones"]
+    H = A["hand"]
+    w = Vector(bones["hand_" + side]["head"])
+    axis = (Vector(bones["hand_" + side]["tail"]) - w).normalized()
+    down = Vector((0, 0, -1)) - axis * Vector((0, 0, -1)).dot(axis)
+    down.normalize()
+    lateral = axis.cross(Vector((0, 0, 1))).normalized()
+    inner = -lateral if w.x * lateral.x > 0 else lateral
+    base = w + axis * H["palm"]["length"]
+    bone = "hand_" + side
+
+    def digit(name, start, direction, lengths, radii, bends):
+        pos, prev = Vector(start), None
+        add(ball(name + "_k0", tuple(pos), radii[0], mats["skin"], segments=16, rings=8), bone)
+        total = 0.0
+        for i, (length, bend) in enumerate(zip(lengths, bends)):
+            total += math.radians(bend)
+            step = (direction * math.cos(total) + down * math.sin(total)).normalized() * length
+            end = pos + step
+            add(tag_smooth(limb("%s_%d" % (name, i), pos, end, radii[i], radii[i + 1], mats["skin"], 14), 70.0), bone)
+            add(ball("%s_k%d" % (name, i + 1), tuple(end), radii[i + 1], mats["skin"], segments=16, rings=8), bone)
+            prev, pos = step, end
+        claw_end = pos + prev.normalized() * H["claw"]
+        add(g.cone(name + "_claw", pos, claw_end, radii[-1] * 0.8, 0.25, mats["feature"], segments=10), bone)
+
+    for k in range(3):
+        off = (k - 1) * H["spread"]
+        digit("finger_%s_%d" % (side, k), base + lateral * off, axis, H["finger"]["lengths"],
+              H["finger"]["radii"], H["finger"]["bends"])
+    thumb_dir = (axis * 0.7 + inner * 0.55).normalized()
+    digit("thumb_" + side, w + axis * (H["palm"]["length"] * 0.35) + inner * H["palm"]["r0"] * 0.8, thumb_dir,
+          H["thumb"]["lengths"], H["thumb"]["radii"], H["thumb"]["bends"])
+
+
 def build_parts(params, cfg, mats):
     parts = []  # (object, bone)
     A = cfg["anatomy"]
@@ -194,130 +432,9 @@ def build_parts(params, cfg, mats):
         parts.append((obj, bone))
         return obj
 
-    # --- head and face (gremlin.py builders, then tidied) ------------------
-    head = params["head"]
-    radii = head["radii3d"]
-    add(tag_smooth(g.ellipsoid("head", (0, 0, 0), radii, mats["skin"], segments=64, rings=32), 90.0), "head")
-
-    for side, sign in (("L", 1.0), ("R", -1.0)):
-        add(ear(cfg, params, mats["skin"], sign, "ear_" + side), "ear_" + side)
-
-    eyes = head["eyes"]
-    for i, center in enumerate(eyes["centers"]):
-        x, z = g.svg_to_xz(center)
-        depth = eyes["depth3d"]
-        y = g.head_surface_y(x, z, radii) - eyes["proud3d"] + depth
-        add(ball("eye_%d" % i, (x, y, z), eyes["r"], mats["pale"], (1, depth / eyes["r"], 1), 40, 20), "eyes")
-    for i, pupil in enumerate(head["pupils"]):
-        x, z = g.svg_to_xz(pupil["at"])
-        p3 = head["pupil3d"]
-        y = g.head_surface_y(x, z, radii) - p3["proud3d"]
-        add(ball("pupil_%d" % i, (x, y, z), pupil["r"], mats["node"],
-                 (1, p3["half_depth"] / pupil["r"], 1), 28, 14), "pupils")
-
-    # closed lids: dark arcs that sit on the eye positions (visible when asleep)
-    for i, center in enumerate(eyes["centers"]):
-        x, z = g.svg_to_xz(center)
-        pts = []
-        for k in range(9):
-            t = k / 8.0
-            ang = math.pi * (0.12 + 0.76 * t)
-            px = x + eyes["r"] * 1.05 * math.cos(math.pi - ang) * -1.0
-            pz = z - 2.0 + 6.5 * math.sin(ang) * -1.0 + 5.0
-            pts.append((px, g.head_surface_y(px, pz, radii) - 2.2, pz))
-        curve = g.polyline("lid_%d" % i, pts, A["eye"]["lid_radius"] * 1.5, mats["dark"], smooth=True)
-        add(bake(curve), "lids")
-
-    grin = head["grin"]
-    scale = grin["z_scale3d"]
-    lower = g.quad_samples(grin["start"], grin["c1"], grin["c2"], grin["samples"])
-    upper = g.quad_samples(grin["c2"], grin["c3"], grin["start"], grin["samples"])
-    outline = [g.svg_to_xz(p) for p in (lower + upper[1:-1])]
-    outline = [(x, z * scale) for x, z in outline]
-    mouth = g.surface_patch("grin", outline, radii, grin["proud3d"], grin["thickness3d"], mats["dark"])
-    add(tag_smooth(mouth, 40.0), "head")
-
-    # fangs: real cones standing on the lip line, tip down
-    for i, fang in enumerate(head["fangs"]):
-        pts = [g.svg_to_xz(p) for p in fang]
-        pts = [(x, z * scale) for x, z in pts]
-        bx = (pts[0][0] + pts[1][0]) / 2.0
-        bz = (pts[0][1] + pts[1][1]) / 2.0
-        tip = pts[2]
-        # the middle fang points up from the lower lip; the two side fangs point down
-        points_down = tip[1] < bz
-        base_w = abs(pts[1][0] - pts[0][0]) / 2.0 * (A["fang"]["width"] if points_down else A["fang"]["center_width"])
-        if points_down:
-            tip = (tip[0], tip[1] - A["fang"]["drop"])
-        yb = g.head_surface_y(bx, bz, radii) - 2.2
-        yt = g.head_surface_y(tip[0], tip[1], radii) - 2.6
-        obj = g.cone("fang_%d" % i, (bx, yb, bz), (tip[0], yt, tip[1]), base_w, 0.5,
-                     mats["pale"], segments=14, squash=0.55, thin_dir=(0.0, 1.0, 0.0))
-        add(tag_smooth(obj, 60.0), "head")
-
-    # --- torso ------------------------------------------------------------
-    t = A["torso"]
-    add(ball("torso", tuple(t["center"]), 1.0, mats["skin"],
-             (t["radii"][0], t["radii"][1], t["radii"][2]), 64, 32), "torso")
-
-    # --- legs -------------------------------------------------------------
-    for side, sign in (("L", 1.0), ("R", -1.0)):
-        b = bones["leg_" + side]
-        hip, ankle = Vector(b["head"]), Vector(b["tail"])
-        add(ball("hip_" + side, tuple(hip), A["thigh"]["r0"], mats["skin"]), "leg_" + side)
-        add(tag_smooth(limb("thigh_" + side, hip, ankle, A["thigh"]["r0"], A["thigh"]["r1"], mats["skin"]), 70.0),
-            "leg_" + side)
-        f = A["foot"]
-        c = ankle + Vector((sign * 0.0, -f["forward"], -f["down"]))
-        add(ball("foot_" + side, tuple(c), 1.0, mats["skin"], tuple(f["radii"]), 32, 16), "leg_" + side)
-
-    # --- arms ---------------------------------------------------------------
-    arm = A["arm"]
-    hand = A["hand"]
-    for side in ("L", "R"):
-        s = Vector(bones["upper_arm_" + side]["head"])
-        e = Vector(bones["forearm_" + side]["head"])
-        w = Vector(bones["hand_" + side]["head"])
-        tip = Vector(bones["hand_" + side]["tail"])
-        add(ball("shoulder_" + side, tuple(s), arm["r_shoulder"], mats["skin"]), "upper_arm_" + side)
-        add(tag_smooth(limb("upper_" + side, s, e, arm["r_shoulder"], arm["r_elbow"], mats["skin"]), 70.0),
-            "upper_arm_" + side)
-        add(ball("elbow_" + side, tuple(e), arm["r_elbow"], mats["skin"]), "forearm_" + side)
-        add(tag_smooth(limb("fore_" + side, e, w, arm["r_elbow"], arm["r_wrist"], mats["skin"]), 70.0),
-            "forearm_" + side)
-        axis = (tip - w).normalized()
-        palm = w + axis * (hand["radii"][1] * 0.55)
-        palm_obj = ball("palm_" + side, tuple(palm), 1.0, mats["skin"], tuple(hand["radii"]), 28, 14)
-        # orient the palm along the hand bone: squash axis y -> bone axis
-        rot = Vector((0, 1, 0)).rotation_difference(axis).to_matrix().to_4x4()
-        pm = Matrix.Translation(palm) @ rot @ Matrix.Translation(-palm)
-        palm_obj.data.transform(pm)
-        add(palm_obj, "hand_" + side)
-        for k in range(3):
-            off = (k - 1) * hand["spread"] * 0.5
-            start = palm + axis * (hand["radii"][1] * 0.8) + Vector((off * 0.8, 0, 0))
-            end = start + axis * hand["claw_length"] + Vector((off * 0.5, 0, 0)) + Vector((0, 0, -1.5))
-            add(tag_smooth(g.cone("claw_%s_%d" % (side, k), start, end, hand["claw_radius"], 0.3,
-                                  mats["pale"], segments=12), 60.0), "hand_" + side)
-
-    # --- tail -------------------------------------------------------------
-    r = A["tail"]["r"]
-    chain = [("tail_1", r[0], r[1]), ("tail_2", r[1], r[2]), ("tail_3", r[2], r[3])]
-    for name, ra, rb in chain:
-        b = bones[name]
-        a_, b_ = Vector(b["head"]), Vector(b["tail"])
-        add(ball("tj_" + name, tuple(a_), ra, mats["skin"]), name)
-        add(tag_smooth(limb("tc_" + name, a_, b_, ra, rb, mats["skin"], 16), 70.0), name)
-    tip = Vector(bones["tail_3"]["tail"])
-    add(ball("tj_tip", tuple(tip), r[3], mats["skin"]), "tail_3")
-    sp = A["spade"]
-    base_pts = [Vector((p[0], 0.0, p[1])) for p in sp["points"]]
-    up = [base_pts[0], base_pts[1], base_pts[2]]
-    lo = [base_pts[0], base_pts[3], base_pts[2]]
-    spade = loft("spade", up, lo, [sp["thickness"] / 2.0, sp["thickness"] / 2.0, 0.2], mats["skin"], 10)
-    spade.data.transform(Matrix.Translation(tip + Vector((0, 0, 0))) @
-                         Matrix.Rotation(math.radians(-14.0), 4, "Y"))
-    add(spade, "tail_3")
+    mark = ms.master()
+    face_parts(add, cfg, mats, mark)
+    body_parts(add, cfg, mats)
 
     # --- props --------------------------------------------------------------
     kb = g.build_keyboard(params, mats)
@@ -352,7 +469,7 @@ def build_parts(params, cfg, mats):
     half = [m["thickness"] / 2.0 * math.sin(math.pi * i / (steps - 1)) ** 0.5 + 0.15 for i in range(steps)]
     # the two arcs share their end points: pin them so the crescent closes
     inner[0], inner[-1] = outer[0], outer[-1]
-    add(loft("moon", outer, inner, half, mats["pale"], 12), "moon")
+    add(loft("moon", outer, inner, half, mats["ink"], 12), "moon")
 
     produced = g.build_produced(params, mats)
     for name, obj in produced.items():
@@ -365,7 +482,7 @@ def build_parts(params, cfg, mats):
         for k in range(14):
             ang = math.radians(-sg["arc_deg"] / 2 + sg["arc_deg"] * k / 13.0)
             pts.append((cx - rad * math.cos(ang) * 0.35 - 6.0 * i, -8.0, cz + rad * math.sin(ang)))
-        mat = mats["guide"] if i == 0 else mats["pale"]
+        mat = mats["guide"] if i == 0 else mats["ink"]
         add(bake(g.polyline("signal_%d" % i, pts, sg["radius"], mat, smooth=True)), "signal")
 
     tk = A["ticks"]
@@ -424,8 +541,9 @@ def skin(parts, arm, mats):
     """One vertex group per part (weight 1), then merge the parts by material."""
     by_mat = {}
     for obj, bone in parts:
-        vg = obj.vertex_groups.new(name=bone)
-        vg.add(list(range(len(obj.data.vertices))), 1.0, "REPLACE")
+        if bone is not None:
+            vg = obj.vertex_groups.new(name=bone)
+            vg.add(list(range(len(obj.data.vertices))), 1.0, "REPLACE")
         by_mat.setdefault(obj.data.materials[0].name, []).append(obj)
     merged = []
     for matname, objs in sorted(by_mat.items()):
@@ -729,8 +847,10 @@ def main():
         cam = build_rig_lights(scene, params, cfg, opts["light"])
         if mode in ("stills", "all"):
             st = cfg["stills"]
-            configure_cycles(scene, cfg, st["size"], st["samples"])
-            aim_camera(cam, cfg, cfg["camera"]["azimuth"], cfg["camera"]["elevation"])
+            size = [opts["size"]] * 2 if opts["size"] else st["size"]
+            configure_cycles(scene, cfg, size, opts["samples"] or st["samples"])
+            aim_camera(cam, cfg, cfg["camera"]["azimuth"] if opts["azimuth"] is None else opts["azimuth"],
+                       cfg["camera"]["elevation"] if opts["elevation"] is None else opts["elevation"])
             for state in opts["states"] or STATES:
                 use_state(arm, actions, state)
                 render_to(scene, os.path.join(out, "still-%s.png" % state))

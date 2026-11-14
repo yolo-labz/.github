@@ -19,17 +19,21 @@
     "dark":  { "hex": "#181825", "role": "mouth interior, keyboard deck", "check": true },
     "node":  { "hex": "#cba6f7", "role": "pupils; produced output only", "check": true },
     "key":   { "hex": "#45475a", "role": "keycaps", "check": true },
-    "guide": { "hex": "#6c7086", "role": "keyboard rim", "check": false }
+    "guide": { "hex": "#6c7086", "role": "keyboard rim", "check": false },
+    "feature": { "hex": "#181825", "role": "eye sockets, claws, closed-eye lines (the mark's feature colour)", "check": false },
+    "ink": { "hex": "#cdd6f4", "role": "moon, sound arcs", "check": false }
   },
 
   "palette_light": {
     "base":  { "hex": "#eff1f5", "role": "background plate (Latte)", "check": false },
-    "skin":  { "hex": "#40a02b", "role": "skin (Latte) - the character, never recolour", "check": false },
+    "skin":  { "hex": "#388c26", "role": "skin (Latte) - the character, never recolour", "check": false },
     "pale":  { "hex": "#eff1f5", "role": "teeth, eyes, claws (Latte, from the hero kit's light query)", "check": false },
     "dark":  { "hex": "#dce0e8", "role": "mouth interior, keyboard case (Latte)", "check": false },
     "node":  { "hex": "#8839ef", "role": "pupils; produced output only (Latte)", "check": false },
     "key":   { "hex": "#9ca0b0", "role": "keycaps (Latte)", "check": false },
-    "guide": { "hex": "#9ca0b0", "role": "keyboard outline stroke (Latte)", "check": false }
+    "guide": { "hex": "#9ca0b0", "role": "keyboard outline stroke (Latte)", "check": false },
+    "feature": { "hex": "#181825", "role": "eye sockets, claws, closed-eye lines (the mark's feature colour)", "check": false },
+    "ink": { "hex": "#1e1e2e", "role": "moon, sound arcs (the mark's mono ink on light)", "check": false }
   },
 
   "head": {
