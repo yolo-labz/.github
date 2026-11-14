@@ -59,7 +59,7 @@ def social(repo=None, line="Small tools. Deliberate automation."):
     name = repo or "yolo-labz"
     esc = lambda x: x.replace("&", "&amp;").replace("<", "&lt;")
     sub = f'<text x="560" y="214" font-family="JetBrains Mono, JetBrainsMono Nerd Font Mono, monospace" font-size="30" fill="{P["node"]}">yolo-labz</text>' if repo else ""
-    size = 92 if len(name) <= 14 else (72 if len(name) <= 20 else 54)
+    size = min(92, int(640 / (0.6 * len(name))))
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">'
             f'<rect width="1280" height="640" fill="{P["ground"]}"/>'
             f'<g transform="translate(96 160) scale(25)">{inner}</g>'
