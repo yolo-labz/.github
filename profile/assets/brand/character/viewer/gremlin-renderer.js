@@ -12,7 +12,8 @@ export const THEMES = {
   light: { skin: "#388c26", node: "#8839ef", key: "#9ca0b0", guide: "#9ca0b0", dark: "#dce0e8", feature: "#181825", ink: "#1e1e2e" },
 };
 // The camera and the three lights are the ones the still images use (model/character.json).
-const CAMERA = { azimuth: 24, elevation: 9, scale: 292, center: [0, -36, 0] };
+// The model faces -z, so the stills' camera (24 degrees) sits at 204 here.
+const CAMERA = { azimuth: 204, elevation: 9, scale: 292, center: [0, -36, 0] };
 const LIGHTS = [
   { dir: [-0.486, 0.532, 0.694], color: [1.0, 1.0, 1.0] },
   { dir: [0.748, 0.201, 0.633], color: [0.8, 0.8, 0.8] },
@@ -114,8 +115,8 @@ export function blendPose(a, b, f) {
   });
 }
 
-// Skin matrices: global joint transform times the inverse bind matrix; the mesh nodes
-// carry the dequantisation, which is applied to the vertex first.
+// Skin matrices: global joint transform times the inverse bind matrix. gltfpack folds the
+// position dequantisation into the inverse bind matrices, so mesh nodes are not used.
 export function jointMatrices(rig, pose, out) {
   const global = new Array(pose.length);
   const world = (i) => global[i] || (global[i] = rig.parent[i] < 0 ? fromTRS(pose[i].t, pose[i].q, pose[i].s)
@@ -130,11 +131,11 @@ const toLinear = (c) => c.map((x) => (x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 
 
 const VERT = `#version 300 es
 in vec3 aPos; in vec3 aNormal; in vec4 aWeights; in uvec4 aJoints;
-uniform mat4 uJoint[26]; uniform mat4 uMesh; uniform mat4 uView;
+uniform mat4 uJoint[26]; uniform mat4 uView;
 out vec3 vN;
 void main() {
   mat4 s = aWeights.x * uJoint[aJoints.x] + aWeights.y * uJoint[aJoints.y] + aWeights.z * uJoint[aJoints.z] + aWeights.w * uJoint[aJoints.w];
-  vec4 p = s * (uMesh * vec4(aPos, 1.0));
+  vec4 p = s * (vec4(aPos, 1.0));
   vN = normalize(mat3(s) * aNormal);
   gl_Position = uView * p;
 }`;
@@ -194,7 +195,6 @@ export async function render(canvas, options) {
   const meshOf = (node) => doc.meshes[doc.nodes[node].mesh];
   const draws = [];
   for (const node of rig.meshNodes) {
-    const n = doc.nodes[node], matrix = fromTRS(n.translation || [0, 0, 0], n.rotation || [0, 0, 0, 1], n.scale || [1, 1, 1]);
     for (const prim of meshOf(node).primitives) {
       const vao = gl.createVertexArray();
       gl.bindVertexArray(vao);
@@ -209,7 +209,7 @@ export async function render(canvas, options) {
       const idx = doc.accessors[prim.indices];
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers[idx.bufferView]);
       const m = doc.materials[prim.material];
-      draws.push({ vao, count: idx.count, type: idx.componentType, offset: idx.byteOffset || 0, matrix, role: m.name.replace(/^m_/, ""),
+      draws.push({ vao, count: idx.count, type: idx.componentType, offset: idx.byteOffset || 0, role: m.name.replace(/^m_/, ""),
         base: m.pbrMetallicRoughness.baseColorFactor, rough: m.pbrMetallicRoughness.roughnessFactor });
     }
   }
@@ -242,7 +242,6 @@ export async function render(canvas, options) {
     gl.uniform3fv(loc("uLight"), LIGHTS.flatMap((l) => l.dir));
     gl.uniform3fv(loc("uLightColor"), LIGHTS.flatMap((l) => l.color));
     for (const d of draws) {
-      gl.uniformMatrix4fv(loc("uMesh"), false, d.matrix);
       gl.uniform3fv(loc("uBase"), colour(d));
       gl.uniform1f(loc("uRough"), d.rough);
       gl.bindVertexArray(d.vao);
