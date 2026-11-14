@@ -237,6 +237,13 @@
       "$value": "#154fc3",
       "$type": "color",
       "$description": "link blue on light surfaces; same value as the blog --l-blue-ink (oklch 47% 0.19 262.1). Latte blue is 4.34:1, under the 4.5:1 text floor"
+    },
+    "gremlin": {
+      "skin-light": {
+        "$value": "#388c26",
+        "$type": "color",
+        "$description": "the gremlin's skin on a light ground: 3.75:1 on Latte base, where Latte green #40a02b is 2.96:1 (NX-BRAND-MARK/DECISION.md section 1)"
+      }
     }
   },
   "font": {
@@ -467,8 +474,9 @@
     },
     "size": {
       "label": {
-        "$value": "0.75rem",
-        "$type": "dimension"
+        "$value": "0.875rem",
+        "$type": "dimension",
+        "$description": "small caps labels and meta lines; 14px, the floor for any text on a phone (NX-MOBILE)"
       },
       "small": {
         "$value": "0.875rem",
@@ -503,6 +511,11 @@
         "$type": "dimension",
         "$description": "modular scale: ratio 1.125 at 360px growing to 1.2 at 1280px"
       }
+    },
+    "min-text": {
+      "$value": "14px",
+      "$type": "dimension",
+      "$description": "no text renders below this on any width, labels and meta included"
     }
   }
 }
