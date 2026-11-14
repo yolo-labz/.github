@@ -5,21 +5,15 @@ SVG masters and the two HTML templates — regenerate, never hand-edit the PNGs.
 
 ## The mark
 
-A `YL` monogram: the `Y` is drawn as a forked letterform, the `L` shares its
-baseline, and a single mauve node sits at the fork. It was chosen over the
-other concepts because it is the only mark that stays legible at both 16px
-(favicon) and as a circular GitHub org avatar.
+The gremlin's head: two pointed ears and two slanted eye slots, on a 16-unit
+grid. It was chosen from three directions by a fixed test, not by taste: it is
+the only one whose features all survive at 16 px, in colour and in one colour,
+on a light and a dark page (`mark/tests.py`, decision in `mark/README.md`). The
+grin does not survive 16 px, so it lives in the mascot, not in the mark.
 
-Canonical geometry (viewBox `0 0 128 128`):
-
-```
-Y: M32 28 L52 60 L52 100   +   M72 28 L52 60     (fork + stem)
-L: M88 28 L88 80           +   M52 100 L96 100   (riser + shared base)
-node: circle cx=52 cy=60   (mauve, at the fork)
-```
-
-Stroke width 6 (7 in the favicon/OG lockup for small-size weight),
-`stroke-linecap`/`stroke-linejoin` round.
+`mark/master.py` holds the geometry; `mark/build.py` writes every file below
+from it, so the set cannot drift (`python3 profile/assets/brand/mark/build.py --verify`).
+The YL monogram is retired.
 
 ## Color
 
@@ -30,7 +24,8 @@ never raw hex outside these masters.
 |------|--------------|---------------|
 | background | `#1e1e2e` base | `#eff1f5` base |
 | surface | `#181825` mantle / `#11111b` crust | — |
-| ink (strokes / text) | `#cdd6f4` text · `#a6adc8` subtext | `#4c4f69` text |
+| ink (text, mono mark) | `#cdd6f4` text · `#a6adc8` subtext | `#1e1e2e` |
+| gremlin skin | `#a6e3a1` | `#388c26` (3.75:1 on `#eff1f5`) |
 | node / accent | `#cba6f7` mauve | `#8839ef` mauve |
 | syntax (deck code) | `#a6e3a1` green · `#fab387` peach · `#89b4fa` blue | — |
 
@@ -50,14 +45,15 @@ so they are font-independent on any renderer.
 ```
 brand/
 ├── logo-mark-{dark,light,mono}.svg   mark only. mono = currentColor.
-├── logo-mark-{dark,light}.png        256px raster
+├── logo-mark-{dark,light}.png        512px raster
 ├── logo-wordmark-{dark,light}.svg    mark + "yolo-labz", text outlined
 ├── logo-wordmark-{dark,light}.png    940px-wide raster
 ├── favicons/
 │   ├── favicon.svg                   theme-adaptive (prefers-color-scheme)
-│   ├── favicon-{16,32,64,128,512}.png
-│   ├── favicon.ico                   multi-res 16+32+64
-│   └── apple-touch-icon.png          180px, dark mark on base
+│   ├── favicon-{16,32,48,64,128,192,512}.png
+│   ├── favicon.ico                   multi-res 16+32+48
+│   └── apple-touch-icon.png          180px, square, mark on base
+├── mark/                             master, build script, tests, avatar, social template
 ├── hero/                             SERVED hero + avatar (adopted 08/11/2026): GPT hero crops
 │                                     (WebP/AVIF), vector avatar at 96/460 px; manifest.json pins bytes
 ├── mascot/                           the programming gremlin — 5-state character system
