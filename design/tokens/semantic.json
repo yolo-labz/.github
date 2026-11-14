@@ -211,7 +211,7 @@
             "light": "{color.latte.mauve}"
           }
         },
-        "$description": "the gremlin's pupils and glyphs; never UI chrome"
+        "$description": "the node, and the gremlin's pupils and glyphs: wayfinding and the mark; never the action"
       }
     },
     "signal": {

@@ -243,11 +243,23 @@
     "family": {
       "sans": {
         "$value": "Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
-        "$type": "fontFamily"
+        "$type": "fontFamily",
+        "$description": "product text: the portfolio"
       },
       "mono": {
         "$value": "\"JetBrains Mono\", ui-monospace, \"SF Mono\", Menlo, Consolas, monospace",
-        "$type": "fontFamily"
+        "$type": "fontFamily",
+        "$description": "data on every surface: repository names, stacks, addresses, numbers"
+      },
+      "serif": {
+        "$value": "\"Noto Serif\", Georgia, serif",
+        "$type": "fontFamily",
+        "$description": "long-form reading text: the blog"
+      },
+      "serif-display": {
+        "$value": "\"Noto Serif Display\", \"Noto Serif\", Georgia, serif",
+        "$type": "fontFamily",
+        "$description": "blog headings, weight 600"
       }
     },
     "weight": {
@@ -298,8 +310,8 @@
       "$value": "48px",
       "$type": "dimension"
     },
-    "16": {
-      "$value": "64px",
+    "18": {
+      "$value": "72px",
       "$type": "dimension"
     },
     "28": {
@@ -313,22 +325,26 @@
       "$type": "dimension"
     },
     "sm": {
-      "$value": "2px",
-      "$type": "dimension"
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "the blog --radius-s; the focus ring, buttons, inline code"
     },
     "md": {
-      "$value": "6px",
-      "$type": "dimension"
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "the blog --radius-m: blocks, figures"
     },
     "lg": {
       "$value": "12px",
-      "$type": "dimension"
+      "$type": "dimension",
+      "$description": "the portfolio --radius-card, only where a container has to be one"
     }
   },
   "duration": {
     "fast": {
-      "$value": "150ms",
-      "$type": "duration"
+      "$value": "160ms",
+      "$type": "duration",
+      "$description": "the blog's colour and border transitions (also uses 120ms and 240ms, to migrate)"
     },
     "base": {
       "$value": "200ms",
@@ -351,7 +367,8 @@
         0.3,
         1
       ],
-      "$type": "cubicBezier"
+      "$type": "cubicBezier",
+      "$description": "cubic-bezier(0.16, 1, 0.3, 1): identical in the portfolio (--ease-out-expo) and the blog (--ease-out)"
     },
     "standard": {
       "$value": [
@@ -389,7 +406,8 @@
     },
     "gutter-mobile": {
       "$value": "16px",
-      "$type": "dimension"
+      "$type": "dimension",
+      "$description": "minimum page gutter under md; the blog's fluid gutter is 18px to 40px"
     },
     "gutter-desktop": {
       "$value": "24px",
