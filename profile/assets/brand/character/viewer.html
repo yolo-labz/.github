@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gremlin viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin: 0; height: 100%; background: #1e1e2e; color: #cdd6f4; font: 14px/1.4 system-ui, sans-serif; }
+  canvas { display: block; width: 100%; height: 100%; }
+  nav { position: fixed; left: 0; right: 0; bottom: 12px; display: flex; gap: 8px; justify-content: center; }
+  button { background: #313244; color: #cdd6f4; border: 1px solid #45475a; border-radius: 6px; padding: 6px 12px; font: inherit; cursor: pointer; }
+  button[aria-pressed="true"] { background: #a6e3a1; color: #1e1e2e; border-color: #a6e3a1; }
+  #status { position: fixed; top: 8px; left: 12px; }
+</style>
+</head>
+<body>
+<div id="status">loading</div>
+<nav id="states"></nav>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+const params = new URLSearchParams(location.search);
+const src = params.get("src") || "gremlin.glb";
+const STATES = ["idle", "working", "paused", "loading", "asleep"];
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+document.body.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color("#1e1e2e");
+const camera = new THREE.PerspectiveCamera(30, 1, 1, 2000);
+camera.position.set(140, 40, -420);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 60, -40);
+controls.update();
+
+// three lights: key, fill, rim
+const key = new THREE.DirectionalLight("#ffffff", 3.0); key.position.set(-210, 230, -300);
+const fill = new THREE.DirectionalLight("#ffffff", 1.2); fill.position.set(260, 70, -220);
+const rim = new THREE.DirectionalLight("#ffffff", 2.4); rim.position.set(90, 200, 300);
+scene.add(key, fill, rim, new THREE.AmbientLight("#ffffff", 0.5));
+
+const loader = new GLTFLoader();
+loader.setMeshoptDecoder(MeshoptDecoder);
+
+const out = { ok: false };
+window.gremlin = out;
+const gltf = await loader.loadAsync(src);
+scene.add(gltf.scene);
+const mixer = new THREE.AnimationMixer(gltf.scene);
+const clips = Object.fromEntries(gltf.animations.map((c) => [c.name, c]));
+let action;
+function play(name) {
+  if (action) action.fadeOut(0.2);
+  action = mixer.clipAction(clips[name]).reset().fadeIn(0.2).play();
+  document.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === name)));
+  out.state = name;
+}
+for (const name of STATES) {
+  const b = document.createElement("button");
+  b.textContent = name;
+  b.onclick = () => play(name);
+  document.getElementById("states").append(b);
+}
+play(params.get("state") || "idle");
+
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+addEventListener("resize", resize);
+resize();
+
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  mixer.update(clock.getDelta());
+  controls.update();
+  renderer.render(scene, camera);
+});
+
+let meshes = 0, tris = 0;
+gltf.scene.traverse((o) => {
+  if (o.isMesh || o.isSkinnedMesh) { meshes++; tris += (o.geometry.index?.count ?? 0) / 3; }
+});
+Object.assign(out, { ok: true, meshes, triangles: tris, clips: Object.keys(clips) });
+document.getElementById("status").textContent = `${meshes} meshes, ${tris} triangles, ${out.clips.length} clips`;
+</script>
+</body>
+</html>
