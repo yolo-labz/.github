@@ -1,0 +1,31 @@
+name: design-check
+
+on:
+  pull_request:
+    paths:
+      - "design/**"
+      - ".github/workflows/design-check.yml"
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  design-check:
+    name: Design tokens build and contrast
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Tokens test (format, references, contrast, mobile floors, dist is current)
+        run: python3 -m unittest discover -s design -v

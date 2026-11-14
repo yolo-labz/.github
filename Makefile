@@ -23,7 +23,7 @@ PYTHON  ?= python3
 THREADS ?= 4
 BUILD   ?= build
 
-.PHONY: model cards cards-verify renders renders-verify web web-verify check clean
+.PHONY: model cards cards-verify renders renders-verify web web-verify check clean mark mark-verify
 
 model:
 	rm -rf $(BUILD)
@@ -63,3 +63,9 @@ check:
 # intentional change to model/params.json or model/gremlin.py.
 clean:
 	rm -rf $(BUILD) model/.determinism
+
+mark:
+	$(PYTHON) profile/assets/brand/mark/build.py
+
+mark-verify:
+	$(PYTHON) profile/assets/brand/mark/build.py --verify

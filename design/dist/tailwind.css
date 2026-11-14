@@ -1,0 +1,32 @@
+/* @yolo-labz/design: GENERATED, do not edit. Source: yolo-labz/.github design/tokens.
+ * inputs sha256:04fff335d85ebdc1c01bef05e3644938fe4c934048138b00d09a08a09f1204fb */
+/* Tailwind v4 preset. Plain @theme, not `inline`: utilities read var(--color-x), so an app can still
+ * override --color-x (prefers-contrast) after this file. Breakpoints are literals because a media
+ * query cannot take var(). Fonts and radius are left to the app: next/font wires the font file, and
+ * Tailwind's radius defaults are what the portfolio ships today. */
+@theme {
+  --color-bg: var(--yl-color-surface-base);
+  --color-bg-elevated: var(--yl-color-surface-raised);
+  --color-crust: var(--yl-color-surface-sunken);
+  --color-surface: var(--yl-color-surface-panel);
+  --color-border: var(--yl-color-border-default);
+  --color-overlay: var(--yl-color-border-strong);
+  --color-text: var(--yl-color-text-default);
+  --color-text-muted: var(--yl-color-text-muted);
+  --color-accent: var(--yl-color-accent-default);
+  --color-accent-hover: var(--yl-color-accent-hover);
+  --color-link: var(--yl-color-link-default);
+  --color-warn: var(--yl-color-role-audit);
+  --color-compliance: var(--yl-color-role-compliance);
+  --ease-out-expo: var(--yl-ease-out-expo);
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --text-step-1: var(--yl-text-size-step-1);
+  --text-step-2: var(--yl-text-size-step-2);
+  --text-step-3: var(--yl-text-size-step-3);
+  --text-step-4: var(--yl-text-size-step-4);
+  --text-step-5: var(--yl-text-size-step-5);
+  --text-step-6: var(--yl-text-size-step-6);
+}
