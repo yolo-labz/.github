@@ -117,14 +117,15 @@ def build() -> dict[str, str]:
         if path[:2] == ("text", "size") and path[2].startswith("step-"):
             tw.append((f"--text-{path[2]}", f"var({prop(path)})"))
         elif path[0] == "breakpoint":
-            tw.append((f"--breakpoint-{path[1]}", f"var({prop(path)})"))
+            tw.append((f"--breakpoint-{path[1]}", tok["$value"]))  # literal: @media cannot take var()
         elif path[:2] == ("ease", "out-expo"):
             tw.append(("--ease-out-expo", f"var({prop(path)})"))
     tailwind_css = (
         head
         + "/* Tailwind v4 preset. Plain @theme, not `inline`: utilities read var(--color-x), so an app can still\n"
-        + " * override --color-x (prefers-contrast) after this file. Fonts and radius are left to the app: next/font\n"
-        + " * wires the font file, and Tailwind's radius defaults are what the portfolio ships today. */\n"
+        + " * override --color-x (prefers-contrast) after this file. Breakpoints are literals because a media\n"
+        + " * query cannot take var(). Fonts and radius are left to the app: next/font wires the font file, and\n"
+        + " * Tailwind's radius defaults are what the portfolio ships today. */\n"
         + block("@theme", tw)
     )
     return {"tokens.css": tokens_css, "tailwind.css": tailwind_css}
