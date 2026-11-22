@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" color="#00c77a" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <title>claude-mac-chrome</title>
+  <rect x="2" y="4" width="20" height="16" rx="4"/>
+  <path d="M2 9h20"/>
+  <path d="M5 9V7a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+  <path d="M11 11v7l2-2 1.5 3 1.5-.7-1.5-3H17z"/>
+</svg>
