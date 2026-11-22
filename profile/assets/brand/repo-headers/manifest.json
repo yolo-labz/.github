@@ -1,0 +1,403 @@
+[
+  {
+    "repo": "wa",
+    "description_raw": "Automate personal WhatsApp workflows through a persistent daemon with allowlist and rate controls.",
+    "shown": "Automate personal WhatsApp workflows through a persistent daemon with allowlist and rate controls.",
+    "lines": [
+      "Automate personal WhatsApp workflows",
+      "through a persistent daemon with allowlist",
+      "and rate controls."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 98,
+      "text_bottom": 483,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 482439,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "wa.png"
+  },
+  {
+    "repo": "chrome-bridge",
+    "description_raw": "Drive a dedicated Chromium profile from a local CLI through an extension and relay.",
+    "shown": "Drive a dedicated Chromium profile from a local CLI through an extension and relay.",
+    "lines": [
+      "Drive a dedicated Chromium profile from",
+      "a local CLI through an extension and",
+      "relay."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 83,
+      "text_bottom": 483,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 483395,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "chrome-bridge.png"
+  },
+  {
+    "repo": "claude-mac-chrome",
+    "description_raw": "Address Chrome profiles and tabs from macOS scripts without relying on window order.",
+    "shown": "Address Chrome profiles and tabs from macOS scripts without relying on window order.",
+    "lines": [
+      "Address Chrome profiles and tabs from",
+      "macOS scripts without relying on window",
+      "order."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 84,
+      "text_bottom": 483,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 492887,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "claude-mac-chrome.png"
+  },
+  {
+    "repo": "linkedin-chrome-copilot",
+    "description_raw": "LinkedIn workflow copilot for Claude Code. PII-gated. Delegates Chrome I/O to claude-mac-chrome.",
+    "shown": "LinkedIn workflow copilot for Claude Code. PII-gated. Delegates Chrome I/O to claude-mac-chrome.",
+    "lines": [
+      "LinkedIn workflow copilot for Claude",
+      "Code. PII-gated. Delegates Chrome I/O to",
+      "claude-mac-chrome."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 96,
+      "text_bottom": 481,
+      "text_bottom_ok": true,
+      "name_pt": 60,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 498492,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "linkedin-chrome-copilot.png"
+  },
+  {
+    "repo": "fand",
+    "description_raw": "Configure temperature-driven fan modes on supported Apple Silicon Macs.",
+    "shown": "Configure temperature-driven fan modes on supported Apple Silicon Macs.",
+    "lines": [
+      "Configure temperature-driven fan modes",
+      "on supported Apple Silicon Macs."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 71,
+      "text_bottom": 464,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 2,
+      "size": "1280x640",
+      "bytes": 469924,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "fand.png"
+  },
+  {
+    "repo": "kokoro-speakd",
+    "description_raw": "Keep Kokoro ready between speech requests, with interruptible local playback.",
+    "shown": "Keep Kokoro ready between speech requests, with interruptible local playback.",
+    "lines": [
+      "Keep Kokoro ready between speech",
+      "requests, with interruptible local",
+      "playback."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 77,
+      "text_bottom": 483,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 487514,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "kokoro-speakd.png"
+  },
+  {
+    "repo": "anthropic-throttle-proxy",
+    "description_raw": "Pace Anthropic API traffic across clients with per-bearer queues and a live dashboard.",
+    "shown": "Pace Anthropic API traffic across clients with per-bearer queues and a live dashboard.",
+    "lines": [
+      "Pace Anthropic API traffic across clients",
+      "with per-bearer queues and a live",
+      "dashboard."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 86,
+      "text_bottom": 481,
+      "text_bottom_ok": true,
+      "name_pt": 60,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 492409,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "anthropic-throttle-proxy.png"
+  },
+  {
+    "repo": "claude-classroom-submit",
+    "description_raw": "Google Classroom submission CLI. REST API + OAuth. Bypasses Drive Picker iframe. Pure stdlib Python.",
+    "shown": "Google Classroom submission CLI. REST API + OAuth. Bypasses Drive Picker iframe. Pure stdlib Python.",
+    "lines": [
+      "Google Classroom submission CLI. REST",
+      "API + OAuth. Bypasses Drive Picker",
+      "iframe. Pure stdlib Python."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 100,
+      "text_bottom": 479,
+      "text_bottom_ok": true,
+      "name_pt": 56,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 502088,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "claude-classroom-submit.png"
+  },
+  {
+    "repo": "zellij-vertical-tabs",
+    "description_raw": "Vertical tab-bar sidebar plugin for zellij (Catppuccin Mocha). Stays responsive under heavy load by not subscribing to PaneUpdate.",
+    "shown": "Vertical tab-bar sidebar plugin for zellij (Catppuccin Mocha).",
+    "lines": [
+      "Vertical tab-bar sidebar plugin for zellij",
+      "(Catppuccin Mocha)."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": false,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 62,
+      "text_bottom": 464,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 2,
+      "size": "1280x640",
+      "bytes": 476554,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "zellij-vertical-tabs.png"
+  },
+  {
+    "repo": "noctalia-appmenu",
+    "description_raw": "macOS-style global menu for noctalia-shell on niri. Rust sidecar bridge + Quickshell QML widget.",
+    "shown": "macOS-style global menu for noctalia-shell on niri. Rust sidecar bridge + Quickshell QML widget.",
+    "lines": [
+      "macOS-style global menu for",
+      "noctalia-shell on niri. Rust sidecar bridge",
+      "+ Quickshell QML widget."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 96,
+      "text_bottom": 483,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 493850,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "noctalia-appmenu.png"
+  },
+  {
+    "repo": "aferidor",
+    "description_raw": "Grocery shopping below market price from your own data. Spreadsheet method + stdlib CLI + MCP server. Nothing auto-pays.",
+    "shown": "Grocery shopping below market price from your own data. Spreadsheet method + stdlib CLI + MCP server.",
+    "lines": [
+      "Grocery shopping below market price",
+      "from your own data. Spreadsheet method",
+      "+ stdlib CLI + MCP server."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": false,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 101,
+      "text_bottom": 483,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 489553,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "aferidor.png"
+  },
+  {
+    "repo": "quality-gates",
+    "description_raw": "Fleet PR quality gates (code-slop + alignment) as a composite Action",
+    "shown": "Fleet PR quality gates (code-slop + alignment) as a composite Action",
+    "lines": [
+      "Fleet PR quality gates (code-slop +",
+      "alignment) as a composite Action"
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 68,
+      "text_bottom": 464,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 2,
+      "size": "1280x640",
+      "bytes": 478445,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "quality-gates.png"
+  },
+  {
+    "repo": "claude-commands",
+    "description_raw": "Custom slash commands for Claude Code: /nix-rebuild, /security-scan, /test-strategy, etc.",
+    "shown": "Custom slash commands for Claude Code: /nix-rebuild, /security-scan, /test-strategy, etc.",
+    "lines": [
+      "Custom slash commands for Claude",
+      "Code: /nix-rebuild, /security-scan,",
+      "/test-strategy, etc."
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 89,
+      "text_bottom": 483,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 492721,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "claude-commands.png"
+  },
+  {
+    "repo": "nixos-ops-skill",
+    "description_raw": "NixOS operations skill for Claude Code: rebuild, debug, generations",
+    "shown": "NixOS operations skill for Claude Code: rebuild, debug, generations",
+    "lines": [
+      "NixOS operations skill for Claude Code:",
+      "rebuild, debug, generations"
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 67,
+      "text_bottom": 464,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 2,
+      "size": "1280x640",
+      "bytes": 481657,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "nixos-ops-skill.png"
+  },
+  {
+    "repo": "speckit-plugins",
+    "description_raw": "Spec-Driven Development plugin for Claude Code (derivative of github/spec-kit)",
+    "shown": "Spec-Driven Development plugin for Claude Code (derivative of github/spec-kit)",
+    "lines": [
+      "Spec-Driven Development plugin for",
+      "Claude Code (derivative of",
+      "github/spec-kit)"
+    ],
+    "checks": {
+      "gremlin_overlaps_text": false,
+      "text_inside_left_column": true,
+      "description_complete": true,
+      "description_ellipsis": false,
+      "description_ends_on_bad_word": false,
+      "description_chars": 78,
+      "text_bottom": 483,
+      "text_bottom_ok": true,
+      "name_pt": 64,
+      "desc_lines": 3,
+      "size": "1280x640",
+      "bytes": 488365,
+      "under_1MB": true,
+      "is_1280x640": true
+    },
+    "file": "speckit-plugins.png"
+  }
+]
