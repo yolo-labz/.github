@@ -21,7 +21,12 @@
   --radius-sm: var(--yl-radius-sm);
   --radius-md: var(--yl-radius-md);
   --radius-lg: var(--yl-radius-lg);
+  --duration-fast: var(--yl-duration-fast);
+  --duration-base: var(--yl-duration-base);
+  --duration-medium: var(--yl-duration-medium);
+  --duration-slow: var(--yl-duration-slow);
   --ease-out-expo: var(--yl-ease-out-expo);
+  --ease-standard: var(--yl-ease-standard);
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
