@@ -14,6 +14,6 @@ every surface. Copy the alt text verbatim.
 
 Consumers copy these files byte for byte and never re-encode them downstream.
 
-The keyboard-press hero is a matte of the 22/11/2026 key-press reference on the `#1e1e2e` plate; it is not produced by `hero.py`.
+The keyboard-press hero is the U2Net (rembg) matte of the 22/11/2026 key-press reference, composed on the `#1e1e2e` plate at 887 x 640 (character 560 px high, 24 px clear under the keyboard), stored lossless so the plate stays exact; it is not produced by `hero.py`. Colour-keying was dropped: it left grey halos and ate light pixels in the eyes and fang.
 
 Regenerate with `python3 ../mark/hero.py`: the hero is the `working` state from `../mark/character.py`, drawn as vector and encoded here. Never edit these files by hand.
