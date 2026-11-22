@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" color="#00c77a" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <title>fand</title>
+  <circle cx="12" cy="12" r="2"/>
+  <path d="M12 10Q8 9 8.5 4Q12.5 5 12 10Z"/>
+  <path transform="rotate(120 12 12)" d="M12 10Q8 9 8.5 4Q12.5 5 12 10Z"/>
+  <path transform="rotate(240 12 12)" d="M12 10Q8 9 8.5 4Q12.5 5 12 10Z"/>
+</svg>
