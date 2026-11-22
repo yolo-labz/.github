@@ -122,6 +122,10 @@ def build() -> dict[str, str]:
             tw.append((f"--breakpoint-{path[1]}", tok["$value"]))  # literal: @media cannot take var()
         elif path[:2] == ("ease", "out-expo"):
             tw.append(("--ease-out-expo", f"var({prop(path)})"))
+        elif path[:2] == ("ease", "standard"):
+            tw.append(("--ease-standard", f"var({prop(path)})"))  # ease-standard
+        elif path[0] == "duration":
+            tw.append((f"--duration-{path[1]}", f"var({prop(path)})"))  # duration-fast 160ms, base 200ms, medium 300ms, slow 520ms
         elif path[:2] == ("text", "tracking") or path[:2] == ("text", "leading"):
             tw.append((f"--{path[1]}-{path[2]}", f"var({prop(path)})"))  # tracking-heading, leading-tight
         elif path == ("text", "measure"):

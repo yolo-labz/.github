@@ -83,6 +83,14 @@ class Tokens(unittest.TestCase):
                      "--shadow-float: var(--yl-shadow-float)", "--text-sm: var(--yl-text-size-small)"):
             self.assertIn(want, css)
 
+    def test_motion_scale_is_in_the_preset(self):
+        # Organisation durations 160 / 200 / 300 / 520 ms and the out-expo curve, as utilities.
+        css = build.build()["tailwind.css"]
+        for want in ("--duration-fast: var(--yl-duration-fast)", "--duration-base: var(--yl-duration-base)",
+                     "--duration-medium: var(--yl-duration-medium)", "--duration-slow: var(--yl-duration-slow)",
+                     "--ease-out-expo: var(--yl-ease-out-expo)", "--ease-standard: var(--yl-ease-standard)"):
+            self.assertIn(want, css)
+
     def test_build_is_deterministic_and_dist_is_current(self):
         self.assertEqual(build.build(), build.build())
         run = subprocess.run([sys.executable, str(HERE / "build.py"), "--check"], capture_output=True, text=True)
