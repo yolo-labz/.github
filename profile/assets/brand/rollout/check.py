@@ -14,7 +14,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 RAW = "https://raw.githubusercontent.com/yolo-labz/.github/main/"
-HERO = "gremlin-hero-887x640.webp"
+HERO = "gremlin-keyboard-press-887x640.webp"
 BOLD_LINK_RE = re.compile(r"\*\*\[([^]]+)\]\((https://[^)]+)\)\*\*")
 
 sys.path.insert(0, str(ROOT / "scripts"))
