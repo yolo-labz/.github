@@ -1,0 +1,44 @@
+name: readme-wording
+
+# Reusable gate: fails when README.md holds an em dash (U+2014) or an en dash (U+2013).
+# Callers pin this file by merge SHA. Not a required check in any ruleset.
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  readme-wording:
+    name: No em or en dashes in README
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Scan README.md for em and en dashes
+        shell: bash
+        run: |
+          set -u
+          if [ ! -f README.md ]; then
+            echo "::notice file=README.md::No README.md in this repository; nothing to check."
+            exit 0
+          fi
+          export LC_ALL=C.UTF-8
+          hits=$(grep -nP '\x{2014}|\x{2013}' README.md || true)
+          if [ -n "$hits" ]; then
+            while IFS= read -r line; do
+              n=${line%%:*}
+              echo "::error file=README.md,line=${n}::em or en dash found: ${line#*:}"
+            done <<< "$hits"
+            count=$(printf '%s\n' "$hits" | wc -l)
+            echo "README.md has ${count} line(s) with an em or en dash. Replace them."
+            exit 1
+          fi
+          echo "README.md has no em or en dashes."
