@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "alt": {
-    "hero": "The yolo-labz gremlin typing on a keyboard, angular dark eyes with purple pupils, pointed ears and a small fanged grin",
+    "hero": "The yolo-labz gremlin in goggles, sitting on the floor and typing on a keyboard.",
     "avatar": "The yolo-labz gremlin's head: pointed ears, dark angular eyes with purple pupils"
   },
   "inputs": {
@@ -70,6 +70,13 @@
       "height": 460,
       "bytes": 12379,
       "sha256": "7a47e2eef243820ff676866db8a43596b3d04f5b3651869416f863823248d61a"
+    },
+    {
+      "file": "gremlin-keyboard-press-887x640.webp",
+      "width": 887,
+      "height": 640,
+      "bytes": 56174,
+      "sha256": "d6c597be46c2e3e6047b1f4a9868a65cfc71274103b5fa11746b47a5cba3ff80"
     }
   ]
 }

@@ -4,7 +4,7 @@ The files every surface serves.
 
 | Slot | File |
 |---|---|
-| Org profile README (shown at 640 px) | `gremlin-hero-887x640.webp` |
+| Org profile README (shown at 640 px) | `gremlin-keyboard-press-887x640.webp` (22/11/2026, new gremlin; the code-drawn `gremlin-hero-887x640.webp` stays for its other consumers) |
 | Portfolio hero, desktop and phone | `gremlin-hero-{804x770,402x385}.{avif,webp}`, `804x770.png` fallback |
 | Avatar, 96 px | `gremlin-avatar-96.{png,webp}` (from `../mark/avatar.svg`) |
 | GitHub org avatar upload | `gremlin-avatar-460.png` (same source) |
@@ -13,5 +13,7 @@ The files every surface serves.
 every surface. Copy the alt text verbatim.
 
 Consumers copy these files byte for byte and never re-encode them downstream.
+
+The keyboard-press hero is a matte of the 22/11/2026 key-press reference on the `#1e1e2e` plate; it is not produced by `hero.py`.
 
 Regenerate with `python3 ../mark/hero.py`: the hero is the `working` state from `../mark/character.py`, drawn as vector and encoded here. Never edit these files by hand.
