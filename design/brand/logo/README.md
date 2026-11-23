@@ -1,4 +1,4 @@
-# Gremlin logo — usage guide
+# Gremlin logo - usage guide
 
 Status: DRAFT, 23/11/2026. Not approved for public use. Pedro has not signed off the final mark.
 
